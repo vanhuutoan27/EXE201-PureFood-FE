@@ -1,60 +1,46 @@
+import { Button } from "@/components/global/atoms/button"
 import Section from "@/components/global/organisms/section"
 
-function SeasonalFruit() {
+function SaleFruit() {
   const vegetableSeason = [
     {
       image:
-        "https://images.pexels.com/photos/40731/ladybug-drop-of-water-rain-leaf-40731.jpeg?auto=compress&cs=tinysrgb&w=600",
-      season: "Spring",
-      vegetables: ["Kohlrabi", "Coriander", "Cabbage"]
+        "https://plus.unsplash.com/premium_photo-1667051230160-5906f5683a59?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGZydWl0fGVufDB8fDB8fHww",
+
+      title: "Trái cây",
+      description: "Giảm giá 40% cho sản phẩm"
     },
     {
       image:
-        "https://images.pexels.com/photos/1152359/pexels-photo-1152359.jpeg?auto=compress&cs=tinysrgb&w=600",
-      season: "Summer",
-      vegetables: ["Tomatoes", "Cucumbers", "Bell Peppers"]
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/756903/pexels-photo-756903.jpeg?auto=compress&cs=tinysrgb&w=600",
-      season: "Fall",
-      vegetables: ["Sweet Potatoes", "Pumpkins", "Cabbage"]
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/813872/pexels-photo-813872.jpeg?auto=compress&cs=tinysrgb&w=600",
-      season: "Winter",
-      vegetables: ["Mustard", "Carrots", "Kohlrabi"]
+        "https://plus.unsplash.com/premium_photo-1675366071307-4be5bda2ceda?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dmVnZXRhYmxlc3xlbnwwfHwwfHx8MA%3D%3D",
+
+      title: "Rau củ",
+      description: "Giảm giá 40% cho sản phẩm"
     }
   ]
 
   return (
     <div>
       <Section
-        title="Rau củ theo mùa"
-        description="Rau theo mùa tươi, bổ dưỡng, thân thiện với môi trường và hỗ trợ nông nghiệp địa phương."
+        title="Trái Cây Tươi Giảm Giá Đặc Biệt"
+        description="Hãy nhanh tay chọn cho mình những loại trái cây yêu thích, bổ sung vitamin và khoáng chất cho cơ thể mỗi ngày."
       />
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {vegetableSeason.map((item, index) => (
-          <div key={index} className="w-full rounded-lg shadow-lg">
-            <div
-              className="relative flex h-[250px] w-full items-center justify-center rounded-lg border border-gray-300 bg-cover bg-center shadow-lg"
-              style={{ backgroundImage: `url(${item.image})` }}
-            >
-              <div className="absolute inset-0 rounded-lg bg-black opacity-10" />
-
-              <div className="w-full border bg-slate-200 text-center text-primary opacity-70">
-                {item.season}
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center justify-center p-4 text-gray-500">
-              <ul className="flex justify-between gap-10 text-sm text-gray-500">
-                {item.vegetables.map((item) => (
-                  <p className="cursor-pointer hover:text-primary">{item}</p>
-                ))}
-              </ul>
+          <div
+            key={index}
+            className="flex h-[40vh] select-none items-end justify-center rounded-xl bg-cover bg-center shadow-lg"
+            style={{ backgroundImage: `url(${item.image})` }}
+          >
+            <div className="mb-6 flex flex-col items-center gap-6">
+              <h3 className="cursor-pointer text-3xl font-semibold text-white duration-300 hover:text-secondary">
+                {item.title}
+              </h3>
+              <p className="text-sm font-medium text-white">
+                {item.description}
+              </p>
+              <Button variant={"default"}>Xem thêm</Button>
             </div>
           </div>
         ))}
@@ -63,4 +49,4 @@ function SeasonalFruit() {
   )
 }
 
-export default SeasonalFruit
+export default SaleFruit

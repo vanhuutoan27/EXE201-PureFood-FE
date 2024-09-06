@@ -7,38 +7,38 @@ function VegetableCard() {
     {
       image:
         "https://images.pexels.com/photos/27644253/pexels-photo-27644253/free-photo-of-fresh-red-apples.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "Apple",
-      description: ["Sweet", "Fresh", "New"]
+      title: "Táo",
+      description: ["Ngọt", "Tươi", "Mới"]
     },
     {
       image:
         "https://images.pexels.com/photos/2316466/pexels-photo-2316466.jpeg?auto=compress&cs=tinysrgb&w=300",
-      title: "Banana",
-      description: ["Organic", "Ripe", "Sweet"]
+      title: "Chuối",
+      description: ["Hữu cơ", "Chín", "Ngọt"]
     },
     {
       image:
         "https://images.pexels.com/photos/59830/melons-water-melons-fruit-green-59830.jpeg?auto=compress&cs=tinysrgb&w=300",
-      title: "Watermelon",
-      description: ["Organic", "Juicy", "Ripe"]
+      title: "Dưa hấu",
+      description: ["Hữu cơ", "Mọng nước", "Chín"]
     },
     {
       image:
         "https://images.pexels.com/photos/13768938/pexels-photo-13768938.jpeg?auto=compress&cs=tinysrgb&w=300",
-      title: "Water spinach",
-      description: ["Organic", "Crisp", "New"]
+      title: "Rau muống",
+      description: ["Hữu cơ", "Giòn", "Mới"]
     },
     {
       image:
         "https://images.pexels.com/photos/1327838/pexels-photo-1327838.jpeg?auto=compress&cs=tinysrgb&w=600",
-      title: "Tomato",
-      description: ["Organic", "Fresh", "Sour"]
+      title: "Cà chua",
+      description: ["Hữu cơ", "Tươi", "Chua"]
     },
     {
       image:
         "https://images.pexels.com/photos/2329440/pexels-photo-2329440.jpeg?auto=compress&cs=tinysrgb&w=600",
-      title: "Cucumber",
-      description: ["Organic", "Crisp", "Ripe"]
+      title: "Dưa leo",
+      description: ["Hữu cơ", "Giòn", "Chín"]
     }
   ]
 
@@ -73,11 +73,7 @@ function VegetableCard() {
                     key={i}
                     className="flex items-center text-[13px] font-medium"
                   >
-                    {i > 0 && (
-                      <i className="">
-                        <Dot />
-                      </i>
-                    )}
+                    {i > 0 && <Dot />}
                     {desc}
                   </li>
                 ))}
