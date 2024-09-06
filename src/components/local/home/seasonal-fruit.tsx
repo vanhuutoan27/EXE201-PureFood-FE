@@ -6,14 +6,12 @@ function SaleFruit() {
     {
       image:
         "https://plus.unsplash.com/premium_photo-1667051230160-5906f5683a59?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGZydWl0fGVufDB8fDB8fHww",
-
       title: "Trái cây",
       description: "Giảm giá 40% cho sản phẩm"
     },
     {
       image:
         "https://plus.unsplash.com/premium_photo-1675366071307-4be5bda2ceda?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dmVnZXRhYmxlc3xlbnwwfHwwfHx8MA%3D%3D",
-
       title: "Rau củ",
       description: "Giảm giá 40% cho sản phẩm"
     }
@@ -26,11 +24,11 @@ function SaleFruit() {
         description="Hãy nhanh tay chọn cho mình những loại trái cây yêu thích, bổ sung vitamin và khoáng chất cho cơ thể mỗi ngày."
       />
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
         {vegetableSeason.map((item, index) => (
           <div
             key={index}
-            className="flex h-[40vh] select-none items-end justify-center rounded-xl bg-cover bg-center shadow-lg"
+            className="flex h-[400px] select-none items-end justify-center rounded-xl bg-cover bg-center shadow-lg"
             style={{ backgroundImage: `url(${item.image})` }}
           >
             <div className="mb-6 flex flex-col items-center gap-6">
