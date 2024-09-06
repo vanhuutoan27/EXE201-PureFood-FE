@@ -2,15 +2,15 @@ import { z } from "zod"
 
 export const userSchema = z.object({
   userId: z.string().nonempty({ message: "User ID is required" }),
-  email: z
-    .string()
-    .email({ message: "Invalid email" })
-    .nonempty({ message: "Email is required" }),
   phoneNumber: z
     .string()
     .nonempty({ message: "Phone number is required" })
     .min(10, { message: "Phone number must be at least 10 characters long" }),
   fullName: z.string().nonempty({ message: "Full name is required" }),
+  email: z
+    .string()
+    .email({ message: "Invalid email" })
+    .nonempty({ message: "Email is required" }),
   password: z
     .string()
     .nonempty({ message: "Password is required" })
@@ -55,12 +55,22 @@ export const userLoginSchema = userSchema.pick({
   password: true
 })
 
-export const userRegisterSchema = userSchema.pick({
-  email: true,
-  phoneNumber: true,
-  fullName: true,
-  password: true
-})
+export const userRegisterSchema = userSchema
+  .pick({
+    fullName: true,
+    phoneNumber: true,
+    email: true,
+    password: true
+  })
+  .extend({
+    confirmPassword: z
+      .string()
+      .nonempty({ message: "Confirm Password is required" })
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"]
+  })
 
 export type UserType = z.infer<typeof userSchema>
 export type UserLoginType = z.infer<typeof userLoginSchema>

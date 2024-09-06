@@ -25,15 +25,15 @@ import {
 import { Input } from "@/components/global/atoms/input"
 import { Label } from "@/components/global/atoms/label"
 
+export const slides = [
+  "/images/login-image-1.jpg",
+  "/images/login-image-2.jpg",
+  "/images/login-image-3.jpg"
+]
+
 function Login() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-
-  const slides = [
-    "/images/login-image-1.jpg",
-    "/images/login-image-2.jpg",
-    "/images/login-image-3.jpg"
-  ]
 
   const handleToggleVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible)
@@ -96,7 +96,7 @@ function Login() {
                   control={loginForm.control}
                   render={({ field }) => (
                     <div className="relative">
-                      <FormItem className="">
+                      <FormItem>
                         <FormControl>
                           <Input
                             type={isPasswordVisible ? "text" : "password"}
@@ -175,7 +175,7 @@ function Login() {
           }}
           plugins={[
             Autoplay({
-              delay: 2000
+              delay: 3000
             })
           ]}
         >
