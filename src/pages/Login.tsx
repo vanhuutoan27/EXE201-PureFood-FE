@@ -61,10 +61,10 @@ function Login() {
     <div className="flex w-full flex-wrap items-center justify-center">
       <div className="flex h-full w-full items-center justify-center p-10 lg:w-1/2">
         <div className="flex w-3/4 flex-col space-y-10">
-          <div className="select-none">
-            <h2 className="text-4xl font-semibold tracking-wider">Login</h2>
+          <div className="select-none space-y-2">
+            <h2 className="text-4xl font-semibold tracking-wider">Đăng nhập</h2>
             <p className="text-primary">
-              Login to access your PureFood account
+              Đăng nhập để truy cập tài khoản PureFood của bạn
             </p>
           </div>
 
@@ -131,12 +131,15 @@ function Login() {
                       htmlFor="remember"
                       className="cursor-pointer font-normal"
                     >
-                      Remember me
+                      Ghi nhớ tôi
                     </Label>
                   </div>
 
-                  <Link to="/forgot-password" className="text-primary">
-                    Forgot password
+                  <Link
+                    to="/forgot-password"
+                    className="font-medium text-primary"
+                  >
+                    Quên mật khẩu
                   </Link>
                 </div>
               </div>
@@ -149,13 +152,13 @@ function Login() {
                   size="lg"
                   className="w-full"
                 >
-                  {isLoading ? "Loading..." : "Login"}
+                  {isLoading ? "Đang tải..." : "Đăng nhập"}
                 </Button>
 
                 <p className="text-center text-sm">
-                  Don't have an account?{" "}
+                  Bạn chưa có tài khoản?{" "}
                   <Link to="/register" className="font-medium text-primary">
-                    Register
+                    Đăng ký
                   </Link>
                 </p>
               </div>

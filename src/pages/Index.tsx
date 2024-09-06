@@ -1,12 +1,13 @@
-import Hero from "./hero"
-import SeasonalFruit from "./seasonalFruit"
-import Vegetables from "./vegetableChip"
+import Hero from "@/components/global/organisms/Hero"
+
+import SeasonalFruit from "../components/local/home/seasonal-fruit"
+import VegetableCard from "../components/local/home/vegetable-card"
 
 function Index() {
   return (
     <div className="flex w-full flex-col gap-10">
       <Hero />
-      <Vegetables />
+      <VegetableCard />
       <SeasonalFruit />
     </div>
   )

@@ -18,17 +18,19 @@ import {
 
 function Hero() {
   return (
-    <div className="mb-[100px] flex h-[550px] w-full items-center justify-center">
-      <div className="flex h-full w-full flex-col items-center justify-center rounded-xl bg-[url('https://coolwallpapers.me/picsup/447346-food-photography-picture.jpg')] bg-cover bg-center font-semibold text-white">
-        <h3 className="text-4xl">Fresh & Organic</h3>
-        <h1 className="text-[80px] font-medium">Healthy Vegetables</h1>
-        <p className="text-xl">
-          Discover the best deals on farm-fresh vegetables
+    <div className="mb-[100px] flex h-[80vh] w-full items-center justify-center">
+      <div className="flex h-full w-full select-none flex-col items-center justify-center gap-4 rounded-3xl bg-[url('https://coolwallpapers.me/picsup/447346-food-photography-picture.jpg')] bg-cover bg-center font-semibold text-white">
+        <h3 className="text-4xl">Tươi mới & Hữu cơ</h3>
+        <h2 className="text-7xl font-bold uppercase tracking-wider">
+          Rau tốt cho sức khỏe
+        </h2>
+        <p className="text-xl font-medium">
+          Khám phá những ưu đãi tốt nhất cho rau tươi từ trang trại
         </p>
       </div>
 
-      <div className="absolute top-[460px] w-[60%] rounded-xl border-black bg-gray-50 p-6 shadow-lg">
-        <Tabs defaultValue="address">
+      <div className="absolute top-[460px] w-[60%] rounded-xl bg-gray-50 p-6 shadow-lg">
+        <Tabs defaultValue="vegetable">
           <TabsList className="grid w-60 grid-cols-2">
             <TabsTrigger value="vegetable">Vegetable</TabsTrigger>
             <TabsTrigger value="address">Address</TabsTrigger>
