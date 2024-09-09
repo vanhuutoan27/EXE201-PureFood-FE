@@ -63,15 +63,15 @@ const InformationProduct: React.FC<ProductInfoProps> = ({
   return (
     <div className="flex flex-col gap-10">
       <div className="flex gap-2 text-4xl font-bold uppercase text-primary">
-        <p>{category}</p>
-        <p>{name}</p>
-        <p>-</p>
-        <p>{weight}</p>
-        <p>{unit}</p>
+        <p>
+          {category} {name} - {weight} {unit}
+        </p>
       </div>
       <p className="text-xl font-bold text-primary">
         Giá: {formatCurrency(price)}
       </p>
+      <p className="text-base font-semibold text-secondary">{description}</p>
+
       <ul className="space-y-4">
         <li className="flex items-start text-secondary">
           <CircleCheck className="text-secondary" />
@@ -79,12 +79,7 @@ const InformationProduct: React.FC<ProductInfoProps> = ({
             <span className="font-semibold">Xuất xứ: {origin}</span>
           </span>
         </li>
-        <li className="flex items-start text-secondary">
-          <CircleCheck className="text-secondary" />
-          <span className="ml-5">
-            <span className="font-semibold">{description}</span>
-          </span>
-        </li>
+
         {organic && (
           <li className="flex items-start text-secondary">
             <CircleCheck className="text-secondary" />

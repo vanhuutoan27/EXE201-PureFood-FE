@@ -20,3 +20,24 @@ export const addToCart = (
   }
   return [...cartItems, newItem]
 }
+
+
+export const formatDate = (dateString: string) => {
+  if (!dateString) {
+    return "NaN"
+  }
+
+  const date = new Date(dateString)
+
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC"
+  }
+  const formattedDate = date
+    .toLocaleDateString("en-GB", options)
+    .replace(/(\d+)\s(\w+)\s(\d+)/, "$1 $2, $3")
+
+  return `${formattedDate}`
+}

@@ -14,8 +14,10 @@ interface RelatedProductProps {
 
 function Related({ relatedProducts }: RelatedProductProps) {
   return (
-    <div className="mt-10">
+    <>
       <Section
+        button="xem thêm"
+        url="/asd"
         title="Sản phẩm liên quan"
         description="Sản phẩm rau hữu cơ sạch, tươi ngon, an toàn cho sức khỏe, đạt chuẩn canh tác bền vững."
       />
@@ -42,7 +44,7 @@ function Related({ relatedProducts }: RelatedProductProps) {
           ))}
         </CarouselContent>
       </Carousel>
-    </div>
+    </>
   )
 }
 
