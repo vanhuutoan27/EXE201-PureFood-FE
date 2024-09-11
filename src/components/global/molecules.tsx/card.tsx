@@ -9,7 +9,7 @@ interface CardProps {
 function Card({
   children,
   className,
-  backgroundColor = "bg-white"
+  backgroundColor = "bg-white border-[1px]"
 }: CardProps) {
   return (
     <div className={cn("rounded-xl p-6 shadow-md", backgroundColor, className)}>
@@ -19,3 +19,4 @@ function Card({
 }
 
 export default Card
+ 
