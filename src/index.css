@@ -54,8 +54,46 @@
   }
 }
 
-@layer utilities {
+@layer components {
+  .lens {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+
   .desc-lens {
     @apply text-gray-400;
   }
+
+  .error-lens {
+    @apply ml-2 text-sm text-red-500;
+  }
+}
+
+@layer utilities {
+  .slow {
+    @apply transition-all duration-300;
+  }
+
+  .sticky-nav {
+    @apply fixed left-0 right-0 top-0 z-20 bg-white shadow-md;
+  }
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }

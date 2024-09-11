@@ -231,12 +231,20 @@ function Register() {
                   )}
                 />
 
-                <div className="flex items-center space-x-2 text-sm">
+                <div className="text-sm">
                   <Checkbox id="terms" />
                   <Label htmlFor="terms" className="cursor-pointer font-normal">
                     Tôi đồng ý với tất cả các{" "}
-                    <span className="text-primary">Điều khoản</span> và{" "}
-                    <span className="text-primary">Chính sách bảo mật</span>
+                    <Link to="/terms" className="font-medium text-primary">
+                      Điều khoản
+                    </Link>{" "}
+                    và{" "}
+                    <Link
+                      to="/privacy-policy"
+                      className="font-medium text-primary"
+                    >
+                      Chính sách bảo mật
+                    </Link>
                   </Label>
                 </div>
               </div>

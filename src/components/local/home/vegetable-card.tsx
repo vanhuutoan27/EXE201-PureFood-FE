@@ -48,14 +48,14 @@ function VegetableCard() {
         title="Rau củ bán chạy"
         description="Từ trang trại đến bàn ăn, hãy trải nghiệm những sản phẩm tươi ngon và lành mạnh nhất ngay từ cánh đồng."
         button="Xem thêm"
-        url="/asd"
+        url="/rau-cu"
       />
 
       <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
         {vegetableChip.map((vegetable, index) => (
           <div
             key={index}
-            className="flex items-center gap-6 rounded-xl bg-card p-4 shadow-md"
+            className="flex items-center gap-6 rounded-xl p-4 shadow-md"
           >
             <img
               src={vegetable.image}
@@ -64,7 +64,7 @@ function VegetableCard() {
             />
 
             <div className="space-y-1">
-              <h2 className="w-fit text-lg font-semibold text-secondary">
+              <h2 className="w-fit text-lg font-bold text-secondary">
                 {vegetable.title}
               </h2>
               <ul className="flex text-gray-500">

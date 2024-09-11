@@ -1,85 +1,60 @@
-import { Navigation } from "lucide-react"
+import { Link } from "react-router-dom"
 
 import { Button } from "@/components/global/atoms/button"
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "@/components/global/atoms/select"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger
-} from "@/components/global/atoms/tabs"
 
 function Hero() {
   return (
-    <div className="mb-[100px] flex h-[80vh] w-full items-center justify-center">
-      <div className="flex h-full w-full select-none flex-col items-center justify-center gap-4 rounded-3xl bg-[url('https://coolwallpapers.me/picsup/447346-food-photography-picture.jpg')] bg-cover bg-center font-semibold text-white">
-        <h3 className="text-3xl">Tươi mới & Hữu cơ</h3>
-        <h2 className="text-6xl font-bold uppercase tracking-wider">
+    <div className="relative mt-6">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src="https://coolwallpapers.me/picsup/447346-food-photography-picture.jpg"
+          alt="Home Hero Image"
+          className="h-[90vh] w-full rounded-3xl object-cover"
+        />
+      </div>
+
+      <div className="absolute inset-0 h-[90vh] rounded-3xl bg-black opacity-40"></div>
+
+      <div className="relative flex h-screen select-none flex-col items-center justify-center text-center text-white">
+        <h1 className="mb-4 text-3xl font-bold">Tươi mới & Hữu cơ</h1>
+        <h2 className="mb-2 text-6xl font-extrabold uppercase">
           Rau tốt cho sức khỏe
         </h2>
-        <p className="text-xl font-medium">
+        <p className="mb-8 text-lg">
           Khám phá những ưu đãi tốt nhất cho rau tươi từ trang trại
         </p>
       </div>
 
-      <div className="absolute top-[460px] w-[60%] rounded-xl bg-gray-50 p-6 shadow-lg">
-        <Tabs defaultValue="vegetable">
-          <TabsList className="grid w-60 grid-cols-2">
-            <TabsTrigger value="vegetable">Vegetable</TabsTrigger>
-            <TabsTrigger value="address">Address</TabsTrigger>
-          </TabsList>
-          <TabsContent value="vegetable" className="flex flex-col gap-6">
-            <div className="flex w-full gap-6">
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="fruit">Fruit</SelectItem>
-                    <SelectItem value="vegetable">Vegetable</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a fruit" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="apple">Apple</SelectItem>
-                    <SelectItem value="banana">Banana</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a fruit" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="apple">Apple</SelectItem>
-                    <SelectItem value="banana">Banana</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="flex justify-end">
-              <Button className="flex gap-2">
-                <Navigation size={18} />
-                Choose address
-              </Button>
-            </div>
-          </TabsContent>
-          <TabsContent value="address">asd</TabsContent>
-        </Tabs>
+      <div className="absolute left-8 right-8 top-6 flex justify-between">
+        <div className="flex items-center gap-8 font-semibold text-white">
+          <Link to="/rau-cu">Rau củ</Link>
+          <Link to="/trai-cay">Trái cây</Link>
+          <Link to="/kien-thuc">Kiến thức</Link>
+        </div>
+
+        <Link to="/" className="text-2xl font-bold text-white">
+          <span className="text-primary">Pure</span>
+          <span>Food</span>
+        </Link>
+
+        <div className="flex gap-4">
+          <Link to="/register">
+            <Button
+              type="button"
+              variant="ghost"
+              className="text-white hover:text-white/90"
+            >
+              Đăng ký
+            </Button>
+          </Link>
+
+          <Link to="/login">
+            <Button type="button" variant="default">
+              Đăng nhập
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   )
