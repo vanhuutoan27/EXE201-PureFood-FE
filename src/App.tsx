@@ -9,8 +9,9 @@ const Index = lazy(() => import("@/pages/Index"))
 const Login = lazy(() => import("@/pages/Login"))
 const Register = lazy(() => import("@/pages/Register"))
 const Error = lazy(() => import("@/pages/Error"))
-const RauCu = lazy(() => import("@/pages/RauCu"))
-const TraiCay = lazy(() => import("@/pages/TraiCay"))
+const Vegetable = lazy(() => import("@/pages/Vegetable"))
+const Fruit = lazy(() => import("@/pages/Fruit"))
+const Blog = lazy(() => import("@/pages/Blog"))
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
       <Routes>
         <Route element={<DefaultLayout />}>
           <Route path="/" element={<Index />} />
-          <Route path="/rau-cu" element={<RauCu />} />
-          <Route path="/trai-cay" element={<TraiCay />} />
+          <Route path="/rau-cu" element={<Vegetable />} />
+          <Route path="/trai-cay" element={<Fruit />} />
+          <Route path="/kien-thuc" element={<Blog />} />
         </Route>
 
         <Route path="/login" element={<Login />} />

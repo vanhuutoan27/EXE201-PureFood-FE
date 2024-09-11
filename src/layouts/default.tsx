@@ -10,7 +10,7 @@ function DefaultLayout() {
   return (
     <div className="flex flex-col">
       {!isHome && <Header />}
-      <main className={`container min-h-screen ${isHome ? "mt-0" : "mt-24"}`}>
+      <main className={`container min-h-screen ${isHome ? "mt-0" : "mt-28"}`}>
         <Outlet />
       </main>
       <Footer />
