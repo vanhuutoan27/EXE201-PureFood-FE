@@ -9,44 +9,41 @@ import {
   BreadcrumbSeparator
 } from "@/components/global/atoms/breadcrumb"
 
-type BreadcrumbComponentProps = {
-  lastPage: string
-  lastPageUrl: string
-  currentPage: string
-  currentPageUrl?: string
-  currentDetailPage?: string
+interface BreadPageProps {
+  name: string
+  url: string
 }
 
-function BreadcrumbComponent({
-  lastPage,
-  lastPageUrl,
-  currentPage,
-  currentPageUrl,
-  currentDetailPage
-}: BreadcrumbComponentProps) {
+interface BreadProps {
+  lastPage: BreadPageProps
+  currentPage: BreadPageProps
+  currentDetailsPage?: string
+}
+
+function Bread({ lastPage, currentPage, currentDetailsPage }: BreadProps) {
   return (
     <div className="mb-2 flex py-2">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink
-              href={lastPageUrl}
-              className="slow text-gray-800 hover:text-primary"
+              href={lastPage.url}
+              className="slow text-secondary hover:text-secondary"
             >
-              {lastPage}
+              {lastPage.name}
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
             <Slash />
           </BreadcrumbSeparator>
-          {currentDetailPage ? (
+          {currentDetailsPage ? (
             <>
               <BreadcrumbItem>
                 <BreadcrumbLink
-                  href={currentPageUrl}
-                  className={`text-primary ${currentDetailPage ? "slow cursor-pointer text-gray-800 hover:text-primary" : ""}`}
+                  href={currentPage.url}
+                  className={`${currentDetailsPage ? "slow cursor-pointer text-secondary hover:text-secondary" : ""}`}
                 >
-                  {currentPage}
+                  {currentPage.name}
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator>
@@ -54,14 +51,14 @@ function BreadcrumbComponent({
               </BreadcrumbSeparator>
               <BreadcrumbItem>
                 <BreadcrumbPage className="font-semibold text-primary">
-                  {currentDetailPage}
+                  {currentDetailsPage}
                 </BreadcrumbPage>
               </BreadcrumbItem>
             </>
           ) : (
             <BreadcrumbItem>
               <BreadcrumbPage className="font-semibold text-primary">
-                {currentPage}
+                {currentPage.name}
               </BreadcrumbPage>
             </BreadcrumbItem>
           )}
@@ -71,4 +68,4 @@ function BreadcrumbComponent({
   )
 }
 
-export default BreadcrumbComponent
+export default Bread

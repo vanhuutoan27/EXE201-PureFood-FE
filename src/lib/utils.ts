@@ -10,6 +10,11 @@ export const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" })
 }
 
+// Format a number to currency format
+export const formatCurrency = (amount: number): string => {
+  return new Intl.NumberFormat("vi-VN").format(amount) + " VND"
+}
+
 // Format a date string to hh:mm AM/PM, DD Month, YYYY
 export const formatTimeAndDate = (dateString: string): string => {
   if (!dateString) {
@@ -37,4 +42,19 @@ export const formatTimeAndDate = (dateString: string): string => {
     .replace(/(\d+)\s(\w+)\s(\d+)/, "$1 $2, $3")
 
   return `${formattedTime}, ${formattedDate}`
+}
+
+// Format a date string to DD/MM/YYYY
+export const formatDateDMY = (dateString: string): string => {
+  const date = new Date(dateString)
+
+  if (isNaN(date.getTime())) {
+    throw new Error("Invalid date string")
+  }
+
+  const day = String(date.getDate()).padStart(2, "0")
+  const month = String(date.getMonth() + 1).padStart(2, "0")
+  const year = date.getFullYear()
+
+  return `${day}/${month}/${year}`
 }

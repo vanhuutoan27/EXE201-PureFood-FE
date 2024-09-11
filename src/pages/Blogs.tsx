@@ -2,7 +2,7 @@ import { exampleBlogsData } from "@/constants/blogs"
 
 import BlogCard from "@/components/local/blog/blog-card"
 
-function Blog() {
+function Blogs() {
   const data = exampleBlogsData
 
   return (
@@ -14,4 +14,4 @@ function Blog() {
   )
 }
 
-export default Blog
+export default Blogs

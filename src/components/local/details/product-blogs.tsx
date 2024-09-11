@@ -1,22 +1,23 @@
-import { blogType } from "@/schemas/productSchema"
+import { BlogType } from "@/schemas/blogSchema"
 
-import { formatDate } from "@/lib/helper"
+import { formatDateDMY } from "@/lib/utils"
 
 import Section from "@/components/global/organisms/section"
 
-interface BlogCardProps {
-  blogs: blogType[]
+interface ProductBlogsProps {
+  blogs: BlogType[]
 }
 
-function BlogProduct({ blogs }: BlogCardProps) {
+function ProductBlogs({ blogs }: ProductBlogsProps) {
   return (
     <div>
       <Section
-        button="xem thêm"
-        url="/asd"
         title="Bài viết liên quan"
         description="Sản phẩm rau hữu cơ sạch, tươi ngon, an toàn cho sức khỏe, đạt chuẩn canh tác bền vững."
+        button="Xem thêm"
+        url="/product"
       />
+
       <div className="flex gap-10">
         {blogs.map((blog) => (
           <div
@@ -32,7 +33,7 @@ function BlogProduct({ blogs }: BlogCardProps) {
 
               <div className="mt-2 flex items-center justify-between">
                 <p className="text-sm font-semibold text-accent">
-                  {formatDate(blog.createdAt)}
+                  {formatDateDMY(blog.createdAt)}
                 </p>
                 <div className="cursor-pointer rounded-md border bg-secondary px-2 py-1 text-xs font-semibold text-gray-100">
                   {blog.type}
@@ -59,4 +60,4 @@ function BlogProduct({ blogs }: BlogCardProps) {
   )
 }
 
-export default BlogProduct
+export default ProductBlogs

@@ -55,7 +55,7 @@ function UserButton() {
           </Avatar>
         </DropdownMenuTrigger>
       </div>
-      <DropdownMenuContent className="absolute -right-6 mt-6 w-40 p-2">
+      <DropdownMenuContent className="absolute -right-6 mt-6 w-40 bg-white p-2">
         <DropdownMenuGroup>
           {menuItems.map(
             (item, index) =>

@@ -1,18 +1,18 @@
-import { productType } from "@/schemas/productSchema"
+import { ProductType } from "@/schemas/productSchema"
 
 import {
   Carousel,
   CarouselContent,
   CarouselItem
 } from "@/components/global/atoms/carousel"
-import ProductCard from "@/components/global/molecules.tsx/product-card"
+import ProductCard from "@/components/global/molecules/product-card"
 import Section from "@/components/global/organisms/section"
 
-interface RelatedProductProps {
-  relatedProducts: productType[]
+interface ProductRelatedProps {
+  products: ProductType[]
 }
 
-function Related({ relatedProducts }: RelatedProductProps) {
+function ProductRelated({ products }: ProductRelatedProps) {
   return (
     <>
       <Section
@@ -29,7 +29,7 @@ function Related({ relatedProducts }: RelatedProductProps) {
         className="w-full"
       >
         <CarouselContent>
-          {relatedProducts.map((product) => (
+          {products.map((product) => (
             <CarouselItem
               key={product.productId}
               className="p-2 md:basis-1/2 lg:basis-1/4"
@@ -48,4 +48,4 @@ function Related({ relatedProducts }: RelatedProductProps) {
   )
 }
 
-export default Related
+export default ProductRelated

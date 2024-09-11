@@ -1,51 +1,18 @@
-import React, { useState } from "react"
+import { useState } from "react"
 
 import { CircleCheck } from "lucide-react"
 
-import { formatCurrency } from "@/lib/helper"
+import { ProductType } from "@/schemas/productSchema"
+
+import { formatCurrency } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
 
-interface ProductInfoProps {
-  productId: string
-  name: string
-  price: number
-  origin: string
-  category: string
-  weight: number
-  unit: string
-  description: string
-  organic: boolean
+interface ProductInformationProps {
+  product: ProductType
 }
 
-// const handleAddToCart = () => {
-//   const newItem: ProductCartType = {
-//     productId: productId,
-//     name: name,
-//     price: price,
-//     weight: weight,
-//     unit: unit
-//   }
-//   const updatedCart = addToCart(cartItems, newItem)
-//   setCartItems(updatedCart)
-//   localStorage.setItem("cartItems", JSON.stringify(updatedCart))
-
-//   toast.success("Added to cart successfully")
-
-//   window.dispatchEvent(new CustomEvent("cartChanged", { detail: updatedCart }))
-// }
-
-const InformationProduct: React.FC<ProductInfoProps> = ({
-  category,
-  name,
-  price,
-  origin,
-  weight,
-  unit,
-  description,
-  organic
-  //   productId
-}) => {
+function ProductInformation({ product }: ProductInformationProps) {
   const [quantity, setQuantity] = useState(1)
 
   const handleIncrease = () => {
@@ -56,31 +23,29 @@ const InformationProduct: React.FC<ProductInfoProps> = ({
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1))
   }
 
-  const handleAddToCart = () => {
-    console.log(`Added ${quantity} items to cart`)
-  }
-
   return (
-    <div className="flex flex-col gap-10">
-      <div className="flex gap-2 text-4xl font-bold uppercase text-primary">
-        <p>
-          {category} {name} - {weight} {unit}
+    <div className="space-y-10">
+      <div className="space-y-4">
+        <p className="text-3xl font-bold uppercase text-primary">
+          {product.category} {product.name} - {product.weight} {product.unit}
         </p>
+
+        <h4 className="text-xl font-bold text-primary">
+          Giá: {formatCurrency(product.price)}
+        </h4>
       </div>
-      <p className="text-xl font-bold text-primary">
-        Giá: {formatCurrency(price)}
-      </p>
-      <p className="text-base font-semibold text-secondary">{description}</p>
+
+      <p>{product.description}</p>
 
       <ul className="space-y-4">
         <li className="flex items-start text-secondary">
           <CircleCheck className="text-secondary" />
           <span className="ml-5">
-            <span className="font-semibold">Xuất xứ: {origin}</span>
+            <span className="font-semibold">Xuất xứ: {product.origin}</span>
           </span>
         </li>
 
-        {organic && (
+        {product.organic && (
           <li className="flex items-start text-secondary">
             <CircleCheck className="text-secondary" />
             <span className="ml-5">
@@ -88,6 +53,7 @@ const InformationProduct: React.FC<ProductInfoProps> = ({
             </span>
           </li>
         )}
+
         <li className="flex items-start text-secondary">
           <CircleCheck className="text-secondary" />
           <span className="ml-5">
@@ -114,11 +80,12 @@ const InformationProduct: React.FC<ProductInfoProps> = ({
           <p className="text-white">+</p>
         </Button>
       </div>
-      <Button variant={"default"} onClick={handleAddToCart}>
-        Add to Cart
+
+      <Button type="button" variant="default" className="h-11 w-full">
+        Thêm vào giỏ hàng
       </Button>
     </div>
   )
 }
 
-export default InformationProduct
+export default ProductInformation

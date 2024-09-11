@@ -1,12 +1,12 @@
-import React, { useState } from "react"
+import { useState } from "react"
 
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-interface ImageGalleryProps {
+interface ProductImageProps {
   images: string[]
 }
 
-const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
+function ProductImage({ images }: ProductImageProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const goToNext = () => {
@@ -26,43 +26,46 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
   }
 
   return (
-    <div className="flex">
-      <div className="mr-4 flex flex-col space-y-2">
+    <div className="flex w-full gap-4">
+      <div className="space-y-4">
         {images.map((image, index) => (
           <img
             key={index}
             src={image}
             alt={`Thumbnail ${index + 1}`}
             onClick={() => handleThumbnailClick(index)}
-            className={`h-20 w-20 cursor-pointer rounded-lg object-cover shadow ${
+            className={`h-20 w-20 cursor-pointer select-none rounded-xl border-2 object-cover shadow-md ${
               currentIndex === index
-                ? "border-2 border-secondary shadow-lg"
-                : "border-2 border-gray-400 opacity-60 shadow-lg"
+                ? "border-secondary"
+                : "border-secondary opacity-50"
             }`}
           />
         ))}
       </div>
+
       <div className="relative">
         <img
           src={images[currentIndex]}
           alt={`Image ${currentIndex + 1}`}
-          className="h-[60vh] w-[60vh] select-none rounded-lg border-2 object-cover shadow-lg border-secondary"
+          className="aspect-[1] w-full select-none rounded-xl object-cover shadow-md"
         />
-        <button
+
+        <ChevronLeft
+          color="white"
+          size={32}
+          className="absolute left-2 top-1/2 -translate-y-1/2 cursor-pointer"
           onClick={goToPrevious}
-          className="absolute left-2 top-1/2 -translate-y-1/2"
-        >
-          <ChevronLeft color="white" size={32} className="cursor-pointer" />
-        </button>
-        <button
+        />
+
+        <ChevronRight
+          color="white"
+          size={32}
+          className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
           onClick={goToNext}
-          className="absolute right-2 top-1/2 -translate-y-1/2"
-        >
-          <ChevronRight color="white" size={32} className="cursor-pointer" />
-        </button>
+        />
       </div>
     </div>
   )
 }
 
-export default ImageGallery
+export default ProductImage

@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import { Link } from "react-router-dom"
 
-import { formatCurrency } from "@/lib/helper"
+import { formatCurrency } from "@/lib/utils"
 
 import { Button } from "../atoms/button"
 import { Skeleton } from "../atoms/skeleton"

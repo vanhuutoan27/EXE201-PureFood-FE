@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-import { formatTimeAndDate } from "@/lib/utils"
+import { formatDateDMY } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
 
@@ -33,7 +33,7 @@ function BlogCard({ blog }: BlogCardProps) {
       <div className="p-4">
         <Link
           to={`/blogs/${blog.slug}`}
-          className="slow w-fit cursor-pointer font-semibold text-primary hover:text-secondary"
+          className="slow title-lens w-fit cursor-pointer text-lg font-semibold text-primary hover:text-secondary"
         >
           {blog.title}
         </Link>
@@ -59,9 +59,12 @@ function BlogCard({ blog }: BlogCardProps) {
           )}
         </div>
 
-        <div className="mt-6 flex items-center justify-between px-2">
-          <p className="text-sm font-semibold text-accent">
-            {formatTimeAndDate(blog.date)}
+        <div className="mt-4 flex items-center justify-between px-2">
+          <p className="text-sm font-medium text-muted-foreground">
+            Created at:{" "}
+            <span className="font-semibold text-secondary">
+              {formatDateDMY(blog.date)}
+            </span>
           </p>
 
           <Link to={`/blogs/${blog.slug}`}>

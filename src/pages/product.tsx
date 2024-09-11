@@ -1,16 +1,20 @@
-import FilterProduct from "@/components/local/home/details/filter-product"
-import ProductList from "@/components/local/home/details/product-list"
-import SearchProduct from "@/components/local/home/details/search-product"
+import ProductFilter from "@/components/local/product/product-filter"
+import ProductList from "@/components/local/product/product-list"
+import ProductSearch from "@/components/local/product/product-search"
 
 function Product() {
   return (
-    <div className="mt-10 flex w-full flex-col gap-10">
-      <SearchProduct />
+    <div className="space-y-10">
+      <ProductSearch />
+
       <div className="flex gap-10">
-        <div>
-          <FilterProduct />
+        <div className="sticky top-24 h-fit w-1/3">
+          <ProductFilter />
         </div>
-        <ProductList />
+
+        <div className="w-2/3">
+          <ProductList />
+        </div>
       </div>
     </div>
   )

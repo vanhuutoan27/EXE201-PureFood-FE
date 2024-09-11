@@ -1,5 +1,6 @@
 import { Dot } from "lucide-react"
 
+import { Card } from "@/components/global/atoms/card"
 import Section from "@/components/global/organisms/section"
 
 function VegetableCard() {
@@ -53,7 +54,7 @@ function VegetableCard() {
 
       <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
         {vegetableChip.map((vegetable, index) => (
-          <div
+          <Card
             key={index}
             className="flex items-center gap-6 rounded-xl p-4 shadow-md"
           >
@@ -79,7 +80,7 @@ function VegetableCard() {
                 ))}
               </ul>
             </div>
-          </div>
+          </Card>
         ))}
       </div>
     </div>

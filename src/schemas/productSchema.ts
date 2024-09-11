@@ -1,13 +1,7 @@
 import { z } from "zod"
 
-const blogSchema = z.object({
-  type: z.string().nonempty({ message: "Type is required" }),
-  title: z.string().nonempty({ message: "Title is required" }),
-  content: z.string().nonempty({ message: "Content is required" }),
-  createdAt: z.string().nonempty({ message: "Created at is required" }),
-  author: z.string().nonempty({ message: "Author is required" }),
-  image: z.string().nonempty({ message: "Image is required" })
-})
+import { blogSchema } from "./blogSchema"
+
 export const productSchema = z.object({
   productId: z.string().nonempty({ message: "Product Id is required" }),
   category: z.string().nonempty({ message: "Category is required" }),
@@ -30,15 +24,4 @@ export const productSchema = z.object({
   updatedBy: z.string().nonempty({ message: "Updated by is required" })
 })
 
-export const productCartSchema = z.object({
-  productId: z.string(),
-  name: z.string(),
-  price: z.number(),
-  weight: z.number(),
-  quantity: z.number(),
-  unit: z.string()
-})
-
-export type productType = z.infer<typeof productSchema>
-export type blogType = z.infer<typeof blogSchema>
-export type ProductCartType = z.infer<typeof productCartSchema>
+export type ProductType = z.infer<typeof productSchema>
