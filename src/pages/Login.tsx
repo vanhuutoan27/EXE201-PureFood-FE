@@ -62,7 +62,7 @@ function Login() {
       <div className="flex h-full w-full items-center justify-center p-10 lg:w-1/2">
         <div className="flex w-3/4 flex-col space-y-10">
           <div className="select-none space-y-2">
-            <h2 className="text-4xl font-semibold tracking-wider">Đăng nhập</h2>
+            <h2 className="text-4xl font-bold tracking-wider">Đăng nhập</h2>
             <p className="text-primary">
               Đăng nhập để truy cập tài khoản PureFood của bạn
             </p>

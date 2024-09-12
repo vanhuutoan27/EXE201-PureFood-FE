@@ -12,16 +12,26 @@ export const productSchema = z.object({
   weight: z.number().min(1, { message: "Weight must be at least 1" }),
   unit: z.string().nonempty({ message: "Unit is required" }),
   images: z.array(z.string()).nonempty({ message: "Images are required" }),
-  blog: z.array(blogSchema).optional(),
+  blogs: z.array(blogSchema).optional(),
   origin: z.string().nonempty({ message: "Origin is required" }),
   organic: z.boolean(),
   status: z.boolean(),
   entryDate: z.string().nonempty({ message: "Entry date is required" }),
   expiryDate: z.string().nonempty({ message: "Expiry date is required" }),
   createdAt: z.string().nonempty({ message: "Created at is required" }),
-  updatedAt: z.string().nonempty({ message: "Updated at is required" }),
   createdBy: z.string().nonempty({ message: "Created by is required" }),
+  updatedAt: z.string().nonempty({ message: "Updated at is required" }),
   updatedBy: z.string().nonempty({ message: "Updated by is required" })
 })
 
+export const createProductSchema = productSchema.omit({
+  productId: true,
+  blogs: true,
+  createdAt: true,
+  updatedAt: true,
+  createdBy: true,
+  updatedBy: true
+})
+
 export type ProductType = z.infer<typeof productSchema>
+export type CreateProductType = z.infer<typeof createProductSchema>

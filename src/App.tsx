@@ -3,6 +3,7 @@ import { Suspense, lazy } from "react"
 import { Route, Routes } from "react-router-dom"
 
 import DefaultLayout from "./layouts/default"
+import UserLayout from "./layouts/user"
 import Loading from "./pages/Loading"
 
 const Index = lazy(() => import("@/pages/Index"))
@@ -15,6 +16,10 @@ const Product = lazy(() => import("@/pages/Product"))
 const Details = lazy(() => import("@/pages/Details"))
 const Blog = lazy(() => import("@/pages/Blogs"))
 
+const Account = lazy(() => import("@/pages/Account"))
+const History = lazy(() => import("@/pages/History"))
+const Password = lazy(() => import("@/pages/Password"))
+
 function App() {
   return (
     <Suspense fallback={<Loading />}>
@@ -23,9 +28,15 @@ function App() {
           <Route path="/" element={<Index />} />
           <Route path="/rau-cu" element={<Vegetable />} />
           <Route path="/trai-cay" element={<Fruit />} />
-          <Route path="/products/:productId" element={<Details />} />
           <Route path="/products" element={<Product />} />
+          <Route path="/products/:productId" element={<Details />} />
           <Route path="/kien-thuc" element={<Blog />} />
+
+          <Route element={<UserLayout />}>
+            <Route path="/thong-tin-ca-nhan/:userId" element={<Account />} />
+            <Route path="/lich-su/:userId" element={<History />} />
+            <Route path="/mat-khau/:userId" element={<Password />} />
+          </Route>
         </Route>
 
         <Route path="/login" element={<Login />} />

@@ -1,9 +1,12 @@
 import { siteConfig } from "@/configs/site"
 import { Link, useLocation } from "react-router-dom"
 
+import { Button } from "../atoms/button"
 import UserButton from "./user-button"
 
 function Header() {
+  const user = null
+
   const location = useLocation()
 
   return (
@@ -33,7 +36,23 @@ function Header() {
         </Link>
 
         {/* Right Side - User */}
-        <UserButton />
+        {user ? (
+          <UserButton />
+        ) : (
+          <div className="flex gap-4">
+            <Link to="/register">
+              <Button type="button" variant="ghost">
+                Đăng ký
+              </Button>
+            </Link>
+
+            <Link to="/login">
+              <Button type="button" variant="default">
+                Đăng nhập
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   )

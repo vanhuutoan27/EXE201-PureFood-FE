@@ -46,7 +46,7 @@ function Details() {
         </div>
       </div>
 
-      <ProductBlogs blogs={product.blog || []} />
+      <ProductBlogs blogs={product.blogs || []} />
 
       <Related products={relatedProducts} />
     </div>
