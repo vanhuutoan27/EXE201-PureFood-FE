@@ -2,18 +2,15 @@ import { z } from "zod"
 
 export const userSchema = z.object({
   userId: z.string().nonempty({ message: "User ID is required" }),
-  phoneNumber: z
-    .string()
-    .nonempty({ message: "Không được bỏ trống" })
-    .min(10, { message: "Nhập ít nhất 10 chữ số" }),
   fullName: z.string().nonempty({ message: "Không được bỏ trống" }),
   email: z
     .string()
     .email({ message: "Email khả dụng" })
     .nonempty({ message: "Không được bỏ trống" }),
-  dob: z.string().nonempty({ message: "Không được bỏ trống" }),
-  gender: z.string().nonempty({ message: "Không được bỏ trống" }),
-  username: z.string().nonempty({ message: "Không được bỏ trống" }),
+  phoneNumber: z
+    .string()
+    .nonempty({ message: "Không được bỏ trống" })
+    .min(10, { message: "Nhập ít nhất 10 chữ số" }),
   password: z
     .string()
     .nonempty({ message: "Không được bỏ trống" })

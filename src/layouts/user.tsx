@@ -1,5 +1,6 @@
 import { defaultAvatar } from "@/configs/config"
 import { exampleUsers } from "@/data/userExample"
+import ErrorPage from "@/pages/Error"
 import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 
 import { UserType } from "@/schemas/userSchema"
@@ -10,7 +11,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger
-} from "@/components/local/profile/tabs"
+} from "@/components/local/profile/profile-tabs"
 
 function UserLayout() {
   const location = useLocation()
@@ -18,6 +19,10 @@ function UserLayout() {
   const { userId } = useParams<{ userId: string }>()
 
   const user = exampleUsers.find((veg: UserType) => veg.userId === userId)
+
+  if (!user) {
+    return <ErrorPage statusCode={404} />
+  }
 
   const activeTab = location.pathname.includes("thong-tin-ca-nhan")
     ? "account"

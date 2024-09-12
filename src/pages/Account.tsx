@@ -1,24 +1,13 @@
 import { exampleUsers } from "@/data/userExample"
-import { useParams } from "react-router-dom"
 
-import { UserType } from "@/schemas/userSchema"
-
-import UserDetail from "@/components/local/details/user-detail"
-
-import ErrorPage from "./Error"
+import UserDetails from "@/components/local/profile/user-detail"
 
 function Account() {
-  const { userId } = useParams<{ userId: string }>()
-
-  const user = exampleUsers.find((veg: UserType) => veg.userId === userId)
-
-  if (!user) {
-    return <ErrorPage statusCode={404} />
-  }
+  const user = exampleUsers[0]
 
   return (
     <div>
-      <UserDetail user={user} />
+      <UserDetails user={user} />
     </div>
   )
 }
