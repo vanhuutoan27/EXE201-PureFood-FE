@@ -7,6 +7,10 @@ export const userSchema = z.object({
     .string()
     .email({ message: "Email khả dụng" })
     .nonempty({ message: "Không được bỏ trống" }),
+  address: z
+    .string()
+    .nonempty({ message: "Không được bỏ trống" })
+    .min(20, { message: "Địa chỉ phải chứa ít nhất 20 ký tự" }),
   phoneNumber: z
     .string()
     .nonempty({ message: "Không được bỏ trống" })
@@ -36,6 +40,7 @@ export const userSchema = z.object({
 
 export const createUserSchema = userSchema.omit({
   userId: true,
+  address: true,
   createdAt: true,
   updatedAt: true,
   createdBy: true,
@@ -44,6 +49,10 @@ export const createUserSchema = userSchema.omit({
 
 export const updateUserSchema = userSchema.omit({
   userId: true,
+  password: true,
+  avatar: true,
+  status: true,
+  role: true,
   createdAt: true,
   updatedAt: true,
   createdBy: true,
@@ -66,7 +75,7 @@ export const userRegisterSchema = userSchema
     confirmPassword: z.string().nonempty({ message: "Không được bỏ trống" })
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Mật khẩu không trùng",
+    message: "Mật khẩu không khớp",
     path: ["confirmPassword"]
   })
 
@@ -90,7 +99,7 @@ export const passwordSchema = z
     confirmPassword: z.string().nonempty({ message: "Không được bỏ trống" })
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Mật khẩu không trùng",
+    message: "Mật khẩu không khớp",
     path: ["confirmPassword"]
   })
 

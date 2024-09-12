@@ -48,9 +48,9 @@ function UserLayout() {
         </Avatar>
       </div>
 
-      <div className="mt-20 text-center">
+      <div className="mt-20 text-center space-y-2">
         <h3 className="cursor-pointer text-xl font-semibold tracking-wider text-secondary">
-          {user?.username}
+          {user?.fullName}
         </h3>
         <p className="text-muted-foreground">{user?.email}</p>
       </div>
