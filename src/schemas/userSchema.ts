@@ -4,34 +4,37 @@ export const userSchema = z.object({
   userId: z.string().nonempty({ message: "User ID is required" }),
   phoneNumber: z
     .string()
-    .nonempty({ message: "Phone number is required" })
-    .min(10, { message: "Phone number must be at least 10 characters long" }),
-  fullName: z.string().nonempty({ message: "Full name is required" }),
+    .nonempty({ message: "Không được bỏ trống" })
+    .min(10, { message: "Nhập ít nhất 10 chữ số" }),
+  fullName: z.string().nonempty({ message: "Không được bỏ trống" }),
   email: z
     .string()
-    .email({ message: "Invalid email" })
-    .nonempty({ message: "Email is required" }),
+    .email({ message: "Email khả dụng" })
+    .nonempty({ message: "Không được bỏ trống" }),
+  dob: z.string().nonempty({ message: "Không được bỏ trống" }),
+  gender: z.string().nonempty({ message: "Không được bỏ trống" }),
+  username: z.string().nonempty({ message: "Không được bỏ trống" }),
   password: z
     .string()
-    .nonempty({ message: "Password is required" })
-    .min(6, { message: "Password must be at least 6 characters long" })
+    .nonempty({ message: "Không được bỏ trống" })
+    .min(6, { message: "Mật khẩu phải chứa ít nhất 6 ký tự" })
     .regex(/[A-Z]/, {
-      message: "Password must contain at least one uppercase letter"
+      message: "Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa"
     })
     .regex(/[a-z]/, {
-      message: "Password must contain at least one lowercase letter"
+      message: "Mật khẩu phải chứa ít nhất 1 chữ cái viết thường"
     })
-    .regex(/[0-9]/, { message: "Password must contain at least one number" })
+    .regex(/[0-9]/, { message: "Mật khẩu phải chứa ít nhất 1 chữ số" })
     .regex(/[@$!%*?&]/, {
-      message: "Password must contain at least one special character"
+      message: "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt"
     }),
-  avatar: z.string().url().nonempty({ message: "Avatar is required" }),
-  role: z.string().nonempty({ message: "Role is required" }),
+  avatar: z.string().url().nonempty({ message: "Không được bỏ trống" }),
+  role: z.string().nonempty({ message: "Không được bỏ trống" }),
   status: z.boolean(),
-  createdAt: z.string().nonempty({ message: "Created at is required" }),
-  updatedAt: z.string().nonempty({ message: "Updated at is required" }),
-  createdBy: z.string().nonempty({ message: "Created by is required" }),
-  updatedBy: z.string().nonempty({ message: "Updated by is required" })
+  createdAt: z.string().nonempty({ message: "Không được bỏ trống" }),
+  updatedAt: z.string().nonempty({ message: "Không được bỏ trống" }),
+  createdBy: z.string().nonempty({ message: "Không được bỏ trống" }),
+  updatedBy: z.string().nonempty({ message: "Không được bỏ trống" })
 })
 
 export const createUserSchema = userSchema.omit({
@@ -63,12 +66,34 @@ export const userRegisterSchema = userSchema
     password: true
   })
   .extend({
-    confirmPassword: z
-      .string()
-      .nonempty({ message: "Confirm Password is required" })
+    confirmPassword: z.string().nonempty({ message: "Không được bỏ trống" })
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
+    message: "Mật khẩu không trùng",
+    path: ["confirmPassword"]
+  })
+
+export const passwordSchema = z
+  .object({
+    currentPassword: z.string().nonempty({ message: "Không được bỏ trống" }),
+    newPassword: z
+      .string()
+      .nonempty({ message: "Không được bỏ trống" })
+      .min(6, { message: "Mật khẩu phải chứa ít nhất 6 ký tự" })
+      .regex(/[A-Z]/, {
+        message: "Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa"
+      })
+      .regex(/[a-z]/, {
+        message: "Mật khẩu phải chứa ít nhất 1 chữ cái viết thường"
+      })
+      .regex(/[0-9]/, { message: "Mật khẩu phải chứa ít nhất 1 chữ số" })
+      .regex(/[@$!%*?&]/, {
+        message: "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt"
+      }),
+    confirmPassword: z.string().nonempty({ message: "Không được bỏ trống" })
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Mật khẩu không trùng",
     path: ["confirmPassword"]
   })
 
@@ -77,3 +102,4 @@ export type UserLoginType = z.infer<typeof userLoginSchema>
 export type UserRegisterType = z.infer<typeof userRegisterSchema>
 export type CreateUserType = z.infer<typeof createUserSchema>
 export type UpdateUserType = z.infer<typeof updateUserSchema>
+export type UpdateUserPasswordType = z.infer<typeof passwordSchema>

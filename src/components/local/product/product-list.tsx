@@ -4,7 +4,7 @@ import { exampleVegetables } from "@/data/vegetableExample"
 import { FaHeart } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
-import { formatCurrency } from "@/lib/utils"
+import { formatCurrency, formatDateDMY } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
@@ -56,7 +56,7 @@ function ProductList() {
                 <p className="font-medium text-muted-foreground">
                   Ngày nhập:{" "}
                   <span className="font-semibold text-secondary">
-                    {product.entryDate}
+                    {formatDateDMY(product.entryDate)}
                   </span>
                 </p>
 

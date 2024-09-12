@@ -1,11 +1,10 @@
 import { defaultAvatar } from "@/configs/config"
+import { exampleUsers } from "@/data/userExample"
 import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage
-} from "@/components/global/atoms/avatar"
+import { UserType } from "@/schemas/userSchema"
+
+import { Avatar, AvatarImage } from "@/components/global/atoms/avatar"
 import {
   Tabs,
   TabsContent,
@@ -14,9 +13,11 @@ import {
 } from "@/components/local/profile/tabs"
 
 function UserLayout() {
-  const { userId } = useParams()
-
   const location = useLocation()
+
+  const { userId } = useParams<{ userId: string }>()
+
+  const user = exampleUsers.find((veg: UserType) => veg.userId === userId)
 
   const activeTab = location.pathname.includes("thong-tin-ca-nhan")
     ? "account"
@@ -34,16 +35,19 @@ function UserLayout() {
         />
 
         <Avatar className="absolute -bottom-20 left-1/2 h-40 w-40 -translate-x-1/2 cursor-pointer select-none border-4 border-primary">
-          <AvatarImage src={defaultAvatar} alt="@nguyenquocdai" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage
+            src={user?.avatar || defaultAvatar}
+            alt="avatar"
+            className="object-cover"
+          />
         </Avatar>
       </div>
 
       <div className="mt-20 text-center">
         <h3 className="cursor-pointer text-xl font-semibold tracking-wider text-secondary">
-          Nguyen Quoc Dai
+          {user?.username}
         </h3>
-        <p className="text-muted-foreground">dainq@fpt.edu.vn</p>
+        <p className="text-muted-foreground">{user?.email}</p>
       </div>
 
       <Tabs value={activeTab}>
