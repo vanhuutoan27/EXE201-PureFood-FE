@@ -12,7 +12,7 @@ const Register = lazy(() => import("@/pages/Register"))
 const Error = lazy(() => import("@/pages/Error"))
 const Vegetable = lazy(() => import("@/pages/Vegetable"))
 const Fruit = lazy(() => import("@/pages/Fruit"))
-const Product = lazy(() => import("@/pages/Product"))
+const Products = lazy(() => import("@/pages/Products"))
 const Details = lazy(() => import("@/pages/Details"))
 const Blog = lazy(() => import("@/pages/Blogs"))
 
@@ -28,7 +28,7 @@ function App() {
           <Route path="/" element={<Index />} />
           <Route path="/rau-cu" element={<Vegetable />} />
           <Route path="/trai-cay" element={<Fruit />} />
-          <Route path="/products" element={<Product />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/products/:productId" element={<Details />} />
           <Route path="/kien-thuc" element={<Blog />} />
 
