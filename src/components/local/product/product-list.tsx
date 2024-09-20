@@ -1,10 +1,11 @@
 import { useState } from "react"
 
-import { exampleVegetables } from "@/data/vegetableExample"
 import { FaHeart } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
 import { formatCurrency, formatDateDMY } from "@/lib/utils"
+
+import { exampleVegetables } from "@/constants/product"
 
 import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
@@ -18,7 +19,7 @@ function ProductList() {
   }
 
   return (
-    <div>
+    <>
       <div className="space-y-6">
         {exampleVegetables.slice(0, visibleProducts).map((product) => (
           <Card key={product.productId} className="flex gap-6 text-sm">
@@ -85,7 +86,7 @@ function ProductList() {
       </div>
 
       <p className="mb-2 mt-6 text-center font-semibold text-primary">
-        Showing {visibleProducts} of {exampleVegetables.length} items
+        Hiển thị {visibleProducts} của {exampleVegetables.length} kết quả
       </p>
 
       {visibleProducts < exampleVegetables.length && (
@@ -100,7 +101,7 @@ function ProductList() {
           </Button>
         </div>
       )}
-    </div>
+    </>
   )
 }
 

@@ -1,9 +1,10 @@
 import { defaultAvatar } from "@/configs/config"
-import { exampleUsers } from "@/data/userExample"
 import ErrorPage from "@/pages/Error"
 import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 
 import { UserType } from "@/schemas/userSchema"
+
+import { exampleUsers } from "@/constants/user"
 
 import { Avatar, AvatarImage } from "@/components/global/atoms/avatar"
 import {
@@ -48,7 +49,7 @@ function UserLayout() {
         </Avatar>
       </div>
 
-      <div className="mt-20 text-center space-y-2">
+      <div className="mt-20 space-y-2 text-center">
         <h3 className="cursor-pointer text-xl font-semibold tracking-wider text-secondary">
           {user?.fullName}
         </h3>

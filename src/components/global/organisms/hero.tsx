@@ -8,7 +8,7 @@ function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://coolwallpapers.me/picsup/447346-food-photography-picture.jpg"
+          src="/images/home-hero-image.jpg"
           alt="Home Hero Image"
           className="h-[90vh] w-full rounded-3xl object-cover"
         />

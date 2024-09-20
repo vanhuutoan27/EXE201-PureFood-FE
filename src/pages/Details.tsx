@@ -1,7 +1,8 @@
-import { exampleVegetables } from "@/data/vegetableExample"
 import { useParams } from "react-router-dom"
 
 import { ProductType } from "@/schemas/productSchema"
+
+import { exampleVegetables } from "@/constants/product"
 
 import Bread from "@/components/global/molecules/bread"
 import ProductBlogs from "@/components/local/details/product-blogs"
