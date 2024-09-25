@@ -22,7 +22,7 @@ function ProductBlogs({ blogs }: ProductBlogsProps) {
         {blogs.map((blog) => (
           <div
             key={blog.title}
-            className="h-[42vh] w-[36vh] rounded-lg border p-4 shadow-sm"
+            className="w-[36vh] rounded-lg border p-4 shadow-sm"
           >
             <div className="flex w-full flex-col gap-2">
               <img
@@ -49,7 +49,7 @@ function ProductBlogs({ blogs }: ProductBlogsProps) {
                     : blog.content}
                 </p>
               </div>
-              <div className="mt-2 text-right text-sm font-medium text-gray-500">
+              <div className="flex justify-end mt-2 text-right text-sm font-medium text-gray-500">
                 {blog.author}
               </div>
             </div>

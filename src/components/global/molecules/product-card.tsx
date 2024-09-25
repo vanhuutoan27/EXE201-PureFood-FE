@@ -11,11 +11,25 @@ interface ProductCardProps {
   productId: string
   name: string
   price: number
+  category: string
   images: string[]
 }
 
-function ProductCard({ productId, name, price, images }: ProductCardProps) {
+function ProductCard({
+  productId,
+  name,
+  price,
+  images,
+  category
+}: ProductCardProps) {
   const [isHover, setIsHover] = useState(false)
+
+  const categoryUrl =
+    category === "Rau" || category === "Củ" || category === "Quả"
+      ? "rau-cu"
+      : category === "Trái"
+        ? "trai-cay"
+        : "other"
 
   const renderImage = () => {
     if (images && images.length > 0) {
@@ -50,7 +64,7 @@ function ProductCard({ productId, name, price, images }: ProductCardProps) {
       >
         {renderImage()}
         <Link
-          to={`/product/${productId}`}
+          to={`/${categoryUrl}/${productId}`}
           target="_blank"
           rel="noopener noreferrer"
           className={`${

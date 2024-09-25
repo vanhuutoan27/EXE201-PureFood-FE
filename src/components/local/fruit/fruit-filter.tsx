@@ -16,20 +16,28 @@ import {
   ToggleGroupItem
 } from "@/components/global/atoms/toggle-group"
 
-function ProductFilter() {
+function FruitFilter() {
+
   // Memoized rating type to avoid re-creating on every render
   const ratingTypes = useMemo(() => ["0+", "1+", "2+", "3+", "4+"], [])
-
   // State for managing selected filters
   const [selectedRatingType, setSelectedRatingType] = useState<string[]>([])
-  const [selectedProductType, setSelectedProductType] = useState<
+  const [selectedTrademark, setSelectedTrademark] = useState<
     string | undefined
   >()
+  const [selectedQuality, setSelectedQuality] = useState<string | undefined>()
+  const [selectedUnit, setSelectedUnit] = useState<string | undefined>()
   const [selectedPriceRange, setSelectedPriceRange] = useState<
     string | undefined
   >()
 
-  console.log(selectedRatingType, selectedProductType, selectedPriceRange)
+  console.log(
+    selectedRatingType,
+    selectedTrademark,
+    selectedQuality,
+    selectedUnit,
+    selectedPriceRange
+  )
 
   const handleSelectedRatingType = (type: string) => {
     setSelectedRatingType((prevSelected) =>
@@ -40,26 +48,20 @@ function ProductFilter() {
   }
 
   return (
-    <Card className="space-y-6">
+    <Card className="space-y-8">
       <div>
-        <h4 className="mb-1 ml-1 font-semibold text-secondary">
-          Loại sản phẩm
-        </h4>
-
-        <Select onValueChange={setSelectedProductType}>
+        <h4 className="mb-1 ml-1 font-semibold text-primary">Thương hiệu</h4>
+        <Select onValueChange={setSelectedTrademark}>
           <SelectTrigger>
-            <SelectValue placeholder="Chọn loại" />
+            <SelectValue placeholder="Chọn nhà cung cấp" />
           </SelectTrigger>
           <SelectContent className="bg-white">
             <SelectGroup>
-              <SelectItem className="cursor-pointer" value="Rau">
-                Rau
+              <SelectItem className="cursor-pointer" value="Pure Food">
+                Pure Food
               </SelectItem>
-              <SelectItem className="cursor-pointer" value="Củ">
-                Củ
-              </SelectItem>
-              <SelectItem className="cursor-pointer" value="Quả">
-                Quả
+              <SelectItem className="cursor-pointer" value="Khác">
+                Khác
               </SelectItem>
             </SelectGroup>
           </SelectContent>
@@ -67,7 +69,46 @@ function ProductFilter() {
       </div>
 
       <div>
-        <h4 className="mb-1 ml-1 font-semibold text-secondary">Giá</h4>
+        <h4 className="mb-1 ml-1 font-semibold text-primary">
+          Chất lượng sản phẩm
+        </h4>
+        <Select onValueChange={setSelectedQuality}>
+          <SelectTrigger>
+            <SelectValue placeholder="Chọn loại sản phẩm" />
+          </SelectTrigger>
+          <SelectContent className="bg-white">
+            <SelectGroup>
+              <SelectItem className="cursor-pointer" value="True">
+                Thực phẩm hữu cơ
+              </SelectItem>
+              <SelectItem className="cursor-pointer" value="False">
+                Thực phẩm vô cơ
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+      <div>
+        <h4 className="mb-1 ml-1 font-semibold text-primary">Khối lượng</h4>
+        <Select onValueChange={setSelectedUnit}>
+          <SelectTrigger>
+            <SelectValue placeholder="Chọn khối lượng sản phẩm" />
+          </SelectTrigger>
+          <SelectContent className="bg-white">
+            <SelectGroup>
+              <SelectItem className="cursor-pointer" value="Kg">
+                Kg
+              </SelectItem>
+              <SelectItem className="cursor-pointer" value="Gr">
+                Gr
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div>
+        <h4 className="mb-1 ml-1 font-semibold text-primary">Giá</h4>
 
         <Select onValueChange={setSelectedPriceRange}>
           <SelectTrigger>
@@ -96,7 +137,7 @@ function ProductFilter() {
       </div>
 
       <div>
-        <h4 className="mb-1 ml-1 font-semibold text-secondary">Đánh giá</h4>
+        <h4 className="mb-1 ml-1 font-semibold text-primary">Đánh giá</h4>
 
         <div className="flex">
           <ToggleGroup type="multiple">
@@ -122,4 +163,4 @@ function ProductFilter() {
   )
 }
 
-export default ProductFilter
+export default FruitFilter

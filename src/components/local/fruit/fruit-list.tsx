@@ -11,17 +11,21 @@ import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
 import { Toggle } from "@/components/global/atoms/toggle"
 
-function ProductList() {
+function VegetableList() {
   const [visibleProducts, setVisibleProducts] = useState(3)
 
   const handleShowMore = () => {
     setVisibleProducts((prevVisible) => prevVisible + 3)
   }
 
+  const filteredProducts = exampleVegetables.filter(
+    (product) => product.category === "Trái"
+  )
+
   return (
     <>
       <div className="space-y-6">
-        {exampleVegetables.slice(0, visibleProducts).map((product) => (
+        {filteredProducts.slice(0, visibleProducts).map((product) => (
           <Card key={product.productId} className="flex gap-6 text-sm">
             <div className="h-[240px] w-2/5">
               <img
@@ -34,11 +38,10 @@ function ProductList() {
             <div className="flex w-3/5 flex-col gap-y-2">
               <div className="flex justify-between">
                 <Link
-                  to={`/products/${product.productId}`}
+                  to={`/trai-cay/${product.productId}`}
                   className="slow text-xl font-bold uppercase text-primary hover:text-secondary"
                 >
-                  {product.category} {product.name} - {product.weight}{" "}
-                  {product.unit}
+                  {product.name} - {product.weight} {product.unit}
                 </Link>
                 <p className="text-lg font-bold text-secondary">
                   {formatCurrency(product.price)}
@@ -74,7 +77,7 @@ function ProductList() {
                   <FaHeart size={16} />
                 </Toggle>
 
-                <Link to={`/products/${product.productId}`} className="w-full">
+                <Link to={`/trai-cay/${product.productId}`} className="w-full">
                   <Button variant="default" className="w-full">
                     Xem chi tiết
                   </Button>
@@ -86,10 +89,10 @@ function ProductList() {
       </div>
 
       <p className="mb-2 mt-6 text-center font-semibold text-primary">
-        Hiển thị {visibleProducts} của {exampleVegetables.length} kết quả
+        Hiển thị {visibleProducts} của {filteredProducts.length} kết quả
       </p>
 
-      {visibleProducts < exampleVegetables.length && (
+      {visibleProducts < filteredProducts.length && (
         <div className="flex justify-center">
           <Button
             type="button"
@@ -105,4 +108,4 @@ function ProductList() {
   )
 }
 
-export default ProductList
+export default VegetableList

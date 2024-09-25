@@ -38,6 +38,7 @@ function ProductRelated({ products }: ProductRelatedProps) {
                 productId={product.productId}
                 images={product.images}
                 price={product.price}
+                category={product.category}
                 name={product.name}
               />
             </CarouselItem>

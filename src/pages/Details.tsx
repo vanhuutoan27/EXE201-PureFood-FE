@@ -29,11 +29,31 @@ function Details() {
         product.productId !== productId && product.status === true
     ) || []
 
+  const currentPageName = (() => {
+    if (product.category === "Rau" || product.category === "Củ" || product.category === "Quả") {
+      return "Rau củ"
+    } else if (product.category === "Trái") {
+      return "Trái cây"
+    } else {
+      return ""
+    }
+  })()
+
+  const currentPageUrl = (() => {
+    if (product.category === "Rau" || product.category === "Củ" || product.category === "Quả") {
+      return "/rau-cu"
+    } else if (product.category === "Trái") {
+      return "/trai-cay"
+    } else {
+      return ""
+    }
+  })()
+
   return (
     <div className="flex w-full flex-col gap-10">
       <Bread
         lastPage={{ name: "Trang chủ", url: "/" }}
-        currentPage={{ name: "Sản phẩm", url: "/products" }}
+        currentPage={{ name: currentPageName, url: currentPageUrl }}
         currentDetailsPage={product.name}
       />
 
