@@ -3,7 +3,7 @@ import { ProductType } from "@/schemas/productSchema"
 export const exampleVegetables: ProductType[] = [
   {
     productId: "veg-001",
-    category: "Quả",
+    category: "Củ",
     name: "Cà rốt",
     description:
       "Cà rốt hữu cơ tươi từ Đà Lạt, không sử dụng phân bón hóa học, chứa nhiều vitamin A và chất xơ, giúp tăng cường sức khỏe và hỗ trợ tiêu hóa. Sản phẩm phù hợp cho các món hầm, súp, salad và nước ép, đem lại hương vị tươi ngon và an toàn cho sức khỏe",
@@ -85,7 +85,7 @@ export const exampleVegetables: ProductType[] = [
   },
   {
     productId: "veg-003",
-    category: "Quả",
+    category: "Trái",
     name: "Dưa hấu",
     description:
       "Dưa hấu ngọt tự nhiên từ Nha Trang, trồng hữu cơ, không chất bảo quản, giúp giải khát và cung cấp nhiều vitamin C. Vỏ mỏng, thịt quả đỏ, mọng nước và vị ngọt thanh. Dưa hấu là lựa chọn hoàn hảo cho ngày hè",
@@ -122,7 +122,7 @@ export const exampleVegetables: ProductType[] = [
   },
   {
     productId: "veg-004",
-    category: "Quả",
+    category: "Trái",
     name: "Chuối",
     description:
       "Chuối vàng từ Nha Trang, không sử dụng chất bảo quản hay hóa chất, đảm bảo chất lượng sạch. Vị ngọt tự nhiên, thơm ngon, thích hợp dùng cho bữa sáng, ăn trực tiếp hoặc làm nguyên liệu cho các món bánh, sinh tố",
@@ -140,6 +140,42 @@ export const exampleVegetables: ProductType[] = [
         title: "Lợi ích của chuối vàng sạch",
         content:
           "Chuối vàng là nguồn cung cấp năng lượng dồi dào, chứa nhiều kali và vitamin B6. Chuối vàng không hóa chất đảm bảo an toàn, thích hợp cho cả người lớn và trẻ nhỏ, giúp tăng cường sức khỏe.",
+        createdAt: "2024-09-04",
+        author: "Phạm Văn D",
+        image:
+          "https://images.unsplash.com/photo-1623227774049-032b11960e7e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmFuYW5hfGVufDB8fDB8fHww"
+      }
+    ],
+    origin: "Nha Trang",
+    organic: true,
+    status: true,
+    entryDate: "2024-09-08T08:00:00Z",
+    expiryDate: "2024-10-08T08:00:00Z",
+    createdAt: "2024-09-08T08:00:00Z",
+    updatedAt: "2024-09-08T08:00:00Z",
+    createdBy: "Admin",
+    updatedBy: "Admin"
+  },
+  {
+    productId: "veg-005",
+    category: "Trái",
+    name: "Táo",
+    description:
+      "Táo đỏ từ Nha Trang, không sử dụng chất bảo quản hay hóa chất, đảm bảo chất lượng sạch. Vị ngọt tự nhiên, thơm ngon, thích hợp dùng cho bữa sáng, ăn trực tiếp hoặc làm nguyên liệu cho các món bánh, sinh tố",
+    price: 37000,
+    stock: 30,
+    weight: 1,
+    unit: "Kg",
+    images: [
+      "https://plus.unsplash.com/premium_photo-1661322640130-f6a1e2c36653?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXBwbGV8ZW58MHx8MHx8fDA%3D",
+      "https://plus.unsplash.com/premium_photo-1669557209063-00212df37810?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGFwcGxlfGVufDB8fDB8fHww"
+    ],
+    blogs: [
+      {
+        type: "Món ăn",
+        title: "Lợi ích của chuối vàng sạch",
+        content:
+          "Táo đỏ là nguồn cung cấp năng lượng dồi dào, chứa nhiều kali và vitamin B6. Táo đỏ không hóa chất đảm bảo an toàn, thích hợp cho cả người lớn và trẻ nhỏ, giúp tăng cường sức khỏe.",
         createdAt: "2024-09-04",
         author: "Phạm Văn D",
         image:

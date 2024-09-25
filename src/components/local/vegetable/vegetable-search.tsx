@@ -4,17 +4,17 @@ import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
 import { Input } from "@/components/global/atoms/input"
 
-function ProductSearch() {
+function VegetableSearch() {
   const [searchValue, setSearchValue] = useState("")
 
   const handleSearch = () => {
-    console.log("Tên rau củ:", searchValue)
+    console.log("Tên rau củ: ", searchValue)
   }
 
   return (
     <Card className="flex gap-8">
       <Input
-        placeholder="Nhập tên rau củ quả muốn tìm"
+        placeholder="Nhập tên rau củ muốn tìm"
         className="font-semibold"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
@@ -26,4 +26,4 @@ function ProductSearch() {
   )
 }
 
-export default ProductSearch
+export default VegetableSearch

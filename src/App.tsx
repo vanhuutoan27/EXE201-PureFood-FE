@@ -12,7 +12,6 @@ const Register = lazy(() => import("@/pages/Register"))
 const Error = lazy(() => import("@/pages/Error"))
 const Vegetable = lazy(() => import("@/pages/Vegetable"))
 const Fruit = lazy(() => import("@/pages/Fruit"))
-const Products = lazy(() => import("@/pages/Products"))
 const Details = lazy(() => import("@/pages/Details"))
 const Blog = lazy(() => import("@/pages/Blogs"))
 
@@ -28,8 +27,8 @@ function App() {
           <Route path="/" element={<Index />} />
           <Route path="/rau-cu" element={<Vegetable />} />
           <Route path="/trai-cay" element={<Fruit />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:productId" element={<Details />} />
+          <Route path="/rau-cu/:productId" element={<Details />} />
+          <Route path="/trai-cay/:productId" element={<Details />} />
           <Route path="/kien-thuc" element={<Blog />} />
 
           <Route element={<UserLayout />}>
