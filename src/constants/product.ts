@@ -1,159 +1,224 @@
 import { ProductType } from "@/schemas/productSchema"
 
-export const exampleVegetables: ProductType[] = [
+export const exampleProductsData: ProductType[] = [
   {
-    productId: "veg-001",
-    category: "Quả",
-    name: "Cà rốt",
-    description:
-      "Cà rốt hữu cơ tươi từ Đà Lạt, không sử dụng phân bón hóa học, chứa nhiều vitamin A và chất xơ, giúp tăng cường sức khỏe và hỗ trợ tiêu hóa. Sản phẩm phù hợp cho các món hầm, súp, salad và nước ép, đem lại hương vị tươi ngon và an toàn cho sức khỏe",
-    price: 30000,
-    stock: 50,
-    weight: 1,
-    unit: "Kg",
-    images: [
-      "https://plus.unsplash.com/premium_photo-1663926032098-62d3593c3200?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Q2Fycm90fGVufDB8fDB8fHww",
-      "https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fENhcnJvdHxlbnwwfHwwfHx8MA%3D%3D"
-    ],
-    blogs: [
-      {
-        type: "Món ăn",
-        title: "Lợi ích sức khỏe của cà rốt hữu cơ",
-        content:
-          "Cà rốt chứa nhiều vitamin A và chất chống oxy hóa, giúp tăng cường sức khỏe mắt, làm đẹp da và hỗ trợ hệ tiêu hóa. Cà rốt hữu cơ đảm bảo an toàn, không chứa hóa chất độc hại.",
-        createdAt: "2024-09-01",
-        author: "Nguyễn Văn A",
-        image:
-          "https://plus.unsplash.com/premium_photo-1675366071314-858486761d51?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDR8fGNhcm90fGVufDB8fDB8fHww"
-      },
-      {
-        type: "Món ăn",
-        title: "Cách chế biến dưa leo ngon miệng",
-        content:
-          "Dưa leo là thực phẩm giàu nước và dễ chế biến. Bạn có thể sử dụng dưa leo để làm salad, sinh tố hoặc ăn trực tiếp để giải nhiệt cơ thể trong những ngày hè nóng bức.",
-        createdAt: "2024-09-02",
-        author: "Trần Thị B",
-        image:
-          "https://plus.unsplash.com/premium_photo-1687975124273-59c1cae2e580?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y3VjdW1iZXJ8ZW58MHx8MHx8fDA%3D"
-      }
-    ],
+    productId: "p001",
+    category: "Rau Củ",
+    supplier: "Công ty Nông sản Xanh",
+    productName: "Cải Bó Xôi",
+    slug: "cai-bo-xoi-yk8pgx",
+    description: "Cải bó xôi sạch, không sử dụng hóa chất, tốt cho sức khỏe.",
+    price: 25000,
+    stock: 150,
+    weight: 0.5,
+    unit: "kg",
     origin: "Đà Lạt",
     organic: true,
+    images: ["https://placehold.jp/250x192.png"],
     status: true,
-    entryDate: "2024-09-08T08:00:00Z",
-    expiryDate: "2024-10-08T08:00:00Z",
-    createdAt: "2024-09-08T08:00:00Z",
-    updatedAt: "2024-09-08T08:00:00Z",
-    createdBy: "Admin",
-    updatedBy: "Admin"
+    entryDate: "2024-09-25",
+    expiryDate: "2024-10-10",
+    createdAt: "2024-09-25",
+    createdBy: "asd",
+    updatedAt: "2024-09-25",
+    updatedBy: "asd"
   },
   {
-    productId: "veg-002",
-    category: "Quả",
-    name: "Dưa leo",
-    description:
-      "Dưa chuột xanh từ Nha Trang, không hữu cơ, giàu nước, vitamin và khoáng chất. Vỏ mỏng, hương vị mát lành, thích hợp dùng trực tiếp hoặc làm salad. Dưa leo có thể giúp giải nhiệt cơ thể, làm đẹp da và bổ sung lượng nước tự nhiên",
-    price: 23000,
-    stock: 30,
-    weight: 1,
-    unit: "Kg",
-    images: [
-      "https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Q3VjdW1iZXJ8ZW58MHx8MHx8fDA%3D",
-      "https://images.unsplash.com/photo-1602343244137-a142ba5c7b22?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fEN1Y3VtYmVyfGVufDB8fDB8fHww"
-    ],
-    blogs: [
-      {
-        type: "Món ăn",
-        title: "Cách chế biến dưa leo ngon miệng",
-        content:
-          "Dưa leo là thực phẩm giàu nước và dễ chế biến. Bạn có thể sử dụng dưa leo để làm salad, sinh tố hoặc ăn trực tiếp để giải nhiệt cơ thể trong những ngày hè nóng bức.",
-        createdAt: "2024-09-02",
-        author: "Trần Thị B",
-        image:
-          "https://plus.unsplash.com/premium_photo-1687975124273-59c1cae2e580?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y3VjdW1iZXJ8ZW58MHx8MHx8fDA%3D"
-      }
-    ],
-    origin: "Nha Trang",
+    productId: "p002",
+    category: "Rau Củ",
+    supplier: "Trang Trại Việt Hưng",
+    productName: "Rau Muống",
+    slug: "rau-muong-z3ko4p",
+    description: "Rau muống tươi, giàu chất xơ, sản phẩm sạch từ nông trại.",
+    price: 18000,
+    stock: 100,
+    weight: 0.5,
+    unit: "kg",
+    origin: "Hà Nam",
     organic: true,
+    images: ["https://placehold.jp/250x192.png"],
     status: true,
-    entryDate: "2024-09-08T08:00:00Z",
-    expiryDate: "2024-10-08T08:00:00Z",
-    createdAt: "2024-09-08T08:00:00Z",
-    updatedAt: "2024-09-08T08:00:00Z",
-    createdBy: "Admin",
-    updatedBy: "Admin"
+    entryDate: "2024-09-20",
+    expiryDate: "2024-09-28",
+    createdAt: "2024-09-20",
+    createdBy: "asd",
+    updatedAt: "2024-09-20",
+    updatedBy: "asd"
   },
   {
-    productId: "veg-003",
-    category: "Quả",
-    name: "Dưa hấu",
-    description:
-      "Dưa hấu ngọt tự nhiên từ Nha Trang, trồng hữu cơ, không chất bảo quản, giúp giải khát và cung cấp nhiều vitamin C. Vỏ mỏng, thịt quả đỏ, mọng nước và vị ngọt thanh. Dưa hấu là lựa chọn hoàn hảo cho ngày hè",
-    price: 42000,
-    stock: 30,
+    productId: "p003",
+    category: "rau-cu",
+    supplier: "Nông Trại Xanh",
+    productName: "Khoai Tây",
+    slug: "khoai-tay-okce88",
+    description: "Khoai tây sạch, phù hợp để làm nhiều món ăn ngon.",
+    price: 30000,
+    stock: 200,
     weight: 1,
-    unit: "Kg",
-    images: [
-      "https://media.istockphoto.com/id/649824716/photo/summer-fruit-green-watermelon.webp?a=1&b=1&s=612x612&w=0&k=20&c=bbrrFe00223c-JZqXguzXtT3Fkrn_d2h5Q-Hw9KFr0A=",
-      "https://images.unsplash.com/photo-1526841535633-ef3be0b21fd2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHdhdGVybWVsb258ZW58MHx8MHx8fDA%3D"
-    ],
-    blogs: [
-      {
-        type: "Món ăn",
-        title: "Lợi ích của dưa hấu hữu cơ",
-        content:
-          "Dưa hấu hữu cơ không chỉ giúp giải khát mà còn cung cấp nhiều vitamin C và chất chống oxy hóa, rất tốt cho da và hệ miễn dịch. Dưa hấu hữu cơ đảm bảo an toàn, không chứa thuốc trừ sâu hay hóa chất độc hại.",
-        createdAt: "2024-09-03",
-        author: "Lê Hoàng C",
-        image:
-          "https://images.unsplash.com/photo-1592498642474-74f9ee88248d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHdhdGVyJTIwbWVsb258ZW58MHx8MHx8fDA%3D"
-      }
-    ],
-    origin: "Nha Trang",
-
+    unit: "kg",
+    origin: "Sơn La",
     organic: true,
+    images: ["https://placehold.jp/250x192.png"],
     status: true,
-    entryDate: "2024-09-08T08:00:00Z",
-    expiryDate: "2024-10-08T08:00:00Z",
-    createdAt: "2024-09-08T08:00:00Z",
-    updatedAt: "2024-09-08T08:00:00Z",
-    createdBy: "Admin",
-    updatedBy: "Admin"
+    entryDate: "2024-09-24",
+    expiryDate: "2024-10-10",
+    createdAt: "2024-09-24",
+    createdBy: "asd",
+    updatedAt: "2024-09-24",
+    updatedBy: "asd"
   },
   {
-    productId: "veg-004",
-    category: "Quả",
-    name: "Chuối",
-    description:
-      "Chuối vàng từ Nha Trang, không sử dụng chất bảo quản hay hóa chất, đảm bảo chất lượng sạch. Vị ngọt tự nhiên, thơm ngon, thích hợp dùng cho bữa sáng, ăn trực tiếp hoặc làm nguyên liệu cho các món bánh, sinh tố",
-    price: 37000,
-    stock: 30,
+    productId: "p004",
+    category: "trai-cay",
+    supplier: "Hợp tác xã Nông sản Việt",
+    productName: "Táo Mèo",
+    slug: "tao-meo-zd26k5",
+    description: "Táo mèo tươi, được trồng tự nhiên tại vùng cao Tây Bắc.",
+    price: 50000,
+    stock: 50,
     weight: 1,
-    unit: "Kg",
-    images: [
-      "https://images.unsplash.com/photo-1543218024-57a70143c369?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJhbmFuYXxlbnwwfHwwfHx8MA%3D%3D",
-      "https://plus.unsplash.com/premium_photo-1685946109192-b9b1867bf0c7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGJhbmFuYXxlbnwwfHwwfHx8MA%3D%3D"
-    ],
-    blogs: [
-      {
-        type: "Món ăn",
-        title: "Lợi ích của chuối vàng sạch",
-        content:
-          "Chuối vàng là nguồn cung cấp năng lượng dồi dào, chứa nhiều kali và vitamin B6. Chuối vàng không hóa chất đảm bảo an toàn, thích hợp cho cả người lớn và trẻ nhỏ, giúp tăng cường sức khỏe.",
-        createdAt: "2024-09-04",
-        author: "Phạm Văn D",
-        image:
-          "https://images.unsplash.com/photo-1623227774049-032b11960e7e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmFuYW5hfGVufDB8fDB8fHww"
-      }
-    ],
-    origin: "Nha Trang",
+    unit: "kg",
+    origin: "Tây Bắc",
     organic: true,
+    images: ["https://placehold.jp/250x192.png"],
     status: true,
-    entryDate: "2024-09-08T08:00:00Z",
-    expiryDate: "2024-10-08T08:00:00Z",
-    createdAt: "2024-09-08T08:00:00Z",
-    updatedAt: "2024-09-08T08:00:00Z",
-    createdBy: "Admin",
-    updatedBy: "Admin"
+    entryDate: "2024-09-23",
+    expiryDate: "2024-10-05",
+    createdAt: "2024-09-23",
+    createdBy: "asd",
+    updatedAt: "2024-09-23",
+    updatedBy: "asd"
+  },
+  {
+    productId: "p005",
+    category: "Rau Củ",
+    supplier: "Công Ty Rau Sạch Việt",
+    productName: "Rau Dền Đỏ",
+    slug: "rau-den-do-7ujuqv",
+    description: "Rau dền đỏ chứa nhiều vitamin, sản phẩm hữu cơ.",
+    price: 22000,
+    stock: 120,
+    weight: 0.5,
+    unit: "kg",
+    origin: "Đà Lạt",
+    organic: true,
+    images: ["https://placehold.jp/250x192.png"],
+    status: true,
+    entryDate: "2024-09-22",
+    expiryDate: "2024-10-05",
+    createdAt: "2024-09-22",
+    createdBy: "asd",
+    updatedAt: "2024-09-22",
+    updatedBy: "asd"
+  },
+  {
+    productId: "p006",
+    category: "rau-cu",
+    supplier: "Trang Trại Đồng Quê",
+    productName: "Cà Rốt",
+    slug: "ca-rot-dexyv7",
+    description: "Cà rốt hữu cơ, giàu beta-carotene, tốt cho sức khỏe mắt.",
+    price: 28000,
+    stock: 180,
+    weight: 1,
+    unit: "kg",
+    origin: "Ninh Thuận",
+    organic: true,
+    images: ["https://placehold.jp/250x192.png"],
+    status: true,
+    entryDate: "2024-09-21",
+    expiryDate: "2024-10-05",
+    createdAt: "2024-09-21",
+    createdBy: "asd",
+    updatedAt: "2024-09-21",
+    updatedBy: "asd"
+  },
+  {
+    productId: "p007",
+    category: "trai-cay",
+    supplier: "Trang Trại Trái Cây Sạch",
+    productName: "Xoài Cát",
+    slug: "xoai-cat-uju54f",
+    description: "Xoài cát ngọt, không thuốc bảo vệ thực vật, an toàn.",
+    price: 45000,
+    stock: 80,
+    weight: 1,
+    unit: "kg",
+    origin: "Tiền Giang",
+    organic: true,
+    images: ["https://placehold.jp/250x192.png"],
+    status: true,
+    entryDate: "2024-09-26",
+    expiryDate: "2024-10-10",
+    createdAt: "2024-09-26",
+    createdBy: "asd",
+    updatedAt: "2024-09-26",
+    updatedBy: "asd"
+  },
+  {
+    productId: "p008",
+    category: "Rau Củ",
+    supplier: "Nông trại Hữu Cơ Việt",
+    productName: "Cà Chua",
+    slug: "ca-chua-v6jvre",
+    description: "Cà chua đỏ tươi, giàu vitamin C, không thuốc trừ sâu.",
+    price: 35000,
+    stock: 60,
+    weight: 1,
+    unit: "kg",
+    origin: "Lâm Đồng",
+    organic: true,
+    images: ["https://placehold.jp/250x192.png"],
+    status: true,
+    entryDate: "2024-09-27",
+    expiryDate: "2024-10-08",
+    createdAt: "2024-09-27",
+    createdBy: "asd",
+    updatedAt: "2024-09-27",
+    updatedBy: "asd"
+  },
+  {
+    productId: "p009",
+    category: "rau-cu",
+    supplier: "Hợp tác xã Hữu Cơ",
+    productName: "Củ Dền",
+    slug: "cu-den-36mylu",
+    description: "Củ dền tươi ngon, thích hợp cho nhiều món ăn bổ dưỡng.",
+    price: 27000,
+    stock: 70,
+    weight: 1,
+    unit: "kg",
+    origin: "Ninh Bình",
+    organic: true,
+    images: ["https://placehold.jp/250x192.png"],
+    status: true,
+    entryDate: "2024-09-26",
+    expiryDate: "2024-10-10",
+    createdAt: "2024-09-26",
+    createdBy: "asd",
+    updatedAt: "2024-09-26",
+    updatedBy: "asd"
+  },
+  {
+    productId: "p010",
+    category: "trai-cay",
+    supplier: "Công ty Xuất khẩu Nông sản",
+    productName: "Bưởi Da Xanh",
+    slug: "buoi-da-xanh-vy0xdz",
+    description: "Bưởi da xanh ngọt thanh, không thuốc bảo vệ thực vật.",
+    price: 60000,
+    stock: 40,
+    weight: 1,
+    unit: "kg",
+    origin: "Bến Tre",
+    organic: true,
+    images: ["https://placehold.jp/250x192.png"],
+    status: true,
+    entryDate: "2024-09-25",
+    expiryDate: "2024-10-10",
+    createdAt: "2024-09-25",
+    createdBy: "asd",
+    updatedAt: "2024-09-25",
+    updatedBy: "asd"
   }
 ]

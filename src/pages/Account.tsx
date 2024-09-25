@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 
 import { UpdateUserType, updateUserSchema } from "@/schemas/userSchema"
 
-import { exampleUsers } from "@/constants/user"
+import { exampleUsers } from "@/constants/users"
 
 import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"

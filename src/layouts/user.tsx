@@ -4,7 +4,7 @@ import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 
 import { UserType } from "@/schemas/userSchema"
 
-import { exampleUsers } from "@/constants/user"
+import { exampleUsers } from "@/constants/users"
 
 import { Avatar, AvatarImage } from "@/components/global/atoms/avatar"
 import {
