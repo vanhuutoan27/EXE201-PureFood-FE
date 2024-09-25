@@ -26,8 +26,8 @@ function App() {
         <Route element={<DefaultLayout />}>
           <Route path="/" element={<Index />} />
           <Route path="/rau-cu" element={<Vegetable />} />
-          <Route path="/trai-cay" element={<Fruit />} />
           <Route path="/rau-cu/:productId" element={<Details />} />
+          <Route path="/trai-cay" element={<Fruit />} />
           <Route path="/trai-cay/:productId" element={<Details />} />
           <Route path="/kien-thuc" element={<Blog />} />
 

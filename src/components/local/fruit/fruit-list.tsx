@@ -1,25 +1,26 @@
 import { useState } from "react"
 
 import { FaHeart } from "react-icons/fa"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 import { formatCurrency, formatDateDMY } from "@/lib/utils"
 
-import { exampleVegetables } from "@/constants/product"
+import { exampleProductsData } from "@/constants/product"
 
 import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
 import { Toggle } from "@/components/global/atoms/toggle"
 
 function VegetableList() {
+  const categoryUrl = useLocation().pathname.split("/")[1]
   const [visibleProducts, setVisibleProducts] = useState(3)
 
   const handleShowMore = () => {
     setVisibleProducts((prevVisible) => prevVisible + 3)
   }
 
-  const filteredProducts = exampleVegetables.filter(
-    (product) => product.category === "Trái"
+  const filteredProducts = exampleProductsData.filter(
+    (product) => product.category === "trai-cay"
   )
 
   return (
@@ -30,7 +31,7 @@ function VegetableList() {
             <div className="h-[240px] w-2/5">
               <img
                 src={product.images[0]}
-                alt={product.name}
+                alt={product.productName}
                 className="h-full w-full rounded-lg object-cover"
               />
             </div>
@@ -38,17 +39,19 @@ function VegetableList() {
             <div className="flex w-3/5 flex-col gap-y-2">
               <div className="flex justify-between">
                 <Link
-                  to={`/trai-cay/${product.productId}`}
+                  to={`/${categoryUrl}/${product.slug}`}
                   className="slow text-xl font-bold uppercase text-primary hover:text-secondary"
                 >
-                  {product.name} - {product.weight} {product.unit}
+                  {product.productName} - {product.weight} {product.unit}
                 </Link>
                 <p className="text-lg font-bold text-secondary">
                   {formatCurrency(product.price)}
                 </p>
               </div>
 
-              <p className="lens">{product.description}</p>
+              <p className="lens min-h-[72px] text-gray-600">
+                {product.description}
+              </p>
 
               {product.organic && (
                 <span className="mt-2 font-semibold text-secondary">
@@ -77,7 +80,7 @@ function VegetableList() {
                   <FaHeart size={16} />
                 </Toggle>
 
-                <Link to={`/trai-cay/${product.productId}`} className="w-full">
+                <Link to={`/${categoryUrl}/${product.slug}`} className="w-full">
                   <Button variant="default" className="w-full">
                     Xem chi tiết
                   </Button>

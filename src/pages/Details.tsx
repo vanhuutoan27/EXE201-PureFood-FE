@@ -1,8 +1,8 @@
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 
 import { ProductType } from "@/schemas/productSchema"
 
-import { exampleVegetables } from "@/constants/product"
+import { exampleProductsData } from "@/constants/product"
 
 import Bread from "@/components/global/molecules/bread"
 import ProductBlogs from "@/components/local/details/product-blogs"
@@ -14,8 +14,9 @@ import ErrorPage from "./Error"
 
 function Details() {
   const { productId } = useParams<{ productId: string }>()
+  const categoryUrl = useLocation().pathname.split("/")[1]
 
-  const product = exampleVegetables.find(
+  const product = exampleProductsData.find(
     (veg: ProductType) => veg.productId === productId
   )
 
@@ -24,37 +25,17 @@ function Details() {
   }
 
   const relatedProducts =
-    exampleVegetables.filter(
+    exampleProductsData.filter(
       (product: ProductType) =>
         product.productId !== productId && product.status === true
     ) || []
-
-  const currentPageName = (() => {
-    if (product.category === "Rau" || product.category === "Củ" || product.category === "Quả") {
-      return "Rau củ"
-    } else if (product.category === "Trái") {
-      return "Trái cây"
-    } else {
-      return ""
-    }
-  })()
-
-  const currentPageUrl = (() => {
-    if (product.category === "Rau" || product.category === "Củ" || product.category === "Quả") {
-      return "/rau-cu"
-    } else if (product.category === "Trái") {
-      return "/trai-cay"
-    } else {
-      return ""
-    }
-  })()
 
   return (
     <div className="flex w-full flex-col gap-10">
       <Bread
         lastPage={{ name: "Trang chủ", url: "/" }}
-        currentPage={{ name: currentPageName, url: currentPageUrl }}
-        currentDetailsPage={product.name}
+        currentPage={{ name: "asd", url: "asd" }}
+        currentDetailsPage={product.productName}
       />
 
       <div className="flex space-x-10">

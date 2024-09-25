@@ -14,11 +14,12 @@ function VegetableSearch() {
   return (
     <Card className="flex gap-8">
       <Input
-        placeholder="Nhập tên rau củ muốn tìm"
-        className="font-semibold"
+        placeholder="Tìm theo tên rau củ..."
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
+        className="font-semibold"
       />
+
       <Button type="button" variant="default" onClick={handleSearch}>
         Tìm kiếm
       </Button>

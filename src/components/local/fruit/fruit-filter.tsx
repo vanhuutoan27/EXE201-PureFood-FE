@@ -17,10 +17,7 @@ import {
 } from "@/components/global/atoms/toggle-group"
 
 function FruitFilter() {
-
-  // Memoized rating type to avoid re-creating on every render
   const ratingTypes = useMemo(() => ["0+", "1+", "2+", "3+", "4+"], [])
-  // State for managing selected filters
   const [selectedRatingType, setSelectedRatingType] = useState<string[]>([])
   const [selectedTrademark, setSelectedTrademark] = useState<
     string | undefined
@@ -50,7 +47,7 @@ function FruitFilter() {
   return (
     <Card className="space-y-8">
       <div>
-        <h4 className="mb-1 ml-1 font-semibold text-primary">Thương hiệu</h4>
+        <h4 className="mb-2 ml-1 font-semibold text-primary">Thương hiệu</h4>
         <Select onValueChange={setSelectedTrademark}>
           <SelectTrigger>
             <SelectValue placeholder="Chọn nhà cung cấp" />
@@ -69,7 +66,7 @@ function FruitFilter() {
       </div>
 
       <div>
-        <h4 className="mb-1 ml-1 font-semibold text-primary">
+        <h4 className="mb-2 ml-1 font-semibold text-primary">
           Chất lượng sản phẩm
         </h4>
         <Select onValueChange={setSelectedQuality}>
@@ -89,7 +86,7 @@ function FruitFilter() {
         </Select>
       </div>
       <div>
-        <h4 className="mb-1 ml-1 font-semibold text-primary">Khối lượng</h4>
+        <h4 className="mb-2 ml-1 font-semibold text-primary">Khối lượng</h4>
         <Select onValueChange={setSelectedUnit}>
           <SelectTrigger>
             <SelectValue placeholder="Chọn khối lượng sản phẩm" />
@@ -108,7 +105,7 @@ function FruitFilter() {
       </div>
 
       <div>
-        <h4 className="mb-1 ml-1 font-semibold text-primary">Giá</h4>
+        <h4 className="mb-2 ml-1 font-semibold text-primary">Giá</h4>
 
         <Select onValueChange={setSelectedPriceRange}>
           <SelectTrigger>
@@ -137,7 +134,7 @@ function FruitFilter() {
       </div>
 
       <div>
-        <h4 className="mb-1 ml-1 font-semibold text-primary">Đánh giá</h4>
+        <h4 className="mb-2 ml-1 font-semibold text-primary">Đánh giá</h4>
 
         <div className="flex">
           <ToggleGroup type="multiple">

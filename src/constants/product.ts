@@ -3,7 +3,7 @@ import { ProductType } from "@/schemas/productSchema"
 export const exampleProductsData: ProductType[] = [
   {
     productId: "p001",
-    category: "Rau Củ",
+    category: "rau-cu",
     supplier: "Công ty Nông sản Xanh",
     productName: "Cải Bó Xôi",
     slug: "cai-bo-xoi-yk8pgx",
@@ -25,7 +25,7 @@ export const exampleProductsData: ProductType[] = [
   },
   {
     productId: "p002",
-    category: "Rau Củ",
+    category: "rau-cu",
     supplier: "Trang Trại Việt Hưng",
     productName: "Rau Muống",
     slug: "rau-muong-z3ko4p",
@@ -91,7 +91,7 @@ export const exampleProductsData: ProductType[] = [
   },
   {
     productId: "p005",
-    category: "Rau Củ",
+    category: "rau-cu",
     supplier: "Công Ty Rau Sạch Việt",
     productName: "Rau Dền Đỏ",
     slug: "rau-den-do-7ujuqv",
@@ -157,7 +157,7 @@ export const exampleProductsData: ProductType[] = [
   },
   {
     productId: "p008",
-    category: "Rau Củ",
+    category: "qua",
     supplier: "Nông trại Hữu Cơ Việt",
     productName: "Cà Chua",
     slug: "ca-chua-v6jvre",
