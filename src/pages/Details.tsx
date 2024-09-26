@@ -5,19 +5,18 @@ import { ProductType } from "@/schemas/productSchema"
 import { exampleProductsData } from "@/constants/product"
 
 import Bread from "@/components/global/molecules/bread"
-import ProductBlogs from "@/components/local/details/product-blogs"
 import ProductImage from "@/components/local/details/product-image"
 import ProductInformation from "@/components/local/details/product-information"
-import Related from "@/components/local/details/product-related"
+import ProductRelated from "@/components/local/details/product-related"
 
 import ErrorPage from "./Error"
 
 function Details() {
-  const { productId } = useParams<{ productId: string }>()
+  const { productSlug } = useParams()
   const categoryUrl = useLocation().pathname.split("/")[1]
 
   const product = exampleProductsData.find(
-    (veg: ProductType) => veg.productId === productId
+    (veg: ProductType) => veg.slug === productSlug
   )
 
   if (!product) {
@@ -27,14 +26,17 @@ function Details() {
   const relatedProducts =
     exampleProductsData.filter(
       (product: ProductType) =>
-        product.productId !== productId && product.status === true
+        product.slug !== productSlug && product.status === true
     ) || []
 
   return (
     <div className="flex w-full flex-col gap-10">
       <Bread
         lastPage={{ name: "Trang chủ", url: "/" }}
-        currentPage={{ name: "asd", url: "asd" }}
+        currentPage={{
+          name: categoryUrl === "rau-cu" ? "Rau Củ" : "Trái Cây",
+          url: `/${categoryUrl}`
+        }}
         currentDetailsPage={product.productName}
       />
 
@@ -48,9 +50,9 @@ function Details() {
         </div>
       </div>
 
-      <ProductBlogs blogs={product.blogs || []} />
+      {/* <ProductBlogs blogs={product.blogs || []} /> */}
 
-      <Related products={relatedProducts} />
+      <ProductRelated products={relatedProducts} />
     </div>
   )
 }

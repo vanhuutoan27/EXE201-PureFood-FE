@@ -27,7 +27,7 @@ function ProductInformation({ product }: ProductInformationProps) {
     <div className="space-y-10">
       <div className="space-y-4">
         <p className="text-3xl font-bold uppercase text-primary">
-          {product.category} {product.name} - {product.weight} {product.unit}
+          {product.productName} - {product.weight} {product.unit}
         </p>
 
         <h4 className="text-xl font-bold text-primary">
@@ -35,7 +35,7 @@ function ProductInformation({ product }: ProductInformationProps) {
         </h4>
       </div>
 
-      <p>{product.description}</p>
+      <p className="text-gray-600">{product.description}</p>
 
       <ul className="space-y-4">
         <li className="flex items-start text-secondary">

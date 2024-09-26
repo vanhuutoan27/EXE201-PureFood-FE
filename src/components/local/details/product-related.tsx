@@ -14,7 +14,7 @@ interface ProductRelatedProps {
 
 function ProductRelated({ products }: ProductRelatedProps) {
   return (
-    <>
+    <div>
       <Section
         button="xem thêm"
         url="/asd"
@@ -39,13 +39,13 @@ function ProductRelated({ products }: ProductRelatedProps) {
                 images={product.images}
                 price={product.price}
                 category={product.category}
-                name={product.name}
+                name={product.productName}
               />
             </CarouselItem>
           ))}
         </CarouselContent>
       </Carousel>
-    </>
+    </div>
   )
 }
 
