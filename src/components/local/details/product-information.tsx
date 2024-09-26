@@ -1,7 +1,9 @@
 import { useState } from "react"
 
 import { CircleCheck } from "lucide-react"
+import { toast } from "sonner"
 
+import { CreateCartItemType } from "@/schemas/cartItemSchema"
 import { ProductType } from "@/schemas/productSchema"
 
 import { formatCurrency } from "@/lib/utils"
@@ -21,6 +23,31 @@ function ProductInformation({ product }: ProductInformationProps) {
 
   const handleDecrease = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1))
+  }
+
+  const handleAddToCart = () => {
+    const cartItems: CreateCartItemType[] = JSON.parse(
+      localStorage.getItem("cart") || "[]"
+    )
+    const newItem: CreateCartItemType = {
+      product: product.productId,
+      quantity: quantity
+    }
+
+    const existingItemIndex = cartItems.findIndex(
+      (item) => item.product === product.productId
+    )
+
+    if (existingItemIndex >= 0) {
+      cartItems[existingItemIndex].quantity += quantity
+    } else {
+      cartItems.push(newItem)
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cartItems))
+    console.log(JSON.stringify(cartItems))
+
+    toast.success("Sản phẩm đã được thêm vào giỏ hàng")
   }
 
   return (
@@ -81,7 +108,12 @@ function ProductInformation({ product }: ProductInformationProps) {
         </Button>
       </div>
 
-      <Button type="button" variant="default" className="h-11 w-full">
+      <Button
+        type="button"
+        variant="default"
+        className="h-11 w-full"
+        onClick={handleAddToCart}
+      >
         Thêm vào giỏ hàng
       </Button>
     </div>
