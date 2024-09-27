@@ -74,11 +74,20 @@
   }
 
   .desc-lens {
-    @apply text-gray-400;
+    @apply text-gray-600;
   }
 
   .error-lens {
     @apply ml-2 text-sm text-red-500;
+  }
+
+  .product-desc-lens p {
+    margin-bottom: 6px;
+  }
+
+  .product-desc-lens ul {
+    list-style-type: disc;
+    margin-left: 20px;
   }
 }
 

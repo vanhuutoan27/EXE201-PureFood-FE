@@ -1,6 +1,6 @@
 import { CircleCheckBig } from "lucide-react"
 
-function Guide() {
+function ProductGuide() {
   return (
     <ul className="space-y-4">
       <li className="flex items-start text-secondary">
@@ -31,4 +31,4 @@ function Guide() {
   )
 }
 
-export default Guide
+export default ProductGuide

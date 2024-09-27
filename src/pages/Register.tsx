@@ -255,7 +255,7 @@ function Register() {
                   type="submit"
                   variant="default"
                   size="lg"
-                  className="w-full"
+                  className="h-11 w-full"
                 >
                   {isLoading ? "Đang tải..." : "Đăng ký"}
                 </Button>

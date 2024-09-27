@@ -1,27 +1,31 @@
 import { useState } from "react"
 
-import { FaHeart } from "react-icons/fa"
-import { Link, useLocation } from "react-router-dom"
+import { FaShoppingCart } from "react-icons/fa"
+import { Link } from "react-router-dom"
+
+import { ProductType } from "@/schemas/productSchema"
 
 import { formatCurrency, formatDateDMY } from "@/lib/utils"
-
-import { exampleProductsData } from "@/constants/product"
 
 import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
 import { Toggle } from "@/components/global/atoms/toggle"
 
-function VegetableList() {
-  const categoryUrl = useLocation().pathname.split("/")[1]
+interface ProductListProps {
+  category: string
+  products: ProductType[]
+}
+
+function ProductList({ category, products }: ProductListProps) {
   const [visibleProducts, setVisibleProducts] = useState(3)
+
+  const filteredProducts = products.filter(
+    (product) => product.category === category
+  )
 
   const handleShowMore = () => {
     setVisibleProducts((prevVisible) => prevVisible + 3)
   }
-
-  const filteredProducts = exampleProductsData.filter(
-    (product) => product.category === "rau-cu" || product.category === "qua"
-  )
 
   return (
     <>
@@ -39,7 +43,7 @@ function VegetableList() {
             <div className="flex w-3/5 flex-col gap-y-2">
               <div className="flex justify-between">
                 <Link
-                  to={`/${categoryUrl}/${product.slug}`}
+                  to={`/${product.category}/${product.slug}`}
                   className="slow text-xl font-bold uppercase text-primary hover:text-secondary"
                 >
                   {product.productName} - {product.weight} {product.unit}
@@ -77,10 +81,13 @@ function VegetableList() {
 
               <div className="mt-4 flex gap-4">
                 <Toggle variant="outline">
-                  <FaHeart size={16} />
+                  <FaShoppingCart size={16} />
                 </Toggle>
 
-                <Link to={`/${categoryUrl}/${product.slug}`} className="w-full">
+                <Link
+                  to={`/${product.category}/${product.slug}`}
+                  className="w-full"
+                >
                   <Button variant="default" className="w-full">
                     Xem chi tiết
                   </Button>
@@ -100,7 +107,7 @@ function VegetableList() {
           <Button
             type="button"
             variant="default"
-            className="h-11 w-full"
+            className="h-11 w-full px-12"
             onClick={handleShowMore}
           >
             Hiển thị thêm
@@ -111,4 +118,4 @@ function VegetableList() {
   )
 }
 
-export default VegetableList
+export default ProductList

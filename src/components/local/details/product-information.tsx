@@ -1,121 +1,81 @@
 import { useState } from "react"
 
-import { CircleCheck } from "lucide-react"
-import { toast } from "sonner"
+import { Heart, Minus, Plus, Share2, ShoppingCart } from "lucide-react"
 
-import { CreateCartItemType } from "@/schemas/cartItemSchema"
 import { ProductType } from "@/schemas/productSchema"
 
 import { formatCurrency } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
+import DiscountChip from "@/components/global/molecules/discount-chip"
 
 interface ProductInformationProps {
-  product: ProductType
+  productData: ProductType
 }
 
-function ProductInformation({ product }: ProductInformationProps) {
+function ProductInformation({ productData }: ProductInformationProps) {
   const [quantity, setQuantity] = useState(1)
 
-  const handleIncrease = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1)
-  }
-
-  const handleDecrease = () => {
-    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1))
-  }
-
-  const handleAddToCart = () => {
-    const cartItems: CreateCartItemType[] = JSON.parse(
-      localStorage.getItem("cart") || "[]"
-    )
-    const newItem: CreateCartItemType = {
-      product: product.productId,
-      quantity: quantity
-    }
-
-    const existingItemIndex = cartItems.findIndex(
-      (item) => item.product === product.productId
-    )
-
-    if (existingItemIndex >= 0) {
-      cartItems[existingItemIndex].quantity += quantity
-    } else {
-      cartItems.push(newItem)
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cartItems))
-    console.log(JSON.stringify(cartItems))
-
-    toast.success("Sản phẩm đã được thêm vào giỏ hàng")
-  }
+  const increaseQuantity = () => setQuantity((prev) => prev + 1)
+  const decreaseQuantity = () =>
+    setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
 
   return (
-    <div className="space-y-10">
-      <div className="space-y-4">
-        <p className="text-3xl font-bold uppercase text-primary">
-          {product.productName} - {product.weight} {product.unit}
-        </p>
+    <div className="mt-10 space-y-6">
+      <h2 className="text-3xl font-bold">
+        {productData.productName} - {productData.weight}
+        {productData.unit}
+      </h2>
 
-        <h4 className="text-xl font-bold text-primary">
-          Giá: {formatCurrency(product.price)}
-        </h4>
-      </div>
-
-      <p className="text-gray-600">{product.description}</p>
-
-      <ul className="space-y-4">
-        <li className="flex items-start text-secondary">
-          <CircleCheck className="text-secondary" />
-          <span className="ml-5">
-            <span className="font-semibold">Xuất xứ: {product.origin}</span>
-          </span>
-        </li>
-
-        {product.organic && (
-          <li className="flex items-start text-secondary">
-            <CircleCheck className="text-secondary" />
-            <span className="ml-5">
-              <span className="font-semibold">Thực phẩm hữu cơ 100%</span>
-            </span>
-          </li>
-        )}
-
-        <li className="flex items-start text-secondary">
-          <CircleCheck className="text-secondary" />
-          <span className="ml-5">
-            <span className="font-semibold">Đảm bảo tươi ngon</span>
-          </span>
-        </li>
-        <li className="flex items-start text-secondary">
-          <CircleCheck className="text-secondary" />
-          <span className="ml-5">
-            <span className="font-semibold">Đổi trả trong vòng 24h</span>
-          </span>
-        </li>
-      </ul>
-      <div className="flex items-center justify-center space-x-4">
-        <Button onClick={handleDecrease} variant={"default"}>
-          <p className="text-white">-</p>
-        </Button>
-
-        <span className="rounded-lg border border-gray-300 px-5 py-3 text-center">
-          {quantity}
+      <div className="flex items-center space-x-2">
+        <span className="text-2xl font-bold text-primary">
+          {formatCurrency(25000)}
+        </span>
+        <span className="text-gray-500 line-through">
+          {formatCurrency(25000000)}
         </span>
 
-        <Button onClick={handleIncrease}>
-          <p className="text-white">+</p>
+        {/* <span className="text-2xl font-bold text-primary">
+          {formatCurrency(productData.price)}
+        </span> */}
+
+        <DiscountChip rate={1000} />
+      </div>
+
+      <div
+        className="productData-desc-lens"
+        dangerouslySetInnerHTML={{ __html: productData.description }}
+      />
+
+      <div className="flex items-center space-x-4">
+        <div className="flex items-center rounded-md border">
+          <Button variant="outline" size="icon" onClick={decreaseQuantity}>
+            <Minus size={16} />
+          </Button>
+
+          <span className="px-4">{quantity}</span>
+
+          <Button variant="outline" size="icon" onClick={increaseQuantity}>
+            <Plus size={16} />
+          </Button>
+        </div>
+
+        <Button variant="default" className="flex-grow">
+          <ShoppingCart size={20} className="mr-3" />
+          Thêm vào giỏ hàng
         </Button>
       </div>
 
-      <Button
-        type="button"
-        variant="default"
-        className="h-11 w-full"
-        onClick={handleAddToCart}
-      >
-        Thêm vào giỏ hàng
-      </Button>
+      <div className="flex space-x-4">
+        <Button variant="outline" size="sm">
+          <Heart size={20} className="mr-3" />
+          Thêm vào danh sách
+        </Button>
+        <Button variant="outline" size="sm">
+          <Share2 size={20} className="mr-3" />
+          Chia sẻ
+        </Button>
+      </div>
     </div>
   )
 }

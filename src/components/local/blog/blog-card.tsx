@@ -46,7 +46,7 @@ function BlogCard({ blogsData }: BlogCardProps) {
         </div>
 
         <Link
-          to={`/blogs/${blogsData.slug}`}
+          to={`/kien-thuc/${blogsData.slug}`}
           className="slow title-lens mt-2 w-fit cursor-pointer text-lg font-semibold text-primary hover:text-secondary"
         >
           {blogsData.title}
@@ -56,7 +56,10 @@ function BlogCard({ blogsData }: BlogCardProps) {
           {blogsData.summary}
         </p>
 
-        <Link to={`/blogs/${blogsData.slug}`} className="mt-4 flex justify-end">
+        <Link
+          to={`/kien-thuc/${blogsData.slug}`}
+          className="mt-4 flex justify-end"
+        >
           <Button type="button" variant="default">
             Đọc thêm
           </Button>

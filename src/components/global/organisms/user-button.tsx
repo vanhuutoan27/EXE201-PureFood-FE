@@ -1,6 +1,8 @@
 import { defaultAvatar } from "@/configs/config"
-import { LogOut, PackageCheck, User } from "lucide-react"
+import { LogOut, PackageCheck, ShoppingBag, User } from "lucide-react"
 import { Link } from "react-router-dom"
+
+import { UserType } from "@/schemas/userSchema"
 
 import { scrollToTop } from "@/lib/utils"
 
@@ -14,23 +16,33 @@ import {
   DropdownMenuTrigger
 } from "../atoms/dropdown-menu"
 
-function UserButton() {
+interface UserButtonProps {
+  userData: UserType
+}
+
+function UserButton({ userData }: UserButtonProps) {
   const menuItems = [
     {
       icon: User,
-      label: "Profile",
-      link: `/my-profile`,
+      label: "Hồ sơ",
+      link: `/thong-tin-ca-nhan/${userData.userId}`,
+      hoverColor: "group-hover:text-primary"
+    },
+    {
+      icon: ShoppingBag,
+      label: "Giỏ hàng",
+      link: `/gio-hang/${userData.userId}`,
       hoverColor: "group-hover:text-primary"
     },
     {
       icon: PackageCheck,
-      label: "Orders",
-      link: `/my-orders`,
+      label: "Đơn hàng",
+      link: `/don-hang/${userData.userId}`,
       hoverColor: "group-hover:text-primary"
     },
     {
       icon: LogOut,
-      label: "Log out",
+      label: "Đăng xuất",
       link: "/login",
       hoverColor: "group-hover:text-red-500",
       separator: true,
@@ -45,13 +57,13 @@ function UserButton() {
       <div className="flex items-center gap-4">
         <span className="flex flex-col text-right">
           <span className="slow cursor-pointer text-sm font-medium text-primary hover:text-secondary">
-            Nguyen Quoc Dai
+            {userData.fullName}
           </span>
-          <span className="text-xs text-secondary">dainq@fpt.edu.vn</span>
+          <span className="text-xs text-secondary">{userData.email}</span>
         </span>
         <DropdownMenuTrigger asChild className="relative select-none">
           <Avatar className="cursor-pointer">
-            <AvatarImage src={defaultAvatar} />
+            <AvatarImage src={userData.avatar || defaultAvatar} />
           </Avatar>
         </DropdownMenuTrigger>
       </div>

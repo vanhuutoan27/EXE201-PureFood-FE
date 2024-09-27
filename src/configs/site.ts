@@ -8,31 +8,49 @@ export const siteConfig = {
   ],
   footerMenuItems: [
     {
-      title: "Company",
+      title: "Công ty",
       links: [
-        { label: "About", href: "/about" },
-        { label: "Blogs", href: "/blogs" }
+        { label: "Trang chủ", href: "/" },
+        { label: "Về PureFood", href: "/ve-purefood" },
+        { label: "Kiến thức", href: "/kien-thuc" },
+        { label: "Liên hệ", href: "/lien-he" }
       ]
     },
     {
-      title: "Help center",
+      title: "Chính sách",
       links: [
-        { label: "Discord", href: "/discord" },
-        { label: "Contact Us", href: "/contact" }
+        { label: "Chính sách & Quy định", href: "/chinh-thuc-quy-dinh" },
+        { label: "Quy chế hoạt động", href: "/quy-che-hoat-dong" },
+        { label: "Bảo mật thông tin", href: "/bao-mat-thong-tin" },
+        { label: "Giải quyết tranh chấp", href: "/giai-quyet-tranh-chap" }
       ]
     },
     {
-      title: "Legal",
+      title: "Tìm hiểu thêm",
       links: [
-        { label: "Privacy Policy", href: "privacy-policy" },
-        { label: "Terms & Conditions", href: "terms-conditions" }
+        { label: "Hướng dẫn chung", href: "/ho-tro/huong-dan-chung" },
+        { label: "Hướng dẫn đặt hàng", href: "/ho-tro/huong-dan-dat-hang" },
+        { label: "Hướng dẫn thanh toán", href: "/ho-tro/huong-dan-thanh-toan" },
+        { label: "Câu hỏi thường gặp", href: "/ho-tro/cau-hoi-thuong-gap" }
+      ]
+    },
+    {
+      title: "Hỗ trợ",
+      links: [
+        { label: "Hỗ trợ khách hàng", href: "/ho-tro/ho-tro-khach-hang" },
+        {
+          label: "Điều khoản & Điều kiện",
+          href: "/ho-tro/dieu-khoan-dieu-kien"
+        },
+        { label: "Giấy phép", href: "/ho-tro/giay-phep" },
+        { label: "Chính sách bảo mật", href: "/ho-tro/chinh-sach-bao-mat" }
       ]
     }
   ],
   socialMedias: [
-    { icon: FaFacebook, label: "Facebook", href: "#" },
-    { icon: FaYoutube, label: "YouTube", href: "#" },
-    { icon: FaTiktok, label: "TikTok", href: "#" },
-    { icon: FaGithub, label: "GitHub", href: "#" }
+    { icon: FaFacebook, label: "Facebook", href: "" },
+    { icon: FaYoutube, label: "YouTube", href: "" },
+    { icon: FaTiktok, label: "TikTok", href: "" },
+    { icon: FaGithub, label: "GitHub", href: "" }
   ]
 }

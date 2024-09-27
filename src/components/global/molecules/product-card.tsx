@@ -1,85 +1,58 @@
-import { useState } from "react"
-
 import { Link } from "react-router-dom"
+
+import { ProductType } from "@/schemas/productSchema"
 
 import { formatCurrency } from "@/lib/utils"
 
 import { Button } from "../atoms/button"
-import { Skeleton } from "../atoms/skeleton"
 
 interface ProductCardProps {
-  productId: string
-  name: string
-  price: number
-  category: string
-  images: string[]
+  productData: ProductType
 }
 
-function ProductCard({
-  productId,
-  name,
-  price,
-  images,
-  category
-}: ProductCardProps) {
-  const [isHover, setIsHover] = useState(false)
-
-  const categoryUrl =
-    category === "Rau" || category === "Củ" || category === "Quả"
-      ? "rau-cu"
-      : category === "Trái"
-        ? "trai-cay"
-        : "other"
-
-  const renderImage = () => {
-    if (images && images.length > 0) {
-      // Render hover effect for jewelry images
-      return (
-        <div className="relative h-48 w-full overflow-hidden rounded-md">
-          <img
-            src={images[0]}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-              isHover ? "opacity-0" : "opacity-100"
-            }`}
-          />
-          <img
-            src={images[1]}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-              isHover ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        </div>
-      )
-    } else {
-      return <Skeleton className="h-48 w-full animate-pulse rounded-md" />
-    }
+function ProductCard({ productData }: ProductCardProps) {
+  const extractParagraphs = (htmlString: string) => {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(htmlString, "text/html")
+    const paragraphs = doc.querySelectorAll("p")
+    return Array.from(paragraphs).map((p) => p.textContent)
   }
 
   return (
-    <div className="ml-4 rounded-lg border-2 border-input p-4 shadow-md">
-      <div
-        className="group relative cursor-pointer"
-        onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}
-      >
-        {renderImage()}
-        <Link
-          to={`/${categoryUrl}/${productId}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`${
-            isHover ? "opacity-1" : "opacity-0"
-          } slow absolute -bottom-6 left-1/2 -translate-x-1/2`}
-        >
-          <Button variant={"default"}>Chi tiết</Button>
+    <div
+      key={productData.productId}
+      className="overflow-hidden rounded-xl bg-white shadow-md"
+    >
+      <img
+        src={productData.images[0]}
+        alt={productData.slug}
+        width={300}
+        height={200}
+        className="h-48 w-full object-cover"
+      />
+
+      <div className="px-4 py-6">
+        <Link to={`/${productData.category}/${productData.slug}`}>
+          <h3 className="slow mb-2 w-fit cursor-pointer text-lg font-semibold hover:text-primary">
+            {productData.productName} - {productData.weight} {productData.unit}
+          </h3>
         </Link>
-      </div>
-      <div className="mt-10 text-center">
-        <p className="h-7 font-semibold uppercase text-secondary">{name}</p>
-        <div className="mt-4 flex items-center justify-center gap-2">
-          <span className="text-[13px] font-semibold text-[#c69967]">
-            {formatCurrency(price)}
-          </span>
+
+        <p className="desc-lens min-h-16 text-sm">
+          {extractParagraphs(productData.description)}
+        </p>
+
+        <div className="mt-4 flex items-center justify-between">
+          <p className="font-medium">{formatCurrency(productData.price)}</p>
+
+          <Link
+            to={`/${productData.category}/${productData.slug}`}
+            className="flex justify-end"
+          >
+            <Button type="button" variant="default">
+              Chi tiết
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

@@ -6,14 +6,14 @@ import { Link } from "react-router-dom"
 
 import { UpdateUserType, updateUserSchema } from "@/schemas/userSchema"
 
-import { exampleUsers } from "@/constants/users"
+import { exampleUsersData } from "@/constants/users"
 
 import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
 import { Input } from "@/components/global/atoms/input"
 
 function UserAccount() {
-  const userData = exampleUsers[0]
+  const userData = exampleUsersData[0]
 
   const {
     register,

@@ -1,10 +1,14 @@
+import { useEffect } from "react"
+
 import { defaultAvatar } from "@/configs/config"
 import ErrorPage from "@/pages/Error"
 import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 
 import { UserType } from "@/schemas/userSchema"
 
-import { exampleUsers } from "@/constants/users"
+import { scrollToTop } from "@/lib/utils"
+
+import { exampleUsersData } from "@/constants/users"
 
 import { Avatar, AvatarImage } from "@/components/global/atoms/avatar"
 import {
@@ -19,7 +23,7 @@ function UserLayout() {
 
   const { userId } = useParams<{ userId: string }>()
 
-  const user = exampleUsers.find((veg: UserType) => veg.userId === userId)
+  const user = exampleUsersData.find((veg: UserType) => veg.userId === userId)
 
   if (!user) {
     return <ErrorPage statusCode={404} />
@@ -29,7 +33,11 @@ function UserLayout() {
     ? "account"
     : location.pathname.includes("mat-khau")
       ? "password"
-      : "history"
+      : "order"
+
+  useEffect(() => {
+    scrollToTop()
+  }, [location])
 
   return (
     <div className="flex flex-col gap-6">
@@ -70,9 +78,9 @@ function UserLayout() {
             </Link>
           </TabsTrigger>
 
-          <TabsTrigger value="history" asChild>
-            <Link to={`/lich-su/${userId}`} className="w-full">
-              Lịch sử
+          <TabsTrigger value="order" asChild>
+            <Link to={`/don-hang/${userId}`} className="w-full">
+              Đơn hàng
             </Link>
           </TabsTrigger>
         </TabsList>
@@ -85,7 +93,7 @@ function UserLayout() {
           <Outlet />
         </TabsContent>
 
-        <TabsContent value="history">
+        <TabsContent value="order">
           <Outlet />
         </TabsContent>
       </Tabs>

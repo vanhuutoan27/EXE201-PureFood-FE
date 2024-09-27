@@ -3,9 +3,10 @@ import { Link, useLocation } from "react-router-dom"
 
 import { Button } from "../atoms/button"
 import UserButton from "./user-button"
+import { exampleUsersData } from "@/constants/users"
 
 function Header() {
-  const user = null
+  const user = exampleUsersData[0]
 
   const location = useLocation()
 
@@ -37,7 +38,7 @@ function Header() {
 
         {/* Right Side - User */}
         {user ? (
-          <UserButton />
+          <UserButton userData={user} />
         ) : (
           <div className="flex gap-4">
             <Link to="/register">

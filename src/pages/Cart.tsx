@@ -8,7 +8,7 @@ import Section from "@/components/global/organisms/section"
 import CartItems from "@/components/local/cart/cart-items"
 import CartSummary from "@/components/local/cart/cart-summary"
 
-function ShoppingCart() {
+function Cart() {
   const [cartItems, setCartItems] = useState<CreateCartItemType[]>([])
 
   useEffect(() => {
@@ -50,6 +50,7 @@ function ShoppingCart() {
             ))}
           </div>
         )}
+
         <div className="w-1/3">
           <CartSummary price={totalPrice} />
         </div>
@@ -58,4 +59,4 @@ function ShoppingCart() {
   )
 }
 
-export default ShoppingCart
+export default Cart
