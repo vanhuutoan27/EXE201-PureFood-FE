@@ -43,35 +43,47 @@ function ProductInformation({ productData }: ProductInformationProps) {
       </div>
 
       <div
-        className="productData-desc-lens"
+        className="product-desc-lens"
         dangerouslySetInnerHTML={{ __html: productData.description }}
       />
 
       <div className="flex items-center space-x-4">
-        <div className="flex items-center rounded-md border">
-          <Button variant="outline" size="icon" onClick={decreaseQuantity}>
+        <div className="flex items-center rounded-xl border">
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            className="h-11"
+            onClick={decreaseQuantity}
+          >
             <Minus size={16} />
           </Button>
 
           <span className="px-4">{quantity}</span>
 
-          <Button variant="outline" size="icon" onClick={increaseQuantity}>
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            className="h-11"
+            onClick={increaseQuantity}
+          >
             <Plus size={16} />
           </Button>
         </div>
 
-        <Button variant="default" className="flex-grow">
+        <Button type="button" variant="default" className="h-11 flex-grow">
           <ShoppingCart size={20} className="mr-3" />
           Thêm vào giỏ hàng
         </Button>
       </div>
 
       <div className="flex space-x-4">
-        <Button variant="outline" size="sm">
+        <Button type="button" variant="outline" size="sm">
           <Heart size={20} className="mr-3" />
           Thêm vào danh sách
         </Button>
-        <Button variant="outline" size="sm">
+        <Button type="button" variant="outline" size="sm">
           <Share2 size={20} className="mr-3" />
           Chia sẻ
         </Button>
