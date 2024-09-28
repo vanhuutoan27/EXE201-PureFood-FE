@@ -5,10 +5,10 @@ import { ProductType } from "@/schemas/productSchema"
 import { exampleProductsData } from "@/constants/product"
 
 import Bread from "@/components/global/molecules/bread"
-import ProductDetails from "@/components/local/details/product-details"
-import ProductImage from "@/components/local/details/product-image"
-import ProductInformation from "@/components/local/details/product-information"
-import ProductRelated from "@/components/local/details/product-related"
+import ProductDetails from "@/components/local/default/details/product-details"
+import ProductImage from "@/components/local/default/details/product-image"
+import ProductInformation from "@/components/local/default/details/product-information"
+import ProductRelated from "@/components/local/default/details/product-related"
 
 import ErrorPage from "./Error"
 

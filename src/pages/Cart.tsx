@@ -5,8 +5,8 @@ import { CreateCartItemType } from "@/schemas/cartItemSchema"
 import { exampleProductsData } from "@/constants/product"
 
 import Section from "@/components/global/organisms/section"
-import CartItems from "@/components/local/cart/cart-items"
-import CartSummary from "@/components/local/cart/cart-summary"
+import CartItems from "@/components/local/user/cart/cart-items"
+import CartSummary from "@/components/local/user/cart/cart-summary"
 
 function Cart() {
   const [cartItems, setCartItems] = useState<CreateCartItemType[]>([])

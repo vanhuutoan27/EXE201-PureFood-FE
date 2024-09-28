@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 import { ProductType } from "@/schemas/productSchema"
 
-import { formatCurrency, formatDateDMY } from "@/lib/utils"
+import { extractParagraphs, formatCurrency, formatDateDMY } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
@@ -13,13 +13,13 @@ import { Toggle } from "@/components/global/atoms/toggle"
 
 interface ProductListProps {
   category: string
-  products: ProductType[]
+  productsData: ProductType[]
 }
 
-function ProductList({ category, products }: ProductListProps) {
+function ProductList({ category, productsData }: ProductListProps) {
   const [visibleProducts, setVisibleProducts] = useState(3)
 
-  const filteredProducts = products.filter(
+  const filteredProducts = productsData.filter(
     (product) => product.category === category
   )
 
@@ -53,8 +53,8 @@ function ProductList({ category, products }: ProductListProps) {
                 </p>
               </div>
 
-              <p className="lens min-h-[72px] text-gray-600">
-                {product.description}
+              <p className="desc-lens min-h-16 text-sm">
+                {extractParagraphs(product.description)}
               </p>
 
               {product.organic && (

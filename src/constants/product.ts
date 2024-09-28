@@ -6,6 +6,7 @@ export const exampleProductsData: ProductType[] = [
     category: "rau-cu",
     supplier: "Công ty Nông sản Xanh",
     productName: "Cải Bó Xôi",
+    foodName: "Spinach",
     slug: "cai-bo-xoi-yk8pgx",
     description: `
     <p>Cải bó xôi sạch, không sử dụng hóa chất, tốt cho sức khỏe, có nhiều lợi ích dinh dưỡng.</p>
@@ -42,6 +43,7 @@ export const exampleProductsData: ProductType[] = [
     category: "rau-cu",
     supplier: "Trang Trại Việt Hưng",
     productName: "Rau Muống",
+    foodName: "Spinach",
     slug: "rau-muong-z3ko4p",
     description: `
     <p>Rau muống tươi ngon, giàu chất xơ, sản phẩm sạch từ nông trại, có nhiều giá trị dinh dưỡng.</p>
@@ -73,6 +75,7 @@ export const exampleProductsData: ProductType[] = [
     category: "rau-cu",
     supplier: "Nông Trại Xanh",
     productName: "Khoai Tây",
+    foodName: "Potato",
     slug: "khoai-tay-okce88",
     description: `
     <p>Khoai tây sạch, tự nhiên, mang lại nhiều giá trị dinh dưỡng cho sức khỏe.</p>
@@ -104,6 +107,7 @@ export const exampleProductsData: ProductType[] = [
     category: "trai-cay",
     supplier: "Hợp tác xã Nông sản Việt",
     productName: "Táo Mèo",
+    foodName: "Potato",
     slug: "tao-meo-zd26k5",
     description: `
     <p>Táo mèo tươi ngon, giàu chất dinh dưỡng, thích hợp cho sức khỏe.</p>
@@ -134,7 +138,8 @@ export const exampleProductsData: ProductType[] = [
     productId: "p005",
     category: "rau-cu",
     supplier: "Công Ty Rau Sạch Việt",
-    productName: "Rau Dền Đỏ",
+    productName: "Red Amaranth",
+    foodName: "Potato",
     slug: "rau-den-do-7ujuqv",
     description: `
     <p>Rau dền đỏ giàu vitamin và khoáng chất, tốt cho sức khỏe tổng thể.</p>
@@ -166,6 +171,7 @@ export const exampleProductsData: ProductType[] = [
     category: "rau-cu",
     supplier: "Trang Trại Đồng Quê",
     productName: "Cà Rốt",
+    foodName: "Carrot",
     slug: "ca-rot-dexyv7",
     description: `
     <p>Cà rốt hữu cơ, giàu beta-carotene, tốt cho sức khỏe mắt và hệ miễn dịch.</p>
@@ -195,8 +201,9 @@ export const exampleProductsData: ProductType[] = [
   {
     productId: "p007",
     category: "trai-cay",
-    supplier: "Trang Trại Trái Cây Sạch",
+    supplier: "Trang Trại trai-cay Sạch",
     productName: "Xoài Cát",
+    foodName: "Mango Cat",
     slug: "xoai-cat-uju54f",
     description: `
     <p>Xoài cát ngọt, giàu vitamin, thích hợp cho mọi bữa ăn tráng miệng.</p>
@@ -204,7 +211,7 @@ export const exampleProductsData: ProductType[] = [
       <li>Giàu vitamin C, tốt cho hệ miễn dịch</li>
       <li>Không thuốc trừ sâu</li>
       <li>Thích hợp làm nước ép, sinh tố hoặc ăn trực tiếp</li>
-      <li>Được trồng tại trang trại trái cây sạch</li>
+      <li>Được trồng tại trang trại trai-cay sạch</li>
     </ul>
     `,
     price: 45000,
@@ -224,9 +231,10 @@ export const exampleProductsData: ProductType[] = [
   },
   {
     productId: "p008",
-    category: "qua",
+    category: "rau-cu",
     supplier: "Nông trại Hữu Cơ Việt",
     productName: "Cà Chua",
+    foodName: "Mango Tomato",
     slug: "ca-chua-v6jvre",
     description: `
     <p>Cà chua đỏ tươi, giàu vitamin C, là thành phần không thể thiếu trong các món ăn.</p>
@@ -258,6 +266,7 @@ export const exampleProductsData: ProductType[] = [
     category: "rau-cu",
     supplier: "Hợp tác xã Hữu Cơ",
     productName: "Củ Dền",
+    foodName: "Beetroot",
     slug: "cu-den-36mylu",
     description: `
     <p>Củ dền tươi ngon, giàu dinh dưỡng, rất tốt cho sức khỏe.</p>
@@ -289,6 +298,7 @@ export const exampleProductsData: ProductType[] = [
     category: "trai-cay",
     supplier: "Công ty Xuất khẩu Nông sản",
     productName: "Bưởi Da Xanh",
+    foodName: "Green Skin Grapefruit",
     slug: "buoi-da-xanh-vy0xdz",
     description: `
     <p>Bưởi da xanh ngọt, thanh mát, giàu vitamin C, thích hợp cho món tráng miệng.</p>

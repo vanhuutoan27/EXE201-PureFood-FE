@@ -1,7 +1,7 @@
 import { exampleBlogsData } from "@/constants/blogs"
 
 import Bread from "@/components/global/molecules/bread"
-import BlogCard from "@/components/local/blog/blog-card"
+import BlogCard from "@/components/local/default/blog/blog-card"
 
 function Blogs() {
   const blogsData = exampleBlogsData

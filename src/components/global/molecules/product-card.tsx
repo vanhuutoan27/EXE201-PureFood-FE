@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 import { ProductType } from "@/schemas/productSchema"
 
-import { formatCurrency } from "@/lib/utils"
+import { extractParagraphs, formatCurrency } from "@/lib/utils"
 
 import { Button } from "../atoms/button"
 
@@ -11,13 +11,6 @@ interface ProductCardProps {
 }
 
 function ProductCard({ productData }: ProductCardProps) {
-  const extractParagraphs = (htmlString: string) => {
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(htmlString, "text/html")
-    const paragraphs = doc.querySelectorAll("p")
-    return Array.from(paragraphs).map((p) => p.textContent)
-  }
-
   return (
     <div
       key={productData.productId}

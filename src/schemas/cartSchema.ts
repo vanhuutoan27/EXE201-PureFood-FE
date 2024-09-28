@@ -3,7 +3,7 @@ import { z } from "zod"
 import { cartItemSchema } from "./cartItemSchema"
 
 export const cartSchema = z.object({
-  cartId: z.string().nonempty({ message: "Cart Id is required" }),
+  cartId: z.string().nonempty({ message: "Cart ID is required" }),
   user: z.string().nonempty({ message: "User is required" }),
   cartItems: z.array(cartItemSchema)
 })

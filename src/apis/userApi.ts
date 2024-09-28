@@ -1,0 +1,103 @@
+import { useMutation, useQuery, useQueryClient } from "react-query"
+import { toast } from "sonner"
+
+import { CreateUserType, UserType } from "@/schemas/userSchema"
+
+import pureAPI from "@/lib/pureAPI"
+
+interface UsersResponse {
+  totalPages: number
+  totalItems: number
+  users: UserType[]
+}
+
+export const useGetAllUsers = (
+  page: number,
+  limit: number,
+  search?: string,
+  status?: boolean
+) => {
+  return useQuery<UsersResponse, Error>({
+    queryKey: ["users", page, limit, search, status],
+    queryFn: async () => {
+      try {
+        const { data } = await pureAPI.get("/users", {
+          params: { page, limit, search, status }
+        })
+
+        if (data.success) {
+          const { totalPages, totalItems, items: users } = data.data
+          return { totalPages, totalItems, users }
+        } else {
+          toast.error(data.message)
+          throw new Error(data.message)
+        }
+      } catch (error: any) {
+        const errorMessage = error.response?.data?.message
+        toast.error(errorMessage)
+        throw new Error(errorMessage)
+      }
+    },
+    keepPreviousData: true,
+    onError: (error: Error) => {
+      toast.error(error.message)
+    }
+  })
+}
+
+export const useGetUserByUsername = (username: string) => {
+  return useQuery<UserType, Error>({
+    queryKey: ["user", username],
+    queryFn: async () => {
+      try {
+        const { data } = await pureAPI.get(`/users/${username}`)
+
+        if (data.success) {
+          return data.data
+        } else {
+          toast.error(data.message)
+          throw new Error(data.message)
+        }
+      } catch (error: any) {
+        const errorMessage = error.response?.data?.message
+        toast.error(errorMessage)
+        throw new Error(errorMessage)
+      }
+    },
+    enabled: !!username,
+    onError: (error: Error) => {
+      toast.error(error.message)
+    }
+  })
+}
+
+export const useCreateUser = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<CreateUserType, Error, CreateUserType>(
+    async (newUser) => {
+      try {
+        const { data } = await pureAPI.post("/users", newUser)
+
+        if (data.success) {
+          return data.data
+        } else {
+          toast.error(data.message)
+          throw new Error(data.message)
+        }
+      } catch (error: any) {
+        const errorMessage = error.response?.data?.message
+        toast.error(errorMessage)
+        throw new Error(errorMessage)
+      }
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("users")
+      },
+      onError: (error: Error) => {
+        toast.error(error.message)
+      }
+    }
+  )
+}

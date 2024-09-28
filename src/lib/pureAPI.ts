@@ -1,5 +1,6 @@
-import { baseUrl } from "@/configs/config"
 import axios from "axios"
+
+import { baseUrl } from "@/configs/config"
 
 const pureAPI = axios.create({
   baseURL: baseUrl,

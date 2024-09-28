@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 export const cartItemSchema = z.object({
-  cartItemId: z.string().nonempty({ message: "Cart Id is required" }),
+  cartItemId: z.string().nonempty({ message: "Cart ID is required" }),
   product: z.string().nonempty({ message: "Product is required" }),
   quantity: z.number().min(1, { message: "Quantity must be at least 1" }),
   productName: z.string().nonempty({ message: "Product name is required" }),

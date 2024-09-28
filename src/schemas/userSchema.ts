@@ -1,24 +1,20 @@
 import { z } from "zod"
 
 export const userSchema = z.object({
-  userId: z.string().nonempty({ message: "User ID is required" }),
-  fullName: z.string().nonempty({ message: "Không được bỏ trống" }),
+  userId: z.string().nonempty({ message: "Mã người dùng là bắt buộc" }),
+  fullName: z.string().nonempty({ message: "Họ và tên là bắt buộc" }),
   email: z
     .string()
-    .email({ message: "Email khả dụng" })
-    .nonempty({ message: "Không được bỏ trống" }),
-  address: z
-    .string()
-    .nonempty({ message: "Không được bỏ trống" })
-    .min(20, { message: "Địa chỉ phải chứa ít nhất 20 ký tự" }),
+    .email({ message: "Địa chỉ email không hợp lệ" })
+    .nonempty({ message: "Email là bắt buộc" }),
   phoneNumber: z
     .string()
-    .nonempty({ message: "Không được bỏ trống" })
-    .min(10, { message: "Nhập ít nhất 10 chữ số" }),
+    .nonempty({ message: "Số điện thoại là bắt buộc" })
+    .min(10, { message: "Số điện thoại phải có ít nhất 10 ký tự" }),
   password: z
     .string()
-    .nonempty({ message: "Không được bỏ trống" })
-    .min(6, { message: "Mật khẩu phải chứa ít nhất 6 ký tự" })
+    .nonempty({ message: "Mật khẩu là bắt buộc" })
+    .min(6, { message: "Mật khẩu phải có ít nhất 6 ký tự" })
     .regex(/[A-Z]/, {
       message: "Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa"
     })
@@ -29,13 +25,20 @@ export const userSchema = z.object({
     .regex(/[@$!%*?&]/, {
       message: "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt"
     }),
-  avatar: z.string().url().nonempty({ message: "Không được bỏ trống" }),
-  role: z.string().nonempty({ message: "Không được bỏ trống" }),
+  avatar: z
+    .string()
+    .url({ message: "URL không hợp lệ" })
+    .nonempty({ message: "Avatar là bắt buộc" }),
+  address: z
+    .string()
+    .nonempty({ message: "Địa chỉ là bắt buộc" })
+    .min(20, { message: "Địa chỉ phải chứa ít nhất 20 ký tự" }),
+  role: z.string().nonempty({ message: "Vai trò là bắt buộc" }),
   status: z.boolean(),
-  createdAt: z.string().nonempty({ message: "Không được bỏ trống" }),
-  updatedAt: z.string().nonempty({ message: "Không được bỏ trống" }),
-  createdBy: z.string().nonempty({ message: "Không được bỏ trống" }),
-  updatedBy: z.string().nonempty({ message: "Không được bỏ trống" })
+  createdAt: z.string().nonempty({ message: "Ngày tạo là bắt buộc" }),
+  createdBy: z.string().nonempty({ message: "Người tạo là bắt buộc" }),
+  updatedAt: z.string().nonempty({ message: "Ngày cập nhật là bắt buộc" }),
+  updatedBy: z.string().nonempty({ message: "Người cập nhật là bắt buộc" })
 })
 
 export const createUserSchema = userSchema.omit({
@@ -72,7 +75,9 @@ export const userRegisterSchema = userSchema
     password: true
   })
   .extend({
-    confirmPassword: z.string().nonempty({ message: "Không được bỏ trống" })
+    confirmPassword: z
+      .string()
+      .nonempty({ message: "Nhập lại mật khẩu là bắt buộc" })
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Mật khẩu không khớp",
@@ -81,25 +86,29 @@ export const userRegisterSchema = userSchema
 
 export const passwordSchema = z
   .object({
-    currentPassword: z.string().nonempty({ message: "Không được bỏ trống" }),
+    currentPassword: z
+      .string()
+      .nonempty({ message: "Mật khẩu hiện tại là bắt buộc" }),
     newPassword: z
       .string()
-      .nonempty({ message: "Không được bỏ trống" })
-      .min(6, { message: "Mật khẩu phải chứa ít nhất 6 ký tự" })
+      .nonempty({ message: "Mật khẩu mới là bắt buộc" })
+      .min(6, { message: "Mật khẩu mới phải có ít nhất 6 ký tự" })
       .regex(/[A-Z]/, {
-        message: "Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa"
+        message: "Mật khẩu mới phải chứa ít nhất 1 chữ cái viết hoa"
       })
       .regex(/[a-z]/, {
-        message: "Mật khẩu phải chứa ít nhất 1 chữ cái viết thường"
+        message: "Mật khẩu mới phải chứa ít nhất 1 chữ cái viết thường"
       })
-      .regex(/[0-9]/, { message: "Mật khẩu phải chứa ít nhất 1 chữ số" })
+      .regex(/[0-9]/, { message: "Mật khẩu mới phải chứa ít nhất 1 chữ số" })
       .regex(/[@$!%*?&]/, {
-        message: "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt"
+        message: "Mật khẩu mới phải chứa ít nhất 1 ký tự đặc biệt"
       }),
-    confirmPassword: z.string().nonempty({ message: "Không được bỏ trống" })
+    confirmPassword: z
+      .string()
+      .nonempty({ message: "Nhập lại mật khẩu mới là bắt buộc" })
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Mật khẩu không khớp",
+    message: "Mật khẩu mới không khớp",
     path: ["confirmPassword"]
   })
 

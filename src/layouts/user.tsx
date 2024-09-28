@@ -16,7 +16,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger
-} from "@/components/local/profile/profile-tabs"
+} from "@/components/local/user/profile/profile-tabs"
 
 function UserLayout() {
   const location = useLocation()

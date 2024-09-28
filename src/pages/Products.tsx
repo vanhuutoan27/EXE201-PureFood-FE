@@ -3,9 +3,9 @@ import { useLocation } from "react-router-dom"
 import { exampleProductsData } from "@/constants/product"
 
 import Bread from "@/components/global/molecules/bread"
-import ProductFilter from "@/components/local/product/product-filter"
-import ProductList from "@/components/local/product/product-list"
-import ProductSearch from "@/components/local/product/product-search"
+import ProductFilter from "@/components/local/default/product/product-filter"
+import ProductList from "@/components/local/default/product/product-list"
+import ProductSearch from "@/components/local/default/product/product-search"
 
 function Products() {
   const productsData = exampleProductsData
@@ -29,7 +29,7 @@ function Products() {
         </div>
 
         <div className="w-2/3">
-          <ProductList category={categoryUrl} products={productsData} />
+          <ProductList category={categoryUrl} productsData={productsData} />
         </div>
       </div>
     </div>

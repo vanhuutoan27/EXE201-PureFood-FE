@@ -1,24 +1,24 @@
 import { z } from "zod"
 
 export const promotionSchema = z.object({
-  promotionId: z.string().nonempty({ message: "Promotion ID is required" }),
+  promotionId: z.string().nonempty({ message: "Mã khuyến mãi là bắt buộc" }),
   promotionName: z
     .string()
-    .min(5, { message: "Promotion name must be at least 5 characters long" })
-    .nonempty({ message: "Promotion name is required" }),
+    .min(5, { message: "Tên khuyến mãi phải có ít nhất 5 ký tự" })
+    .nonempty({ message: "Tên khuyến mãi là bắt buộc" }),
   description: z.string().optional(),
-  discountCode: z.string().nonempty({ message: "Discount code is required" }),
+  discountCode: z.string().nonempty({ message: "Mã giảm giá là bắt buộc" }),
   discountPercentage: z.coerce
     .number()
-    .min(1, { message: "Discount must be at least 1%" })
-    .max(100, { message: "Discount cannot exceed 100%" }),
-  startDate: z.string().nonempty({ message: "Start date is required" }),
-  endDate: z.string().nonempty({ message: "End date is required" }),
+    .min(1, { message: "Giảm giá phải ít nhất là 1%" })
+    .max(100, { message: "Giảm giá không được vượt quá 100%" }),
+  startDate: z.string().nonempty({ message: "Ngày bắt đầu là bắt buộc" }),
+  endDate: z.string().nonempty({ message: "Ngày kết thúc là bắt buộc" }),
   status: z.boolean(),
-  createdAt: z.string().nonempty({ message: "Created at is required" }),
-  createdBy: z.string().nonempty({ message: "Created by is required" }),
-  updatedAt: z.string().nonempty({ message: "Updated at is required" }),
-  updatedBy: z.string().nonempty({ message: "Updated by is required" })
+  createdAt: z.string().nonempty({ message: "Ngày tạo là bắt buộc" }),
+  createdBy: z.string().nonempty({ message: "Người tạo là bắt buộc" }),
+  updatedAt: z.string().nonempty({ message: "Ngày cập nhật là bắt buộc" }),
+  updatedBy: z.string().nonempty({ message: "Người cập nhật là bắt buộc" })
 })
 
 export type PromotionType = z.infer<typeof promotionSchema>
