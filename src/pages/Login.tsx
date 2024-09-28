@@ -24,6 +24,7 @@ import {
 } from "@/components/global/atoms/form"
 import { Input } from "@/components/global/atoms/input"
 import { Label } from "@/components/global/atoms/label"
+import LazyImage from "@/components/global/molecules/lazy-image"
 
 export const slides = [
   "/images/login-image-1.jpg",
@@ -182,7 +183,7 @@ function Login() {
           <CarouselContent>
             {slides.map((slide, index) => (
               <CarouselItem key={index}>
-                <img
+                <LazyImage
                   className="h-[88vh] w-full rounded-3xl object-cover shadow-xl"
                   src={slide}
                   alt={`Login slide ${index + 1}`}

@@ -11,6 +11,7 @@ import { scrollToTop } from "@/lib/utils"
 import { exampleUsersData } from "@/constants/users"
 
 import { Avatar, AvatarImage } from "@/components/global/atoms/avatar"
+import LazyImage from "@/components/global/molecules/lazy-image"
 import {
   Tabs,
   TabsContent,
@@ -42,7 +43,7 @@ function UserLayout() {
   return (
     <div className="flex flex-col gap-6">
       <div className="relative">
-        <img
+        <LazyImage
           src="/images/user-cover-image.png"
           alt="User cover image"
           className="select-none rounded-xl shadow-md"

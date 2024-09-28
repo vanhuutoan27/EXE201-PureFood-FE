@@ -1,5 +1,6 @@
 import { ReviewType } from "@/schemas/reviewSchema"
 
+import { Textarea } from "@/components/global/atoms/textarea"
 import ReviewCard from "@/components/global/molecules/review-card"
 
 interface ProductReviewsProps {
@@ -11,7 +12,15 @@ function ProductReviews({ reviews }: ProductReviewsProps) {
     <div className="rounded-lg bg-white p-6 shadow-md">
       <h3 className="mb-4 text-xl font-semibold">Đánh giá của khách hàng</h3>
 
-      <div className="space-y-4">
+      <div>
+        <Textarea
+          rows={4}
+          placeholder="Type your message here."
+          className="resize-none rounded-xl"
+        />
+      </div>
+
+      <div className="mt-8 space-y-4">
         {reviews.map((review) => (
           <ReviewCard key={review.reviewId} review={review} />
         ))}

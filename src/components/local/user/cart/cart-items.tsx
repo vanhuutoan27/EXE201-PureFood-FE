@@ -10,6 +10,7 @@ import { formatCurrency } from "@/lib/utils"
 import { exampleProductsData } from "@/constants/product"
 
 import { Button } from "@/components/global/atoms/button"
+import LazyImage from "@/components/global/molecules/lazy-image"
 
 interface CartItemProps {
   item: CreateCartItemType
@@ -73,7 +74,7 @@ function CartItems({ item }: CartItemProps) {
       {product ? (
         <div className="flex">
           <div className="flex w-2/3 gap-10">
-            <img
+            <LazyImage
               src={product.images[0]}
               alt={product.productName}
               className="select-none rounded-lg"

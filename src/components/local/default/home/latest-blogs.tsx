@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { BlogType } from "@/schemas/blogSchema"
 
 import { Button } from "@/components/global/atoms/button"
+import LazyImage from "@/components/global/molecules/lazy-image"
 
 interface LatestBlogsProps {
   blogsData: BlogType[]
@@ -19,7 +20,7 @@ function LatestBlogs({ blogsData }: LatestBlogsProps) {
             key={blog.blogId}
             className="overflow-hidden rounded-xl bg-white shadow-md"
           >
-            <img
+            <LazyImage
               src={`/placeholder.svg?height=200&width=300`}
               alt={blog.title}
               width={300}

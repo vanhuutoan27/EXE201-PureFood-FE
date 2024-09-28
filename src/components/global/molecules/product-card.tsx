@@ -5,6 +5,7 @@ import { ProductType } from "@/schemas/productSchema"
 import { extractParagraphs, formatCurrency } from "@/lib/utils"
 
 import { Button } from "../atoms/button"
+import LazyImage from "./lazy-image"
 
 interface ProductCardProps {
   productData: ProductType
@@ -16,7 +17,7 @@ function ProductCard({ productData }: ProductCardProps) {
       key={productData.productId}
       className="overflow-hidden rounded-xl bg-white shadow-md"
     >
-      <img
+      <LazyImage
         src={productData.images[0]}
         alt={productData.slug}
         width={300}

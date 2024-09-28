@@ -10,6 +10,7 @@ import { extractParagraphs, formatCurrency, formatDateDMY } from "@/lib/utils"
 import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
 import { Toggle } from "@/components/global/atoms/toggle"
+import LazyImage from "@/components/global/molecules/lazy-image"
 
 interface ProductListProps {
   category: string
@@ -33,7 +34,7 @@ function ProductList({ category, productsData }: ProductListProps) {
         {filteredProducts.slice(0, visibleProducts).map((product) => (
           <Card key={product.productId} className="flex gap-6 text-sm">
             <div className="h-[240px] w-2/5">
-              <img
+              <LazyImage
                 src={product.images[0]}
                 alt={product.productName}
                 className="h-full w-full rounded-lg object-cover"

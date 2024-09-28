@@ -1,5 +1,7 @@
 import { useState } from "react"
 
+import LazyImage from "@/components/global/molecules/lazy-image"
+
 interface ProductImageProps {
   images: string[]
 }
@@ -10,7 +12,7 @@ function ProductImage({ images }: ProductImageProps) {
   return (
     <div className="space-y-4">
       <div className="rounded-lg bg-white p-4 shadow-md">
-        <img
+        <LazyImage
           src={mainImage}
           alt="Selected Product"
           width={600}
@@ -21,7 +23,7 @@ function ProductImage({ images }: ProductImageProps) {
 
       <div className="grid grid-cols-4 gap-4">
         {images.map((image, index) => (
-          <img
+          <LazyImage
             key={index}
             src={image}
             alt={`Product image ${index + 1}`}

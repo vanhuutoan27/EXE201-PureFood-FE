@@ -16,6 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/global/atoms/dropdown-menu"
+import LazyImage from "@/components/global/molecules/lazy-image"
 
 export const columns: ColumnDef<UserType>[] = [
   // {
@@ -30,7 +31,7 @@ export const columns: ColumnDef<UserType>[] = [
       const fullName = row.original.fullName
 
       return (
-        <img
+        <LazyImage
           src={avatar}
           alt={fullName}
           className="h-16 min-h-16 w-16 min-w-16 select-none rounded-xl"

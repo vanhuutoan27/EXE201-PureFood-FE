@@ -83,43 +83,43 @@ function ProductNutrition({ foodName }: ProductNutritionProps) {
       <table className="mt-4 w-full text-left">
         <thead>
           <tr className="border-b">
-            <th className="py-2">Nutrient</th>
-            <th className="py-2">Amount per 100g</th>
-            <th className="py-2">% Daily Value*</th>
+            <th className="py-2">Chất dinh dưỡng</th>
+            <th className="py-2">Lượng trên 100g</th>
+            <th className="py-2">% Giá trị hằng ngày*</th>
           </tr>
         </thead>
         <tbody>
           <tr className="border-b">
-            <td className="py-2">Calories</td>
+            <td className="py-2">Calo</td>
             <td>{nutritionData["energy-kcal_100g"] ?? "N/A"} kcal</td>
             <td>
               {calculateDailyValue(nutritionData["energy-kcal_100g"], 2000)}
             </td>
           </tr>
           <tr className="border-b">
-            <td className="py-2">Total Fat</td>
+            <td className="py-2">Chất béo tổng</td>
             <td>{nutritionData.fat_100g ?? "N/A"} g</td>
             <td>{calculateDailyValue(nutritionData.fat_100g, 78)}</td>
           </tr>
           <tr className="border-b">
-            <td className="py-2">Sodium</td>
+            <td className="py-2">Natri</td>
             <td>{nutritionData.sodium_100g ?? "N/A"} mg</td>
             <td>{calculateDailyValue(nutritionData.sodium_100g, 2300)}</td>
           </tr>
           <tr className="border-b">
-            <td className="py-2">Total Carbohydrate</td>
+            <td className="py-2">Carbohydrate tổng</td>
             <td>{nutritionData.carbohydrates_100g ?? "N/A"} g</td>
             <td>
               {calculateDailyValue(nutritionData.carbohydrates_100g, 275)}
             </td>
           </tr>
           <tr className="border-b">
-            <td className="py-2">Dietary Fiber</td>
+            <td className="py-2">Chất xơ</td>
             <td>{nutritionData.fiber_100g ?? "N/A"} g</td>
             <td>{calculateDailyValue(nutritionData.fiber_100g, 28)}</td>
           </tr>
           <tr className="border-b">
-            <td className="py-2">Protein</td>
+            <td className="py-2">Chất đạm</td>
             <td>{nutritionData.proteins_100g ?? "N/A"} g</td>
             <td>{calculateDailyValue(nutritionData.proteins_100g, 50)}</td>
           </tr>
@@ -137,7 +137,7 @@ function ProductNutrition({ foodName }: ProductNutritionProps) {
       </table>
 
       <p className="mt-4 text-sm text-gray-500">
-        *Percent Daily Values are based on a 2,000 calorie diet.
+        *Giá trị hàng ngày dựa trên chế độ ăn 2,000 calo.
       </p>
     </div>
   )
