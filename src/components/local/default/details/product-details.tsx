@@ -33,7 +33,7 @@ function ProductDetails({ productData }: ProductDetailsProps) {
       </TabsContent>
 
       <TabsContent value="nutrition" className="mt-4">
-        <ProductNutrition />
+        <ProductNutrition foodName={productData.foodName} />
       </TabsContent>
 
       <TabsContent value="reviews" className="mt-4">

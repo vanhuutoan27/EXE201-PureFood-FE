@@ -1,9 +1,10 @@
 import { siteConfig } from "@/configs/site"
 import { Link, useLocation } from "react-router-dom"
 
+import { exampleUsersData } from "@/constants/users"
+
 import { Button } from "../atoms/button"
 import UserButton from "./user-button"
-import { exampleUsersData } from "@/constants/users"
 
 function Header() {
   const user = exampleUsersData[0]
@@ -46,7 +47,6 @@ function Header() {
                 Đăng ký
               </Button>
             </Link>
-
             <Link to="/login">
               <Button type="button" variant="default">
                 Đăng nhập

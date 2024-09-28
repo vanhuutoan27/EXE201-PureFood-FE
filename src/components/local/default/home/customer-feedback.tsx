@@ -20,7 +20,7 @@ function CustomerFeedback({ reviewsData }: CustomerFeedbackProps) {
             className="rounded-lg bg-white p-6 shadow-md"
           >
             <div className="mb-4 flex items-center">
-              {[...Array(5)].map((_, i) => (
+              {Array.from({ length: review.rating }).map((_, i) => (
                 <Star
                   key={i}
                   className="h-5 w-5 fill-current text-yellow-400"

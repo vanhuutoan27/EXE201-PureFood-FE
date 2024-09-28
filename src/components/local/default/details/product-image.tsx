@@ -15,7 +15,7 @@ function ProductImage({ images }: ProductImageProps) {
           alt="Selected Product"
           width={600}
           height={400}
-          className="h-96 w-full rounded-lg object-cover"
+          className="h-96 w-full select-none rounded-lg object-cover"
         />
       </div>
 
@@ -25,7 +25,7 @@ function ProductImage({ images }: ProductImageProps) {
             key={index}
             src={image}
             alt={`Product image ${index + 1}`}
-            className="h-24 w-full cursor-pointer rounded-lg object-cover transition-opacity hover:opacity-75"
+            className="h-24 w-full cursor-pointer select-none rounded-lg object-cover transition-opacity hover:opacity-75"
             onClick={() => setMainImage(image)}
           />
         ))}

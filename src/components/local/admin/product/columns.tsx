@@ -157,7 +157,7 @@ export const columns: ColumnDef<ProductType>[] = [
       ) : (
         <X size={16} />
       )
-      return <span className="flex justify-center">{organic}</span>
+      return <span className="flex justify-start pl-4">{organic}</span>
     }
   },
   {

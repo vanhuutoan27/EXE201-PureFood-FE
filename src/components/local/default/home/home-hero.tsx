@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom"
 
+import { exampleUsersData } from "@/constants/users"
+
 import { Button } from "@/components/global/atoms/button"
+import UserButton from "@/components/global/organisms/user-button"
 
 function HomeHero() {
+  const user = exampleUsersData[0]
+
   return (
     <div className="relative mt-6">
       {/* Background Image */}
@@ -38,23 +43,27 @@ function HomeHero() {
           <span>Food</span>
         </Link>
 
-        <div className="flex gap-4">
-          <Link to="/register">
-            <Button
-              type="button"
-              variant="ghost"
-              className="text-white hover:text-white/90"
-            >
-              Đăng ký
-            </Button>
-          </Link>
+        {user ? (
+          <UserButton variant="ghost" userData={user} />
+        ) : (
+          <div className="flex gap-4">
+            <Link to="/register">
+              <Button
+                type="button"
+                variant="ghost"
+                className="text-white hover:text-white/90"
+              >
+                Đăng ký
+              </Button>
+            </Link>
 
-          <Link to="/login">
-            <Button type="button" variant="default">
-              Đăng nhập
-            </Button>
-          </Link>
-        </div>
+            <Link to="/login">
+              <Button type="button" variant="default">
+                Đăng nhập
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* <div className="absolute bottom-12 flex w-full justify-center">

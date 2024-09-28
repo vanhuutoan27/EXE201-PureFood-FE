@@ -164,9 +164,12 @@ function Sidebar() {
   return (
     <div className="fixed flex h-screen w-72 flex-col px-3 py-4 shadow-lg">
       <div className="mb-8 mt-4">
-        <h2 className="select-none text-center text-3xl font-bold text-secondary">
-          PureFood
-        </h2>
+        <Link
+          to="/"
+          className="flex select-none justify-center text-3xl font-bold text-primary"
+        >
+          Pure <span className="text-secondary">Food</span>
+        </Link>
       </div>
 
       <div className="flex-grow">

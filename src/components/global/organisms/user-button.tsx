@@ -17,10 +17,11 @@ import {
 } from "../atoms/dropdown-menu"
 
 interface UserButtonProps {
+  variant?: "default" | "ghost"
   userData: UserType
 }
 
-function UserButton({ userData }: UserButtonProps) {
+function UserButton({ variant = "default", userData }: UserButtonProps) {
   const menuItems = [
     {
       icon: User,
@@ -56,10 +57,14 @@ function UserButton({ userData }: UserButtonProps) {
     <DropdownMenu>
       <div className="flex items-center gap-4">
         <span className="flex flex-col text-right">
-          <span className="slow cursor-pointer text-sm font-medium text-primary hover:text-secondary">
+          <span className="slow cursor-pointer text-sm font-medium text-primary">
             {userData.fullName}
           </span>
-          <span className="text-xs text-secondary">{userData.email}</span>
+          <span
+            className={`text-xs ${variant === "default" ? "text-secondary" : "text-white"}`}
+          >
+            {userData.email}
+          </span>
         </span>
         <DropdownMenuTrigger asChild className="relative select-none">
           <Avatar className="cursor-pointer">

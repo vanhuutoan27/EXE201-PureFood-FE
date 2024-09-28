@@ -4,31 +4,31 @@ export const exampleProductsData: ProductType[] = [
   {
     productId: "p001",
     category: "rau-cu",
-    supplier: "Công ty Nông sản Xanh",
-    productName: "Cải Bó Xôi",
-    foodName: "Spinach",
-    slug: "cai-bo-xoi-yk8pgx",
+    supplier: "PureFood",
+    productName: "Rau muống",
+    foodName: "Water spinach",
+    slug: "rau-muong-400-gr-zk7dwx",
     description: `
-    <p>Cải bó xôi sạch, không sử dụng hóa chất, tốt cho sức khỏe, có nhiều lợi ích dinh dưỡng.</p>
+   <p>Rau muống tươi ngon, giàu chất xơ, sản phẩm sạch từ nông trại, có nhiều giá trị dinh dưỡng.</p>
     <ul>
-      <li>Sản phẩm hữu cơ, không chứa thuốc bảo vệ thực vật</li>
-      <li>Giàu vitamin A, C và các khoáng chất</li>
-      <li>Tốt cho hệ tiêu hóa và sức khỏe tim mạch</li>
-      <li>Thích hợp chế biến nhiều món ăn khác nhau</li>
-      <li>Được trồng và chăm sóc tại các trang trại uy tín</li>
+      <li>Giàu chất xơ, tốt cho hệ tiêu hóa</li>
+      <li>Giàu vitamin A và C</li>
+      <li>Không thuốc bảo vệ thực vật</li>
+      <li>Thích hợp chế biến các món xào, nấu canh</li>
+      <li>Được trồng tại các nông trại xanh</li>
     </ul>
   `,
-    price: 25000,
-    stock: 150,
-    weight: 0.5,
-    unit: "kg",
-    origin: "Đà Lạt",
+    price: 8000,
+    stock: 100,
+    weight: 400,
+    unit: "gr",
+    origin: "Long An",
     organic: true,
     images: [
-      "https://placehold.jp/600x400.png",
-      "https://placehold.jp/500x400.png",
-      "https://placehold.jp/400x400.png",
-      "https://placehold.jp/300x400.png"
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F1.1.jpg?alt=media&token=8aa2db36-a902-45d3-bd89-577a7e1051b9",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F1.2.jpg?alt=media&token=5ed9e2ad-a0ab-4144-bb83-b7a0bc943f79",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F1.3.jpg?alt=media&token=85f219cc-ca82-4f76-8813-4b2d01396a54",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F1.4.jpg?alt=media&token=7cdbdbd1-c9d2-44ea-9472-24a8ad85fc18"
     ],
     status: true,
     entryDate: "2024-09-25",
@@ -41,27 +41,32 @@ export const exampleProductsData: ProductType[] = [
   {
     productId: "p002",
     category: "rau-cu",
-    supplier: "Trang Trại Việt Hưng",
-    productName: "Rau Muống",
-    foodName: "Spinach",
-    slug: "rau-muong-z3ko4p",
+    supplier: "PureFood",
+    productName: "Bắp cải",
+    foodName: "Cabbage",
+    slug: "bap-cai-500-gr-rkwi1a",
     description: `
-    <p>Rau muống tươi ngon, giàu chất xơ, sản phẩm sạch từ nông trại, có nhiều giá trị dinh dưỡng.</p>
+    <p>Bắp cải tươi ngon, giòn ngọt, sản phẩm hữu cơ giàu vitamin và chất xơ.</p>
     <ul>
-      <li>Giàu chất xơ, tốt cho hệ tiêu hóa</li>
-      <li>Giàu vitamin A và C</li>
-      <li>Không thuốc bảo vệ thực vật</li>
-      <li>Thích hợp chế biến các món xào, nấu canh</li>
-      <li>Được trồng tại các nông trại xanh</li>
+      <li>Giàu vitamin K và C, tốt cho sức khỏe xương và hệ miễn dịch</li>
+      <li>Hàm lượng chất chống oxy hóa cao</li>
+      <li>Không sử dụng thuốc trừ sâu</li>
+      <li>Thích hợp chế biến món luộc, xào và salad</li>
+      <li>Trồng tại các nông trại hữu cơ</li>
     </ul>
   `,
-    price: 18000,
+    price: 12500,
     stock: 100,
-    weight: 0.5,
-    unit: "kg",
-    origin: "Hà Nam",
+    weight: 500,
+    unit: "gr",
+    origin: "Lâm Đồng",
     organic: true,
-    images: ["https://placehold.jp/250x192.png"],
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F2.1.jpg?alt=media&token=9ebd04cb-02b4-4662-8618-53791f069691",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F2.2.jpg?alt=media&token=75e12cd9-1e2f-4b83-be28-629f06529e91",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F2.3.jpg?alt=media&token=ffc5cba6-f45f-43d4-a2ae-d181efc60d32",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F2.4.jpg?alt=media&token=b0fa6d72-c3f6-4eb1-a260-00a9e002b6a5"
+    ],
     status: true,
     entryDate: "2024-09-20",
     expiryDate: "2024-09-28",
@@ -73,27 +78,32 @@ export const exampleProductsData: ProductType[] = [
   {
     productId: "p003",
     category: "rau-cu",
-    supplier: "Nông Trại Xanh",
-    productName: "Khoai Tây",
-    foodName: "Potato",
-    slug: "khoai-tay-okce88",
+    supplier: "PureFood",
+    productName: "Giá sống",
+    foodName: "Bean sprouts",
+    slug: "gia-song-200-gr-fb1ihn",
     description: `
-    <p>Khoai tây sạch, tự nhiên, mang lại nhiều giá trị dinh dưỡng cho sức khỏe.</p>
+    <p>Giá sống tươi mát, giàu dinh dưỡng, sản phẩm sạch từ nông trại.</p>
     <ul>
-      <li>Giàu carbohydrate cung cấp năng lượng</li>
-      <li>Tốt cho sức khỏe tim mạch</li>
-      <li>Thích hợp cho các món chiên, nướng</li>
+      <li>Giàu chất xơ và vitamin E</li>
+      <li>Tốt cho hệ tiêu hóa và làn da</li>
       <li>Không thuốc bảo vệ thực vật</li>
-      <li>Được trồng tại các nông trại hữu cơ</li>
+      <li>Dùng trong các món gỏi, xào, và phở</li>
+      <li>Được trồng tại các nông trại xanh</li>
     </ul>
     `,
-    price: 30000,
-    stock: 200,
-    weight: 1,
-    unit: "kg",
-    origin: "Sơn La",
+    price: 6800,
+    stock: 100,
+    weight: 200,
+    unit: "gr",
+    origin: "Tiền Giang",
     organic: true,
-    images: ["https://placehold.jp/250x192.png"],
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F3.1.jpg?alt=media&token=d0673683-e125-4784-b417-7d91f36b5487",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F3.2.jpg?alt=media&token=768cda30-028d-4750-9b40-fc47b06852f6",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F3.3.jpg?alt=media&token=a6782085-e680-4bd7-98be-4bbbf1755a51",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F3.4.jpg?alt=media&token=9b436fa5-ff2a-4bd9-99d1-50cad660d704"
+    ],
     status: true,
     entryDate: "2024-09-24",
     expiryDate: "2024-10-10",
@@ -105,27 +115,32 @@ export const exampleProductsData: ProductType[] = [
   {
     productId: "p004",
     category: "trai-cay",
-    supplier: "Hợp tác xã Nông sản Việt",
-    productName: "Táo Mèo",
-    foodName: "Potato",
-    slug: "tao-meo-zd26k5",
+    supplier: "PureFood",
+    productName: "Dưa hấu",
+    foodName: "Watermelon",
+    slug: "dua-hau-2-kg-im862u",
     description: `
-    <p>Táo mèo tươi ngon, giàu chất dinh dưỡng, thích hợp cho sức khỏe.</p>
+    <p>Dưa hấu ngọt mát, tươi ngon, sản phẩm sạch từ nông trại.</p>
     <ul>
-      <li>Tốt cho hệ tiêu hóa</li>
-      <li>Giàu vitamin C và chất chống oxy hóa</li>
-      <li>Không thuốc trừ sâu, an toàn cho sức khỏe</li>
-      <li>Thích hợp cho món tráng miệng, làm nước ép</li>
-      <li>Được trồng tự nhiên tại vùng cao Tây Bắc</li>
+      <li>Giàu nước, giúp giải khát hiệu quả</li>
+      <li>Chứa nhiều vitamin A và C</li>
+      <li>Không hóa chất bảo quản</li>
+      <li>Thích hợp ăn trực tiếp và làm nước ép</li>
+      <li>Trồng tại các nông trại hữu cơ</li>
     </ul>
   `,
-    price: 50000,
-    stock: 50,
-    weight: 1,
+    price: 35400,
+    stock: 100,
+    weight: 2,
     unit: "kg",
-    origin: "Tây Bắc",
+    origin: "Long An",
     organic: true,
-    images: ["https://placehold.jp/250x192.png"],
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F18.1.jpg?alt=media&token=b05ea5eb-c364-4017-9727-b29a9ba39139",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F18.2.jpg?alt=media&token=f41c8267-27a0-46a1-ac00-183aa7bc303e",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F18.3.jpg?alt=media&token=d61ca12f-1e94-4b50-a420-a4a83e0ccfc1",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F18.4.jpg?alt=media&token=f9bddef4-1395-485e-9513-445289e0ef74"
+    ],
     status: true,
     entryDate: "2024-09-23",
     expiryDate: "2024-10-05",
@@ -136,28 +151,33 @@ export const exampleProductsData: ProductType[] = [
   },
   {
     productId: "p005",
-    category: "rau-cu",
-    supplier: "Công Ty Rau Sạch Việt",
-    productName: "Red Amaranth",
-    foodName: "Potato",
-    slug: "rau-den-do-7ujuqv",
+    category: "trai-cay",
+    supplier: "PureFood",
+    productName: "Cam sành",
+    foodName: "Orange",
+    slug: "cam-sanh-1-kg-3tqshu",
     description: `
-    <p>Rau dền đỏ giàu vitamin và khoáng chất, tốt cho sức khỏe tổng thể.</p>
+    <p>Cam sành tươi ngon, mọng nước, giàu vitamin C, sản phẩm sạch từ nông trại.</p>
     <ul>
-      <li>Giàu vitamin A và C</li>
-      <li>Không sử dụng hóa chất</li>
-      <li>Tốt cho sức khỏe mắt và da</li>
-      <li>Thích hợp cho món xào, luộc, nấu canh</li>
-      <li>Được trồng tại các trang trại hữu cơ uy tín</li>
+      <li>Giàu vitamin C, tốt cho sức khỏe tổng thể</li>
+      <li>Hương vị ngọt mát, nhiều nước</li>
+      <li>Không thuốc bảo vệ thực vật</li>
+      <li>Thích hợp ăn trực tiếp và làm nước ép</li>
+      <li>Trồng tại các nông trại hữu cơ</li>
     </ul>
   `,
-    price: 22000,
-    stock: 120,
-    weight: 0.5,
+    price: 17900,
+    stock: 100,
+    weight: 1,
     unit: "kg",
-    origin: "Đà Lạt",
+    origin: "Vĩnh Long",
     organic: true,
-    images: ["https://placehold.jp/250x192.png"],
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F28.1.jpg?alt=media&token=3eb98a98-2398-4d0b-93a3-89b67bdd2e84",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F28.2.jpg?alt=media&token=89c90c2d-8d09-417f-9391-dad2c97b25ee",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F28.3.jpg?alt=media&token=66352262-c0aa-4b17-b4b2-e018a2c6aa34",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F28.4.jpg?alt=media&token=6eb34cbd-e2da-445e-9f49-24a06fca8432"
+    ],
     status: true,
     entryDate: "2024-09-22",
     expiryDate: "2024-10-05",
@@ -168,160 +188,40 @@ export const exampleProductsData: ProductType[] = [
   },
   {
     productId: "p006",
-    category: "rau-cu",
-    supplier: "Trang Trại Đồng Quê",
-    productName: "Cà Rốt",
-    foodName: "Carrot",
-    slug: "ca-rot-dexyv7",
+    category: "trai-cay",
+    supplier: "PureFood",
+    productName: "Kiwi xanh",
+    foodName: "Green kiwi",
+    slug: "kiwi-xanh-250-gr-6kodf3",
     description: `
-    <p>Cà rốt hữu cơ, giàu beta-carotene, tốt cho sức khỏe mắt và hệ miễn dịch.</p>
+    <p>Kiwi xanh tươi ngon, giàu vitamin và chất xơ, sản phẩm nhập khẩu chất lượng cao.</p>
     <ul>
-      <li>Giàu beta-carotene, chuyển hóa thành vitamin A</li>
-      <li>Giúp tăng cường thị lực</li>
-      <li>Không chứa hóa chất và thuốc trừ sâu</li>
-      <li>Thích hợp cho các món salad, nấu canh, hầm</li>
-      <li>Được trồng tại các nông trại uy tín</li>
+      <li>Giàu vitamin C và chất xơ, tốt cho hệ miễn dịch</li>
+      <li>Chứa nhiều chất chống oxy hóa</li>
+      <li>Không hóa chất bảo quản</li>
+      <li>Thích hợp ăn trực tiếp, làm salad và sinh tố</li>
+      <li>Nhập khẩu từ các trang trại hữu cơ</li>
     </ul>
+
   `,
-    price: 28000,
-    stock: 180,
-    weight: 1,
-    unit: "kg",
-    origin: "Ninh Thuận",
+    price: 39000,
+    stock: 100,
+    weight: 250,
+    unit: "gr",
+    origin: "Lâm Đồng",
     organic: true,
-    images: ["https://placehold.jp/250x192.png"],
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F27.1.jpg?alt=media&token=d954ccd7-d969-463f-a80a-4da254da10ec",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F27.3.jpg?alt=media&token=3f7ebe66-c153-4b50-bc7d-405100655377",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F27.5.jpg?alt=media&token=d547bde3-c871-4788-a63a-3d25c1b44b2f",
+      "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F27.6.jpg?alt=media&token=244e0070-c373-4833-a87c-25d11cb513a1"
+    ],
     status: true,
     entryDate: "2024-09-21",
     expiryDate: "2024-10-05",
     createdAt: "2024-09-21",
     createdBy: "asd",
     updatedAt: "2024-09-21",
-    updatedBy: "asd"
-  },
-  {
-    productId: "p007",
-    category: "trai-cay",
-    supplier: "Trang Trại trai-cay Sạch",
-    productName: "Xoài Cát",
-    foodName: "Mango Cat",
-    slug: "xoai-cat-uju54f",
-    description: `
-    <p>Xoài cát ngọt, giàu vitamin, thích hợp cho mọi bữa ăn tráng miệng.</p>
-    <ul>
-      <li>Giàu vitamin C, tốt cho hệ miễn dịch</li>
-      <li>Không thuốc trừ sâu</li>
-      <li>Thích hợp làm nước ép, sinh tố hoặc ăn trực tiếp</li>
-      <li>Được trồng tại trang trại trai-cay sạch</li>
-    </ul>
-    `,
-    price: 45000,
-    stock: 80,
-    weight: 1,
-    unit: "kg",
-    origin: "Tiền Giang",
-    organic: true,
-    images: ["https://placehold.jp/250x192.png"],
-    status: true,
-    entryDate: "2024-09-26",
-    expiryDate: "2024-10-10",
-    createdAt: "2024-09-26",
-    createdBy: "asd",
-    updatedAt: "2024-09-26",
-    updatedBy: "asd"
-  },
-  {
-    productId: "p008",
-    category: "rau-cu",
-    supplier: "Nông trại Hữu Cơ Việt",
-    productName: "Cà Chua",
-    foodName: "Mango Tomato",
-    slug: "ca-chua-v6jvre",
-    description: `
-    <p>Cà chua đỏ tươi, giàu vitamin C, là thành phần không thể thiếu trong các món ăn.</p>
-    <ul>
-      <li>Giàu vitamin C và chất chống oxy hóa</li>
-      <li>Giúp tăng cường hệ miễn dịch</li>
-      <li>Không chứa hóa chất bảo quản</li>
-      <li>Thích hợp cho món salad, sốt cà, nấu canh</li>
-      <li>Được trồng tự nhiên tại các nông trại hữu cơ</li>
-    </ul>
-  `,
-    price: 35000,
-    stock: 60,
-    weight: 1,
-    unit: "kg",
-    origin: "Lâm Đồng",
-    organic: true,
-    images: ["https://placehold.jp/250x192.png"],
-    status: true,
-    entryDate: "2024-09-27",
-    expiryDate: "2024-10-08",
-    createdAt: "2024-09-27",
-    createdBy: "asd",
-    updatedAt: "2024-09-27",
-    updatedBy: "asd"
-  },
-  {
-    productId: "p009",
-    category: "rau-cu",
-    supplier: "Hợp tác xã Hữu Cơ",
-    productName: "Củ Dền",
-    foodName: "Beetroot",
-    slug: "cu-den-36mylu",
-    description: `
-    <p>Củ dền tươi ngon, giàu dinh dưỡng, rất tốt cho sức khỏe.</p>
-    <ul>
-      <li>Giàu chất sắt và vitamin C</li>
-      <li>Giúp tăng cường sức khỏe máu và hệ miễn dịch</li>
-      <li>Không chứa thuốc bảo vệ thực vật</li>
-      <li>Thích hợp cho các món nước ép, hầm</li>
-      <li>Được trồng tại các nông trại xanh</li>
-    </ul>
-    `,
-    price: 27000,
-    stock: 70,
-    weight: 1,
-    unit: "kg",
-    origin: "Ninh Bình",
-    organic: true,
-    images: ["https://placehold.jp/250x192.png"],
-    status: true,
-    entryDate: "2024-09-26",
-    expiryDate: "2024-10-10",
-    createdAt: "2024-09-26",
-    createdBy: "asd",
-    updatedAt: "2024-09-26",
-    updatedBy: "asd"
-  },
-  {
-    productId: "p010",
-    category: "trai-cay",
-    supplier: "Công ty Xuất khẩu Nông sản",
-    productName: "Bưởi Da Xanh",
-    foodName: "Green Skin Grapefruit",
-    slug: "buoi-da-xanh-vy0xdz",
-    description: `
-    <p>Bưởi da xanh ngọt, thanh mát, giàu vitamin C, thích hợp cho món tráng miệng.</p>
-    <ul>
-      <li>Giàu vitamin C, tốt cho sức khỏe tổng thể</li>
-      <li>Không chứa hóa chất</li>
-      <li>Thích hợp làm nước ép, ăn trực tiếp</li>
-      <li>Được trồng tự nhiên tại vùng đất Bến Tre</li>
-    </ul>
-  `,
-    price: 60000,
-    stock: 40,
-    weight: 1,
-    unit: "kg",
-    origin: "Bến Tre",
-    organic: true,
-    images: ["https://placehold.jp/250x192.png"],
-    status: true,
-    entryDate: "2024-09-25",
-    expiryDate: "2024-10-10",
-    createdAt: "2024-09-25",
-    createdBy: "asd",
-    updatedAt: "2024-09-25",
     updatedBy: "asd"
   }
 ]
