@@ -1,11 +1,16 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 
 import { FaShoppingCart } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
 import { ProductType } from "@/schemas/productSchema"
 
-import { extractParagraphs, formatCurrency, formatDateDMY } from "@/lib/utils"
+import {
+  extractParagraphs,
+  formatCurrency,
+  formatDateDMY,
+  removeVietnameseTones
+} from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
@@ -15,14 +20,63 @@ import LazyImage from "@/components/global/molecules/lazy-image"
 interface ProductListProps {
   category: string
   productsData: ProductType[]
+  search: string
+  filters: {
+    supplier: string
+    origin: string
+    organic: boolean
+    priceRange: string
+    weightRange: string
+  }
 }
 
-function ProductList({ category, productsData }: ProductListProps) {
+function ProductList({
+  category,
+  productsData,
+  search,
+  filters
+}: ProductListProps) {
+  console.log("🚀 ~ category:", category)
+
   const [visibleProducts, setVisibleProducts] = useState(3)
 
-  const filteredProducts = productsData.filter(
+  const categoryFilteredProducts = productsData.filter(
     (product) => product.category === category
   )
+
+  const filterByPrice = (product: ProductType) => {
+    if (!filters.priceRange || filters.priceRange === "all") return true
+    const [minPrice, maxPrice] = filters.priceRange.split("-").map(Number)
+    if (!maxPrice) return product.price > minPrice
+    return product.price >= minPrice && product.price <= maxPrice
+  }
+
+  const filterByWeight = (product: ProductType) => {
+    if (!filters.weightRange || filters.weightRange === "all") return true;
+    const weightInGrams = product.unit === "Kg" ? product.weight * 1000 : product.weight;
+    const [minWeight, maxWeight] = filters.weightRange.split("-").map(Number);
+    if (!maxWeight) return weightInGrams > minWeight;
+    return weightInGrams >= minWeight && weightInGrams <= maxWeight;
+  };
+  
+
+  const filteredProducts = useMemo(() => {
+    return categoryFilteredProducts.filter(
+      (product) =>
+        removeVietnameseTones(product.productName.toLowerCase()).includes(
+          removeVietnameseTones(search.toLowerCase())
+        ) &&
+        (filters.supplier === "" ||
+          filters.supplier === "all" ||
+          product.supplier === filters.supplier) &&
+        (filters.origin === "" ||
+          filters.origin === "all" ||
+          product.origin === filters.origin) &&
+        (!filters.organic || product.organic) &&
+        (filters.priceRange === "all" || filterByPrice(product)) &&
+        (filters.weightRange === "all" || filterByWeight(product))
+    )
+  }, [categoryFilteredProducts, search, filters])
 
   const handleShowMore = () => {
     setVisibleProducts((prevVisible) => prevVisible + 3)
@@ -34,18 +88,20 @@ function ProductList({ category, productsData }: ProductListProps) {
         {filteredProducts.slice(0, visibleProducts).map((product) => (
           <Card key={product.productId} className="flex gap-6 text-sm">
             <div className="h-[240px] w-2/5">
-              <LazyImage
-                src={product.images[0]}
-                alt={product.productName}
-                className="h-full w-full rounded-lg object-cover"
-              />
+              {product.images && product.images[0] && (
+                <LazyImage
+                  src={product.images[0]}
+                  alt={product.productName}
+                  className="h-full w-full rounded-lg object-cover"
+                />
+              )}
             </div>
 
             <div className="flex w-3/5 flex-col gap-y-2">
               <div className="flex justify-between">
                 <Link
                   to={`/${product.category}/${product.slug}`}
-                  className="slow text-xl font-bold uppercase text-primary hover:text-secondary"
+                  className="text-xl font-bold uppercase text-primary"
                 >
                   {product.productName} - {product.weight} {product.unit}
                 </Link>
@@ -54,7 +110,7 @@ function ProductList({ category, productsData }: ProductListProps) {
                 </p>
               </div>
 
-              <p className="desc-lens min-h-16 text-sm">
+              <p className="min-h-16 text-sm text-gray-600">
                 {extractParagraphs(product.description)}
               </p>
 
@@ -100,7 +156,7 @@ function ProductList({ category, productsData }: ProductListProps) {
       </div>
 
       <p className="mb-2 mt-6 text-center font-semibold text-primary">
-        Hiển thị {visibleProducts} của {filteredProducts.length} kết quả
+        Hiển thị {filteredProducts.length} của {visibleProducts} kết quả
       </p>
 
       {visibleProducts < filteredProducts.length && (

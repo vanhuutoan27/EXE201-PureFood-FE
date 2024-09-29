@@ -21,7 +21,7 @@ function Section({
     <div className={`mb-8 flex items-center justify-between ${className}`}>
       <div className="space-y-2">
         <h3 className="text-2xl font-bold text-secondary">{title}</h3>
-        <p className="text-medium desc-lens text-sm">{description}</p>
+        <p className="text-medium text-sm text-gray-600">{description}</p>
       </div>
 
       {button &&

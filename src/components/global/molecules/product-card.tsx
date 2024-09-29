@@ -32,7 +32,7 @@ function ProductCard({ productData }: ProductCardProps) {
           </h3>
         </Link>
 
-        <p className="desc-lens min-h-16 text-sm">
+        <p className="min-h-16 text-sm text-gray-600">
           {extractParagraphs(productData.description)}
         </p>
 

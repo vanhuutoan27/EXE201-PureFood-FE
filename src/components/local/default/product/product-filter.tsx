@@ -1,8 +1,9 @@
-import { useMemo, useState } from "react"
-
 import { formatCurrency } from "@/lib/utils"
 
+import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
+import { Checkbox } from "@/components/global/atoms/checkbox"
+import { Label } from "@/components/global/atoms/label"
 import {
   Select,
   SelectContent,
@@ -11,122 +12,111 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/global/atoms/select"
-import {
-  ToggleGroup,
-  ToggleGroupItem
-} from "@/components/global/atoms/toggle-group"
 
-function ProductFilter() {
-  const ratingTypes = useMemo(() => ["0+", "1+", "2+", "3+", "4+"], [])
+interface Filters {
+  supplier: string
+  origin: string
+  organic: boolean
+  priceRange: string
+  weightRange: string
+}
 
-  const [selectedRatingType, setSelectedRatingType] = useState<string[]>([])
-  const [selectedTrademark, setSelectedTrademark] = useState<
-    string | undefined
-  >()
-  const [selectedQuality, setSelectedQuality] = useState<string | undefined>()
-  const [selectedUnit, setSelectedUnit] = useState<string | undefined>()
-  const [selectedPriceRange, setSelectedPriceRange] = useState<
-    string | undefined
-  >()
+interface ProductFilterProps {
+  filters: Filters
+  setFilters: (filters: Filters) => void
+}
 
-  console.log(
-    selectedRatingType,
-    selectedTrademark,
-    selectedQuality,
-    selectedUnit,
-    selectedPriceRange
-  )
+const defaultFilters = {
+  supplier: "all",
+  origin: "all",
+  organic: false,
+  priceRange: "all",
+  weightRange: "all"
+}
 
-  const handleSelectedRatingType = (type: string) => {
-    setSelectedRatingType((prevSelected) =>
-      prevSelected.includes(type)
-        ? prevSelected.filter((item) => item !== type)
-        : [...prevSelected, type]
-    )
+function ProductFilter({ filters, setFilters }: ProductFilterProps) {
+  const handleResetFilters = () => {
+    setFilters(defaultFilters)
   }
 
   return (
     <Card className="space-y-6">
-      <div>
-        <h4 className="mb-2 ml-1 font-semibold text-primary">Thương hiệu</h4>
-        <Select onValueChange={setSelectedTrademark}>
+      <div className="space-y-2">
+        <Label className="ml-1 font-semibold text-primary">Nhà cung cấp</Label>
+        <Select
+          value={filters.supplier}
+          onValueChange={(value) => setFilters({ ...filters, supplier: value })}
+        >
           <SelectTrigger>
             <SelectValue placeholder="Chọn nhà cung cấp" />
           </SelectTrigger>
           <SelectContent className="bg-white">
             <SelectGroup>
-              <SelectItem className="cursor-pointer" value="Pure Food">
-                Pure Food
-              </SelectItem>
-              <SelectItem className="cursor-pointer" value="Khác">
-                Khác
-              </SelectItem>
+              <SelectItem value="all">Tất cả</SelectItem>
+              <SelectItem value="PureFood">PureFood</SelectItem>
+              <SelectItem value="Moncati">Moncati</SelectItem>
+              <SelectItem value="Khác">Khác</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
       </div>
 
-      <div>
-        <h4 className="mb-2 ml-1 font-semibold text-primary">
-          Chất lượng sản phẩm
-        </h4>
-        <Select onValueChange={setSelectedQuality}>
+      <div className="space-y-2">
+        <Label className="ml-1 font-semibold text-primary">Khối lượng</Label>
+        <Select
+          value={filters.weightRange}
+          onValueChange={(value) =>
+            setFilters({ ...filters, weightRange: value })
+          }
+        >
           <SelectTrigger>
-            <SelectValue placeholder="Chọn loại sản phẩm" />
+            <SelectValue placeholder="Chọn khoảng trọng lượng" />
           </SelectTrigger>
           <SelectContent className="bg-white">
             <SelectGroup>
-              <SelectItem className="cursor-pointer" value="True">
-                Thực phẩm hữu cơ
+              <SelectItem value="all">Tất cả</SelectItem>
+              <SelectItem value="0-200">Dưới 0.2 Kg (200 Gr)</SelectItem>
+              <SelectItem value="200-500">
+                0.2 - 0.5 Kg (200 - 500 Gr)
               </SelectItem>
-              <SelectItem className="cursor-pointer" value="False">
-                Thực phẩm vô cơ
+              <SelectItem value="500-1000">
+                0.5 -1 Kg (500 - 1000 Gr)
               </SelectItem>
+              <SelectItem value="1000-2000">1 - 2 Kg (1000-2000 Gr)</SelectItem>
+              <SelectItem value="2000-5000">2 - 5 Kg (2000-5000 Gr)</SelectItem>
+              <SelectItem value=">5000">Trên 5 Kg (Trên 5000 Gr)</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
       </div>
 
-      <div>
-        <h4 className="mb-2 ml-1 font-semibold text-primary">Khối lượng</h4>
-        <Select onValueChange={setSelectedUnit}>
+      <div className="space-y-2">
+        <Label className="ml-1 font-semibold text-primary">Giá</Label>
+        <Select
+          value={filters.priceRange}
+          onValueChange={(value) =>
+            setFilters({ ...filters, priceRange: value })
+          }
+        >
           <SelectTrigger>
-            <SelectValue placeholder="Chọn khối lượng sản phẩm" />
+            <SelectValue placeholder="Chọn khoảng giá" />
           </SelectTrigger>
           <SelectContent className="bg-white">
             <SelectGroup>
-              <SelectItem className="cursor-pointer" value="Kg">
-                Kg
-              </SelectItem>
-              <SelectItem className="cursor-pointer" value="Gr">
-                Gr
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <h4 className="mb-2 ml-1 font-semibold text-primary">Giá</h4>
-        <Select onValueChange={setSelectedPriceRange}>
-          <SelectTrigger>
-            <SelectValue placeholder="Chọn giá" />
-          </SelectTrigger>
-          <SelectContent className="bg-white">
-            <SelectGroup>
-              <SelectItem className="cursor-pointer" value="<10000">
+              <SelectItem value="all">Tất cả</SelectItem>
+              <SelectItem value="0-10000">
                 Dưới {formatCurrency(10000)}
               </SelectItem>
-              <SelectItem className="cursor-pointer" value="10000-20000">
+              <SelectItem value="10000-20000">
                 {formatCurrency(10000)} - {formatCurrency(20000)}
               </SelectItem>
-              <SelectItem className="cursor-pointer" value="20000-40000">
+              <SelectItem value="20000-40000">
                 {formatCurrency(20000)} - {formatCurrency(40000)}
               </SelectItem>
-              <SelectItem className="cursor-pointer" value="40000-80000">
+              <SelectItem value="40000-80000">
                 {formatCurrency(40000)} - {formatCurrency(80000)}
               </SelectItem>
-              <SelectItem className="cursor-pointer" value=">80000">
+              <SelectItem value="80000-100000">
                 Trên {formatCurrency(80000)}
               </SelectItem>
             </SelectGroup>
@@ -134,29 +124,53 @@ function ProductFilter() {
         </Select>
       </div>
 
-      <div>
-        <h4 className="mb-2 ml-1 font-semibold text-primary">Đánh giá</h4>
-        <div className="flex">
-          <ToggleGroup type="multiple">
-            {ratingTypes.map((type) => (
-              <ToggleGroupItem
-                key={type}
-                variant="outline"
-                value={type}
-                onClick={() => handleSelectedRatingType(type)}
-                className={
-                  selectedRatingType.includes(type)
-                    ? "selected"
-                    : "text-secondary"
-                }
-              >
-                {type}
-              </ToggleGroupItem>
-            ))}
-          </ToggleGroup>
-        </div>
+      <div className="space-y-2">
+        <Label className="ml-1 font-semibold text-primary">Xuất xứ</Label>
+        <Select
+          value={filters.origin}
+          onValueChange={(value) => setFilters({ ...filters, origin: value })}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Chọn nơi xuất xứ" defaultValue="all" />
+          </SelectTrigger>
+          <SelectContent className="bg-white">
+            <SelectGroup>
+              <SelectItem value="all">Tất cả</SelectItem>
+              <SelectItem value="Củ Chi">Củ Chi</SelectItem>
+              <SelectItem value="Đồng Nai">Đồng Nai</SelectItem>
+              <SelectItem value="Đà Lạt">Đà Lạt</SelectItem>
+              <SelectItem value="Bình Dương">Bình Dương</SelectItem>
+              <SelectItem value="Khác">Khác</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="flex items-center space-x-2">
+        <Checkbox
+          id="huu-co"
+          checked={filters.organic}
+          onCheckedChange={(checked) =>
+            setFilters({ ...filters, organic: checked as boolean })
+          }
+        />
+        <Label htmlFor="huu-co" className="text-primary">
+          Sản phẩm hữu cơ
+        </Label>
+      </div>
+
+      <div className="pt-4">
+        <Button
+          type="button"
+          variant="default"
+          className="w-full"
+          onClick={handleResetFilters}
+        >
+          Làm mới bộ lọc
+        </Button>
       </div>
     </Card>
   )
 }
+
 export default ProductFilter

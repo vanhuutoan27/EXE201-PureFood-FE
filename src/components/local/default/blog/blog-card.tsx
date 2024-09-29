@@ -47,7 +47,7 @@ function BlogCard({ blogsData }: BlogCardProps) {
 
         <Link
           to={`/kien-thuc/${blogsData.slug}`}
-          className="slow title-lens mt-2 w-fit cursor-pointer text-lg font-semibold text-primary hover:text-secondary"
+          className="title-lens mt-2 w-fit cursor-pointer text-lg font-semibold text-primary"
         >
           {blogsData.title}
         </Link>

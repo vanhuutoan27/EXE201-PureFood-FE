@@ -57,7 +57,7 @@ function UserButton({ variant = "default", userData }: UserButtonProps) {
     <DropdownMenu>
       <div className="flex items-center gap-4">
         <span className="flex flex-col text-right">
-          <span className="slow cursor-pointer text-sm font-medium text-primary">
+          <span className="slow cursor-pointer text-sm font-semibold text-primary">
             {userData.fullName}
           </span>
           <span

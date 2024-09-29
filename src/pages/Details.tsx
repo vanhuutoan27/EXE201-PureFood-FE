@@ -43,13 +43,15 @@ function Details() {
         currentDetailsPage={productsData.productName}
       />
 
-      <div className="grid gap-8 md:grid-cols-2">
-        <ProductImage images={productsData.images} />
-        <ProductInformation productData={productsData} />
-      </div>
+      <div className="space-y-20">
+        <div className="grid gap-8 md:grid-cols-2">
+          <ProductImage images={productsData.images} />
+          <ProductInformation productData={productsData} />
+        </div>
 
-      <ProductDetails productData={productsData} />
-      <ProductRelated productsData={relatedProducts} />
+        <ProductDetails productData={productsData} />
+        <ProductRelated productsData={relatedProducts} />
+      </div>
     </div>
   )
 }

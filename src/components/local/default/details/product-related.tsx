@@ -8,7 +8,7 @@ interface ProductRelatedProps {
 
 function ProductRelated({ productsData }: ProductRelatedProps) {
   return (
-    <>
+    <div>
       <h3 className="mb-6 text-2xl font-bold text-secondary">
         Sản phẩm liên quan
       </h3>
@@ -18,7 +18,7 @@ function ProductRelated({ productsData }: ProductRelatedProps) {
           <ProductCard key={product.productId} productData={product} />
         ))}
       </div>
-    </>
+    </div>
   )
 }
 

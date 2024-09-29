@@ -16,30 +16,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/global/atoms/dropdown-menu"
-import CategoryChip from "@/components/global/molecules/category-chip"
 
 export const columns: ColumnDef<ProductType>[] = [
   // {
   //   accessorKey: "productId",
   //   header: "ID"
   // },
-  {
-    accessorKey: "category",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Loại
-        </span>
-      )
-    },
-    cell: ({ row }) => {
-      const category = row.original.category
-      return <CategoryChip content={category} />
-    }
-  },
   {
     accessorKey: "productName",
     header: ({ column }) => {

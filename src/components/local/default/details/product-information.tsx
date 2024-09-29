@@ -27,11 +27,11 @@ function ProductInformation({ productData }: ProductInformationProps) {
         {productData.unit}
       </h2>
 
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-4">
         <span className="text-2xl font-bold text-primary">
           {formatCurrency(25000)}
         </span>
-        <span className="text-gray-500 line-through">
+        <span className="font-medium text-gray-600 line-through">
           {formatCurrency(25000000)}
         </span>
 

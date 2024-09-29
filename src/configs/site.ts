@@ -1,4 +1,4 @@
-import { FaFacebook, FaGithub, FaTiktok, FaYoutube } from "react-icons/fa"
+import { FaFacebook, FaGithub, FaInstagram } from "react-icons/fa"
 
 export const siteConfig = {
   navItems: [
@@ -48,9 +48,12 @@ export const siteConfig = {
     }
   ],
   socialMedias: [
-    { icon: FaFacebook, label: "Facebook", href: "" },
-    { icon: FaYoutube, label: "YouTube", href: "" },
-    { icon: FaTiktok, label: "TikTok", href: "" },
+    {
+      icon: FaFacebook,
+      label: "Facebook",
+      href: "https://www.facebook.com/profile.php?id=61565999649377"
+    },
+    { icon: FaInstagram, label: "YouTube", href: "" },
     { icon: FaGithub, label: "GitHub", href: "" }
   ]
 }

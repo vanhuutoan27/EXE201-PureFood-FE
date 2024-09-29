@@ -45,3 +45,12 @@ export const extractParagraphs = (htmlString: string) => {
   const paragraphs = doc.querySelectorAll("p")
   return Array.from(paragraphs).map((p) => p.textContent)
 }
+
+// Remove Vietnamese tones from a string
+export function removeVietnameseTones(str: string): string {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+}

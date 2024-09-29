@@ -1,37 +1,11 @@
-import { useEffect, useState } from "react"
-
-import { CreateCartItemType } from "@/schemas/cartItemSchema"
-
 import { exampleProductsData } from "@/constants/product"
 
+import CartItemCard from "@/components/global/molecules/cart-item-card"
 import Section from "@/components/global/organisms/section"
-import CartItems from "@/components/local/user/cart/cart-items"
 import CartSummary from "@/components/local/user/cart/cart-summary"
 
 function Cart() {
-  const [cartItems, setCartItems] = useState<CreateCartItemType[]>([])
-
-  useEffect(() => {
-    const items: CreateCartItemType[] = JSON.parse(
-      localStorage.getItem("cart") || "[]"
-    )
-    setCartItems(items)
-  }, [])
-
-  const productPrices = exampleProductsData.reduce(
-    (acc, product) => {
-      acc[product.productId] = product.price
-      return acc
-    },
-    {} as Record<string, number>
-  )
-
-  const totalPrice = cartItems.reduce((total, item) => {
-    const price = productPrices[item.product]
-    return total + (price ? price * item.quantity : 0)
-  }, 0)
-
-  console.log("Total Price:", totalPrice)
+  const cartsData = exampleProductsData
 
   return (
     <div>
@@ -41,18 +15,20 @@ function Cart() {
       />
 
       <div className="flex justify-between gap-10">
-        {cartItems.length === 0 ? (
-          <p>Your cart is empty</p>
+        {cartsData.length === 0 ? (
+          <p className="text-xl font-medium text-gray-600">
+            Your cart is empty.
+          </p>
         ) : (
           <div className="w-2/3 flex-col">
-            {cartItems.map((item, index) => (
-              <CartItems key={index} item={item} />
+            {cartsData.map((item, index) => (
+              <CartItemCard key={index} productData={item} />
             ))}
           </div>
         )}
 
         <div className="w-1/3">
-          <CartSummary price={totalPrice} />
+          <CartSummary price={10000} />
         </div>
       </div>
     </div>
