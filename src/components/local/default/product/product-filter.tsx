@@ -40,7 +40,7 @@ function ProductFilter({ filters, setFilters }: ProductFilterProps) {
   }
 
   return (
-    <Card className="space-y-6">
+    <Card className="space-y-4">
       <div className="space-y-2">
         <Label className="ml-1 font-semibold text-primary">Nhà cung cấp</Label>
         <Select
@@ -55,7 +55,6 @@ function ProductFilter({ filters, setFilters }: ProductFilterProps) {
               <SelectItem value="all">Tất cả</SelectItem>
               <SelectItem value="PureFood">PureFood</SelectItem>
               <SelectItem value="Moncati">Moncati</SelectItem>
-              <SelectItem value="Khác">Khác</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -146,7 +145,7 @@ function ProductFilter({ filters, setFilters }: ProductFilterProps) {
         </Select>
       </div>
 
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-2 pt-4">
         <Checkbox
           id="huu-co"
           checked={filters.organic}

@@ -49,12 +49,7 @@ function UserAccount() {
         <h3 className="text-2xl font-bold text-primary">Tài khoản</h3>
 
         {!isEditing && (
-          <Button
-            type="button"
-            variant="default"
-            onClick={handleEdit}
-            className="h-11"
-          >
+          <Button type="button" variant="default" onClick={handleEdit}>
             Cập nhật
           </Button>
         )}

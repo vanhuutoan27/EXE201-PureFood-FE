@@ -14,11 +14,31 @@ interface ProductInformationProps {
 }
 
 function ProductInformation({ productData }: ProductInformationProps) {
+  // const { user } = useAuthContext()
+
+  // const createCart = useCreateCart()
+
   const [quantity, setQuantity] = useState(1)
 
   const increaseQuantity = () => setQuantity((prev) => prev + 1)
   const decreaseQuantity = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+
+  const handleAddToCart = () => {
+    const cartData = {
+      user: "Toan dep trai hehe",
+      cartItems: [
+        {
+          product: productData.productId,
+          quantity: quantity
+        }
+      ]
+    }
+
+    console.log("Data before mutate:", JSON.stringify(cartData, null, 2))
+
+    // createCart.mutate(cartData);
+  }
 
   return (
     <div className="mt-10 space-y-6">
@@ -72,7 +92,12 @@ function ProductInformation({ productData }: ProductInformationProps) {
           </Button>
         </div>
 
-        <Button type="button" variant="default" className="h-11 flex-grow">
+        <Button
+          type="button"
+          variant="default"
+          className="h-11 flex-grow"
+          onClick={handleAddToCart}
+        >
           <ShoppingCart size={20} className="mr-3" />
           Thêm vào giỏ hàng
         </Button>

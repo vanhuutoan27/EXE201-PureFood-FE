@@ -1,11 +1,11 @@
 import { z } from "zod"
 
-import { cartItemSchema } from "./cartItemSchema"
+import { createCartItemSchema } from "./cartItemSchema"
 
 export const cartSchema = z.object({
   cartId: z.string().nonempty({ message: "Cart ID is required" }),
   user: z.string().nonempty({ message: "User is required" }),
-  cartItems: z.array(cartItemSchema)
+  cartItems: z.array(createCartItemSchema)
 })
 
 export const createCartSchema = cartSchema.omit({

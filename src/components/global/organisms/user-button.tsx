@@ -26,26 +26,22 @@ function UserButton({ variant = "default", userData }: UserButtonProps) {
     {
       icon: User,
       label: "Hồ sơ",
-      link: `/thong-tin-ca-nhan/${userData.userId}`,
-      hoverColor: "group-hover:text-primary"
+      link: `/thong-tin-ca-nhan/${userData.userId}`
     },
     {
       icon: ShoppingBag,
       label: "Giỏ hàng",
-      link: `/gio-hang/${userData.userId}`,
-      hoverColor: "group-hover:text-primary"
+      link: `/gio-hang/${userData.userId}`
     },
     {
       icon: PackageCheck,
       label: "Đơn hàng",
-      link: `/don-hang/${userData.userId}`,
-      hoverColor: "group-hover:text-primary"
+      link: `/don-hang/${userData.userId}`
     },
     {
       icon: LogOut,
       label: "Đăng xuất",
       link: "/login",
-      hoverColor: "group-hover:text-red-500",
       separator: true,
       onClick: () => {
         console.log("Logged out")
@@ -89,13 +85,8 @@ function UserButton({ variant = "default", userData }: UserButtonProps) {
                   <DropdownMenuItem
                     className={`group mb-2 cursor-pointer ${item.separator ? "mb-0 mt-2" : ""}`}
                   >
-                    <item.icon
-                      className={`slow mr-4 ${item.hoverColor}`}
-                      size={20}
-                    />
-                    <span className={`slow text-sm ${item.hoverColor}`}>
-                      {item.label}
-                    </span>
+                    <item.icon className={"slow mr-4"} size={20} />
+                    <span className={"slow text-sm"}>{item.label}</span>
                   </DropdownMenuItem>
                 </Link>
               )

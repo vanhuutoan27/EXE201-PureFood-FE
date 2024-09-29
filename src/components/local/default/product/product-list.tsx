@@ -52,13 +52,13 @@ function ProductList({
   }
 
   const filterByWeight = (product: ProductType) => {
-    if (!filters.weightRange || filters.weightRange === "all") return true;
-    const weightInGrams = product.unit === "Kg" ? product.weight * 1000 : product.weight;
-    const [minWeight, maxWeight] = filters.weightRange.split("-").map(Number);
-    if (!maxWeight) return weightInGrams > minWeight;
-    return weightInGrams >= minWeight && weightInGrams <= maxWeight;
-  };
-  
+    if (!filters.weightRange || filters.weightRange === "all") return true
+    const weightInGrams =
+      product.unit === "Kg" ? product.weight * 1000 : product.weight
+    const [minWeight, maxWeight] = filters.weightRange.split("-").map(Number)
+    if (!maxWeight) return weightInGrams > minWeight
+    return weightInGrams >= minWeight && weightInGrams <= maxWeight
+  }
 
   const filteredProducts = useMemo(() => {
     return categoryFilteredProducts.filter(
