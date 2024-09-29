@@ -21,7 +21,7 @@ export const exampleProductsData: ProductType[] = [
     price: 8000,
     stock: 100,
     weight: 400,
-    unit: "gr",
+    unit: "Gr",
     origin: "Long An",
     organic: true,
     images: [
@@ -58,7 +58,7 @@ export const exampleProductsData: ProductType[] = [
     price: 12500,
     stock: 100,
     weight: 500,
-    unit: "gr",
+    unit: "Gr",
     origin: "Lâm Đồng",
     organic: true,
     images: [
@@ -95,7 +95,7 @@ export const exampleProductsData: ProductType[] = [
     price: 6800,
     stock: 100,
     weight: 200,
-    unit: "gr",
+    unit: "Gr",
     origin: "Tiền Giang",
     organic: true,
     images: [
@@ -132,7 +132,7 @@ export const exampleProductsData: ProductType[] = [
     price: 35400,
     stock: 100,
     weight: 2,
-    unit: "kg",
+    unit: "Kg",
     origin: "Long An",
     organic: true,
     images: [
@@ -169,7 +169,7 @@ export const exampleProductsData: ProductType[] = [
     price: 17900,
     stock: 100,
     weight: 1,
-    unit: "kg",
+    unit: "Kg",
     origin: "Vĩnh Long",
     organic: true,
     images: [
@@ -207,7 +207,7 @@ export const exampleProductsData: ProductType[] = [
     price: 39000,
     stock: 100,
     weight: 250,
-    unit: "gr",
+    unit: "Gr",
     origin: "Lâm Đồng",
     organic: true,
     images: [

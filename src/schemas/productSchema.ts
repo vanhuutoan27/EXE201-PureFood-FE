@@ -26,10 +26,10 @@ export const productSchema = z.object({
     .number()
     .min(0.1, { message: "Khối lượng phải ít nhất là 0.1 kg" })
     .max(100, { message: "Khối lượng không được vượt quá 100 kg" }),
-  unit: z.string().refine((val) => ["kg", "gr", "lb", "oz"].includes(val), {
-    message: "Đơn vị phải là một trong các giá trị: kg, gr, lb, oz"
+  unit: z.string().refine((val) => ["Kg", "Gr", "Lb", "Oz"].includes(val), {
+    message: "Đơn vị phải là một trong các giá trị: Kg, Gr, Lb, Oz"
   }),
-  price: z.number().min(10000, { message: "Giá phải ít nhất là 10,000" }),
+  price: z.number().min(5000, { message: "Giá phải ít nhất là 5.000" }),
   origin: z.string().nonempty({ message: "Xuất xứ là bắt buộc" }),
   organic: z.boolean(),
   images: z
@@ -54,5 +54,20 @@ export const createUpdateProductSchema = productSchema.omit({
   updatedBy: true
 })
 
+export const updateProductSchema = productSchema.omit({
+  productId: true,
+  images: true,
+  slug: true,
+  foodName: true,
+  status: true,
+  entryDate: true,
+  expiryDate: true,
+  createdAt: true,
+  createdBy: true,
+  updatedAt: true,
+  updatedBy: true
+})
+
 export type ProductType = z.infer<typeof productSchema>
 export type CreateUpdateProductType = z.infer<typeof createUpdateProductSchema>
+export type UpdateProductType = z.infer<typeof updateProductSchema>
