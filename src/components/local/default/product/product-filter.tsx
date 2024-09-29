@@ -13,7 +13,7 @@ import {
   SelectValue
 } from "@/components/global/atoms/select"
 
-interface Filters {
+export interface Filters {
   supplier: string
   origin: string
   organic: boolean
@@ -50,7 +50,7 @@ function ProductFilter({ filters, setFilters }: ProductFilterProps) {
           <SelectTrigger>
             <SelectValue placeholder="Chọn nhà cung cấp" />
           </SelectTrigger>
-          <SelectContent className="bg-white">
+          <SelectContent>
             <SelectGroup>
               <SelectItem value="all">Tất cả</SelectItem>
               <SelectItem value="PureFood">PureFood</SelectItem>
@@ -71,7 +71,7 @@ function ProductFilter({ filters, setFilters }: ProductFilterProps) {
           <SelectTrigger>
             <SelectValue placeholder="Chọn khoảng trọng lượng" />
           </SelectTrigger>
-          <SelectContent className="bg-white">
+          <SelectContent>
             <SelectGroup>
               <SelectItem value="all">Tất cả</SelectItem>
               <SelectItem value="0-200">Dưới 0.2 Kg (200 Gr)</SelectItem>
@@ -100,7 +100,7 @@ function ProductFilter({ filters, setFilters }: ProductFilterProps) {
           <SelectTrigger>
             <SelectValue placeholder="Chọn khoảng giá" />
           </SelectTrigger>
-          <SelectContent className="bg-white">
+          <SelectContent>
             <SelectGroup>
               <SelectItem value="all">Tất cả</SelectItem>
               <SelectItem value="0-10000">
@@ -132,7 +132,7 @@ function ProductFilter({ filters, setFilters }: ProductFilterProps) {
           <SelectTrigger>
             <SelectValue placeholder="Chọn nơi xuất xứ" defaultValue="all" />
           </SelectTrigger>
-          <SelectContent className="bg-white">
+          <SelectContent>
             <SelectGroup>
               <SelectItem value="all">Tất cả</SelectItem>
               <SelectItem value="Củ Chi">Củ Chi</SelectItem>

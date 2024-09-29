@@ -17,17 +17,13 @@ import { Card } from "@/components/global/atoms/card"
 import { Toggle } from "@/components/global/atoms/toggle"
 import LazyImage from "@/components/global/molecules/lazy-image"
 
+import { Filters } from "./product-filter"
+
 interface ProductListProps {
   category: string
   productsData: ProductType[]
   search: string
-  filters: {
-    supplier: string
-    origin: string
-    organic: boolean
-    priceRange: string
-    weightRange: string
-  }
+  filters: Filters
 }
 
 function ProductList({
@@ -36,8 +32,6 @@ function ProductList({
   search,
   filters
 }: ProductListProps) {
-  console.log("🚀 ~ category:", category)
-
   const [visibleProducts, setVisibleProducts] = useState(3)
 
   const categoryFilteredProducts = productsData.filter(

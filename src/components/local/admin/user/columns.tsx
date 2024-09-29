@@ -195,11 +195,11 @@ export const columns: ColumnDef<UserType>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(user.userId)}
             >
-              Copy User ID
+              Sao chép ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View Details</DropdownMenuItem>
-            <DropdownMenuItem>Change Status</DropdownMenuItem>
+            <DropdownMenuItem>Xem chi tiết</DropdownMenuItem>
+            <DropdownMenuItem>Thay đổi trạng thái</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )

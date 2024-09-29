@@ -10,8 +10,8 @@ export const cartItemSchema = z.object({
   weight: z.number().min(1, { message: "Weight must be at least 1" }),
   unit: z.string().nonempty({ message: "Unit is required" }),
   origin: z.string().nonempty({ message: "Origin is required" }),
-  status: z.boolean(),
-  organic: z.boolean()
+  organic: z.boolean(),
+  status: z.boolean()
 })
 
 export const createCartItemSchema = cartItemSchema.pick({

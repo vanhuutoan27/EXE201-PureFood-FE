@@ -211,11 +211,11 @@ export const columns: ColumnDef<ProductType>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(product.productId)}
             >
-              Copy Product ID
+              Sao chép ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View Details</DropdownMenuItem>
-            <DropdownMenuItem>Change Status</DropdownMenuItem>
+            <DropdownMenuItem>Xem chi tiết</DropdownMenuItem>
+            <DropdownMenuItem>Thay đổi trạng thái</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )

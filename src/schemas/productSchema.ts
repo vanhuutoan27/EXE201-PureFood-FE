@@ -18,18 +18,20 @@ export const productSchema = z.object({
   description: z
     .string()
     .min(20, { message: "Mô tả phải có ít nhất 20 ký tự" }),
-  stock: z
+  stock: z.coerce
     .number()
     .min(1, { message: "Số lượng tồn kho phải ít nhất là 1" })
     .max(1000, { message: "Số lượng tồn kho không được vượt quá 1,000" }),
-  weight: z
+  weight: z.coerce
     .number()
     .min(0.1, { message: "Khối lượng phải ít nhất là 0.1 kg" })
     .max(100, { message: "Khối lượng không được vượt quá 100 kg" }),
   unit: z.string().refine((val) => ["kg", "gr", "lb", "oz"].includes(val), {
     message: "Đơn vị phải là một trong các giá trị: kg, gr, lb, oz"
   }),
-  price: z.number().min(10000, { message: "Giá phải ít nhất là 10,000" }),
+  price: z.coerce
+    .number()
+    .min(10000, { message: "Giá phải ít nhất là 10,000" }),
   origin: z.string().nonempty({ message: "Xuất xứ là bắt buộc" }),
   organic: z.boolean(),
   images: z

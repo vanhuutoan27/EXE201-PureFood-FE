@@ -15,20 +15,21 @@ const Product = lazy(() => import("@/pages/Products"))
 const Details = lazy(() => import("@/pages/Details"))
 const Blog = lazy(() => import("@/pages/Blogs"))
 const Cart = lazy(() => import("@/pages/Cart"))
-
-// User pages
-const Account = lazy(() => import("@/pages/Account"))
-const Password = lazy(() => import("@/pages/Password"))
 const Order = lazy(() => import("@/pages/Order"))
 
+// User pages
+const UserAccount = lazy(() => import("@/pages/user/Account"))
+const UserPassword = lazy(() => import("@/pages/user/Password"))
+const UserOrder = lazy(() => import("@/pages/user/Order"))
+
 // Admin pages
-const Dashboard = lazy(() => import("@/pages/admin/Dashboard"))
-const Products = lazy(() => import("@/pages/admin/Products"))
-const AddProduct = lazy(() => import("@/pages/admin/ProductAdd"))
-const Orders = lazy(() => import("@/pages/admin/Orders"))
-const OrdersNew = lazy(() => import("@/pages/admin/OrdersNew"))
-const OrdersProcessed = lazy(() => import("@/pages/admin/OrdersProcessed"))
-const Users = lazy(() => import("@/pages/admin/Users"))
+const AdminDashboard = lazy(() => import("@/pages/admin/Dashboard"))
+const AdminProducts = lazy(() => import("@/pages/admin/Products"))
+const AdminAddProduct = lazy(() => import("@/pages/admin/ProductAdd"))
+const AdminOrders = lazy(() => import("@/pages/admin/Orders"))
+const AdminOrdersNew = lazy(() => import("@/pages/admin/OrdersNew"))
+const AdminOrdersProcessed = lazy(() => import("@/pages/admin/OrdersProcessed"))
+const AdminUsers = lazy(() => import("@/pages/admin/Users"))
 
 function App() {
   return (
@@ -42,23 +43,30 @@ function App() {
           <Route path="/trai-cay/:productSlug" element={<Details />} />
           <Route path="/kien-thuc" element={<Blog />} />
           <Route path="/gio-hang/:userId" element={<Cart />} />
+          <Route path="/dat-hang" element={<Order />} />
 
           <Route element={<UserLayout />}>
-            <Route path="/thong-tin-ca-nhan/:userId" element={<Account />} />
-            <Route path="/mat-khau/:userId" element={<Password />} />
-            <Route path="/don-hang/:userId" element={<Order />} />
+            <Route
+              path="/thong-tin-ca-nhan/:userId"
+              element={<UserAccount />}
+            />
+            <Route path="/mat-khau/:userId" element={<UserPassword />} />
+            <Route path="/don-hang/:userId" element={<UserOrder />} />
           </Route>
         </Route>
 
         <Route element={<AdminLayout />}>
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/san-pham/rau-cu" element={<Products />} />
-          <Route path="/admin/san-pham/trai-cay" element={<Products />} />
-          <Route path="/admin/san-pham/tao-moi" element={<AddProduct />} />
-          <Route path="/admin/don-hang/tat-ca" element={<Orders />} />
-          <Route path="/admin/don-hang/moi" element={<OrdersNew />} />
-          <Route path="/admin/don-hang/da-xu-ly" element={<OrdersProcessed />} />
-          <Route path="/admin/khach-hang" element={<Users />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/san-pham/rau-cu" element={<AdminProducts />} />
+          <Route path="/admin/san-pham/trai-cay" element={<AdminProducts />} />
+          <Route path="/admin/san-pham/tao-moi" element={<AdminAddProduct />} />
+          <Route path="/admin/don-hang/tat-ca" element={<AdminOrders />} />
+          <Route path="/admin/don-hang/moi" element={<AdminOrdersNew />} />
+          <Route
+            path="/admin/don-hang/da-xu-ly"
+            element={<AdminOrdersProcessed />}
+          />
+          <Route path="/admin/khach-hang" element={<AdminUsers />} />
 
           <Route path="/admin/not-found" element={<Error statusCode={404} />} />
         </Route>
