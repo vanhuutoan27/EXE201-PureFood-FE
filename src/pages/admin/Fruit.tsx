@@ -3,8 +3,10 @@ import { exampleProductsData } from "@/constants/product"
 import { columns } from "@/components/local/admin/product/columns"
 import { DataTable } from "@/components/local/admin/product/data-table"
 
-function Products() {
-  const productsData = exampleProductsData
+function FruitList() {
+  const productsData = exampleProductsData.filter(
+    (product) => product.category === "trai-cay"
+  )
 
   return (
     <div>
@@ -13,4 +15,4 @@ function Products() {
   )
 }
 
-export default Products
+export default FruitList

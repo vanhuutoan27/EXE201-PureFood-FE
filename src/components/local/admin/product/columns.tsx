@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from "react"
+
 import { ColumnDef } from "@tanstack/react-table"
 import { Check, MoreHorizontal, X } from "lucide-react"
 
@@ -16,6 +18,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/global/atoms/dropdown-menu"
+
+import ViewProductDialog from "./view-product-dialog"
 
 export const columns: ColumnDef<ProductType>[] = [
   // {
@@ -189,7 +193,7 @@ export const columns: ColumnDef<ProductType>[] = [
       )
     },
     cell: ({ row }) => {
-      const status = row.original.status ? "Đang hoạt động" : "Ngừng hoạt động"
+      const status = row.original.status ? "Đang bán" : "Tạm ngưng"
       return <span>{status}</span>
     }
   },
@@ -198,26 +202,59 @@ export const columns: ColumnDef<ProductType>[] = [
     cell: ({ row }) => {
       const product = row.original
 
+      const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
+
+      const handleViewDetailsClick = () => {
+        setIsViewDialogOpen(true)
+      }
+
+      // const handleStatusChange = () => {
+      //   changeProductStatus(product.productId)
+      // }
+
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-white">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(product.productId)}
-            >
-              Sao chép ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Xem chi tiết</DropdownMenuItem>
-            <DropdownMenuItem>Thay đổi trạng thái</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-white">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={() => navigator.clipboard.writeText(product.productId)}
+              >
+                <span className="duration-300 hover:text-primary">
+                  Sao chép ID
+                </span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={handleViewDetailsClick}
+                className="cursor-pointer"
+              >
+                <span className="duration-300 hover:text-primary">
+                  Xem chi tiết
+                </span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
+                <span className="duration-300 hover:text-primary">
+                  Đổi trạng thái
+                </span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {isViewDialogOpen && (
+            <ViewProductDialog
+              product={product}
+              onClose={() => setIsViewDialogOpen(false)}
+            />
+          )}
+        </>
       )
     }
   }

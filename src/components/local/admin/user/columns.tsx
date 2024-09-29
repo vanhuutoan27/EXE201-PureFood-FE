@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from "react"
+
 import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 
@@ -17,6 +19,8 @@ import {
   DropdownMenuTrigger
 } from "@/components/global/atoms/dropdown-menu"
 import LazyImage from "@/components/global/molecules/lazy-image"
+
+import ViewUserDialog from "./view-user-dialog"
 
 export const columns: ColumnDef<UserType>[] = [
   // {
@@ -182,26 +186,59 @@ export const columns: ColumnDef<UserType>[] = [
     cell: ({ row }) => {
       const user = row.original
 
+      const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
+
+      const handleViewDetailsClick = () => {
+        setIsViewDialogOpen(true)
+      }
+
+      // const handleStatusChange = () => {
+      //   changeProductStatus(product.productId)
+      // }
+
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-white">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(user.userId)}
-            >
-              Sao chép ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Xem chi tiết</DropdownMenuItem>
-            <DropdownMenuItem>Thay đổi trạng thái</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-white">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={() => navigator.clipboard.writeText(user.userId)}
+              >
+                <span className="duration-300 hover:text-primary">
+                  Sao chép ID
+                </span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={handleViewDetailsClick}
+                className="cursor-pointer"
+              >
+                <span className="duration-300 hover:text-primary">
+                  Xem chi tiết
+                </span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
+                <span className="duration-300 hover:text-primary">
+                  Đổi trạng thái
+                </span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {isViewDialogOpen && (
+            <ViewUserDialog
+              user={user}
+              onClose={() => setIsViewDialogOpen(false)}
+            />
+          )}
+        </>
       )
     }
   }

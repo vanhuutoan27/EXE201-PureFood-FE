@@ -112,9 +112,16 @@ export const passwordSchema = z
     path: ["confirmPassword"]
   })
 
+export const updateStatusUserSchema = userSchema.pick({
+  status: true
+})
+
 export type UserType = z.infer<typeof userSchema>
 export type UserLoginType = z.infer<typeof userLoginSchema>
 export type UserRegisterType = z.infer<typeof userRegisterSchema>
 export type CreateUserType = z.infer<typeof createUserSchema>
 export type UpdateUserType = z.infer<typeof updateUserSchema>
 export type UpdateUserPasswordType = z.infer<typeof passwordSchema>
+export type UpdateStatusUserType = z.infer<
+  typeof updateStatusUserSchema
+>
