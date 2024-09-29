@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useRef } from "react"
 
 import { defaultAvatar } from "@/configs/config"
 
@@ -18,15 +18,12 @@ import { Input } from "@/components/global/atoms/input"
 import { Label } from "@/components/global/atoms/label"
 
 interface ViewUserProps {
-  user: UserType
+  userData: UserType
   onClose: () => void
 }
 
-function ViewUserDialog({ user, onClose }: ViewUserProps) {
-  console.log(user.fullName)
+function ViewUserDialog({ userData, onClose }: ViewUserProps) {
   const dialogRef = useRef<HTMLDivElement | null>(null)
-
-  const handleUpdateStatus = () => {}
 
   return (
     <Dialog onOpenChange={onClose} open>
@@ -40,96 +37,95 @@ function ViewUserDialog({ user, onClose }: ViewUserProps) {
           <div className="flex items-center gap-4">
             <Avatar className="h-20 w-20 cursor-pointer select-none border-4 border-primary">
               <AvatarImage
-                src={user?.avatar || defaultAvatar}
-                alt="avatar"
-                className="object-cover"
+                src={userData?.avatar || defaultAvatar}
+                alt={userData.fullName}
+                className="select-none object-cover"
               />
             </Avatar>
-            <div>
-              <h1 className="font-semibold text-secondary">{user.fullName}</h1>
-              <p className="text-sm font-semibold text-gray-400">{user.role}</p>
+
+            <div className="space-y-2">
+              <h3 className="font-semibold text-secondary">
+                {userData.fullName}
+              </h3>
+              <p className="text-sm font-semibold text-gray-500">
+                {userData.role}
+              </p>
             </div>
           </div>
 
-          <div>
-            <Label className="ml-1 font-semibold text-secondary">Email</Label>
+          <div className="space-y-2">
+            <Label className="font-semibold text-secondary">Email</Label>
             <Input
               type="text"
               readOnly
               placeholder="Nhập email"
-              defaultValue={user.email}
-              className="mt-1"
+              defaultValue={userData.email}
             />
           </div>
-          <div>
-            <Label className="ml-1 font-semibold text-secondary">
+
+          <div className="space-y-2">
+            <Label className="font-semibold text-secondary">
               Số điện thoại
             </Label>
             <Input
               type="number"
               readOnly
               placeholder="Nhập số điện thoại"
-              defaultValue={user.phoneNumber}
-              className="mt-1"
+              defaultValue={userData.phoneNumber}
             />
           </div>
-          <div>
-            <Label className="ml-1 font-semibold text-secondary">Địa chỉ</Label>
+
+          <div className="space-y-2">
+            <Label className="font-semibold text-secondary">Địa chỉ</Label>
             <Input
               type="text"
               readOnly
               placeholder="Nhập địa chỉ"
-              defaultValue={user.address}
-              className="mt-1"
+              defaultValue={userData.address}
             />
           </div>
+
           <div className="flex justify-between gap-4">
             <div className="w-full">
-              <Label className="ml-1 font-semibold text-secondary">
-                Ngày tạo
-              </Label>
+              <Label className="font-semibold text-secondary">Ngày tạo</Label>
               <Input
                 type="text"
                 readOnly
                 placeholder="Nhập ngày tạo"
-                defaultValue={formatDateDMY(user.createdAt)}
-                className="mt-1 w-full"
+                defaultValue={formatDateDMY(userData.createdAt)}
+                className="w-full"
               />
             </div>
 
             <div className="w-full">
-              <Label className="ml-1 font-semibold text-secondary">
+              <Label className="font-semibold text-secondary">
                 Ngày cập nhật
               </Label>
               <Input
                 type="text"
                 readOnly
                 placeholder="Nhập ngày cập nhật"
-                defaultValue={formatDateDMY(user.updatedAt)}
-                className="mt-1 w-full"
+                defaultValue={formatDateDMY(userData.updatedAt)}
+                className="w-full"
               />
             </div>
           </div>
-          <div>
-            <Label className="ml-1 font-semibold text-secondary">
-              Trạng thái
-            </Label>
+
+          <div className="space-y-2">
+            <Label className="font-semibold text-secondary">Trạng thái</Label>
             <Input
               type="text"
               readOnly
               placeholder="Nhập trạng thái"
-              defaultValue={user.status ? "Đang hoạt động" : "Ngừng hoạt động"}
-              className="mt-1"
+              defaultValue={
+                userData.status ? "Đang hoạt động" : "Ngừng hoạt động"
+              }
             />
           </div>
 
           <div className="mt-4 flex justify-between">
-            <Button
-              type="button"
-              variant="default"
-              onClick={handleUpdateStatus}
-            >
-              Đổi trạng thái
+            <Button type="button" variant="default">
+              Cập nhật
             </Button>
             <Button type="button" variant="outline" onClick={onClose}>
               Đóng

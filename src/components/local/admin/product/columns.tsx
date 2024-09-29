@@ -19,7 +19,7 @@ import {
   DropdownMenuTrigger
 } from "@/components/global/atoms/dropdown-menu"
 
-import ViewProductDialog from "./view-product-dialog"
+import ViewProductDialog from "./view-product"
 
 export const columns: ColumnDef<ProductType>[] = [
   // {
@@ -250,7 +250,7 @@ export const columns: ColumnDef<ProductType>[] = [
 
           {isViewDialogOpen && (
             <ViewProductDialog
-              product={product}
+              productData={product}
               onClose={() => setIsViewDialogOpen(false)}
             />
           )}

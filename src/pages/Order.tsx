@@ -3,12 +3,7 @@ import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
-import {
-  CreateOrderType,
-  OrderType,
-  createOrderSchema,
-  orderSchema
-} from "@/schemas/orderSchema"
+import { CreateOrderType, createOrderSchema } from "@/schemas/orderSchema"
 
 import { exampleOrdersData } from "@/constants/order"
 

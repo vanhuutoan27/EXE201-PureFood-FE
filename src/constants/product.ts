@@ -9,7 +9,7 @@ export const exampleProductsData: ProductType[] = [
     foodName: "Water spinach",
     slug: "rau-muong-400-gr-zk7dwx",
     description: `
-   <p>Rau muống tươi ngon, giàu chất xơ, sản phẩm sạch từ nông trại, có nhiều giá trị dinh dưỡng.</p>
+    <p>Rau muống tươi ngon, giàu chất xơ, sản phẩm sạch từ nông trại, có nhiều giá trị dinh dưỡng.</p>
     <ul>
       <li>Giàu chất xơ, tốt cho hệ tiêu hóa</li>
       <li>Giàu vitamin A và C</li>

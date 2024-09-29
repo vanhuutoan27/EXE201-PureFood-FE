@@ -20,7 +20,7 @@ import {
 } from "@/components/global/atoms/dropdown-menu"
 import LazyImage from "@/components/global/molecules/lazy-image"
 
-import ViewUserDialog from "./view-user-dialog"
+import ViewUserDialog from "./view-user"
 
 export const columns: ColumnDef<UserType>[] = [
   // {
@@ -234,7 +234,7 @@ export const columns: ColumnDef<UserType>[] = [
 
           {isViewDialogOpen && (
             <ViewUserDialog
-              user={user}
+              userData={user}
               onClose={() => setIsViewDialogOpen(false)}
             />
           )}

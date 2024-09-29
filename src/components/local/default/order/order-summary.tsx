@@ -30,7 +30,7 @@ function OrderSummary({
   setPaymentMethod
 }: OrderSummaryProps) {
   return (
-    <Card className="px-0 py-6">
+    <Card className="px-0 h-fit py-6">
       <CardHeader>
         <CardTitle className="text-lg">Phương thức thanh toán</CardTitle>
         <CardDescription>

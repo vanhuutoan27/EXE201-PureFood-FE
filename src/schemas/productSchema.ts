@@ -48,6 +48,7 @@ export const productSchema = z.object({
 
 export const createProductSchema = productSchema.omit({
   productId: true,
+  // foodName: true,
   slug: true,
   status: true,
   createdAt: true,

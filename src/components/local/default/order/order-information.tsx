@@ -27,13 +27,9 @@ function OrderInformation({ register, errors }: OrderInformationProps) {
         <div className="grid grid-cols-2 gap-6">
           <div className="space-y-2">
             <Label htmlFor="firstName">Họ</Label>
-            <Input
-              id="firstName"
-              {...register("customerInfo.firstName")}
-              className="border-input"
-            />
+            <Input id="firstName" {...register("customerInfo.firstName")} />
             {errors?.customerInfo?.firstName && (
-              <p className="text-red-500">
+              <p className="error-lens">
                 {errors.customerInfo.firstName.message}
               </p>
             )}
@@ -41,13 +37,9 @@ function OrderInformation({ register, errors }: OrderInformationProps) {
 
           <div className="space-y-2">
             <Label htmlFor="lastName">Tên</Label>
-            <Input
-              id="lastName"
-              {...register("customerInfo.lastName")}
-              className="border-input"
-            />
+            <Input id="lastName" {...register("customerInfo.lastName")} />
             {errors?.customerInfo?.lastName && (
-              <p className="text-red-500">
+              <p className="error-lens">
                 {errors.customerInfo.lastName.message}
               </p>
             )}
@@ -56,37 +48,27 @@ function OrderInformation({ register, errors }: OrderInformationProps) {
 
         <div className="space-y-2">
           <Label htmlFor="phoneNumber">Số điện thoại</Label>
-          <Input
-            id="phoneNumber"
-            {...register("customerInfo.phoneNumber")}
-            className="border-input"
-          />
+          <Input id="phoneNumber" {...register("customerInfo.phoneNumber")} />
           {errors?.customerInfo?.phoneNumber && (
-            <p className="text-red-500">{errors.customerInfo.phoneNumber.message}</p>
+            <p className="error-lens">
+              {errors.customerInfo.phoneNumber.message}
+            </p>
           )}
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            {...register("customerInfo.email")}
-            className="border-input"
-          />
+          <Input id="email" {...register("customerInfo.email")} />
           {errors?.customerInfo?.email && (
-            <p className="text-red-500">{errors.customerInfo.email.message}</p>
+            <p className="error-lens">{errors.customerInfo.email.message}</p>
           )}
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="address">Địa chỉ</Label>
-          <Input
-            id="address"
-            {...register("shippingAddress.address")}
-            className="border-input"
-          />
+          <Input id="address" {...register("shippingAddress.address")} />
           {errors?.shippingAddress?.address && (
-            <p className="text-red-500">
+            <p className="error-lens">
               {errors.shippingAddress.address.message}
             </p>
           )}
@@ -95,13 +77,9 @@ function OrderInformation({ register, errors }: OrderInformationProps) {
         <div className="grid grid-cols-2 gap-6">
           <div className="space-y-2">
             <Label htmlFor="commune">Phường / Xã</Label>
-            <Input
-              id="commune"
-              {...register("shippingAddress.commune")}
-              className="border-input"
-            />
+            <Input id="commune" {...register("shippingAddress.commune")} />
             {errors?.shippingAddress?.commune && (
-              <p className="text-red-500">
+              <p className="error-lens">
                 {errors.shippingAddress.commune.message}
               </p>
             )}
@@ -109,13 +87,9 @@ function OrderInformation({ register, errors }: OrderInformationProps) {
 
           <div className="space-y-2">
             <Label htmlFor="district">Quận / Huyện</Label>
-            <Input
-              id="district"
-              {...register("shippingAddress.district")}
-              className="border-input"
-            />
+            <Input id="district" {...register("shippingAddress.district")} />
             {errors?.shippingAddress?.district && (
-              <p className="text-red-500">
+              <p className="error-lens">
                 {errors.shippingAddress.district.message}
               </p>
             )}
@@ -124,13 +98,9 @@ function OrderInformation({ register, errors }: OrderInformationProps) {
 
         <div className="space-y-2">
           <Label htmlFor="province">Thành phố / Tỉnh</Label>
-          <Input
-            id="province"
-            {...register("shippingAddress.province")}
-            className="border-input"
-          />
+          <Input id="province" {...register("shippingAddress.province")} />
           {errors?.shippingAddress?.province && (
-            <p className="text-red-500">
+            <p className="error-lens">
               {errors.shippingAddress.province.message}
             </p>
           )}
