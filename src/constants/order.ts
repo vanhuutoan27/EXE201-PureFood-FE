@@ -11,7 +11,7 @@ export const exampleOrdersData = {
     district: "Quận 1",
     province: "Hồ Chí Minh"
   },
-  paymentMethod: "VNPAY",
+  paymentMethod: "VNPAY", // COD or VNPAY
   orderSummary: {
     items: [
       {

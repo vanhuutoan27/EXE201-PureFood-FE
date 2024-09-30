@@ -36,6 +36,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [globalFilter, setGlobalFilter] = useState<string>("")
 
   const table = useReactTable({
     data,
@@ -48,7 +49,21 @@ export function DataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     state: {
       sorting,
-      columnFilters
+      columnFilters,
+      globalFilter
+    },
+    globalFilterFn: (row, filterValue) => {
+      return (
+        String(row.getValue("fullName"))
+          .toLowerCase()
+          .includes(filterValue.toLowerCase()) ||
+        String(row.getValue("email"))
+          .toLowerCase()
+          .includes(filterValue.toLowerCase()) ||
+        String(row.getValue("phoneNumber"))
+          .toLowerCase()
+          .includes(filterValue.toLowerCase())
+      )
     }
   })
 
@@ -57,12 +72,8 @@ export function DataTable<TData, TValue>({
       <div className="flex items-center py-4">
         <Input
           placeholder="Tìm kiếm theo họ và tên, email hoặc số điện thoại..."
-          value={
-            (table.getColumn("fullName")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("fullName")?.setFilterValue(event.target.value)
-          }
+          value={globalFilter}
+          onChange={(event) => setGlobalFilter(event.target.value)}
           className="border-input bg-white"
         />
       </div>

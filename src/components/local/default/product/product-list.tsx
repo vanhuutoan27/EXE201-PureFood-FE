@@ -86,7 +86,7 @@ function ProductList({
                 <LazyImage
                   src={product.images[0]}
                   alt={product.productName}
-                  className="h-full w-full rounded-lg object-cover"
+                  className="h-full w-full select-none rounded-lg object-cover"
                 />
               )}
             </div>

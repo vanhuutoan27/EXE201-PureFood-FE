@@ -1,5 +1,3 @@
-import { useRef } from "react"
-
 import { defaultAvatar } from "@/configs/config"
 
 import { UserType } from "@/schemas/userSchema"
@@ -23,11 +21,9 @@ interface ViewUserProps {
 }
 
 function ViewUserDialog({ userData, onClose }: ViewUserProps) {
-  const dialogRef = useRef<HTMLDivElement | null>(null)
-
   return (
     <Dialog onOpenChange={onClose} open>
-      <DialogContent ref={dialogRef} className="min-w-[500px]">
+      <DialogContent className="min-w-[500px]">
         <DialogHeader>
           <DialogTitle className="text-center text-xl font-semibold text-secondary">
             Chi tiết người dùng
@@ -56,8 +52,9 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
           <div className="space-y-2">
             <Label className="font-semibold text-secondary">Email</Label>
             <Input
-              type="text"
               readOnly
+              type="text"
+              tabIndex={-1}
               placeholder="Nhập email"
               defaultValue={userData.email}
             />
@@ -68,8 +65,9 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
               Số điện thoại
             </Label>
             <Input
-              type="number"
               readOnly
+              type="string"
+              tabIndex={-1}
               placeholder="Nhập số điện thoại"
               defaultValue={userData.phoneNumber}
             />
@@ -78,19 +76,21 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
           <div className="space-y-2">
             <Label className="font-semibold text-secondary">Địa chỉ</Label>
             <Input
-              type="text"
               readOnly
+              type="text"
+              tabIndex={-1}
               placeholder="Nhập địa chỉ"
               defaultValue={userData.address}
             />
           </div>
 
-          <div className="flex justify-between gap-4">
+          <div className="flex justify-between gap-x-6">
             <div className="w-full">
               <Label className="font-semibold text-secondary">Ngày tạo</Label>
               <Input
-                type="text"
                 readOnly
+                type="text"
+                tabIndex={-1}
                 placeholder="Nhập ngày tạo"
                 defaultValue={formatDateDMY(userData.createdAt)}
                 className="w-full"
@@ -102,8 +102,9 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
                 Ngày cập nhật
               </Label>
               <Input
-                type="text"
                 readOnly
+                type="text"
+                tabIndex={-1}
                 placeholder="Nhập ngày cập nhật"
                 defaultValue={formatDateDMY(userData.updatedAt)}
                 className="w-full"
@@ -114,8 +115,9 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
           <div className="space-y-2">
             <Label className="font-semibold text-secondary">Trạng thái</Label>
             <Input
-              type="text"
               readOnly
+              type="text"
+              tabIndex={-1}
               placeholder="Nhập trạng thái"
               defaultValue={
                 userData.status ? "Đang hoạt động" : "Ngừng hoạt động"

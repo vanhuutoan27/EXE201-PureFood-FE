@@ -53,7 +53,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    < >
+    <>
       <div className="flex items-center py-4">
         <Input
           placeholder="Tìm kiếm theo tên sản phẩm..."

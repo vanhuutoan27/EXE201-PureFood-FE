@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ChevronLeft, ChevronRight } from "lucide-react"
@@ -62,7 +62,6 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
     setIsEditing(false)
   }
 
-  const dialogRef = useRef<HTMLDivElement | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const handleNextImage = () => {
@@ -81,12 +80,10 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
     }
   }
 
-  console.log(errors)
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Dialog onOpenChange={onClose} open>
-        <DialogContent ref={dialogRef} className="min-w-[1200px]">
+    <Dialog onOpenChange={onClose} open>
+      <DialogContent className="min-w-[1200px]">
+        <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
             <DialogTitle className="text-center text-xl font-semibold text-secondary">
               Chi tiết sản phẩm
@@ -127,6 +124,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 <Input
                   readOnly
                   type="text"
+                  tabIndex={-1}
                   defaultValue={productData.productId}
                 />
               </div>
@@ -138,6 +136,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 <Input
                   readOnly={!isEditing}
                   type="text"
+                  tabIndex={-1}
                   placeholder="Nhập tên sản phẩm"
                   {...register("productName")}
                   defaultValue={productData.productName}
@@ -152,6 +151,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 <Input
                   readOnly={!isEditing}
                   type="text"
+                  tabIndex={-1}
                   placeholder="Nhập nơi xuất xứ"
                   {...register("origin")}
                   defaultValue={productData.origin}
@@ -165,7 +165,8 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 <Label className="font-semibold text-secondary">Tồn kho</Label>
                 <Input
                   readOnly={!isEditing}
-                  type="text"
+                  type="number"
+                  tabIndex={-1}
                   placeholder="Nhập số lượng tồn kho"
                   {...register("stock")}
                   defaultValue={productData.stock}
@@ -203,6 +204,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                   <Input
                     readOnly
                     type="text"
+                    tabIndex={-1}
                     defaultValue={
                       productData.category === "trai-cay"
                         ? "Trái cây"
@@ -219,6 +221,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 <Input
                   readOnly
                   type="text"
+                  tabIndex={-1}
                   placeholder="Nhập tên danh mục"
                   defaultValue={productData.category}
                 />
@@ -231,6 +234,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 <Input
                   readOnly={!isEditing}
                   type="text"
+                  tabIndex={-1}
                   placeholder="Nhập tên nhà cung cấp"
                   {...register("supplier")}
                   defaultValue={productData.supplier}
@@ -267,6 +271,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                   <Input
                     readOnly
                     type="text"
+                    tabIndex={-1}
                     defaultValue={productData.organic ? "Hữu cơ" : "Vô cơ"}
                   />
                 )}
@@ -283,6 +288,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 <Input
                   readOnly={!isEditing}
                   type="number"
+                  tabIndex={-1}
                   placeholder="Nhập khối lượng sản phẩm"
                   {...register("weight")}
                   defaultValue={productData.weight}
@@ -298,6 +304,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 </Label>
                 <Input
                   readOnly
+                  tabIndex={-1}
                   defaultValue={formatDateDMY(productData.entryDate)}
                 />
               </div>
@@ -330,7 +337,12 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                     )}
                   </>
                 ) : (
-                  <Input readOnly type="text" defaultValue={productData.unit} />
+                  <Input
+                    readOnly
+                    type="text"
+                    tabIndex={-1}
+                    defaultValue={productData.unit}
+                  />
                 )}
               </div>
 
@@ -340,6 +352,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 </Label>
                 <Input
                   readOnly
+                  tabIndex={-1}
                   defaultValue={formatDateDMY(productData.expiryDate)}
                 />
               </div>
@@ -351,6 +364,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 <Input
                   readOnly={!isEditing}
                   type="number"
+                  tabIndex={-1}
                   placeholder="Nhập giá sản phẩm"
                   defaultValue={formatCurrency(productData.price)}
                   {...register("price")}
@@ -364,6 +378,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 <Label className="font-semibold text-secondary">Ngày tạo</Label>
                 <Input
                   readOnly
+                  tabIndex={-1}
                   defaultValue={formatDateDMY(productData.createdAt)}
                 />
               </div>
@@ -378,6 +393,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 <Input
                   readOnly
                   type="text"
+                  tabIndex={-1}
                   defaultValue={productData.status ? "Đang bán" : "Ngưng bán"}
                 />
               </div>
@@ -388,6 +404,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 </Label>
                 <Input
                   readOnly
+                  tabIndex={-1}
                   defaultValue={formatDateDMY(productData.updatedAt)}
                 />
               </div>
@@ -400,13 +417,13 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               <Textarea
                 readOnly={!isEditing}
                 rows={10}
+                tabIndex={-1}
                 placeholder="Nhập mô tả sản phẩm"
                 {...register("description")}
                 defaultValue={productData.description}
                 className="resize-none"
               />
             </ScrollArea>
-
             {errors.description && (
               <p className="error-lens">{errors.description.message}</p>
             )}
@@ -432,9 +449,9 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               Đóng
             </Button>
           </div>
-        </DialogContent>
-      </Dialog>
-    </form>
+        </form>
+      </DialogContent>
+    </Dialog>
   )
 }
 

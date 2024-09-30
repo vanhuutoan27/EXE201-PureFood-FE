@@ -14,7 +14,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/global/atoms/dropdown-menu"
@@ -206,29 +205,16 @@ export const columns: ColumnDef<UserType>[] = [
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="bg-white">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
-                className="cursor-pointer"
                 onClick={() => navigator.clipboard.writeText(user.userId)}
               >
-                <span className="duration-300 hover:text-primary">
-                  Sao chép ID
-                </span>
+                Sao chép ID
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={handleViewDetailsClick}
-                className="cursor-pointer"
-              >
-                <span className="duration-300 hover:text-primary">
-                  Xem chi tiết
-                </span>
+              <DropdownMenuItem onClick={handleViewDetailsClick}>
+                Xem chi tiết
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
-                <span className="duration-300 hover:text-primary">
-                  Đổi trạng thái
-                </span>
-              </DropdownMenuItem>
+              <DropdownMenuItem>Đổi trạng thái</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
