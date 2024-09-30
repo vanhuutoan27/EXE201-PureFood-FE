@@ -1,8 +1,7 @@
 export const exampleOrdersData = {
   customerInfo: {
-    firstName: "Nguyễn",
-    lastName: "Văn A",
-    phone: "0987654321",
+    fullName: "Nguyễn Quốc Đại",
+    phoneNumber: "0987654321",
     email: "nguyenvana@example.com"
   },
   shippingAddress: {

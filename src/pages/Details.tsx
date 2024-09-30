@@ -2,7 +2,7 @@ import { useLocation, useParams } from "react-router-dom"
 
 import { ProductType } from "@/schemas/productSchema"
 
-import { exampleProductsData } from "@/constants/product"
+import { exampleProductsData } from "@/constants/products"
 
 import Bread from "@/components/global/molecules/bread"
 import ProductDetails from "@/components/local/default/details/product-details"

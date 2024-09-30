@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom"
 
 import useDebounce from "@/hooks/useDebounce"
 
-import { exampleProductsData } from "@/constants/product"
+import { exampleProductsData } from "@/constants/products"
 
 import Bread from "@/components/global/molecules/bread"
 import ProductFilter from "@/components/local/default/product/product-filter"

@@ -1,4 +1,4 @@
-import { exampleProductsData } from "@/constants/product"
+import { exampleProductsData } from "@/constants/products"
 
 import { columns } from "@/components/local/admin/product/columns"
 import { DataTable } from "@/components/local/admin/product/data-table"

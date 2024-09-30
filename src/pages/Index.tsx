@@ -1,5 +1,5 @@
 import { exampleBlogsData } from "@/constants/blogs"
-import { exampleProductsData } from "@/constants/product"
+import { exampleProductsData } from "@/constants/products"
 import { exampleReviewsData } from "@/constants/reviews"
 
 import CustomerFeedback from "@/components/local/default/home/customer-feedback"

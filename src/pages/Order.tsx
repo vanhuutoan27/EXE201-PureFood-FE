@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 
 import { CreateOrderType, createOrderSchema } from "@/schemas/orderSchema"
 
-import { exampleOrdersData } from "@/constants/order"
+import { exampleOrdersData } from "@/constants/orders"
 
 import Section from "@/components/global/organisms/section"
 import OrderInformation from "@/components/local/default/order/order-information"

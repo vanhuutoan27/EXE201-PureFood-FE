@@ -1,4 +1,4 @@
-import { exampleProductsData } from "@/constants/product"
+import { exampleProductsData } from "@/constants/products"
 
 import CartItemCard from "@/components/global/molecules/cart-item-card"
 import Section from "@/components/global/organisms/section"
