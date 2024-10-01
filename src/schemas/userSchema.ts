@@ -43,7 +43,10 @@ export const userSchema = z.object({
 
 export const createUserSchema = userSchema.omit({
   userId: true,
+  avatar: true,
+  password: true,
   address: true,
+  status: true,
   createdAt: true,
   updatedAt: true,
   createdBy: true,
@@ -122,6 +125,4 @@ export type UserRegisterType = z.infer<typeof userRegisterSchema>
 export type CreateUserType = z.infer<typeof createUserSchema>
 export type UpdateUserType = z.infer<typeof updateUserSchema>
 export type UpdateUserPasswordType = z.infer<typeof passwordSchema>
-export type UpdateStatusUserType = z.infer<
-  typeof updateStatusUserSchema
->
+export type UpdateStatusUserType = z.infer<typeof updateStatusUserSchema>

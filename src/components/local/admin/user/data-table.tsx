@@ -24,6 +24,7 @@ import {
   TableHeader,
   TableRow
 } from "@/components/global/atoms/table"
+import AddUser from "./add-user"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -67,15 +68,23 @@ export function DataTable<TData, TValue>({
     }
   })
 
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
+
+  const handleAddDetailsClick = () => {
+    setIsAddDialogOpen(true)
+  }
+
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Tìm kiếm theo họ và tên, email hoặc số điện thoại..."
           value={globalFilter}
           onChange={(event) => setGlobalFilter(event.target.value)}
-          className="border-input bg-white"
+          className="w-2/3 border-input bg-white"
         />
+
+        <Button onClick={handleAddDetailsClick}>Thêm người dùng</Button>
       </div>
 
       <div className="overflow-hidden rounded-xl border shadow">
@@ -130,6 +139,13 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
+
+        {isAddDialogOpen && (
+            <AddUser
+              onClose={() => setIsAddDialogOpen(false)}
+            />
+          )}
+
       </div>
 
       <div className="flex items-center justify-end space-x-2 py-4">

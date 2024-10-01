@@ -85,7 +85,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
       <DialogContent className="min-w-[1200px]">
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
-            <DialogTitle className="text-center text-xl font-semibold text-secondary">
+          <DialogTitle className="text-center">
               Chi tiết sản phẩm
             </DialogTitle>
           </DialogHeader>

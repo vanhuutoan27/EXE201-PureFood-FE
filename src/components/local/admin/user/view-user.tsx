@@ -25,7 +25,7 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
     <Dialog onOpenChange={onClose} open>
       <DialogContent className="min-w-[500px]">
         <DialogHeader>
-          <DialogTitle className="text-center text-xl font-semibold text-secondary">
+        <DialogTitle className="text-center">
             Chi tiết người dùng
           </DialogTitle>
         </DialogHeader>
