@@ -27,8 +27,8 @@ export const productSchema = z.object({
     .positive({ message: "Khối lượng phải là số dương" }),
   // .min(0.1, { message: "Khối lượng phải ít nhất là 0.1 kg" }),
   // .max(100, { message: "Khối lượng không được vượt quá 100 kg" }),
-  unit: z.string().refine((val) => ["Kg", "Gr", "Lb", "Oz"].includes(val), {
-    message: "Đơn vị phải là một trong các giá trị: Kg, Gr, Lb, Oz"
+  unit: z.string().refine((val) => ["Kg", "Gr"].includes(val), {
+    message: "Đơn vị phải là một trong các giá trị: Kg, Gr"
   }),
   price: z.coerce.number().min(5000, { message: "Giá phải ít nhất là 5.000" }),
   origin: z.string().nonempty({ message: "Xuất xứ là bắt buộc" }),
