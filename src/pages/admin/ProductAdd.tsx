@@ -1,7 +1,13 @@
 import { useState } from "react"
 
+import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
 import { CalendarIcon, Upload } from "lucide-react"
+import { useForm } from "react-hook-form"
+
+import { CreateProductType, createProductSchema } from "@/schemas/productSchema"
+
+import { convertToLocalISOString } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
 import { Calendar } from "@/components/global/atoms/calendar"
@@ -15,6 +21,7 @@ import {
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue
@@ -24,113 +31,225 @@ import { Textarea } from "@/components/global/atoms/textarea"
 import AdminTitle from "@/components/global/organisms/admin-title"
 
 function ProductAdd() {
-  const [entryDate, setEntryDate] = useState<Date>()
-  const [expiryDate, setExpiryDate] = useState<Date>()
+  const [entryDate, setEntryDate] = useState<string>("")
+  const [expiryDate, setExpiryDate] = useState<string>("")
+
+  const handleEntryDateSelect = (date: Date | undefined) => {
+    if (date) {
+      const isoString = convertToLocalISOString(date)
+      setEntryDate(isoString)
+    }
+  }
+  const handleExpiryDateSelect = (date: Date | undefined) => {
+    if (date) {
+      const isoString = convertToLocalISOString(date)
+      setExpiryDate(isoString)
+    }
+  }
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors }
+  } = useForm<CreateProductType>({
+    resolver: zodResolver(createProductSchema),
+    defaultValues: {
+      organic: false,
+      unit: ""
+    }
+  })
+
+  const handleCategoryChange = (value: string) => {
+    console.log(value)
+    setValue("category", value)
+  }
+
+  const handleSupplierChange = (value: string) => {
+    setValue("supplier", value)
+    console.log(value)
+  }
+
+  const handleUnitChange = (value: string) => {
+    setValue("unit", value)
+    console.log(value)
+  }
+
+  const handleOrganicChange = (value: boolean) => {
+    setValue("organic", value)
+  }
+
+  const onSubmit = (data: CreateProductType) => {
+    console.log("Form data:", data)
+  }
+
+  console.log(errors)
 
   return (
     <div>
       <AdminTitle title="Thêm sản phẩm mới" />
 
-      <form className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2">
           <div className="space-y-1">
-            <Label htmlFor="category">Category</Label>
-            <Select>
-              <SelectTrigger>
-                <SelectValue placeholder="Select category" />
+            <Label htmlFor="category">Danh mục</Label>
+
+            <Select onValueChange={handleCategoryChange}>
+              <SelectTrigger className="mb-3 mt-1 h-10 rounded-xl border-[1px] pl-5">
+                <SelectValue placeholder="Chọn danh mục" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="fruits">Fruits</SelectItem>
-                <SelectItem value="vegetables">Vegetables</SelectItem>
-                <SelectItem value="dairy">Dairy</SelectItem>
+                <SelectGroup>
+                  <SelectItem value="trai-cay">Trái cây</SelectItem>
+                  <SelectItem value="rau-cu">Rau củ</SelectItem>
+                </SelectGroup>
               </SelectContent>
             </Select>
+            {errors.category && (
+              <p className="error-lens">{errors.category.message}</p>
+            )}
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="supplier">Supplier</Label>
-            <Select>
-              <SelectTrigger>
-                <SelectValue placeholder="Select supplier" />
+            <Label htmlFor="supplier">Nhà cung cấp</Label>
+
+            <Select onValueChange={handleSupplierChange}>
+              <SelectTrigger className="mb-3 mt-1 h-10 rounded-xl border-[1px] pl-5">
+                <SelectValue placeholder="Chọn nhà cung cấp" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="supplier1">Supplier 1</SelectItem>
-                <SelectItem value="supplier2">Supplier 2</SelectItem>
-                <SelectItem value="supplier3">Supplier 3</SelectItem>
+                <SelectGroup>
+                  <SelectItem value="Pure Food">Pure Food</SelectItem>
+                  <SelectItem value="other">Khác</SelectItem>
+                </SelectGroup>
               </SelectContent>
             </Select>
+            {errors.supplier && (
+              <p className="error-lens">Nhà cung cấp là bắt buộc</p>
+            )}
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="productName">Product Name</Label>
-            <Input id="productName" placeholder="Enter product name" />
-          </div>
-
-          <div className="space-y-1">
-            <Label htmlFor="slug">Slug</Label>
+            <Label htmlFor="productName">Tên sản phẩm</Label>
             <Input
-              id="slug"
-              readOnly
-              value="Tu generate ra (productName (weight unit))"
+              type="text"
+              id="productName"
+              placeholder="Nhập tên sản phẩm"
+              {...register("productName")}
             />
+            {errors.productName && (
+              <p className="error-lens">{errors.productName.message}</p>
+            )}
+          </div>
+
+          <div className="space-y-1">
+            <Label htmlFor="foodName">Tên thực phẩm</Label>
+            <Input
+              type="text"
+              id="foodName"
+              placeholder="Nhập tên thực phẩm"
+              {...register("foodName")}
+            />
+            {errors.foodName && (
+              <p className="error-lens">{errors.foodName.message}</p>
+            )}
           </div>
 
           <div className="col-span-2 space-y-1">
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">Mô tả chi tiết</Label>
             <Textarea
               id="description"
               rows={5}
-              placeholder="Enter product description"
+              placeholder="Nhập mô tả chi tiết"
               className="resize-none"
+              {...register("description")}
             />
+            {errors.description && (
+              <p className="error-lens">{errors.description.message}</p>
+            )}
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="stock">Stock</Label>
+            <Label htmlFor="stock">Số lượng tồn kho</Label>
             <Input
               id="stock"
               type="number"
-              placeholder="Enter stock quantity"
+              placeholder="Nhập số lượng tồn kho"
+              {...register("stock")}
             />
+            {errors.stock && (
+              <p className="error-lens">{errors.stock.message}</p>
+            )}
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="weight">Weight</Label>
-            <Input id="weight" type="number" placeholder="Enter weight" />
+            <Label htmlFor="weight">Khối lượng</Label>
+            <Input
+              id="weight"
+              type="number"
+              placeholder="Nhập khối lượng sản phẩm"
+              {...register("weight")}
+            />
+            {errors.weight && (
+              <p className="error-lens">{errors.weight.message}</p>
+            )}
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="unit">Unit</Label>
-            <Select>
-              <SelectTrigger>
-                <SelectValue placeholder="Select unit" />
+            <Label htmlFor="unit">Đơn vị</Label>
+
+            <Select onValueChange={handleUnitChange}>
+              <SelectTrigger className="mb-3 mt-1 h-10 rounded-xl border-[1px] pl-5">
+                <SelectValue placeholder="Chọn đơn vị sản phẩm" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="kg">kg</SelectItem>
-                <SelectItem value="g">g</SelectItem>
-                <SelectItem value="l">l</SelectItem>
-                <SelectItem value="ml">ml</SelectItem>
+                <SelectGroup>
+                  <SelectItem value="Kg">Kg</SelectItem>
+                  <SelectItem value="Gr">Gr</SelectItem>
+                </SelectGroup>
               </SelectContent>
             </Select>
+            {errors.unit && <p className="error-lens">Đơn vị là bắt buộc</p>}
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="price">Price</Label>
-            <Input id="price" type="number" placeholder="Enter price" />
+            <Label htmlFor="price">Giá</Label>
+            <Input
+              id="price"
+              type="number"
+              placeholder="Nhập giá sản phẩm"
+              {...register("price")}
+            />
+            {errors.price && (
+              <p className="error-lens">{errors.price.message}</p>
+            )}
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="origin">Origin</Label>
-            <Input id="origin" placeholder="Enter product origin" />
+            <Label htmlFor="origin">Xuất xứ</Label>
+            <Input
+              id="origin"
+              type="text"
+              placeholder="Nhập nơi xuất xứ"
+              {...register("origin")}
+            />
+            {errors.origin && (
+              <p className="error-lens">{errors.origin.message}</p>
+            )}
           </div>
 
           <div className="mt-6 flex items-center space-x-2">
-            <Switch id="organic" />
+            <Switch
+              id="organic"
+              {...register("organic")}
+              onCheckedChange={handleOrganicChange}
+              defaultChecked={false}
+            />
             <Label htmlFor="organic">Organic</Label>
           </div>
 
           <div className="space-y-1">
-            <Label>Entry Date</Label>
+            <Label>Ngày nhập</Label>
             <Popover>
               <PopoverTrigger asChild>
                 <Button
@@ -141,23 +260,26 @@ function ProductAdd() {
                   {entryDate ? (
                     format(entryDate, "PPP")
                   ) : (
-                    <span>Pick a date</span>
+                    <span>Chọn ngày nhập</span>
                   )}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
                 <Calendar
                   mode="single"
-                  selected={entryDate}
-                  onSelect={setEntryDate}
+                  selected={entryDate ? new Date(entryDate) : undefined}
+                  onSelect={handleEntryDateSelect}
                   initialFocus
                 />
               </PopoverContent>
             </Popover>
+            {errors.entryDate && (
+              <p className="error-lens">Ngày nhập là bắt buộc</p>
+            )}
           </div>
 
           <div className="space-y-1">
-            <Label>Expiry Date</Label>
+            <Label>Ngày hết hạn</Label>
             <Popover>
               <PopoverTrigger asChild>
                 <Button
@@ -168,19 +290,22 @@ function ProductAdd() {
                   {expiryDate ? (
                     format(expiryDate, "PPP")
                   ) : (
-                    <span>Pick a date</span>
+                    <span>Chọn ngày hết hạn</span>
                   )}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
                 <Calendar
                   mode="single"
-                  selected={expiryDate}
-                  onSelect={setExpiryDate}
+                  selected={expiryDate ? new Date(expiryDate) : undefined}
+                  onSelect={handleExpiryDateSelect}
                   initialFocus
                 />
               </PopoverContent>
             </Popover>
+            {errors.expiryDate && (
+              <p className="error-lens">Ngày hết hạn là bắt buộc</p>
+            )}
           </div>
 
           <div className="col-span-2 space-y-1">
