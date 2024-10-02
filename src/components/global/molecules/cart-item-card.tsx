@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Minus, Plus, X } from "lucide-react"
 import { Link } from "react-router-dom"
 
-import { ProductType } from "@/schemas/productSchema"
+import { CartItemType } from "@/schemas/cartItemSchema"
 
 import { formatCurrency } from "@/lib/utils"
 
@@ -11,7 +11,7 @@ import { Button } from "@/components/global/atoms/button"
 import LazyImage from "@/components/global/molecules/lazy-image"
 
 interface CartItemCardProps {
-  productData: ProductType
+  productData: CartItemType
 }
 
 function CartItemCard({ productData }: CartItemCardProps) {
@@ -25,7 +25,7 @@ function CartItemCard({ productData }: CartItemCardProps) {
     <div className="flex border-t-2 py-10">
       <div className="flex w-2/3 gap-8">
         <LazyImage
-          src={productData.images[0]}
+          src={productData.image}
           alt={productData.productName}
           className="size-40 min-w-40 select-none rounded-xl"
         />

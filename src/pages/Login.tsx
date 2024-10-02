@@ -101,7 +101,6 @@ function Login() {
             </p>
           </div>
 
-          {/* Wrap your form in FormProvider */}
           <FormProvider {...formMethods}>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
               <div className="space-y-4">

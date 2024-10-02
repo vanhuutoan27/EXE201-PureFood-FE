@@ -22,16 +22,17 @@ export const useGetAllProducts = (
     queryKey: ["products", page, limit, search, category, status],
     queryFn: async () => {
       try {
-        const { data } = await pureAPI.get("/products", {
+        const response = await pureAPI.get("/products", {
           params: { page, limit, search, status }
         })
+        const { success, message, data } = response.data
+        const { totalPages, totalItems, items: products } = data
 
-        if (data.success) {
-          const { totalPages, totalItems, items: products } = data.data
+        if (success) {
           return { totalPages, totalItems, products }
         } else {
-          toast.error(data.message)
-          throw new Error(data.message)
+          toast.error(message)
+          throw new Error(message)
         }
       } catch (error: any) {
         const errorMessage = error.response?.data?.message
@@ -46,20 +47,26 @@ export const useGetAllProducts = (
   })
 }
 
-export const useGetProductsByCategory = (category: string) => {
-  return useQuery<ProductType[], Error>({
-    queryKey: ["products", category],
+export const useGetProductsByCategory = (
+  category: string,
+  page?: number,
+  limit?: number
+) => {
+  return useQuery<ProductResponse, Error>({
+    queryKey: ["products", category, page, limit],
     queryFn: async () => {
       try {
-        const { data } = await pureAPI.get("/products", {
-          params: { category }
+        const response = await pureAPI.get(`/products/category/${category}`, {
+          params: { page, limit }
         })
+        const { success, message, data } = response.data
+        const { totalPages, totalItems, items: products } = data
 
-        if (data.success) {
-          return data.data.items
+        if (success) {
+          return { totalPages, totalItems, products }
         } else {
-          toast.error(data.message)
-          throw new Error(data.message)
+          toast.error(message)
+          throw new Error(message)
         }
       } catch (error: any) {
         const errorMessage = error.response?.data?.message
@@ -74,20 +81,26 @@ export const useGetProductsByCategory = (category: string) => {
   })
 }
 
-export const useGetProductsBySupplier = (supplierId: string) => {
-  return useQuery<ProductType[], Error>({
-    queryKey: ["products", supplierId],
+export const useGetProductsBySupplier = (
+  supplier: string,
+  page?: number,
+  limit?: number
+) => {
+  return useQuery<ProductResponse, Error>({
+    queryKey: ["products", supplier, page, limit],
     queryFn: async () => {
       try {
-        const { data } = await pureAPI.get("/products", {
-          params: { supplierId }
+        const response = await pureAPI.get(`/products/supplier/${supplier}`, {
+          params: { page, limit }
         })
+        const { success, message, data } = response.data
+        const { totalPages, totalItems, items: products } = data
 
-        if (data.success) {
-          return data.data.items
+        if (success) {
+          return { totalPages, totalItems, products }
         } else {
-          toast.error(data.message)
-          throw new Error(data.message)
+          toast.error(message)
+          throw new Error(message)
         }
       } catch (error: any) {
         const errorMessage = error.response?.data?.message
@@ -95,7 +108,7 @@ export const useGetProductsBySupplier = (supplierId: string) => {
         throw new Error(errorMessage)
       }
     },
-    enabled: !!supplierId,
+    enabled: !!supplier,
     onError: (error: Error) => {
       toast.error(error.message)
     }
@@ -107,13 +120,14 @@ export const useGetProductBySlug = (slug: string) => {
     queryKey: ["product", slug],
     queryFn: async () => {
       try {
-        const { data } = await pureAPI.get(`/products/${slug}`)
+        const response = await pureAPI.get(`/products/${slug}`)
+        const { success, message, data } = response.data
 
-        if (data.success) {
-          return data.data
+        if (success) {
+          return data
         } else {
-          toast.error(data.message)
-          throw new Error(data.message)
+          toast.error(message)
+          throw new Error(message)
         }
       } catch (error: any) {
         const errorMessage = error.response?.data?.message
@@ -133,13 +147,14 @@ export const useCreateProduct = () => {
 
   return useMutation<ProductType, Error, ProductType>(
     async (product) => {
-      const { data } = await pureAPI.post("/products", product)
+      const response = await pureAPI.post("/products", product)
+      const { success, message, data } = response.data
 
-      if (data.success) {
-        return data.data
+      if (success) {
+        return data
       } else {
-        toast.error(data.message)
-        throw new Error(data.message)
+        toast.error(message)
+        throw new Error(message)
       }
     },
     {
@@ -158,15 +173,16 @@ export const useChangeStatusProduct = (productId: string) => {
 
   return useMutation<ProductType, Error, { status: boolean }>(
     async ({ status }) => {
-      const { data } = await pureAPI.patch(`/products/${productId}/status`, {
+      const response = await pureAPI.patch(`/products/${productId}/status`, {
         status
       })
+      const { success, message, data } = response.data
 
-      if (data.success) {
-        return data.data
+      if (success) {
+        return data
       } else {
-        toast.error(data.message)
-        throw new Error(data.message)
+        toast.error(message)
+        throw new Error(message)
       }
     },
     {

@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom"
 
 import useDebounce from "@/hooks/useDebounce"
 
-import { useGetAllProducts } from "@/apis/productApi"
+import { useGetProductsByCategory } from "@/apis/productApi"
 
 import Bread from "@/components/global/molecules/bread"
 import ProductFilter from "@/components/local/default/product/product-filter"
@@ -25,13 +25,16 @@ const INITIAL_PRODUCT_COUNT = 3
 
 function Products() {
   const [visibleProducts, setVisibleProducts] = useState(INITIAL_PRODUCT_COUNT)
+  const categoryUrl = useLocation().pathname.split("/")[1]
 
-  const { data: productsData, isLoading } = useGetAllProducts(
-    1,
-    visibleProducts
+  const { data: productsData, isLoading } = usGetProductsByCategory(
+    categoryUrl
+    // 1,
+    // visibleProducts
   )
 
-  const categoryUrl = useLocation().pathname.split("/")[1]
+  console.log(productsData?.products)
+
   const [searchValue, setSearchValue] = useState("")
   const [filters, setFilters] = useState(defaultFilters)
   const debouncedSearchValue = useDebounce(searchValue)
@@ -72,7 +75,6 @@ function Products() {
           />
 
           <ProductList
-            category={categoryUrl}
             productsData={productsData}
             visibleProducts={visibleProducts}
             handleShowMore={handleShowMore}

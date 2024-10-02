@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import Autoplay from "embla-carousel-autoplay"
 import { Eye, EyeOff } from "lucide-react"
 import { FormProvider, useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 
 import { UserRegisterType, userRegisterSchema } from "@/schemas/userSchema"
@@ -31,10 +31,13 @@ import LazyImage from "@/components/global/molecules/lazy-image"
 import { slides } from "./Login"
 
 function Register() {
+  const navigate = useNavigate()
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isChecked, setIsChecked] = useState(false)
 
   const handleToggleVisibility = (key: string) => {
     if (key === "password") {
@@ -74,6 +77,7 @@ function Register() {
 
       if (success) {
         toast.success(message)
+        navigate("/login")
       } else {
         toast.error(message)
       }
@@ -95,11 +99,7 @@ function Register() {
             align: "start",
             loop: true
           }}
-          plugins={[
-            Autoplay({
-              delay: 3000
-            })
-          ]}
+          plugins={[Autoplay({ delay: 3000 })]}
         >
           <CarouselContent>
             {slides.map((slide, index) => (
@@ -125,7 +125,6 @@ function Register() {
             </p>
           </div>
 
-          {/* Use FormProvider to wrap the form */}
           <FormProvider {...methods}>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
               <div className="space-y-4">
@@ -256,8 +255,14 @@ function Register() {
                   )}
                 />
 
-                <div className="text-sm">
-                  <Checkbox id="terms" />
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="terms"
+                    checked={isChecked}
+                    onCheckedChange={(checked) =>
+                      setIsChecked(checked === true)
+                    }
+                  />
                   <Label htmlFor="terms" className="cursor-pointer font-normal">
                     Tôi đồng ý với tất cả các{" "}
                     <Link to="/terms" className="font-medium text-primary">
@@ -276,7 +281,7 @@ function Register() {
 
               <div className="space-y-4">
                 <Button
-                  disabled={isLoading}
+                  disabled={!isChecked || isLoading}
                   type="submit"
                   variant="default"
                   size="lg"

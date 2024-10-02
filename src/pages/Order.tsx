@@ -5,25 +5,35 @@ import { useForm } from "react-hook-form"
 
 import { CreateOrderType, createOrderSchema } from "@/schemas/orderSchema"
 
-import { exampleOrdersData } from "@/constants/orders"
-
 import Section from "@/components/global/organisms/section"
 import OrderInformation from "@/components/local/default/order/order-information"
 import OrderSummary from "@/components/local/default/order/order-summary"
 
 function Order() {
-  const orderData = exampleOrdersData
+  const orderItems = [
+    {
+      productName: "Sữa chua trân châu",
+      quantity: 2,
+      price: 20000
+    },
+    {
+      productName: "Bánh mì que",
+      quantity: 5,
+      price: 10000
+    }
+  ]
+
+  const orderTotal = 30000
 
   const {
     handleSubmit,
     register,
     formState: { errors }
   } = useForm<CreateOrderType>({
-    resolver: zodResolver(createOrderSchema),
-    defaultValues: orderData
+    resolver: zodResolver(createOrderSchema)
   })
 
-  const [paymentMethod, setPaymentMethod] = useState(orderData.paymentMethod)
+  const [paymentMethod, setPaymentMethod] = useState("COD")
 
   const onSubmit = (data: any) => {
     console.log("Đơn hàng đã được đặt!", JSON.stringify(data, null, 2))
@@ -45,9 +55,10 @@ function Order() {
         <OrderInformation register={register} errors={errors} />
 
         <OrderSummary
-          orderSummary={orderData.orderSummary}
           paymentMethod={paymentMethod}
           setPaymentMethod={setPaymentMethod}
+          orderSummary={orderItems}
+          totalAmount={orderTotal}
         />
       </form>
     </div>

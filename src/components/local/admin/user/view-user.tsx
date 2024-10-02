@@ -124,11 +124,11 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
           </div>
 
           <div className="mt-4 flex justify-between">
-            <Button type="button" variant="default">
-              Cập nhật
-            </Button>
             <Button type="button" variant="outline" onClick={onClose}>
               Đóng
+            </Button>
+            <Button type="button" variant="default">
+              Cập nhật
             </Button>
           </div>
         </div>

@@ -5,19 +5,19 @@ import { SupplierType } from "@/schemas/supplierSchema"
 
 import pureAPI from "@/lib/pureAPI"
 
-interface UsersResponse {
+interface SuppliersResponse {
   totalPages: number
   totalItems: number
   suppliers: SupplierType[]
 }
 
-export const useGetAllUsers = (
+export const useGetAllSuppliers = (
   page: number,
   limit: number,
   search?: string,
   status?: boolean
 ) => {
-  return useQuery<UsersResponse, Error>({
+  return useQuery<SuppliersResponse, Error>({
     queryKey: ["suppliers", page, limit, search, status],
     queryFn: async () => {
       try {

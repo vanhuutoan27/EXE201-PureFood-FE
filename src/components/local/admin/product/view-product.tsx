@@ -122,7 +122,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
   const handleNextImage = () => {
     if (productData.images) {
       setCurrentImageIndex((prevIndex) =>
-        prevIndex === productData.images.length - 1 ? 0 : prevIndex + 1
+        prevIndex === (productData.images?.length ?? 0) - 1 ? 0 : prevIndex + 1
       )
     }
   }
@@ -130,7 +130,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
   const handlePreviousImage = () => {
     if (productData.images) {
       setCurrentImageIndex((prevIndex) =>
-        prevIndex === 0 ? productData.images.length - 1 : prevIndex - 1
+        prevIndex === 0 ? (productData.images?.length ?? 1) - 1 : prevIndex - 1
       )
     }
   }
@@ -532,7 +532,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
             </div>
           </div>
 
-          <div className="space-y-1">
+          <div className="space-y-1 pt-3">
             <Label className="font-semibold text-secondary">Mô tả</Label>
             <ScrollArea className="h-40">
               <Textarea
@@ -549,8 +549,12 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               <p className="error-lens">{errors.description.message}</p>
             )}
           </div>
-          {/* Nút lưu và hủy */}
-          <div className="mt-6 flex justify-between">
+
+          <div className="mt-6 flex justify-between gap-4">
+            <Button type="button" variant="outline" onClick={onClose}>
+              Đóng
+            </Button>
+
             {isEditing && (
               <div className="space-x-4">
                 <Button type="button" variant="outline" onClick={handleCancel}>
@@ -567,10 +571,6 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 Cập nhật
               </Button>
             )}
-
-            <Button type="button" variant="outline" onClick={onClose}>
-              Đóng
-            </Button>
           </div>
         </form>
       </DialogContent>

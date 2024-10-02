@@ -13,6 +13,7 @@ import {
   getSortedRowModel,
   useReactTable
 } from "@tanstack/react-table"
+import { Link } from "react-router-dom"
 
 import { Button } from "@/components/global/atoms/button"
 import { Input } from "@/components/global/atoms/input"
@@ -54,7 +55,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Tìm kiếm theo tên sản phẩm..."
           value={
@@ -63,8 +64,14 @@ export function DataTable<TData, TValue>({
           onChange={(event) =>
             table.getColumn("productName")?.setFilterValue(event.target.value)
           }
-          className="border-input bg-white"
+          className="w-2/3 border-input bg-white"
         />
+
+        <Link to="/admin/san-pham/tao-moi">
+          <Button type="button" variant="default">
+            Thêm sản phẩm
+          </Button>
+        </Link>
       </div>
 
       <div className="overflow-hidden rounded-xl border shadow">

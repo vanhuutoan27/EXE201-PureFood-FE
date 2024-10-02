@@ -1,4 +1,4 @@
-import { OrderSummaryType } from "@/schemas/orderSchema"
+import { OrderItemType } from "@/schemas/orderSchema"
 
 import { formatCurrency } from "@/lib/utils"
 
@@ -19,18 +19,20 @@ import {
 import { Separator } from "@/components/global/atoms/separator"
 
 interface OrderSummaryProps {
-  orderSummary: OrderSummaryType
   paymentMethod: string
   setPaymentMethod: (method: string) => void
+  orderSummary: OrderItemType[]
+  totalAmount: number
 }
 
 function OrderSummary({
-  orderSummary,
   paymentMethod,
-  setPaymentMethod
+  setPaymentMethod,
+  orderSummary,
+  totalAmount
 }: OrderSummaryProps) {
   return (
-    <Card className="px-0 h-fit py-6">
+    <Card className="h-fit px-0 py-6">
       <CardHeader>
         <CardTitle className="text-lg">Phương thức thanh toán</CardTitle>
         <CardDescription>
@@ -61,7 +63,7 @@ function OrderSummary({
 
       <CardContent>
         <ul className="space-y-2">
-          {orderSummary.items.map((item, index) => (
+          {orderSummary.map((item, index) => (
             <li className="flex justify-between" key={index}>
               <span>
                 {item.productName} (x{item.quantity})
@@ -73,7 +75,7 @@ function OrderSummary({
         <Separator className="my-4" />
         <div className="flex justify-between font-bold">
           <span>Tổng cộng</span>
-          <span>{formatCurrency(orderSummary.totalAmount)} VND</span>
+          <span>{formatCurrency(totalAmount)} VND</span>
         </div>
       </CardContent>
 

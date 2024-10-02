@@ -21,19 +21,21 @@ export const useGetAllUsers = (
     queryKey: ["users", page, limit, search, status],
     queryFn: async () => {
       try {
-        const { data } = await pureAPI.get("/users", {
+        const response = await pureAPI.get("/users", {
           params: { page, limit, search, status }
         })
 
-        if (data.success) {
-          const { totalPages, totalItems, items: users } = data.data
+        const { success, message, data } = response.data
+        const { totalPages, totalItems, items: users } = data
+
+        if (success) {
           return { totalPages, totalItems, users }
         } else {
-          toast.error(data.message)
-          throw new Error(data.message)
+          toast.error(message)
+          throw new Error(message)
         }
       } catch (error: any) {
-        const errorMessage = error.response?.data?.message
+        const errorMessage = error.response.message
         toast.error(errorMessage)
         throw new Error(errorMessage)
       }
@@ -50,13 +52,14 @@ export const useGetUserByUsername = (username: string) => {
     queryKey: ["user", username],
     queryFn: async () => {
       try {
-        const { data } = await pureAPI.get(`/users/${username}`)
+        const response = await pureAPI.get(`/users/${username}`)
+        const { success, message, data } = response.data
 
-        if (data.success) {
-          return data.data
+        if (success) {
+          return data
         } else {
-          toast.error(data.message)
-          throw new Error(data.message)
+          toast.error(message)
+          throw new Error(message)
         }
       } catch (error: any) {
         const errorMessage = error.response?.data?.message
@@ -77,13 +80,14 @@ export const useCreateUser = () => {
   return useMutation<CreateUserType, Error, CreateUserType>(
     async (newUser) => {
       try {
-        const { data } = await pureAPI.post("/users", newUser)
+        const response = await pureAPI.post("/users", newUser)
+        const { success, message, data } = response.data
 
-        if (data.success) {
-          return data.data
+        if (success) {
+          return data
         } else {
-          toast.error(data.message)
-          throw new Error(data.message)
+          toast.error(message)
+          throw new Error(message)
         }
       } catch (error: any) {
         const errorMessage = error.response?.data?.message

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 
+import { defaultAvatar } from "@/configs/config"
 import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 
@@ -45,12 +46,12 @@ export const columns: ColumnDef<UserType>[] = [
       return (
         <div className="flex items-center gap-4">
           <LazyImage
-            src={avatar}
+            src={avatar || defaultAvatar}
             alt={fullName}
             className="h-16 min-h-16 w-16 min-w-16 select-none rounded-xl"
           />
 
-          <h3>{fullName}</h3>
+          <h3 className="font-semibold">{fullName}</h3>
         </div>
       )
     }
@@ -92,6 +93,10 @@ export const columns: ColumnDef<UserType>[] = [
           Địa chỉ
         </span>
       )
+    },
+    cell: ({ row }) => {
+      const address = row.original.address
+      return <span>{address || "Không"}</span>
     }
   },
   {
@@ -126,7 +131,7 @@ export const columns: ColumnDef<UserType>[] = [
     },
     cell: ({ row }) => {
       const createdBy = row.original.createdBy
-      return <span>{createdBy}</span>
+      return <span>{createdBy || "Không"}</span>
     }
   },
   {
@@ -160,7 +165,7 @@ export const columns: ColumnDef<UserType>[] = [
     },
     cell: ({ row }) => {
       const updatedBy = row.original.updatedBy
-      return <span>{updatedBy}</span>
+      return <span>{updatedBy || "Không"}</span>
     }
   },
   {

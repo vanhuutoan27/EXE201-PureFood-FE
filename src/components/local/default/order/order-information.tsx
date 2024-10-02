@@ -26,51 +26,59 @@ function OrderInformation({ register, errors }: OrderInformationProps) {
       <CardContent className="space-y-6">
         <div className="grid grid-cols-2 gap-6">
           <div className="space-y-2">
-            <Label htmlFor="firstName">Họ</Label>
-            <Input id="firstName" {...register("customerInfo.firstName")} />
-            {errors?.customerInfo?.firstName && (
-              <p className="error-lens">
-                {errors.customerInfo.firstName.message}
-              </p>
+            <Label htmlFor="fullName">Họ và tên</Label>
+            <Input
+              id="fullName"
+              type="text"
+              placeholder="Nhập họ và tên"
+              {...register("customerInfo.fullName")}
+            />
+
+            {errors?.fullName && (
+              <p className="error-lens">{errors.fullName.message}</p>
             )}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="lastName">Tên</Label>
-            <Input id="lastName" {...register("customerInfo.lastName")} />
-            {errors?.customerInfo?.lastName && (
-              <p className="error-lens">
-                {errors.customerInfo.lastName.message}
-              </p>
+            <Label htmlFor="phoneNumber">Số điện thoại</Label>
+            <Input
+              id="phoneNumber"
+              type="text"
+              placeholder="Nhập số điện thoại"
+              {...register("customerInfo.phoneNumber")}
+            />
+
+            {errors?.phoneNumber && (
+              <p className="error-lens">{errors.phoneNumber.message}</p>
             )}
           </div>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="phoneNumber">Số điện thoại</Label>
-          <Input id="phoneNumber" {...register("customerInfo.phoneNumber")} />
-          {errors?.customerInfo?.phoneNumber && (
-            <p className="error-lens">
-              {errors.customerInfo.phoneNumber.message}
-            </p>
-          )}
-        </div>
-
-        <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" {...register("customerInfo.email")} />
-          {errors?.customerInfo?.email && (
-            <p className="error-lens">{errors.customerInfo.email.message}</p>
+          <Input
+            id="email"
+            type="email"
+            placeholder="Nhập địa chỉ email"
+            {...register("customerInfo.email")}
+          />
+
+          {errors?.email && (
+            <p className="error-lens">{errors.email.message}</p>
           )}
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="address">Địa chỉ</Label>
-          <Input id="address" {...register("shippingAddress.address")} />
-          {errors?.shippingAddress?.address && (
-            <p className="error-lens">
-              {errors.shippingAddress.address.message}
-            </p>
+          <Input
+            id="address"
+            type="text"
+            placeholder="Nhập địa chỉ giao hàng"
+            {...register("shippingAddress.address")}
+          />
+
+          {errors?.address && (
+            <p className="error-lens">{errors.address.message}</p>
           )}
         </div>
 
@@ -78,20 +86,18 @@ function OrderInformation({ register, errors }: OrderInformationProps) {
           <div className="space-y-2">
             <Label htmlFor="commune">Phường / Xã</Label>
             <Input id="commune" {...register("shippingAddress.commune")} />
-            {errors?.shippingAddress?.commune && (
-              <p className="error-lens">
-                {errors.shippingAddress.commune.message}
-              </p>
+
+            {errors?.commune && (
+              <p className="error-lens">{errors.commune.message}</p>
             )}
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="district">Quận / Huyện</Label>
             <Input id="district" {...register("shippingAddress.district")} />
-            {errors?.shippingAddress?.district && (
-              <p className="error-lens">
-                {errors.shippingAddress.district.message}
-              </p>
+
+            {errors?.district && (
+              <p className="error-lens">{errors.district.message}</p>
             )}
           </div>
         </div>
@@ -99,10 +105,9 @@ function OrderInformation({ register, errors }: OrderInformationProps) {
         <div className="space-y-2">
           <Label htmlFor="province">Thành phố / Tỉnh</Label>
           <Input id="province" {...register("shippingAddress.province")} />
-          {errors?.shippingAddress?.province && (
-            <p className="error-lens">
-              {errors.shippingAddress.province.message}
-            </p>
+
+          {errors?.province && (
+            <p className="error-lens">{errors.province.message}</p>
           )}
         </div>
       </CardContent>

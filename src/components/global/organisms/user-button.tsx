@@ -2,6 +2,8 @@ import { defaultAvatar } from "@/configs/config"
 import { LogOut, PackageCheck, ShoppingBag, User } from "lucide-react"
 import { Link } from "react-router-dom"
 
+import { useAuthContext } from "@/contexts/auth-context"
+
 import { UserType } from "@/schemas/userSchema"
 
 import { scrollToTop } from "@/lib/utils"
@@ -22,6 +24,8 @@ interface UserButtonProps {
 }
 
 function UserButton({ variant = "default", userData }: UserButtonProps) {
+  const { logout } = useAuthContext()
+
   const menuItems = [
     {
       icon: User,
@@ -43,9 +47,7 @@ function UserButton({ variant = "default", userData }: UserButtonProps) {
       label: "Đăng xuất",
       link: "/login",
       separator: true,
-      onClick: () => {
-        console.log("Logged out")
-      }
+      onClick: logout
     }
   ]
 

@@ -1,11 +1,26 @@
-import { exampleProductsData } from "@/constants/products"
+import { useParams } from "react-router-dom"
+
+import { useAuthContext } from "@/contexts/auth-context"
+
+import { useGetAllCartItems } from "@/apis/cartApi"
 
 import CartItemCard from "@/components/global/molecules/cart-item-card"
 import Section from "@/components/global/organisms/section"
 import CartSummary from "@/components/local/user/cart/cart-summary"
 
+import ErrorPage from "./Error"
+import Loading from "./Loading"
+
 function Cart() {
-  const cartsData = exampleProductsData
+  const { userId } = useParams<{ userId: string }>()
+  const { user } = useAuthContext()
+
+  const { data: cartItemsData, isLoading } = useGetAllCartItems(userId, 1, null)
+
+  console.log(cartItemsData?.cartItems)
+
+  if (user?.userId !== userId) return <ErrorPage statusCode={404} />
+  if (!cartItemsData || isLoading) return <Loading />
 
   return (
     <div>
@@ -15,13 +30,13 @@ function Cart() {
       />
 
       <div className="flex justify-between gap-10">
-        {cartsData.length === 0 ? (
+        {cartItemsData.cartItems.length === 0 ? (
           <p className="text-xl font-medium text-gray-600">
             Your cart is empty.
           </p>
         ) : (
           <div className="w-2/3 flex-col">
-            {cartsData.map((item, index) => (
+            {cartItemsData.cartItems.map((item, index) => (
               <CartItemCard key={index} productData={item} />
             ))}
           </div>

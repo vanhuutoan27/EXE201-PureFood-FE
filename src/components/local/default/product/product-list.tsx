@@ -20,7 +20,6 @@ import LazyImage from "@/components/global/molecules/lazy-image"
 import { Filters } from "./product-filter"
 
 interface ProductListProps {
-  category: string
   productsData: {
     totalPages: number
     totalItems: number
@@ -33,17 +32,12 @@ interface ProductListProps {
 }
 
 function ProductList({
-  category,
   productsData,
   search,
   filters,
   handleShowMore,
   visibleProducts
 }: ProductListProps) {
-  console.log("🚀 ~ category:", category)
-
-  console.log(productsData.totalItems)
-
   const filterByPrice = (product: ProductType) => {
     if (!filters.priceRange || filters.priceRange === "all") return true
     const [minPrice, maxPrice] = filters.priceRange.split("-").map(Number)
