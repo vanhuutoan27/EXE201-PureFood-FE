@@ -3,6 +3,7 @@ import { OrderType } from "@/schemas/orderSchema"
 export const exampleOrdersData: OrderType[] = [
   {
     orderId: "OD001",
+    user: "DB620724-B051-4B8E-9FFD-08DCE2FA2BF4",
     fullName: "Phan Văn Khải",
     phoneNumber: "0987654321",
     email: "nguyenvana@example.com",
@@ -44,6 +45,7 @@ export const exampleOrdersData: OrderType[] = [
   },
   {
     orderId: "OD002",
+    user: "DB620724-B051-4B8E-9FFD-08DCE2FA2BF4",
     fullName: "Văn Hữu Toàn",
     phoneNumber: "0987654321",
     email: "nguyenvana@example.com",
@@ -85,6 +87,7 @@ export const exampleOrdersData: OrderType[] = [
   },
   {
     orderId: "OD003",
+    user: "DB620724-B051-4B8E-9FFD-08DCE2FA2BF4",
     fullName: "Nguyễn Quốc Đại",
     phoneNumber: "0987654321",
     email: "nguyenvana@example.com",
@@ -126,6 +129,7 @@ export const exampleOrdersData: OrderType[] = [
   },
   {
     orderId: "OD004",
+    user: "DB620724-B051-4B8E-9FFD-08DCE2FA2BF4",
     fullName: "Nguyễn Quốc Đại",
     phoneNumber: "0987654321",
     email: "nguyenvana@example.com",

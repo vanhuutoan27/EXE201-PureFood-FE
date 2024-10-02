@@ -27,13 +27,11 @@ function Products() {
   const [visibleProducts, setVisibleProducts] = useState(INITIAL_PRODUCT_COUNT)
   const categoryUrl = useLocation().pathname.split("/")[1]
 
-  const { data: productsData, isLoading } = usGetProductsByCategory(
-    categoryUrl
-    // 1,
-    // visibleProducts
+  const { data: productsData, isLoading } = useGetProductsByCategory(
+    categoryUrl,
+    1,
+    visibleProducts
   )
-
-  console.log(productsData?.products)
 
   const [searchValue, setSearchValue] = useState("")
   const [filters, setFilters] = useState(defaultFilters)
@@ -41,6 +39,7 @@ function Products() {
 
   useEffect(() => {
     setFilters(defaultFilters)
+    setVisibleProducts(INITIAL_PRODUCT_COUNT)
   }, [categoryUrl])
 
   const handleShowMore = () => {

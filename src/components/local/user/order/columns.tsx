@@ -1,7 +1,5 @@
 "use client"
 
-import { useState } from "react"
-
 import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 
@@ -23,8 +21,6 @@ import {
   DropdownMenuTrigger
 } from "@/components/global/atoms/dropdown-menu"
 
-import ViewOrderDialog from "./view-order"
-
 export const columns: ColumnDef<OrderType>[] = [
   {
     accessorKey: "fullName",
@@ -39,45 +35,25 @@ export const columns: ColumnDef<OrderType>[] = [
       )
     }
   },
-
   {
     accessorKey: "phoneNumber",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Số điện thoại
-        </span>
-      )
+    header: "Số điện thoại",
+    cell: ({ row }) => {
+      const phoneNumber = row.original.phoneNumber
+      return <span>{capitalize(phoneNumber)}</span>
     }
   },
   {
     accessorKey: "paymentMethod",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Thanh toán
-        </span>
-      )
+    header: "Thanh toán",
+    cell: ({ row }) => {
+      const paymentMethod = row.original.paymentMethod
+      return <span>{paymentMethod}</span>
     }
   },
   {
     accessorKey: "totalAmount",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Giá
-        </span>
-      )
-    },
+    header: "Tổng tiền",
     cell: ({ row }) => {
       const totalAmount = row.original.totalAmount
       return <span>{formatCurrency(totalAmount)}</span>
@@ -123,45 +99,20 @@ export const columns: ColumnDef<OrderType>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
-      const order = row.original
-
-      const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
-
-      const handleViewDetailsClick = () => {
-        setIsViewDialogOpen(true)
-      }
-
+    cell: () => {
       return (
-        <>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-white">
-              <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(order.orderId)}
-              >
-                Sao chép ID
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleViewDetailsClick}>
-                Xem chi tiết
-              </DropdownMenuItem>
-              <DropdownMenuItem>Đổi trạng thái</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {isViewDialogOpen && (
-            <ViewOrderDialog
-              orderData={order}
-              onClose={() => setIsViewDialogOpen(false)}
-            />
-          )}
-        </>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="bg-white">
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Xem chi tiết</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       )
     }
   }

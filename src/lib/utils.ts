@@ -65,3 +65,36 @@ export function convertToLocalISOString(date: Date): string {
 
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`
 }
+
+export const getOrderStatus = (status: string) => {
+  let statusValue
+  let statusColor
+
+  switch (status) {
+    case "Pending":
+      statusValue = "Đang chờ"
+      statusColor = "text-yellow-500"
+      break
+    case "Processing":
+      statusValue = "Đang xử lý"
+      statusColor = "text-orange-500"
+      break
+    case "Shipping":
+      statusValue = "Đang giao hàng"
+      statusColor = "text-blue-500"
+      break
+    case "Completed":
+      statusValue = "Đã hoàn thành"
+      statusColor = "text-green-500"
+      break
+    case "Cancelled":
+      statusValue = "Đã hủy"
+      statusColor = "text-red-500"
+      break
+    default:
+      statusValue = "Không xác định"
+      statusColor = "text-gray-500"
+  }
+
+  return { statusValue, statusColor }
+}

@@ -42,8 +42,8 @@
     margin: 0;
     padding: 0;
     font-family: "Open Sans", sans-serif;
-    min-width: 100vw;
-    overflow-x: hidden;
+    /* min-width: 96vw; */
+    /* overflow-x: hidden; */
     /* background: #f1f5f9; */
   }
 

@@ -3,17 +3,24 @@ import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
+import { useOutletContext } from "react-router-dom"
 
-import { UpdateUserType, updateUserSchema } from "@/schemas/userSchema"
-
-import { exampleUsersData } from "@/constants/users"
+import {
+  UpdateUserType,
+  UserType,
+  updateUserSchema
+} from "@/schemas/userSchema"
 
 import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
 import { Input } from "@/components/global/atoms/input"
 
+import Loading from "../Loading"
+
 function UserAccount() {
-  const userData = exampleUsersData[0]
+  const { userData } = useOutletContext<{ userData: UserType }>()
+
+  if (!userData) return <Loading />
 
   const {
     register,

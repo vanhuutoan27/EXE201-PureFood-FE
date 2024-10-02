@@ -2,13 +2,14 @@ import { useEffect } from "react"
 
 import { defaultAvatar } from "@/configs/config"
 import ErrorPage from "@/pages/Error"
+import Loading from "@/pages/Loading"
 import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 
-import { UserType } from "@/schemas/userSchema"
+import { useAuthContext } from "@/contexts/auth-context"
+
+import { useGetUserById } from "@/apis/userApi"
 
 import { scrollToTop } from "@/lib/utils"
-
-import { exampleUsersData } from "@/constants/users"
 
 import { Avatar, AvatarImage } from "@/components/global/atoms/avatar"
 import LazyImage from "@/components/global/molecules/lazy-image"
@@ -23,12 +24,9 @@ function UserLayout() {
   const location = useLocation()
 
   const { userId } = useParams<{ userId: string }>()
+  const { user } = useAuthContext()
 
-  const user = exampleUsersData.find((veg: UserType) => veg.userId === userId)
-
-  if (!user) {
-    return <ErrorPage statusCode={404} />
-  }
+  const { data: userData, isLoading } = useGetUserById(userId)
 
   const activeTab = location.pathname.includes("thong-tin-ca-nhan")
     ? "account"
@@ -39,6 +37,9 @@ function UserLayout() {
   useEffect(() => {
     scrollToTop()
   }, [location])
+
+  if (user?.userId !== userId) return <ErrorPage statusCode={404} />
+  if (!userData || isLoading) return <Loading />
 
   return (
     <div className="flex flex-col gap-6">
@@ -87,15 +88,15 @@ function UserLayout() {
         </TabsList>
 
         <TabsContent value="account">
-          <Outlet />
+          <Outlet context={{ userData }} />
         </TabsContent>
 
         <TabsContent value="password">
-          <Outlet />
+          <Outlet context={{ userId }} />
         </TabsContent>
 
         <TabsContent value="order">
-          <Outlet />
+          <Outlet context={{ userId }} />
         </TabsContent>
       </Tabs>
     </div>

@@ -1,6 +1,6 @@
 import { OrderType } from "@/schemas/orderSchema"
 
-import { formatCurrency, formatDateDMY } from "@/lib/utils"
+import { formatCurrency, formatDateDMY, getOrderStatus } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
 import {
@@ -21,29 +21,6 @@ interface ViewOrderProps {
 
 function ViewOrderDialog({ orderData, onClose }: ViewOrderProps) {
   const addressCustomer = `${orderData.address}, ${orderData.commune}, ${orderData.district}, ${orderData.province}`
-
-  const getOrderStatus = (orderStatus: string) => {
-    let statusValue = ""
-    switch (orderStatus) {
-      case "Pending":
-        statusValue = "Đang chờ"
-        break
-      case "Processing":
-        statusValue = "Đang xử lý"
-        break
-      case "Shipping":
-        statusValue = "Đang giao hàng"
-        break
-      case "Completed":
-        statusValue = "Đã hoàn thành"
-        break
-      default:
-        statusValue = "Đã hủy"
-        break
-    }
-
-    return { statusValue }
-  }
 
   const { statusValue } = getOrderStatus(orderData.orderStatus)
 

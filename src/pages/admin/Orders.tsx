@@ -6,6 +6,7 @@ import { DataTable } from "@/components/local/admin/order/data-table"
 
 function Orders() {
   const ordersData = exampleOrdersData
+
   return (
     <div>
       <AdminTitle title={"Quản lý đơn hàng"} />

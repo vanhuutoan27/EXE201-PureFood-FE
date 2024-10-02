@@ -20,6 +20,7 @@ export const createOrderItemSchema = orderItemSchema.omit({
 
 export const orderSchema = z.object({
   orderId: z.string().nonempty({ message: "Mã đơn hàng là bắt buộc" }),
+  user: z.string().nonempty({ message: "Mã người dùng là bắt buộc" }),
   fullName: z.string().nonempty({ message: "Vui lòng nhập họ và tên" }),
   phoneNumber: z.string().nonempty({ message: "Vui lòng nhập số điện thoại" }),
   email: z

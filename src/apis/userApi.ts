@@ -47,12 +47,12 @@ export const useGetAllUsers = (
   })
 }
 
-export const useGetUserByUsername = (username: string) => {
+export const useGetUserById = (userId: string | undefined) => {
   return useQuery<UserType, Error>({
-    queryKey: ["user", username],
+    queryKey: ["user", userId],
     queryFn: async () => {
       try {
-        const response = await pureAPI.get(`/users/${username}`)
+        const response = await pureAPI.get(`/users/${userId}`)
         const { success, message, data } = response.data
 
         if (success) {
@@ -67,7 +67,7 @@ export const useGetUserByUsername = (username: string) => {
         throw new Error(errorMessage)
       }
     },
-    enabled: !!username,
+    enabled: !!userId,
     onError: (error: Error) => {
       toast.error(error.message)
     }
