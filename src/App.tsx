@@ -30,7 +30,6 @@ const AdminOrders = lazy(() => import("@/pages/admin/Orders"))
 const AdminOrdersNew = lazy(() => import("@/pages/admin/OrdersNew"))
 const AdminOrdersProcessed = lazy(() => import("@/pages/admin/OrdersProcessed"))
 const AdminUsers = lazy(() => import("@/pages/admin/Users"))
-const TestDatePicker = lazy(() => import("@/pages/admin/TestDatePicker"))
 
 function App() {
   return (
@@ -63,7 +62,11 @@ function App() {
           <Route path="/admin/san-pham/tao-moi" element={<AdminAddProduct />} />
           <Route path="/admin/don-hang/tat-ca" element={<AdminOrders />} />
           <Route path="/admin/don-hang/moi" element={<AdminOrdersNew />} />
-          {/* <Route path="/admin/san-pham/tao-moi" element={<TestDatePicker />} /> */}
+          <Route
+            path="/admin/don-hang/da-xu-ly"
+            element={<AdminOrdersProcessed />}
+          />
+
           <Route
             path="/admin/don-hang/da-xu-ly"
             element={<AdminOrdersProcessed />}

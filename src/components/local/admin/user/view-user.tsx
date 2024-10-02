@@ -25,9 +25,7 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
     <Dialog onOpenChange={onClose} open>
       <DialogContent className="min-w-[500px]">
         <DialogHeader>
-        <DialogTitle className="text-center">
-            Chi tiết người dùng
-          </DialogTitle>
+          <DialogTitle className="text-center">Chi tiết người dùng</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-4">

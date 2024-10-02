@@ -1,8 +1,7 @@
 import { z } from "zod"
 
 export const customerInfoSchema = z.object({
-  firstName: z.string().nonempty({ message: "Họ là bắt buộc" }),
-  lastName: z.string().nonempty({ message: "Tên là bắt buộc" }),
+  fullName: z.string().nonempty({ message: "Họ và tên là bắt buộc" }),
   phoneNumber: z.string().nonempty({ message: "Số điện thoại là bắt buộc" }),
   email: z
     .string()
