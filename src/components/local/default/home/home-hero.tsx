@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom"
 
-import { exampleUsersData } from "@/constants/users"
+import { useAuthContext } from "@/contexts/auth-context"
 
 import { Button } from "@/components/global/atoms/button"
 import UserButton from "@/components/global/organisms/user-button"
 
 function HomeHero() {
-  const user = exampleUsersData[0]
+  const { user } = useAuthContext()
 
   return (
     <div className="relative mt-6">

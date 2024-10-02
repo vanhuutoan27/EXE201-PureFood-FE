@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom"
 
 import App from "./App.tsx"
 import { Toaster } from "./components/global/atoms/sonner.tsx"
+import { AuthProvider } from "./contexts/auth-context.tsx"
 import "./index.css"
 
 const queryClient = new QueryClient()
@@ -11,8 +12,10 @@ const queryClient = new QueryClient()
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
-      <App />
-      <Toaster />
+      <AuthProvider>
+        <App />
+        <Toaster />
+      </AuthProvider>
     </QueryClientProvider>
   </BrowserRouter>
 )

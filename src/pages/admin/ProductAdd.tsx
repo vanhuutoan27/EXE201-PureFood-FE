@@ -2,11 +2,13 @@ import { useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { CalendarIcon, Upload } from "lucide-react"
 import { useForm } from "react-hook-form"
 
 import { CreateProductType, createProductSchema } from "@/schemas/productSchema"
 
+import { diamoonDB } from "@/lib/firebase"
 import { convertToLocalISOString } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
@@ -33,57 +35,108 @@ import AdminTitle from "@/components/global/organisms/admin-title"
 function ProductAdd() {
   const [entryDate, setEntryDate] = useState<string>("")
   const [expiryDate, setExpiryDate] = useState<string>("")
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
+  const [isDragOver, setIsDragOver] = useState<boolean>(false)
 
-  const handleEntryDateSelect = (date: Date | undefined) => {
+  const handleDateSelect = (
+    date: Date | undefined,
+    fieldName: "entryDate" | "expiryDate"
+  ) => {
     if (date) {
       const isoString = convertToLocalISOString(date)
-      setEntryDate(isoString)
+      if (fieldName === "entryDate") {
+        setEntryDate(isoString)
+      } else if (fieldName === "expiryDate") {
+        setExpiryDate(isoString)
+      }
+      setValue(fieldName, isoString)
     }
   }
-  const handleExpiryDateSelect = (date: Date | undefined) => {
-    if (date) {
-      const isoString = convertToLocalISOString(date)
-      setExpiryDate(isoString)
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files
+    if (files) {
+      setUploadedFiles(Array.from(files))
+      setError("images", { message: "" })
     }
+  }
+
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault()
+    setIsDragOver(false)
+    const files = event.dataTransfer.files
+    if (files) {
+      setUploadedFiles(Array.from(files))
+    }
+  }
+
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault()
+    setIsDragOver(true)
+  }
+
+  const handleDragLeave = () => {
+    setIsDragOver(false)
+  }
+
+  const uploadImagesToFirebase = async (files: File[]) => {
+    const uploadPromises = files.map(async (file) => {
+      const storageRef = ref(diamoonDB, `PureFood/Products/${file.name}`)
+      await uploadBytes(storageRef, file)
+      const downloadURL = await getDownloadURL(storageRef)
+      return downloadURL
+    })
+
+    return Promise.all(uploadPromises)
   }
 
   const {
     register,
-    handleSubmit,
     setValue,
+    handleSubmit,
+    setError,
     formState: { errors }
   } = useForm<CreateProductType>({
     resolver: zodResolver(createProductSchema),
     defaultValues: {
-      organic: false,
-      unit: ""
+      organic: false
     }
   })
 
   const handleCategoryChange = (value: string) => {
-    console.log(value)
     setValue("category", value)
   }
 
   const handleSupplierChange = (value: string) => {
     setValue("supplier", value)
-    console.log(value)
   }
 
   const handleUnitChange = (value: string) => {
     setValue("unit", value)
-    console.log(value)
   }
 
   const handleOrganicChange = (value: boolean) => {
     setValue("organic", value)
   }
 
-  const onSubmit = (data: CreateProductType) => {
-    console.log("Form data:", data)
-  }
+  const onSubmit = async (data: CreateProductType) => {
+    try {
+      if (uploadedFiles.length === 0) {
+        setError("images", { message: "Vui lòng thêm hình ảnh sản phẩm" })
+        return
+      }
 
-  console.log(errors)
+      const imageUrls = await uploadImagesToFirebase(uploadedFiles)
+
+      setValue("images", imageUrls as [string, ...string[]])
+
+      const finalData = { ...data, images: imageUrls }
+
+      console.log(JSON.stringify(finalData, null, 2))
+    } catch (error) {
+      console.error("Error uploading images:", error)
+    }
+  }
 
   return (
     <div>
@@ -93,39 +146,40 @@ function ProductAdd() {
         <div className="grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2">
           <div className="space-y-1">
             <Label htmlFor="category">Danh mục</Label>
-
             <Select onValueChange={handleCategoryChange}>
-              <SelectTrigger className="mb-3 mt-1 h-10 rounded-xl border-[1px] pl-5">
+              <SelectTrigger className="h-10 rounded-xl bg-white pl-5">
                 <SelectValue placeholder="Chọn danh mục" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="trai-cay">Trái cây</SelectItem>
                   <SelectItem value="rau-cu">Rau củ</SelectItem>
+                  <SelectItem value="trai-cay">Trái cây</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
+
             {errors.category && (
-              <p className="error-lens">{errors.category.message}</p>
+              <p className="error-lens">Vui lòng chọn loại sản phẩm</p>
             )}
           </div>
 
           <div className="space-y-1">
             <Label htmlFor="supplier">Nhà cung cấp</Label>
-
             <Select onValueChange={handleSupplierChange}>
-              <SelectTrigger className="mb-3 mt-1 h-10 rounded-xl border-[1px] pl-5">
+              <SelectTrigger className="h-10 rounded-xl bg-white pl-5">
                 <SelectValue placeholder="Chọn nhà cung cấp" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="Pure Food">Pure Food</SelectItem>
-                  <SelectItem value="other">Khác</SelectItem>
+                  <SelectItem value="PureFood">PureFood</SelectItem>
+                  <SelectItem value="Moncati">Moncati</SelectItem>
+                  <SelectItem value="Other">Khác</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
+
             {errors.supplier && (
-              <p className="error-lens">Nhà cung cấp là bắt buộc</p>
+              <p className="error-lens">Vui lòng chọn nhà cung cấp</p>
             )}
           </div>
 
@@ -136,7 +190,10 @@ function ProductAdd() {
               id="productName"
               placeholder="Nhập tên sản phẩm"
               {...register("productName")}
+              defaultValue={"Rau cải thảo"}
+              className="bg-white"
             />
+
             {errors.productName && (
               <p className="error-lens">{errors.productName.message}</p>
             )}
@@ -149,7 +206,10 @@ function ProductAdd() {
               id="foodName"
               placeholder="Nhập tên thực phẩm"
               {...register("foodName")}
+              defaultValue={"Cải thảo"}
+              className="bg-white"
             />
+
             {errors.foodName && (
               <p className="error-lens">{errors.foodName.message}</p>
             )}
@@ -161,9 +221,11 @@ function ProductAdd() {
               id="description"
               rows={5}
               placeholder="Nhập mô tả chi tiết"
-              className="resize-none"
               {...register("description")}
+              defaultValue={"No description for you"}
+              className="resize-none bg-white"
             />
+
             {errors.description && (
               <p className="error-lens">{errors.description.message}</p>
             )}
@@ -175,8 +237,11 @@ function ProductAdd() {
               id="stock"
               type="number"
               placeholder="Nhập số lượng tồn kho"
-              {...register("stock")}
+              {...register("stock", { valueAsNumber: true })}
+              defaultValue={100}
+              className="bg-white"
             />
+
             {errors.stock && (
               <p className="error-lens">{errors.stock.message}</p>
             )}
@@ -188,8 +253,11 @@ function ProductAdd() {
               id="weight"
               type="number"
               placeholder="Nhập khối lượng sản phẩm"
-              {...register("weight")}
+              {...register("weight", { valueAsNumber: true })}
+              defaultValue={100}
+              className="bg-white"
             />
+
             {errors.weight && (
               <p className="error-lens">{errors.weight.message}</p>
             )}
@@ -197,9 +265,8 @@ function ProductAdd() {
 
           <div className="space-y-1">
             <Label htmlFor="unit">Đơn vị</Label>
-
             <Select onValueChange={handleUnitChange}>
-              <SelectTrigger className="mb-3 mt-1 h-10 rounded-xl border-[1px] pl-5">
+              <SelectTrigger className="h-10 rounded-xl bg-white pl-5">
                 <SelectValue placeholder="Chọn đơn vị sản phẩm" />
               </SelectTrigger>
               <SelectContent>
@@ -209,6 +276,7 @@ function ProductAdd() {
                 </SelectGroup>
               </SelectContent>
             </Select>
+
             {errors.unit && <p className="error-lens">Đơn vị là bắt buộc</p>}
           </div>
 
@@ -218,8 +286,11 @@ function ProductAdd() {
               id="price"
               type="number"
               placeholder="Nhập giá sản phẩm"
-              {...register("price")}
+              {...register("price", { valueAsNumber: true })}
+              defaultValue={10000}
+              className="bg-white"
             />
+
             {errors.price && (
               <p className="error-lens">{errors.price.message}</p>
             )}
@@ -232,20 +303,23 @@ function ProductAdd() {
               type="text"
               placeholder="Nhập nơi xuất xứ"
               {...register("origin")}
+              defaultValue={"Củ Chi"}
+              className="bg-white"
             />
+
             {errors.origin && (
               <p className="error-lens">{errors.origin.message}</p>
             )}
           </div>
 
-          <div className="mt-6 flex items-center space-x-2">
+          <div className="flex items-center space-x-2">
             <Switch
               id="organic"
               {...register("organic")}
               onCheckedChange={handleOrganicChange}
-              defaultChecked={false}
             />
-            <Label htmlFor="organic">Organic</Label>
+
+            <Label htmlFor="organic">Sản phẩm hữu cơ</Label>
           </div>
 
           <div className="space-y-1">
@@ -268,13 +342,14 @@ function ProductAdd() {
                 <Calendar
                   mode="single"
                   selected={entryDate ? new Date(entryDate) : undefined}
-                  onSelect={handleEntryDateSelect}
+                  onSelect={(date) => handleDateSelect(date, "entryDate")}
                   initialFocus
                 />
               </PopoverContent>
             </Popover>
+
             {errors.entryDate && (
-              <p className="error-lens">Ngày nhập là bắt buộc</p>
+              <p className="error-lens">Vui lòng nhập ngày nhập</p>
             )}
           </div>
 
@@ -298,47 +373,68 @@ function ProductAdd() {
                 <Calendar
                   mode="single"
                   selected={expiryDate ? new Date(expiryDate) : undefined}
-                  onSelect={handleExpiryDateSelect}
+                  onSelect={(date) => handleDateSelect(date, "expiryDate")}
                   initialFocus
                 />
               </PopoverContent>
             </Popover>
+
             {errors.expiryDate && (
-              <p className="error-lens">Ngày hết hạn là bắt buộc</p>
+              <p className="error-lens">Vui lòng nhập ngày hết hạn</p>
             )}
           </div>
 
           <div className="col-span-2 space-y-1">
-            <Label htmlFor="images">Images</Label>
-            <div className="mt-1 flex justify-center rounded-md border-2 border-dashed px-6 pb-6 pt-5">
-              <div className="space-y-1 text-center">
-                <Upload className="mx-auto h-8 w-8 text-gray-400" />
-                <div className="flex text-sm text-gray-600">
-                  <label
-                    htmlFor="file-upload"
-                    className="relative cursor-pointer rounded-md font-medium text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-primary"
-                  >
-                    <span>Upload a file</span>
-                    <input
-                      id="file-upload"
-                      name="file-upload"
-                      type="file"
-                      className="sr-only"
-                      multiple
-                    />
-                  </label>
-                  <p className="pl-1">or drag and drop</p>
+            <Label htmlFor="images">Hình ảnh</Label>
+            <label htmlFor="file-upload" className="cursor-pointer">
+              <div
+                className={`slow mt-1 flex flex-col items-center justify-center space-y-1 rounded-xl border-2 ${isDragOver ? "border-primary" : "border-dashed"} bg-white px-6 py-10 font-medium`}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+              >
+                <Upload size={32} className="mb-2 text-gray-400" />
+                <div className="flex select-none text-sm text-gray-600">
+                  <span className="font-semibold text-primary">
+                    Tải hình lên
+                  </span>
+                  <input
+                    id="file-upload"
+                    name="file-upload"
+                    type="file"
+                    className="sr-only"
+                    multiple
+                    onChange={handleFileUpload}
+                  />
+                  <p className="pl-1">hoặc kéo và thả</p>
                 </div>
-                <p className="text-xs text-gray-500">
-                  PNG, JPG, GIF up to 10MB
+                <p className="select-none text-xs text-gray-600">
+                  PNG, JPG, GIF lên đến 10MB
                 </p>
               </div>
-            </div>
+            </label>
+
+            {uploadedFiles.length > 0 && (
+              <div className="pt-4">
+                <Label>Hình ảnh đã tải lên:</Label>
+                <ul className="list-disc pl-5">
+                  {uploadedFiles.map((file, index) => (
+                    <li key={index} className="text-gray-600">
+                      {file.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {errors.images && (
+              <p className="error-lens">{errors.images.message}</p>
+            )}
           </div>
         </div>
 
         <Button type="submit" variant="default" className="h-11 w-full">
-          Add Product
+          Thêm sản phẩm
         </Button>
       </form>
     </div>

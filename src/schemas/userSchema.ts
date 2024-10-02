@@ -65,9 +65,24 @@ export const updateUserSchema = userSchema.omit({
   updatedBy: true
 })
 
-export const userLoginSchema = userSchema.pick({
-  email: true,
-  password: true
+export const userLoginSchema = z.object({
+  identifier: z
+    .string()
+    .nonempty({ message: "Vui lòng nhập email hoặc số điện thoại" }),
+  password: z
+    .string()
+    .nonempty({ message: "Vui lòng nhập mật khẩu" })
+    .min(6, { message: "Mật khẩu phải có ít nhất 6 ký tự" })
+    .regex(/[A-Z]/, {
+      message: "Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa"
+    })
+    .regex(/[a-z]/, {
+      message: "Mật khẩu phải chứa ít nhất 1 chữ cái viết thường"
+    })
+    .regex(/[0-9]/, { message: "Mật khẩu phải chứa ít nhất 1 chữ số" })
+    .regex(/[@$!%*?&]/, {
+      message: "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt"
+    })
 })
 
 export const userRegisterSchema = userSchema

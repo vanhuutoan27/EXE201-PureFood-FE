@@ -1,13 +1,13 @@
 import { siteConfig } from "@/configs/site"
 import { Link, useLocation } from "react-router-dom"
 
-import { exampleUsersData } from "@/constants/users"
+import { useAuthContext } from "@/contexts/auth-context"
 
 import { Button } from "../atoms/button"
 import UserButton from "./user-button"
 
 function Header() {
-  const user = exampleUsersData[0]
+  const { user } = useAuthContext()
 
   const location = useLocation()
 

@@ -3,10 +3,15 @@ import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Autoplay from "embla-carousel-autoplay"
 import { Eye, EyeOff } from "lucide-react"
-import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { FormProvider, useForm } from "react-hook-form"
+import { Link, useNavigate } from "react-router-dom"
+import { toast } from "sonner"
+
+import { useAuthContext } from "@/contexts/auth-context"
 
 import { UserLoginType, userLoginSchema } from "@/schemas/userSchema"
+
+import pureAPI from "@/lib/pureAPI"
 
 import { Button } from "@/components/global/atoms/button"
 import {
@@ -16,7 +21,6 @@ import {
 } from "@/components/global/atoms/carousel"
 import { Checkbox } from "@/components/global/atoms/checkbox"
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -33,34 +37,62 @@ export const slides = [
 ]
 
 function Login() {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const { login } = useAuthContext()
+
   const [isLoading, setIsLoading] = useState(false)
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const navigate = useNavigate()
 
   const handleToggleVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible)
   }
 
-  const loginForm = useForm<UserLoginType>({
+  const formMethods = useForm<UserLoginType>({
     resolver: zodResolver(userLoginSchema),
     defaultValues: {
-      email: "dainguquen@gmail.com",
+      identifier: "vanhuutoan27@gmail.com",
       password: "123As@"
     }
   })
 
-  const onSubmit = async (data: UserLoginType) => {
-    setIsLoading(true)
+  const {
+    handleSubmit,
+    formState: { errors },
+    control
+  } = formMethods
 
+  const onSubmit = async (loginData: UserLoginType) => {
     try {
-      console.log(data)
+      setIsLoading(true)
+      const response = await pureAPI.post("/auth/login", {
+        email: loginData.identifier,
+        password: loginData.password
+      })
+
+      const { success, message, data } = response.data
+
+      if (success && data) {
+        const { accessToken, refreshToken, expiredAt } = data
+        login(accessToken, refreshToken, expiredAt)
+        toast.success(message)
+        navigate("/")
+        // navigate("/redirect")
+      } else {
+        toast.error(message)
+      }
+    } catch (error: any) {
+      toast.error(
+        error.response.data.message ||
+          "An error occurred. Please try again later."
+      )
     } finally {
       setIsLoading(false)
     }
   }
 
   return (
-    <div className="flex w-full flex-wrap items-center justify-center">
-      <div className="flex h-full w-full items-center justify-center p-10 lg:w-1/2">
+    <div className="flex min-h-screen w-full flex-wrap items-center justify-center">
+      <div className="flex w-full items-center justify-center p-10 lg:w-1/2">
         <div className="flex w-3/4 flex-col space-y-10">
           <div className="select-none space-y-2">
             <h2 className="text-4xl font-bold tracking-wider">Đăng nhập</h2>
@@ -69,15 +101,13 @@ function Login() {
             </p>
           </div>
 
-          <Form {...loginForm}>
-            <form
-              onSubmit={loginForm.handleSubmit(onSubmit)}
-              className="space-y-10"
-            >
+          {/* Wrap your form in FormProvider */}
+          <FormProvider {...formMethods}>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
               <div className="space-y-4">
                 <FormField
-                  name="email"
-                  control={loginForm.control}
+                  name="identifier"
+                  control={control}
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -87,14 +117,14 @@ function Login() {
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage>{errors.identifier?.message}</FormMessage>
                     </FormItem>
                   )}
                 />
 
                 <FormField
                   name="password"
-                  control={loginForm.control}
+                  control={control}
                   render={({ field }) => (
                     <div className="relative">
                       <FormItem>
@@ -105,7 +135,7 @@ function Login() {
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage>{errors.password?.message}</FormMessage>
                       </FormItem>
 
                       {isPasswordVisible ? (
@@ -164,7 +194,7 @@ function Login() {
                 </p>
               </div>
             </form>
-          </Form>
+          </FormProvider>
         </div>
       </div>
 

@@ -123,20 +123,20 @@ export function DataTable<TData, TValue>({
 
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
+          disabled={!table.getCanPreviousPage()}
           type="button"
           size="sm"
           variant="outline"
           onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
         >
           Previous
         </Button>
         <Button
+          disabled={!table.getCanNextPage()}
           type="button"
           size="sm"
           variant="outline"
           onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
         >
           Next
         </Button>

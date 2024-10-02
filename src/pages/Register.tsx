@@ -3,10 +3,13 @@ import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Autoplay from "embla-carousel-autoplay"
 import { Eye, EyeOff } from "lucide-react"
-import { useForm } from "react-hook-form"
+import { FormProvider, useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
+import { toast } from "sonner"
 
 import { UserRegisterType, userRegisterSchema } from "@/schemas/userSchema"
+
+import pureAPI from "@/lib/pureAPI"
 
 import { Button } from "@/components/global/atoms/button"
 import {
@@ -16,7 +19,6 @@ import {
 } from "@/components/global/atoms/carousel"
 import { Checkbox } from "@/components/global/atoms/checkbox"
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -42,29 +44,51 @@ function Register() {
     }
   }
 
-  const registerForm = useForm<UserRegisterType>({
+  const methods = useForm<UserRegisterType>({
     resolver: zodResolver(userRegisterSchema),
     defaultValues: {
-      fullName: "Shadow Nguyen",
-      phoneNumber: "0123456789",
-      email: "dainguquen@gmail.com",
+      fullName: "Van Huu Toan",
+      phoneNumber: "0792766979",
+      email: "vanhuutoan27@gmail.com",
       password: "123As@",
       confirmPassword: "123As@"
     }
   })
 
-  const onSubmit = async (data: UserRegisterType) => {
-    setIsLoading(true)
+  const {
+    handleSubmit,
+    formState: { errors }
+  } = methods
 
+  const onSubmit = async (registerData: UserRegisterType) => {
     try {
-      console.log(data)
+      setIsLoading(true)
+      const response = await pureAPI.post("/auth/register", {
+        fullName: registerData.fullName,
+        phoneNumber: registerData.phoneNumber,
+        email: registerData.email,
+        password: registerData.password
+      })
+
+      const { success, message } = response.data
+
+      if (success) {
+        toast.success(message)
+      } else {
+        toast.error(message)
+      }
+    } catch (error: any) {
+      toast.error(
+        error.response.data.message ||
+          "An error occurred. Please try again later."
+      )
     } finally {
       setIsLoading(false)
     }
   }
 
   return (
-    <div className="flex w-full flex-wrap items-center justify-center">
+    <div className="flex min-h-screen w-full flex-wrap items-center justify-center">
       <div className="hidden w-1/3 p-10 lg:block">
         <Carousel
           opts={{
@@ -91,7 +115,7 @@ function Register() {
         </Carousel>
       </div>
 
-      <div className="flex h-full w-full items-center justify-center p-10 lg:w-2/3">
+      <div className="flex w-full items-center justify-center p-10 lg:w-2/3">
         <div className="flex w-3/4 flex-col space-y-10">
           <div className="select-none space-y-2">
             <h2 className="text-4xl font-bold tracking-wider">Đăng ký</h2>
@@ -101,16 +125,14 @@ function Register() {
             </p>
           </div>
 
-          <Form {...registerForm}>
-            <form
-              onSubmit={registerForm.handleSubmit(onSubmit)}
-              className="space-y-10"
-            >
+          {/* Use FormProvider to wrap the form */}
+          <FormProvider {...methods}>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <FormField
                     name="fullName"
-                    control={registerForm.control}
+                    control={methods.control}
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
@@ -120,14 +142,14 @@ function Register() {
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage>{errors.fullName?.message}</FormMessage>
                       </FormItem>
                     )}
                   />
 
                   <FormField
                     name="phoneNumber"
-                    control={registerForm.control}
+                    control={methods.control}
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
@@ -137,7 +159,7 @@ function Register() {
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage>{errors.phoneNumber?.message}</FormMessage>
                       </FormItem>
                     )}
                   />
@@ -145,7 +167,7 @@ function Register() {
 
                 <FormField
                   name="email"
-                  control={registerForm.control}
+                  control={methods.control}
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -155,14 +177,14 @@ function Register() {
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage>{errors.email?.message}</FormMessage>
                     </FormItem>
                   )}
                 />
 
                 <FormField
                   name="password"
-                  control={registerForm.control}
+                  control={methods.control}
                   render={({ field }) => (
                     <div className="relative">
                       <FormItem>
@@ -173,7 +195,7 @@ function Register() {
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage>{errors.password?.message}</FormMessage>
                       </FormItem>
 
                       {isPasswordVisible ? (
@@ -194,8 +216,8 @@ function Register() {
                 />
 
                 <FormField
-                  name="password"
-                  control={registerForm.control}
+                  name="confirmPassword"
+                  control={methods.control}
                   render={({ field }) => (
                     <div className="relative">
                       <FormItem>
@@ -204,11 +226,13 @@ function Register() {
                             type={
                               isConfirmPasswordVisible ? "text" : "password"
                             }
-                            placeholder="Enter your password"
+                            placeholder="Confirm your password"
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage>
+                          {errors.confirmPassword?.message}
+                        </FormMessage>
                       </FormItem>
 
                       {isConfirmPasswordVisible ? (
@@ -269,7 +293,7 @@ function Register() {
                 </p>
               </div>
             </form>
-          </Form>
+          </FormProvider>
         </div>
       </div>
     </div>

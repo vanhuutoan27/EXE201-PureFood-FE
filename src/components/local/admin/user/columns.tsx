@@ -27,22 +27,6 @@ export const columns: ColumnDef<UserType>[] = [
   //   header: "ID"
   // },
   {
-    accessorKey: "avatar",
-    header: "",
-    cell: ({ row }) => {
-      const avatar = row.original.avatar
-      const fullName = row.original.fullName
-
-      return (
-        <LazyImage
-          src={avatar}
-          alt={fullName}
-          className="h-16 min-h-16 w-16 min-w-16 select-none rounded-xl"
-        />
-      )
-    }
-  },
-  {
     accessorKey: "fullName",
     header: ({ column }) => {
       return (
@@ -52,6 +36,22 @@ export const columns: ColumnDef<UserType>[] = [
         >
           Họ tên
         </span>
+      )
+    },
+    cell: ({ row }) => {
+      const avatar = row.original.avatar
+      const fullName = row.original.fullName
+
+      return (
+        <div className="flex items-center gap-4">
+          <LazyImage
+            src={avatar}
+            alt={fullName}
+            className="h-16 min-h-16 w-16 min-w-16 select-none rounded-xl"
+          />
+
+          <h3>{fullName}</h3>
+        </div>
       )
     }
   },

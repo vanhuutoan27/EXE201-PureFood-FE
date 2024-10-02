@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
@@ -73,6 +71,7 @@ function AddUser({ onClose }: AddUserProps) {
                   </SelectGroup>
                 </SelectContent>
               </Select>
+              
               {errors.role && (
                 <p className="error-lens">{errors.role.message}</p>
               )}
@@ -85,6 +84,7 @@ function AddUser({ onClose }: AddUserProps) {
                 placeholder="Nhập họ và tên"
                 {...register("fullName")}
               />
+
               {errors.fullName && (
                 <p className="error-lens">{errors.fullName.message}</p>
               )}
@@ -97,6 +97,7 @@ function AddUser({ onClose }: AddUserProps) {
                 placeholder="Nhập email"
                 {...register("email")}
               />
+
               {errors.email && (
                 <p className="error-lens">{errors.email.message}</p>
               )}
@@ -111,6 +112,7 @@ function AddUser({ onClose }: AddUserProps) {
                 placeholder="Nhập số điện thoại"
                 {...register("phoneNumber")}
               />
+
               {errors.phoneNumber && (
                 <p className="error-lens">{errors.phoneNumber.message}</p>
               )}

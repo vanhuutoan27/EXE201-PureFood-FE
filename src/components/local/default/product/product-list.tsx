@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 
 import { FaShoppingCart } from "react-icons/fa"
 import { Link } from "react-router-dom"
@@ -21,7 +21,13 @@ import { Filters } from "./product-filter"
 
 interface ProductListProps {
   category: string
-  productsData: ProductType[]
+  productsData: {
+    totalPages: number
+    totalItems: number
+    products: ProductType[]
+  }
+  visibleProducts: number
+  handleShowMore: () => void
   search: string
   filters: Filters
 }
@@ -30,13 +36,13 @@ function ProductList({
   category,
   productsData,
   search,
-  filters
+  filters,
+  handleShowMore,
+  visibleProducts
 }: ProductListProps) {
-  const [visibleProducts, setVisibleProducts] = useState(3)
+  console.log("🚀 ~ category:", category)
 
-  const categoryFilteredProducts = productsData.filter(
-    (product) => product.category === category
-  )
+  console.log(productsData.totalItems)
 
   const filterByPrice = (product: ProductType) => {
     if (!filters.priceRange || filters.priceRange === "all") return true
@@ -55,7 +61,7 @@ function ProductList({
   }
 
   const filteredProducts = useMemo(() => {
-    return categoryFilteredProducts.filter(
+    return productsData.products.filter(
       (product) =>
         removeVietnameseTones(product.productName.toLowerCase()).includes(
           removeVietnameseTones(search.toLowerCase())
@@ -70,11 +76,7 @@ function ProductList({
         (filters.priceRange === "all" || filterByPrice(product)) &&
         (filters.weightRange === "all" || filterByWeight(product))
     )
-  }, [categoryFilteredProducts, search, filters])
-
-  const handleShowMore = () => {
-    setVisibleProducts((prevVisible) => prevVisible + 3)
-  }
+  }, [productsData.products, search, filters])
 
   return (
     <>
@@ -150,10 +152,11 @@ function ProductList({
       </div>
 
       <p className="mb-2 mt-6 text-center font-semibold text-primary">
-        Hiển thị {filteredProducts.length} của {visibleProducts} kết quả
+        Hiển thị {Math.min(visibleProducts, filteredProducts.length)} của{" "}
+        {productsData.totalItems} kết quả
       </p>
 
-      {visibleProducts < filteredProducts.length && (
+      {visibleProducts < productsData.totalItems && (
         <div className="flex justify-center">
           <Button
             type="button"

@@ -11,7 +11,7 @@ function ProductSearch({ searchValue, setSearchValue }: ProductSearchProps) {
       placeholder="Tìm theo tên sản phẩm..."
       value={searchValue}
       onChange={(e) => setSearchValue(e.target.value)}
-      className="border-input font-semibold"
+      className="h-12 border-input"
     />
   )
 }

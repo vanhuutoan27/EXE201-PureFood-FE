@@ -63,7 +63,7 @@ function UserButton({ variant = "default", userData }: UserButtonProps) {
           </span>
         </span>
         <DropdownMenuTrigger asChild className="relative select-none">
-          <Avatar className="cursor-pointer">
+          <Avatar>
             <AvatarImage src={userData.avatar || defaultAvatar} />
           </Avatar>
         </DropdownMenuTrigger>

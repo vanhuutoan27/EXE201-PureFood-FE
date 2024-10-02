@@ -4,12 +4,14 @@ import { useLocation } from "react-router-dom"
 
 import useDebounce from "@/hooks/useDebounce"
 
-import { exampleProductsData } from "@/constants/products"
+import { useGetAllProducts } from "@/apis/productApi"
 
 import Bread from "@/components/global/molecules/bread"
 import ProductFilter from "@/components/local/default/product/product-filter"
 import ProductList from "@/components/local/default/product/product-list"
 import ProductSearch from "@/components/local/default/product/product-search"
+
+import Loading from "./Loading"
 
 const defaultFilters = {
   supplier: "all",
@@ -19,18 +21,34 @@ const defaultFilters = {
   weightRange: "all"
 }
 
+const INITIAL_PRODUCT_COUNT = 3
+
 function Products() {
-  const productsData = exampleProductsData
+  const [visibleProducts, setVisibleProducts] = useState(INITIAL_PRODUCT_COUNT)
+
+  const { data: productsData, isLoading } = useGetAllProducts(
+    1,
+    visibleProducts
+  )
+
   const categoryUrl = useLocation().pathname.split("/")[1]
   const [searchValue, setSearchValue] = useState("")
-
   const [filters, setFilters] = useState(defaultFilters)
-
   const debouncedSearchValue = useDebounce(searchValue)
 
   useEffect(() => {
     setFilters(defaultFilters)
   }, [categoryUrl])
+
+  const handleShowMore = () => {
+    if (visibleProducts >= (productsData?.totalItems ?? 0)) {
+      setVisibleProducts(INITIAL_PRODUCT_COUNT)
+    } else {
+      setVisibleProducts((prev) => prev + INITIAL_PRODUCT_COUNT)
+    }
+  }
+
+  if (!productsData || isLoading) return <Loading />
 
   return (
     <div className="space-y-10">
@@ -56,6 +74,8 @@ function Products() {
           <ProductList
             category={categoryUrl}
             productsData={productsData}
+            visibleProducts={visibleProducts}
+            handleShowMore={handleShowMore}
             search={debouncedSearchValue}
             filters={filters}
           />
