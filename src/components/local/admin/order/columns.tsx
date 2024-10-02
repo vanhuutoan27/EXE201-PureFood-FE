@@ -3,7 +3,7 @@
 import { useState } from "react"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { Check, MoreHorizontal, X } from "lucide-react"
+import { MoreHorizontal } from "lucide-react"
 
 import { OrderType } from "@/schemas/orderSchema"
 
@@ -22,7 +22,7 @@ import ViewOrderDialog from "./view-order"
 
 export const columns: ColumnDef<OrderType>[] = [
   {
-    accessorKey: "customerInfo.fullName",
+    accessorKey: "fullName",
     header: ({ column }) => {
       return (
         <span
@@ -34,27 +34,47 @@ export const columns: ColumnDef<OrderType>[] = [
       )
     }
   },
+
   {
-    accessorKey: "customerInfo.phoneNumber",
-    header: "Số điện thoại",
-    cell: ({ row }) => {
-      const phoneNumber = row.original.customerInfo.phoneNumber
-      return <span>{capitalize(phoneNumber)}</span>
+    accessorKey: "phoneNumber",
+    header: ({ column }) => {
+      return (
+        <span
+          className="cursor-pointer select-none"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Số điện thoại
+        </span>
+      )
     }
   },
   {
     accessorKey: "paymentMethod",
-    header: "Thanh toán",
-    cell: ({ row }) => {
-      const paymentMethod = row.original.paymentMethod
-      return <span>{paymentMethod}</span>
+    header: ({ column }) => {
+      return (
+        <span
+          className="cursor-pointer select-none"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Thanh toán
+        </span>
+      )
     }
   },
   {
-    accessorKey: "orderSummary.totalAmount",
-    header: "Tổng tiền",
+    accessorKey: "totalAmount",
+    header: ({ column }) => {
+      return (
+        <span
+          className="cursor-pointer select-none"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Giá
+        </span>
+      )
+    },
     cell: ({ row }) => {
-      const totalAmount = row.original.orderSummary.totalAmount
+      const totalAmount = row.original.totalAmount
       return <span>{formatCurrency(totalAmount)}</span>
     }
   },
