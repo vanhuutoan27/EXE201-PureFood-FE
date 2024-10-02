@@ -31,11 +31,11 @@ export const exampleProductsData: ProductType[] = [
       "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F1.4.jpg?alt=media&token=7cdbdbd1-c9d2-44ea-9472-24a8ad85fc18"
     ],
     status: true,
-    entryDate: "2024-09-25",
-    expiryDate: "2024-10-10",
-    createdAt: "2024-09-25",
+    entryDate: "2024-10-30T00:00:00",
+    expiryDate: "2024-10-30T00:00:00",
+    createdAt: "2024-10-30T00:00:00",
     createdBy: "asd",
-    updatedAt: "2024-09-25",
+    updatedAt: "2024-10-30T00:00:00",
     updatedBy: "asd"
   },
   {
@@ -68,11 +68,11 @@ export const exampleProductsData: ProductType[] = [
       "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F2.4.jpg?alt=media&token=b0fa6d72-c3f6-4eb1-a260-00a9e002b6a5"
     ],
     status: true,
-    entryDate: "2024-09-20",
-    expiryDate: "2024-09-28",
-    createdAt: "2024-09-20",
+    entryDate: "2024-10-30T00:00:00",
+    expiryDate: "2024-10-30T00:00:00",
+    createdAt: "2024-10-30T00:00:00",
     createdBy: "asd",
-    updatedAt: "2024-09-20",
+    updatedAt: "2024-10-30T00:00:00",
     updatedBy: "asd"
   },
   {
@@ -105,11 +105,11 @@ export const exampleProductsData: ProductType[] = [
       "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F3.4.jpg?alt=media&token=9b436fa5-ff2a-4bd9-99d1-50cad660d704"
     ],
     status: true,
-    entryDate: "2024-09-24",
-    expiryDate: "2024-10-10",
-    createdAt: "2024-09-24",
+    entryDate: "2024-10-30T00:00:00",
+    expiryDate: "2024-10-30T00:00:00",
+    createdAt: "2024-10-30T00:00:00",
     createdBy: "asd",
-    updatedAt: "2024-09-24",
+    updatedAt: "2024-10-30T00:00:00",
     updatedBy: "asd"
   },
   {
@@ -142,11 +142,11 @@ export const exampleProductsData: ProductType[] = [
       "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F18.4.jpg?alt=media&token=f9bddef4-1395-485e-9513-445289e0ef74"
     ],
     status: true,
-    entryDate: "2024-09-23",
-    expiryDate: "2024-10-05",
-    createdAt: "2024-09-23",
+    entryDate: "2024-10-30T00:00:00",
+    expiryDate: "2024-10-30T00:00:00",
+    createdAt: "2024-10-30T00:00:00",
     createdBy: "asd",
-    updatedAt: "2024-09-23",
+    updatedAt: "2024-10-30T00:00:00",
     updatedBy: "asd"
   },
   {
@@ -179,11 +179,11 @@ export const exampleProductsData: ProductType[] = [
       "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F28.4.jpg?alt=media&token=6eb34cbd-e2da-445e-9f49-24a06fca8432"
     ],
     status: true,
-    entryDate: "2024-09-22",
-    expiryDate: "2024-10-05",
-    createdAt: "2024-09-22",
+    entryDate: "2024-10-30T00:00:00",
+    expiryDate: "2024-10-30T00:00:00",
+    createdAt: "2024-10-30T00:00:00",
     createdBy: "asd",
-    updatedAt: "2024-09-22",
+    updatedAt: "2024-10-30T00:00:00",
     updatedBy: "asd"
   },
   {
@@ -217,11 +217,11 @@ export const exampleProductsData: ProductType[] = [
       "https://firebasestorage.googleapis.com/v0/b/diamoondb-1412.appspot.com/o/PureFood%2FProductEx%2F27.6.jpg?alt=media&token=244e0070-c373-4833-a87c-25d11cb513a1"
     ],
     status: true,
-    entryDate: "2024-09-21",
-    expiryDate: "2024-10-05",
-    createdAt: "2024-09-21",
+    entryDate: "2024-10-30T00:00:00",
+    expiryDate: "2024-10-30T00:00:00",
+    createdAt: "2024-10-30T00:00:00",
     createdBy: "asd",
-    updatedAt: "2024-09-21",
+    updatedAt: "2024-10-30T00:00:00",
     updatedBy: "asd"
   }
 ]

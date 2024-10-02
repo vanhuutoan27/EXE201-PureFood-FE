@@ -1,7 +1,8 @@
 import { useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { format } from "date-fns"
+import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react"
 import { useForm } from "react-hook-form"
 
 import {
@@ -10,9 +11,14 @@ import {
   updateProductSchema
 } from "@/schemas/productSchema"
 
-import { formatCurrency, formatDateDMY } from "@/lib/utils"
+import {
+  convertToLocalISOString,
+  formatCurrency,
+  formatDateDMY
+} from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
+import { Calendar } from "@/components/global/atoms/calendar"
 import {
   Dialog,
   DialogContent,
@@ -21,6 +27,11 @@ import {
 } from "@/components/global/atoms/dialog"
 import { Input } from "@/components/global/atoms/input"
 import { Label } from "@/components/global/atoms/label"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from "@/components/global/atoms/popover"
 import { ScrollArea } from "@/components/global/atoms/scroll-area"
 import {
   Select,
@@ -39,14 +50,50 @@ interface ViewProductProps {
 }
 
 function ViewProductDialog({ productData, onClose }: ViewProductProps) {
+  const [entryDate, setEntryDate] = useState<string>(
+    productData.entryDate
+      ? format(new Date(productData.entryDate), "yyyy-MM-dd")
+      : ""
+  )
+  const [expiryDate, setExpiryDate] = useState<string>(
+    productData.expiryDate
+      ? format(new Date(productData.expiryDate), "yyyy-MM-dd")
+      : ""
+  )
+
+  const handleEntryDateSelect = (date: Date | undefined) => {
+    if (date) {
+      const isoStringEntry = convertToLocalISOString(date)
+      setEntryDate(isoStringEntry)
+      setValue("entryDate", isoStringEntry)
+    }
+  }
+  const handleExpiryDateSelect = (date: Date | undefined) => {
+    if (date) {
+      const isoStringExpiry = convertToLocalISOString(date)
+      setExpiryDate(isoStringExpiry)
+      setValue("expiryDate", isoStringExpiry)
+    }
+  }
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors }
   } = useForm<UpdateProductType>({
     resolver: zodResolver(updateProductSchema),
-    defaultValues: productData
+    defaultValues: {
+      ...productData,
+      entryDate: productData.entryDate
+        ? format(new Date(productData.entryDate), "yyyy-MM-dd")
+        : "",
+      expiryDate: productData.expiryDate
+        ? format(new Date(productData.expiryDate), "yyyy-MM-dd")
+        : ""
+    }
   })
+
   const [isEditing, setIsEditing] = useState(false)
 
   const handleCancel = () => {
@@ -57,12 +104,20 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
     setIsEditing(true)
   }
 
-  const onSubmit = (data: UpdateProductType) => {
-    console.log("Form data:", data)
-    setIsEditing(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  const handleOrganicChange = (value: string) => {
+    const isOrganic = value === "true"
+    setValue("organic", isOrganic)
   }
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const handleCategoryChange = (value: string) => {
+    setValue("category", value)
+  }
+
+  const handleUnitChange = (value: string) => {
+    setValue("unit", value)
+  }
 
   const handleNextImage = () => {
     if (productData.images) {
@@ -80,14 +135,17 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
     }
   }
 
+  const onSubmit = (data: UpdateProductType) => {
+    console.log("Form data:", data)
+    setIsEditing(false)
+  }
+
   return (
     <Dialog onOpenChange={onClose} open>
       <DialogContent className="min-w-[1200px]">
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
-          <DialogTitle className="text-center">
-              Chi tiết sản phẩm
-            </DialogTitle>
+            <DialogTitle className="text-center">Chi tiết sản phẩm</DialogTitle>
           </DialogHeader>
           <div className="grid grid-cols-3 gap-x-6">
             <div className="col-span-1 space-y-1">
@@ -99,7 +157,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 {productData.images && (
                   <LazyImage
                     src={productData.images[currentImageIndex]}
-                    alt={`Product image ${currentImageIndex + 1}`}
+                    alt="image-product"
                     className="min-h-[260px] w-full select-none rounded-xl object-cover"
                   />
                 )}
@@ -183,7 +241,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 {isEditing ? (
                   <>
                     <Select
-                      {...register("category")}
+                      onValueChange={handleCategoryChange}
                       defaultValue={productData.category}
                     >
                       <SelectTrigger className="mb-3 mt-1 h-10 rounded-xl border-[1px] pl-5">
@@ -250,7 +308,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 {isEditing ? (
                   <>
                     <Select
-                      {...register("organic")}
+                      onValueChange={handleOrganicChange}
                       defaultValue={productData.organic ? "true" : "false"}
                     >
                       <SelectTrigger className="mb-1 mt-1 h-10 rounded-xl border-[1px] pl-5">
@@ -302,11 +360,43 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 <Label className="font-semibold text-secondary">
                   Ngày nhập
                 </Label>
-                <Input
-                  readOnly
-                  tabIndex={-1}
-                  defaultValue={formatDateDMY(productData.entryDate)}
-                />
+
+                {isEditing ? (
+                  <>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant={"outline"}
+                          className={`w-full justify-start text-left font-normal ${!entryDate && "text-muted-foreground"}`}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {entryDate ? (
+                            format(new Date(entryDate), "PPP")
+                          ) : (
+                            <span>Chọn ngày nhập</span>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          selected={entryDate ? new Date(entryDate) : undefined}
+                          onSelect={handleEntryDateSelect}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    {errors.expiryDate && (
+                      <p className="error-lens">Ngày nhập là bắt buộc</p>
+                    )}
+                  </>
+                ) : (
+                  <Input
+                    readOnly
+                    tabIndex={-1}
+                    defaultValue={formatDateDMY(productData.entryDate)}
+                  />
+                )}
               </div>
             </div>
 
@@ -317,7 +407,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 {isEditing ? (
                   <>
                     <Select
-                      {...register("unit")}
+                      onValueChange={handleUnitChange}
                       defaultValue={productData.unit}
                     >
                       <SelectTrigger className="mb-3 mt-1 h-10 rounded-xl border-[1px] pl-5">
@@ -327,8 +417,6 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                         <SelectGroup>
                           <SelectItem value="Kg">Kg</SelectItem>
                           <SelectItem value="Gr">Gr</SelectItem>
-                          <SelectItem value="Lb">Lb</SelectItem>
-                          <SelectItem value="Oz">Oz</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
@@ -350,11 +438,44 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                 <Label className="font-semibold text-secondary">
                   Ngày hết hạn
                 </Label>
-                <Input
-                  readOnly
-                  tabIndex={-1}
-                  defaultValue={formatDateDMY(productData.expiryDate)}
-                />
+                {isEditing ? (
+                  <>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant={"outline"}
+                          className={`w-full justify-start text-left font-normal ${!expiryDate && "text-muted-foreground"}`}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {expiryDate ? (
+                            format(new Date(expiryDate), "PPP")
+                          ) : (
+                            <span>Chọn ngày hết hạn</span>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          selected={
+                            expiryDate ? new Date(expiryDate) : undefined
+                          }
+                          onSelect={handleExpiryDateSelect}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    {errors.expiryDate && (
+                      <p className="error-lens">Ngày hết hạn là bắt buộc</p>
+                    )}
+                  </>
+                ) : (
+                  <Input
+                    readOnly
+                    tabIndex={-1}
+                    defaultValue={formatDateDMY(productData.expiryDate)}
+                  />
+                )}
               </div>
             </div>
 
@@ -428,22 +549,24 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               <p className="error-lens">{errors.description.message}</p>
             )}
           </div>
-
+          {/* Nút lưu và hủy */}
           <div className="mt-6 flex justify-between">
-            <div className="space-x-4">
-              {isEditing && (
+            {isEditing && (
+              <div className="space-x-4">
                 <Button type="button" variant="outline" onClick={handleCancel}>
                   Hủy
                 </Button>
-              )}
-              <Button
-                type={isEditing ? "submit" : "button"}
-                variant={"default"}
-                onClick={isEditing ? undefined : handleUpdate}
-              >
-                {isEditing ? "Lưu" : "Cập nhật"}
+                <Button type="submit" variant="default">
+                  Lưu
+                </Button>
+              </div>
+            )}
+
+            {!isEditing && (
+              <Button type="button" variant="default" onClick={handleUpdate}>
+                Cập nhật
               </Button>
-            </div>
+            )}
 
             <Button type="button" variant="outline" onClick={onClose}>
               Đóng

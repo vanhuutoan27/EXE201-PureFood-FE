@@ -62,8 +62,6 @@ export const updateProductSchema = productSchema.omit({
   slug: true,
   images: true,
   status: true,
-  entryDate: true,
-  expiryDate: true,
   createdAt: true,
   createdBy: true,
   updatedAt: true,
