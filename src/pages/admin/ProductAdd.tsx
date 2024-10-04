@@ -394,7 +394,7 @@ function ProductAdd() {
                 onDrop={handleDrop}
               >
                 <Upload size={32} className="mb-2 text-gray-400" />
-                <div className="flex select-none text-sm text-gray-600">
+                <div className="flex select-none text-sm text-gray-500">
                   <span className="font-semibold text-primary">
                     Tải hình lên
                   </span>
@@ -408,7 +408,7 @@ function ProductAdd() {
                   />
                   <p className="pl-1">hoặc kéo và thả</p>
                 </div>
-                <p className="select-none text-xs text-gray-600">
+                <p className="select-none text-xs text-gray-500">
                   PNG, JPG, GIF lên đến 10MB
                 </p>
               </div>
@@ -419,7 +419,7 @@ function ProductAdd() {
                 <Label>Hình ảnh đã tải lên:</Label>
                 <ul className="list-disc pl-5">
                   {uploadedFiles.map((file, index) => (
-                    <li key={index} className="text-gray-600">
+                    <li key={index} className="text-gray-500">
                       {file.name}
                     </li>
                   ))}

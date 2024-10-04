@@ -1,3 +1,5 @@
+import { appliedFee, shippingFee } from "@/configs/config"
+
 import { OrderItemType } from "@/schemas/orderSchema"
 
 import { formatCurrency } from "@/lib/utils"
@@ -59,12 +61,13 @@ function OrderSummary({
 
       <CardHeader>
         <CardTitle className="text-lg">Tóm tắt đơn hàng</CardTitle>
+        <CardDescription>Xem lại đơn hàng trước khi đặt hàng</CardDescription>
       </CardHeader>
 
       <CardContent>
         <ul className="space-y-2">
           {orderSummary.map((item, index) => (
-            <li className="flex justify-between" key={index}>
+            <li key={index} className="flex justify-between">
               <span>
                 {item.productName} (x{item.quantity})
               </span>
@@ -72,7 +75,23 @@ function OrderSummary({
             </li>
           ))}
         </ul>
+
         <Separator className="my-4" />
+
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span>Phí vận chuyển</span>
+            <span>{formatCurrency(shippingFee)} VND</span>
+          </div>
+
+          <div className="flex justify-between">
+            <span>Phí áp dụng</span>
+            <span>{formatCurrency(appliedFee)} VND</span>
+          </div>
+        </div>
+
+        <Separator className="my-4" />
+
         <div className="flex justify-between font-bold">
           <span>Tổng cộng</span>
           <span>{formatCurrency(totalAmount)} VND</span>

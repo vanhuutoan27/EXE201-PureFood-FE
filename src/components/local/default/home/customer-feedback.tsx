@@ -30,7 +30,7 @@ function CustomerFeedback({ reviewsData }: CustomerFeedbackProps) {
               ))}
             </div>
 
-            <p className="mb-4 text-gray-600">"{review.content}"</p>
+            <p className="mb-4 text-gray-500">"{review.content}"</p>
             <p className="font-semibold">{review.author}</p>
           </div>
         ))}

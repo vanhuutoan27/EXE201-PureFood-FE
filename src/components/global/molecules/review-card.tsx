@@ -43,7 +43,7 @@ function ReviewCard({ review }: ReviewCardProps) {
         </div>
       </div>
 
-      <p className="text-gray-600">{review.content}</p>
+      <p className="text-gray-500">{review.content}</p>
     </div>
   )
 }

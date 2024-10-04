@@ -46,8 +46,8 @@ function ProductInformation({ productData }: ProductInformationProps) {
   return (
     <div className="mt-10 space-y-6">
       <h2 className="text-3xl font-bold">
-        {productData.productName} - {productData.weight}
-        {productData.unit}
+        {productData.productName} ({productData.weight}
+        {productData.unit})
       </h2>
 
       <div className="flex items-center space-x-4">
@@ -55,7 +55,7 @@ function ProductInformation({ productData }: ProductInformationProps) {
         {/* <span className="text-2xl font-bold text-primary">
           {formatCurrency(25000)}
         </span>
-        <span className="font-medium text-gray-600 line-through">
+        <span className="font-medium text-gray-500 line-through">
           {formatCurrency(25000000)}
         </span> */}
 

@@ -93,14 +93,14 @@ function ProductList({
                   to={`/${product.category}/${product.slug}`}
                   className="text-xl font-bold uppercase text-primary"
                 >
-                  {product.productName} - {product.weight} {product.unit}
+                  {product.productName} ({product.weight} {product.unit})
                 </Link>
                 <p className="text-lg font-bold text-secondary">
                   {formatCurrency(product.price)}
                 </p>
               </div>
 
-              <p className="min-h-16 text-sm text-gray-600">
+              <p className="min-h-16 text-sm text-gray-500">
                 {extractParagraphs(product.description)}
               </p>
 

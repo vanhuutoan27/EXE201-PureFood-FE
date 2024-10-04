@@ -75,7 +75,7 @@ function CartItemCard({ productData }: CartItemCardProps) {
             )}
           </div>
 
-          <p className="text-gray-600">
+          <p className="text-gray-500">
             Xuất xứ: <span className="font-semibold">{productData.origin}</span>
           </p>
         </div>
@@ -108,7 +108,7 @@ function CartItemCard({ productData }: CartItemCardProps) {
 
         <X
           size={20}
-          className="mt-2 cursor-pointer text-gray-600"
+          className="mt-2 cursor-pointer text-gray-500"
           onClick={handleDelete}
         />
       </div>

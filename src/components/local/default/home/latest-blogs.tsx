@@ -35,7 +35,7 @@ function LatestBlogs({ blogsData }: LatestBlogsProps) {
                 </h3>
               </Link>
 
-              <p className="lens min-h-[72px] text-gray-600">{blog.summary}</p>
+              <p className="lens min-h-[72px] text-gray-500">{blog.summary}</p>
 
               <Link
                 to={`/kien-thuc/${blog.slug}`}

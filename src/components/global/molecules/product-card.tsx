@@ -18,7 +18,7 @@ function ProductCard({ productData }: ProductCardProps) {
       className="overflow-hidden rounded-xl bg-white shadow-md"
     >
       <LazyImage
-        src={productData.images[0]}
+        src={productData.images?.[0]}
         alt={productData.slug}
         width={300}
         height={200}
@@ -28,11 +28,11 @@ function ProductCard({ productData }: ProductCardProps) {
       <div className="px-4 py-6">
         <Link to={`/${productData.category}/${productData.slug}`}>
           <h3 className="slow mb-2 w-fit cursor-pointer text-lg font-semibold hover:text-primary">
-            {productData.productName} - {productData.weight} {productData.unit}
+            {productData.productName} ({productData.weight} {productData.unit})
           </h3>
         </Link>
 
-        <p className="min-h-16 text-sm text-gray-600">
+        <p className="min-h-16 text-sm text-gray-500">
           {extractParagraphs(productData.description)}
         </p>
 

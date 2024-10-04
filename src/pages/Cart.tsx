@@ -31,7 +31,7 @@ function Cart() {
 
       <div className="flex justify-between gap-10">
         {cartItemsData.cartItems.length === 0 ? (
-          <p className="font-medium text-gray-600">Your cart is empty.</p>
+          <p className="font-medium text-gray-500">Your cart is empty.</p>
         ) : (
           <div className="w-2/3 flex-col">
             {cartItemsData.cartItems.map((item, index) => (

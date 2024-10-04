@@ -2,6 +2,7 @@ import { useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useLocation } from "react-router-dom"
 
 import { CreateOrderType, createOrderSchema } from "@/schemas/orderSchema"
 
@@ -10,20 +11,8 @@ import OrderInformation from "@/components/local/default/order/order-information
 import OrderSummary from "@/components/local/default/order/order-summary"
 
 function Order() {
-  const orderItems = [
-    {
-      productName: "Sữa chua trân châu",
-      quantity: 2,
-      price: 20000
-    },
-    {
-      productName: "Bánh mì que",
-      quantity: 5,
-      price: 10000
-    }
-  ]
-
-  const orderTotal = 30000
+  const location = useLocation()
+  const { productsData, total } = location.state
 
   const {
     handleSubmit,
@@ -57,8 +46,8 @@ function Order() {
         <OrderSummary
           paymentMethod={paymentMethod}
           setPaymentMethod={setPaymentMethod}
-          orderSummary={orderItems}
-          totalAmount={orderTotal}
+          orderSummary={productsData}
+          totalAmount={total}
         />
       </form>
     </div>
