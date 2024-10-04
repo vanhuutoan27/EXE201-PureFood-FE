@@ -1,10 +1,10 @@
-import { exampleOrdersData } from "@/constants/orders"
+import { sampleOrderData } from "@/constants/orders"
 
 import { DataTable } from "@/components/local/admin/order/data-table"
 import { columns } from "@/components/local/user/order/columns"
 
 function UserOrder() {
-  const ordersData = exampleOrdersData
+  const ordersData = sampleOrderData
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import { BlogType } from "@/schemas/blogSchema"
 
-export const exampleBlogsData: BlogType[] = [
+export const sampleBlogData: BlogType[] = [
   {
     blogId: "b001",
     title: "Lợi ích của việc ăn rau củ quả sạch",

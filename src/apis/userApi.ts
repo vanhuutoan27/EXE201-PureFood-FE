@@ -110,11 +110,9 @@ export const useCreateUser = () => {
 export const useChangeStatusUser = (userId: string) => {
   const queryClient = useQueryClient()
 
-  return useMutation<UserType, Error, { status: boolean }>(
-    async ({ status }) => {
-      const response = await pureAPI.patch(`/users/${userId}/status`, {
-        status
-      })
+  return useMutation<UserType, Error>(
+    async () => {
+      const response = await pureAPI.patch(`/users/${userId}/status`)
       const { success, message, data } = response.data
 
       if (success) {

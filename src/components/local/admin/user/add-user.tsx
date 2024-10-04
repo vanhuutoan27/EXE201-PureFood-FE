@@ -63,8 +63,8 @@ function AddUser({ onClose }: AddUserProps) {
           </DialogHeader>
 
           <div className="flex flex-col gap-4">
-            <div className="space-y-2">
-              <Label className="font-semibold text-secondary">Role</Label>
+            <div className="space-y-1">
+              <Label>Role</Label>
 
               <Select onValueChange={handleRoleChange}>
                 <SelectTrigger className="mb-3 mt-1 h-10 rounded-xl border-[1px] pl-5">
@@ -82,8 +82,8 @@ function AddUser({ onClose }: AddUserProps) {
                 <p className="error-lens">{errors.role.message}</p>
               )}
             </div>
-            <div className="space-y-2">
-              <Label className="font-semibold text-secondary">Họ và tên</Label>
+            <div className="space-y-1">
+              <Label>Họ và tên</Label>
               <Input
                 type="text"
                 tabIndex={-1}
@@ -95,8 +95,8 @@ function AddUser({ onClose }: AddUserProps) {
                 <p className="error-lens">{errors.fullName.message}</p>
               )}
             </div>
-            <div className="space-y-2">
-              <Label className="font-semibold text-secondary">Email</Label>
+            <div className="space-y-1">
+              <Label>Email</Label>
               <Input
                 type="text"
                 tabIndex={-1}
@@ -108,10 +108,8 @@ function AddUser({ onClose }: AddUserProps) {
                 <p className="error-lens">{errors.email.message}</p>
               )}
             </div>
-            <div className="space-y-2">
-              <Label className="font-semibold text-secondary">
-                Số điện thoại
-              </Label>
+            <div className="space-y-1">
+              <Label>Số điện thoại</Label>
               <Input
                 type="string"
                 tabIndex={-1}

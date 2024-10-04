@@ -1,6 +1,6 @@
 import { ProductType } from "@/schemas/productSchema"
 
-export const exampleProductsData: ProductType[] = [
+export const sampleProductData: ProductType[] = [
   {
     productId: "p001",
     category: "rau-cu",

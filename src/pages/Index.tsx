@@ -1,6 +1,6 @@
-import { exampleBlogsData } from "@/constants/blogs"
-import { exampleProductsData } from "@/constants/products"
-import { exampleReviewsData } from "@/constants/reviews"
+import { sampleBlogData } from "@/constants/blogs"
+import { sampleProductData } from "@/constants/products"
+import { sampleReviewData } from "@/constants/reviews"
 
 import CustomerFeedback from "@/components/local/default/home/customer-feedback"
 import FeaturedProducts from "@/components/local/default/home/featured-products"
@@ -8,9 +8,9 @@ import HomeHero from "@/components/local/default/home/home-hero"
 import LatestBlogs from "@/components/local/default/home/latest-blogs"
 
 function Index() {
-  const productsData = exampleProductsData
-  const reviewsData = exampleReviewsData
-  const blogsData = exampleBlogsData
+  const productsData = sampleProductData
+  const reviewsData = sampleReviewData
+  const blogsData = sampleBlogData
 
   return (
     <div className="space-y-20">

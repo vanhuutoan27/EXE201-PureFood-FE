@@ -14,6 +14,7 @@ import {
   useReactTable
 } from "@tanstack/react-table"
 
+import { Button } from "@/components/global/atoms/button"
 import { Input } from "@/components/global/atoms/input"
 import {
   Table,
@@ -31,8 +32,19 @@ interface DataTableProps<TData, TValue> {
 
 export function DataTable<TData, TValue>({
   columns,
-  data
-}: DataTableProps<TData, TValue>) {
+  data,
+  currentPage,
+  totalOrders,
+  visibleOrders,
+  onNextPage,
+  onPreviousPage
+}: DataTableProps<TData, TValue> & {
+  currentPage: number
+  totalOrders: number
+  visibleOrders: number
+  onNextPage: () => void
+  onPreviousPage: () => void
+}) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
@@ -50,6 +62,8 @@ export function DataTable<TData, TValue>({
       columnFilters
     }
   })
+
+  const maxPage = Math.ceil(totalOrders / visibleOrders)
 
   return (
     <>
@@ -110,7 +124,7 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-60 text-center"
                 >
                   No results.
                 </TableCell>
@@ -118,6 +132,27 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
+      </div>
+
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          disabled={currentPage === 1}
+          type="button"
+          size="sm"
+          variant="outline"
+          onClick={onPreviousPage}
+        >
+          Previous
+        </Button>
+        <Button
+          disabled={currentPage === maxPage || totalOrders === 0}
+          type="button"
+          size="sm"
+          variant="outline"
+          onClick={onNextPage}
+        >
+          Next
+        </Button>
       </div>
     </>
   )

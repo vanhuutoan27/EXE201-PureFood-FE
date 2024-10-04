@@ -27,8 +27,6 @@ const AdminDashboard = lazy(() => import("@/pages/admin/Dashboard"))
 const AdminProducts = lazy(() => import("@/pages/admin/Products"))
 const AdminAddProduct = lazy(() => import("@/pages/admin/ProductAdd"))
 const AdminOrders = lazy(() => import("@/pages/admin/Orders"))
-const AdminOrdersNew = lazy(() => import("@/pages/admin/OrdersNew"))
-const AdminOrdersProcessed = lazy(() => import("@/pages/admin/OrdersProcessed"))
 const AdminUsers = lazy(() => import("@/pages/admin/Users"))
 
 function App() {
@@ -61,16 +59,8 @@ function App() {
           <Route path="/admin/san-pham/trai-cay" element={<AdminProducts />} />
           <Route path="/admin/san-pham/tao-moi" element={<AdminAddProduct />} />
           <Route path="/admin/don-hang/tat-ca" element={<AdminOrders />} />
-          <Route path="/admin/don-hang/moi" element={<AdminOrdersNew />} />
-          <Route
-            path="/admin/don-hang/da-xu-ly"
-            element={<AdminOrdersProcessed />}
-          />
-
-          <Route
-            path="/admin/don-hang/da-xu-ly"
-            element={<AdminOrdersProcessed />}
-          />
+          <Route path="/admin/don-hang/moi" element={<AdminOrders />} />
+          <Route path="/admin/don-hang/da-xu-ly" element={<AdminOrders />} />
           <Route path="/admin/khach-hang" element={<AdminUsers />} />
 
           <Route path="/admin/not-found" element={<Error statusCode={404} />} />

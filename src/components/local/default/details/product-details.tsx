@@ -1,6 +1,6 @@
 import { ProductType } from "@/schemas/productSchema"
 
-import { exampleReviewsData } from "@/constants/reviews"
+import { sampleReviewData } from "@/constants/reviews"
 
 import {
   Tabs,
@@ -18,7 +18,7 @@ interface ProductDetailsProps {
 }
 
 function ProductDetails({ productData }: ProductDetailsProps) {
-  const reviewsData = exampleReviewsData
+  const reviewsData = sampleReviewData
 
   return (
     <Tabs defaultValue="description">

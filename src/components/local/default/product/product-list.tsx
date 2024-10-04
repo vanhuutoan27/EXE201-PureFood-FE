@@ -150,7 +150,7 @@ function ProductList({
         {productsData.totalItems} kết quả
       </p>
 
-      {visibleProducts < productsData.totalItems && (
+      {visibleProducts < filteredProducts.length && (
         <div className="flex justify-center">
           <Button
             type="button"

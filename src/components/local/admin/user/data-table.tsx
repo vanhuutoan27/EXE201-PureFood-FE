@@ -34,8 +34,19 @@ interface DataTableProps<TData, TValue> {
 
 export function DataTable<TData, TValue>({
   columns,
-  data
-}: DataTableProps<TData, TValue>) {
+  data,
+  currentPage,
+  totalUsers,
+  visibleOrders,
+  onNextPage,
+  onPreviousPage
+}: DataTableProps<TData, TValue> & {
+  currentPage: number
+  totalUsers: number
+  visibleOrders: number
+  onNextPage: () => void
+  onPreviousPage: () => void
+}) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [globalFilter, setGlobalFilter] = useState<string>("")
@@ -69,6 +80,8 @@ export function DataTable<TData, TValue>({
     }
   })
 
+  const maxPage = Math.ceil(totalUsers / visibleOrders)
+
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
 
   const handleAddDetailsClick = () => {
@@ -76,7 +89,7 @@ export function DataTable<TData, TValue>({
   }
 
   return (
-    <div>
+    <>
       <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Tìm kiếm theo họ và tên, email hoặc số điện thoại..."
@@ -134,7 +147,7 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-60 text-center"
                 >
                   No results.
                 </TableCell>
@@ -150,24 +163,24 @@ export function DataTable<TData, TValue>({
 
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
+          disabled={currentPage === 1}
           type="button"
           size="sm"
           variant="outline"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
+          onClick={onPreviousPage}
         >
           Previous
         </Button>
         <Button
+          disabled={currentPage === maxPage || totalUsers === 0}
           type="button"
           size="sm"
           variant="outline"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
+          onClick={onNextPage}
         >
           Next
         </Button>
       </div>
-    </div>
+    </>
   )
 }

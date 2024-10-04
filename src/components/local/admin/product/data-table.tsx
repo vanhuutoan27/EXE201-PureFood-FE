@@ -33,8 +33,19 @@ interface DataTableProps<TData, TValue> {
 
 export function DataTable<TData, TValue>({
   columns,
-  data
-}: DataTableProps<TData, TValue>) {
+  data,
+  currentPage,
+  totalProducts,
+  visibleProducts,
+  onNextPage,
+  onPreviousPage
+}: DataTableProps<TData, TValue> & {
+  currentPage: number
+  totalProducts: number
+  visibleProducts: number
+  onNextPage: () => void
+  onPreviousPage: () => void
+}) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
@@ -52,6 +63,8 @@ export function DataTable<TData, TValue>({
       columnFilters
     }
   })
+
+  const maxPage = Math.ceil(totalProducts / visibleProducts)
 
   return (
     <>
@@ -116,7 +129,7 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-60 text-center"
                 >
                   No results.
                 </TableCell>
@@ -128,20 +141,20 @@ export function DataTable<TData, TValue>({
 
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
-          disabled={!table.getCanPreviousPage()}
+          disabled={currentPage === 1}
           type="button"
           size="sm"
           variant="outline"
-          onClick={() => table.previousPage()}
+          onClick={onPreviousPage}
         >
           Previous
         </Button>
         <Button
-          disabled={!table.getCanNextPage()}
+          disabled={currentPage === maxPage || totalProducts === 0}
           type="button"
           size="sm"
           variant="outline"
-          onClick={() => table.nextPage()}
+          onClick={onNextPage}
         >
           Next
         </Button>

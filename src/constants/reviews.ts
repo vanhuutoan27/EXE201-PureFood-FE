@@ -1,6 +1,6 @@
 import { ReviewType } from "@/schemas/reviewSchema"
 
-export const exampleReviewsData: ReviewType[] = [
+export const sampleReviewData: ReviewType[] = [
   {
     reviewId: "r001",
     product: "p001",

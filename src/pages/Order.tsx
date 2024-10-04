@@ -1,8 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
+
+import { useAuthContext } from "@/contexts/auth-context"
 
 import { CreateOrderType, createOrderSchema } from "@/schemas/orderSchema"
 
@@ -11,8 +13,10 @@ import OrderInformation from "@/components/local/default/order/order-information
 import OrderSummary from "@/components/local/default/order/order-summary"
 
 function Order() {
+  const { user } = useAuthContext()
+
   const location = useLocation()
-  const { productsData, total } = location.state
+  const navigate = useNavigate()
 
   const {
     handleSubmit,
@@ -24,7 +28,27 @@ function Order() {
 
   const [paymentMethod, setPaymentMethod] = useState("COD")
 
-  const onSubmit = (data: any) => {
+  useEffect(() => {
+    if (
+      !location.state ||
+      !location.state.productsData ||
+      !location.state.total
+    ) {
+      navigate(`/gio-hang/${user?.userId}`, { replace: true })
+    }
+  }, [location.state, navigate])
+
+  if (
+    !location.state ||
+    !location.state.productsData ||
+    !location.state.total
+  ) {
+    return null
+  }
+
+  const { productsData, total } = location.state
+
+  const onSubmit = (data: CreateOrderType) => {
     console.log("Đơn hàng đã được đặt!", JSON.stringify(data, null, 2))
   }
 

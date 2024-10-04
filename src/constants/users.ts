@@ -1,6 +1,6 @@
 import { UserType } from "@/schemas/userSchema"
 
-export const exampleUsersData: UserType[] = [
+export const sampleUserData: UserType[] = [
   {
     userId: "u001",
     phoneNumber: "0963122758",

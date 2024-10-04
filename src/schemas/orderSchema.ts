@@ -34,6 +34,7 @@ export const orderSchema = z.object({
   paymentMethod: z
     .string()
     .nonempty({ message: "Vui lòng chọn phương thức thanh toán" }),
+  voucher: z.string().optional(),
   orderSummary: z.array(orderItemSchema),
   totalAmount: z.coerce
     .number()

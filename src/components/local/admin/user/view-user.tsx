@@ -23,11 +23,10 @@ interface ViewUserProps {
 }
 
 function ViewUserDialog({ userData, onClose }: ViewUserProps) {
-  const changeStatusMutation = useChangeStatusUser(userData.userId)
+  const changeUserStatus = useChangeStatusUser(userData.userId)
 
   const handleStatusChange = () => {
-    const newStatus = !userData.userId
-    changeStatusMutation.mutate({ status: newStatus })
+    changeUserStatus.mutate()
   }
 
   return (
@@ -38,11 +37,10 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
         </DialogHeader>
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-4">
-            <Avatar className="h-20 w-20 cursor-pointer select-none border-4 border-primary">
+            <Avatar className="h-20 w-20 border-4 border-primary">
               <AvatarImage
                 src={userData?.avatar || defaultAvatar}
                 alt={userData.fullName}
-                className="select-none object-cover"
               />
             </Avatar>
 

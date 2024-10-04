@@ -1,6 +1,6 @@
 import { OrderType } from "@/schemas/orderSchema"
 
-export const exampleOrdersData: OrderType[] = [
+export const sampleOrderData: OrderType[] = [
   {
     orderId: "OD001",
     user: "DB620724-B051-4B8E-9FFD-08DCE2FA2BF4",

@@ -153,7 +153,7 @@ export const columns: ColumnDef<UserType>[] = [
     id: "actions",
     cell: ({ row }) => {
       const user = row.original
-      const changeStatusMutation = useChangeStatusUser(user.userId)
+      const changeUserStatus = useChangeStatusUser(user.userId)
       const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
 
       const handleViewDetailsClick = () => {
@@ -161,8 +161,7 @@ export const columns: ColumnDef<UserType>[] = [
       }
 
       const handleStatusChange = () => {
-        const newStatus = !user.userId
-        changeStatusMutation.mutate({ status: newStatus })
+        changeUserStatus.mutate()
       }
 
       return (

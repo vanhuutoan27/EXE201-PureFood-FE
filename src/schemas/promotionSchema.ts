@@ -12,6 +12,14 @@ export const promotionSchema = z.object({
     .number()
     .min(1, { message: "Giảm giá phải ít nhất là 1%" })
     .max(100, { message: "Giảm giá không được vượt quá 100%" }),
+  quantity: z.coerce
+    .number()
+    .int({ message: "Số lượng khuyến mãi phải là số nguyên" })
+    .positive({ message: "Số lượng khuyến mãi phải lớn hơn 0" }),
+  stock: z.coerce
+    .number()
+    .int({ message: "Số lượng tồn kho phải là số nguyên" })
+    .positive({ message: "Số lượng tồn kho phải lớn hơn 0" }),
   startDate: z.string().nonempty({ message: "Ngày bắt đầu là bắt buộc" }),
   endDate: z.string().nonempty({ message: "Ngày kết thúc là bắt buộc" }),
   status: z.boolean(),

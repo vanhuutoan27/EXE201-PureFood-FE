@@ -11,13 +11,17 @@ interface OrderResponse {
   orders: OrderType[]
 }
 
-export const useGetAllOrders = (page: number, limit: number) => {
+export const useGetAllOrders = (
+  page: number,
+  limit: number,
+  orderStatus?: string | null
+) => {
   return useQuery<OrderResponse, Error>({
-    queryKey: ["orders", page, limit],
+    queryKey: ["orders", page, limit, orderStatus],
     queryFn: async () => {
       try {
         const response = await pureAPI.get("/orders", {
-          params: { page, limit }
+          params: { page, limit, orderStatus }
         })
         const { success, message, data } = response.data
         const { totalPages, totalItems, items: orders } = data

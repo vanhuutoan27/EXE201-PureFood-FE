@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import { useLocation } from "react-router-dom"
 
-import { useGetAllProducts } from "@/apis/productApi"
+import { useGetProductsByCategory } from "@/apis/productApi"
 
 import AdminTitle from "@/components/global/organisms/admin-title"
 import { columns } from "@/components/local/admin/product/columns"
@@ -14,26 +14,19 @@ const INITIAL_PRODUCT_COUNT = 10
 
 function Products() {
   const categoryUrl = useLocation().pathname.split("/")[3]
-  const [visibleProducts] = useState(INITIAL_PRODUCT_COUNT)
   const [currentPage, setCurrentPage] = useState(1)
+  const [visibleProducts] = useState(INITIAL_PRODUCT_COUNT)
 
-  const { data, isLoading } = useGetAllProducts(
-    currentPage,
-    visibleProducts,
-    undefined,
+  const { data: productsData, isLoading } = useGetProductsByCategory(
     categoryUrl,
-    true
+    currentPage,
+    visibleProducts
   )
 
-  if (isLoading) {
-    return <Loading />
-  }
-
-  const products = data?.products || []
-  const totalPages = data?.totalPages || 1
+  const maxPage = Math.ceil((productsData?.totalItems || 1) / visibleProducts)
 
   const handleNextPage = () => {
-    if (currentPage < totalPages) {
+    if (currentPage < maxPage) {
       setCurrentPage((prevPage) => prevPage + 1)
     }
   }
@@ -44,14 +37,24 @@ function Products() {
     }
   }
 
+  if (!productsData || isLoading) return <Loading />
+
   return (
-    <div>
+    <>
       <AdminTitle
         title={categoryUrl === "rau-cu" ? "Quản lý Rau củ" : "Quản lý Trái cây"}
       />
 
-      <DataTable columns={columns} data={products} />
-    </div>
+      <DataTable
+        columns={columns}
+        data={productsData.products || []}
+        currentPage={currentPage}
+        totalProducts={productsData?.totalItems || 0}
+        visibleProducts={visibleProducts}
+        onNextPage={handleNextPage}
+        onPreviousPage={handlePreviousPage}
+      />
+    </>
   )
 }
 
