@@ -1,8 +1,9 @@
 import { useLocation, useParams } from "react-router-dom"
 
-import { ProductType } from "@/schemas/productSchema"
-
-import { exampleProductsData } from "@/constants/products"
+import {
+  useGetProductBySlug,
+  useGetProductsByCategory
+} from "@/apis/productApi"
 
 import Bread from "@/components/global/molecules/bread"
 import ProductDetails from "@/components/local/default/details/product-details"
@@ -10,27 +11,27 @@ import ProductImage from "@/components/local/default/details/product-image"
 import ProductInformation from "@/components/local/default/details/product-information"
 import ProductRelated from "@/components/local/default/details/product-related"
 
-import ErrorPage from "./Error"
+import Loading from "./Loading"
 
 function Details() {
   const { productSlug } = useParams()
   const categoryUrl = useLocation().pathname.split("/")[1]
 
-  const productsData = exampleProductsData.find(
-    (veg: ProductType) => veg.slug === productSlug
-  )
+  const { data: productData, isLoading: isProductLoading } =
+    useGetProductBySlug(productSlug)
 
-  if (!productsData) {
-    return <ErrorPage statusCode={404} />
-  }
+  const { data: relatedProductsData, isLoading: isRelatedProductsLoading } =
+    useGetProductsByCategory(categoryUrl)
 
-  const relatedProducts = exampleProductsData
-    .filter(
+  if (!productData || isProductLoading || isRelatedProductsLoading)
+    return <Loading />
+
+  const relatedProducts =
+    relatedProductsData?.products?.filter(
       (product) =>
-        product.slug !== productsData.slug &&
-        product.category === productsData.category
-    )
-    .slice(0, 4)
+        product.slug !== productData.slug &&
+        product.category === productData.category
+    ) || []
 
   return (
     <div className="space-y-10">
@@ -40,16 +41,16 @@ function Details() {
           name: categoryUrl === "rau-cu" ? "Rau Củ" : "Trái Cây",
           url: `/${categoryUrl}`
         }}
-        currentDetailsPage={productsData.productName}
+        currentDetailsPage={productData.productName}
       />
 
       <div className="space-y-20">
-        <div className="grid gap-8 md:grid-cols-2">
-          <ProductImage images={productsData.images} />
-          <ProductInformation productData={productsData} />
+        <div className="grid gap-8 lg:grid-cols-2">
+          <ProductImage images={productData.images || []} />
+          <ProductInformation productData={productData} />
         </div>
 
-        <ProductDetails productData={productsData} />
+        <ProductDetails productData={productData} />
         <ProductRelated productsData={relatedProducts} />
       </div>
     </div>

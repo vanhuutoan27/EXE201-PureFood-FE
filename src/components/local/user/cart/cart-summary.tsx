@@ -1,19 +1,24 @@
+import { CartItemType } from "@/schemas/cartItemSchema"
+
 import { formatCurrency } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
 import { Input } from "@/components/global/atoms/input"
 
-interface priceSummaryProps {
-  price: number
+interface CartSummaryProps {
+  productsData: CartItemType[]
 }
-function CartSummary({ price }: priceSummaryProps) {
+
+function CartSummary({ productsData }: CartSummaryProps) {
+  console.log(JSON.stringify(productsData, null, 2))
+
   const shippingFee = 30000
   const appliedFee = 10000
-  const total = price + shippingFee + appliedFee
 
   return (
     <div className="space-y-6 rounded-md border-2 px-4 py-6">
-      <h1 className="text-xl font-semibold text-primary">Tóm tắt đơn hàng</h1>
+      <h3 className="text-xl font-semibold text-primary">Tóm tắt đơn hàng</h3>
+
       <div className="space-y-4">
         <div className="flex justify-between text-sm text-secondary">
           <p>Sản phẩm</p>

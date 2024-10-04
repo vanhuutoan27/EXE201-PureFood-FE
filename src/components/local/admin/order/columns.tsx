@@ -7,12 +7,7 @@ import { MoreHorizontal } from "lucide-react"
 
 import { OrderType } from "@/schemas/orderSchema"
 
-import {
-  capitalize,
-  formatCurrency,
-  formatDateDMY,
-  getOrderStatus
-} from "@/lib/utils"
+import { formatCurrency, formatDateDMY, getOrderStatus } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
 import {
@@ -39,7 +34,6 @@ export const columns: ColumnDef<OrderType>[] = [
       )
     }
   },
-
   {
     accessorKey: "phoneNumber",
     header: ({ column }) => {
@@ -83,7 +77,6 @@ export const columns: ColumnDef<OrderType>[] = [
       return <span>{formatCurrency(totalAmount)}</span>
     }
   },
-
   {
     accessorKey: "createdAt",
     header: "Ngày tạo",

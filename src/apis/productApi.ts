@@ -75,6 +75,7 @@ export const useGetProductsByCategory = (
       }
     },
     enabled: !!category,
+    keepPreviousData: true,
     onError: (error: Error) => {
       toast.error(error.message)
     }
@@ -115,7 +116,7 @@ export const useGetProductsBySupplier = (
   })
 }
 
-export const useGetProductBySlug = (slug: string) => {
+export const useGetProductBySlug = (slug: string | undefined) => {
   return useQuery<ProductType, Error>({
     queryKey: ["product", slug],
     queryFn: async () => {

@@ -17,7 +17,7 @@ function Cart() {
 
   const { data: cartItemsData, isLoading } = useGetAllCartItems(userId, 1, null)
 
-  console.log(cartItemsData?.cartItems)
+  // console.log(cartItemsData?.cartItems)
 
   if (user?.userId !== userId) return <ErrorPage statusCode={404} />
   if (!cartItemsData || isLoading) return <Loading />
@@ -31,9 +31,7 @@ function Cart() {
 
       <div className="flex justify-between gap-10">
         {cartItemsData.cartItems.length === 0 ? (
-          <p className="text-xl font-medium text-gray-600">
-            Your cart is empty.
-          </p>
+          <p className="font-medium text-gray-600">Your cart is empty.</p>
         ) : (
           <div className="w-2/3 flex-col">
             {cartItemsData.cartItems.map((item, index) => (
@@ -43,7 +41,7 @@ function Cart() {
         )}
 
         <div className="w-1/3">
-          <CartSummary price={10000} />
+          <CartSummary productsData={cartItemsData.cartItems} />
         </div>
       </div>
     </div>

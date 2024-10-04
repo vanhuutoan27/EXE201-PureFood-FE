@@ -1,5 +1,10 @@
 import { ProductType } from "@/schemas/productSchema"
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem
+} from "@/components/global/atoms/carousel"
 import ProductCard from "@/components/global/molecules/product-card"
 
 interface ProductRelatedProps {
@@ -13,11 +18,23 @@ function ProductRelated({ productsData }: ProductRelatedProps) {
         Sản phẩm liên quan
       </h3>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {productsData.map((product) => (
-          <ProductCard key={product.productId} productData={product} />
-        ))}
-      </div>
+      <Carousel
+        opts={{
+          align: "start"
+        }}
+        className="w-full"
+      >
+        <CarouselContent>
+          {productsData.map((product) => (
+            <CarouselItem
+              key={product.productId}
+              className="p-2 md:basis-1/2 lg:basis-1/4"
+            >
+              <ProductCard key={product.productId} productData={product} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
     </div>
   )
 }

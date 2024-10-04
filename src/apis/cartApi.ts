@@ -24,10 +24,11 @@ export const useGetAllCartItems = (
         const response = await pureAPI.get(`/cart-items/${userId}`, {
           params: { page, limit }
         })
-        const { success, message, data: cartItems } = response.data
+        const { success, message, data } = response.data
+        const { totalPages, totalItems, items: cartItems } = data
 
         if (success) {
-          return cartItems
+          return { totalPages, totalItems, cartItems }
         } else {
           toast.error(message)
           throw new Error(message)
@@ -56,6 +57,7 @@ export const useCreateCart = () => {
         const { success, message, data } = response.data
 
         if (success) {
+          toast.success(message)
           return data
         } else {
           toast.error(message)
@@ -84,9 +86,13 @@ export const useUpdateQuantityCartItem = () => {
   return useMutation<void, Error, { cartItemId: string; quantity: number }>(
     async ({ cartItemId, quantity }) => {
       try {
-        const response = await pureAPI.put(`/cart-items/${cartItemId}`, {
-          params: { quantity }
-        })
+        const response = await pureAPI.patch(
+          `/cart-items/${cartItemId}`,
+          null,
+          {
+            params: { quantity }
+          }
+        )
         const { success, message, data } = response.data
 
         if (success) {
@@ -122,6 +128,7 @@ export const useDeleteCartItem = () => {
         const { success, message, data } = response.data
 
         if (success) {
+          toast.success(message)
           return data
         } else {
           toast.error(message)

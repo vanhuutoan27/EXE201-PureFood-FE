@@ -2,21 +2,24 @@ import { useState } from "react"
 
 import { Heart, Minus, Plus, Share2, ShoppingCart } from "lucide-react"
 
+import { useAuthContext } from "@/contexts/auth-context"
+
 import { ProductType } from "@/schemas/productSchema"
+
+import { useCreateCart } from "@/apis/cartApi"
 
 import { formatCurrency } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
-import DiscountChip from "@/components/global/molecules/discount-chip"
 
 interface ProductInformationProps {
   productData: ProductType
 }
 
 function ProductInformation({ productData }: ProductInformationProps) {
-  // const { user } = useAuthContext()
+  const { user } = useAuthContext()
 
-  // const createCart = useCreateCart()
+  const createCart = useCreateCart()
 
   const [quantity, setQuantity] = useState(1)
 
@@ -26,7 +29,7 @@ function ProductInformation({ productData }: ProductInformationProps) {
 
   const handleAddToCart = () => {
     const cartData = {
-      user: "Toan dep trai hehe",
+      user: user?.userId || "",
       cartItems: [
         {
           product: productData.productId,
@@ -35,9 +38,9 @@ function ProductInformation({ productData }: ProductInformationProps) {
       ]
     }
 
-    console.log("Data before mutate:", JSON.stringify(cartData, null, 2))
+    // console.log("Data before mutate:", JSON.stringify(cartData, null, 2))
 
-    // createCart.mutate(cartData);
+    createCart.mutate(cartData)
   }
 
   return (
@@ -48,18 +51,20 @@ function ProductInformation({ productData }: ProductInformationProps) {
       </h2>
 
       <div className="flex items-center space-x-4">
-        <span className="text-2xl font-bold text-primary">
+        {/* if discount */}
+        {/* <span className="text-2xl font-bold text-primary">
           {formatCurrency(25000)}
         </span>
         <span className="font-medium text-gray-600 line-through">
           {formatCurrency(25000000)}
-        </span>
-
-        {/* <span className="text-2xl font-bold text-primary">
-          {formatCurrency(productData.price)}
         </span> */}
 
-        <DiscountChip rate={1000} />
+        <span className="text-2xl font-bold text-primary">
+          {formatCurrency(productData.price)}
+        </span>
+
+        {/* if discount */}
+        {/* <DiscountChip rate={1000} /> */}
       </div>
 
       <div

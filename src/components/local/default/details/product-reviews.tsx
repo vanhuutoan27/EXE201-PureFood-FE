@@ -2,6 +2,8 @@ import { useState } from "react"
 
 import { defaultAvatar } from "@/configs/config"
 
+import { useAuthContext } from "@/contexts/auth-context"
+
 import { ReviewType } from "@/schemas/reviewSchema"
 
 import { Button } from "@/components/global/atoms/button"
@@ -14,10 +16,7 @@ interface ProductReviewsProps {
 }
 
 function ProductReviews({ reviews }: ProductReviewsProps) {
-  const userData = {
-    fullName: "Van Huu Toan",
-    avatar: ""
-  }
+  const { user } = useAuthContext()
 
   const [rating, setRating] = useState<number>(0)
   const [content, setContent] = useState<string>("")
@@ -37,8 +36,8 @@ function ProductReviews({ reviews }: ProductReviewsProps) {
     <div className="rounded-lg bg-white p-6 shadow-md">
       <div className="flex gap-4">
         <LazyImage
-          src={userData?.avatar || defaultAvatar}
-          alt={userData?.fullName}
+          src={user?.avatar || defaultAvatar}
+          alt={user?.fullName || "User Avatar"}
           className="size-12 rounded-full"
         />
 

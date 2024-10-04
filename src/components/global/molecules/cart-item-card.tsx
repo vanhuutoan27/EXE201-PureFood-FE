@@ -1,9 +1,9 @@
-import { useState } from "react"
-
 import { Minus, Plus, X } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { CartItemType } from "@/schemas/cartItemSchema"
+
+import { useDeleteCartItem, useUpdateQuantityCartItem } from "@/apis/cartApi"
 
 import { formatCurrency } from "@/lib/utils"
 
@@ -15,11 +15,35 @@ interface CartItemCardProps {
 }
 
 function CartItemCard({ productData }: CartItemCardProps) {
-  const [quantity, setQuantity] = useState(1)
+  const updateQuantity = useUpdateQuantityCartItem()
+  const deleteCartItem = useDeleteCartItem()
 
-  const increaseQuantity = () => setQuantity((prev) => prev + 1)
-  const decreaseQuantity = () =>
-    setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+  const handleUpdateQuantity = async (quantity: number) => {
+    const newData = {
+      cartItemId: productData.cartItemId,
+      quantity
+    }
+
+    await updateQuantity.mutateAsync(newData)
+  }
+
+  const handleDelete = async () => {
+    await deleteCartItem.mutateAsync({ cartItemId: productData.cartItemId })
+  }
+
+  const decreaseQuantity = () => {
+    if (productData.quantity > 1) {
+      handleUpdateQuantity(productData.quantity - 1)
+    } else if ((productData.quantity = 1)) {
+      handleDelete()
+    }
+  }
+
+  const increaseQuantity = () => {
+    if (productData.quantity > 1) {
+      handleUpdateQuantity(productData.quantity + 1)
+    }
+  }
 
   return (
     <div className="flex border-t-2 py-10">
@@ -69,7 +93,7 @@ function CartItemCard({ productData }: CartItemCardProps) {
             <Minus size={16} />
           </Button>
 
-          <span className="px-4">{quantity}</span>
+          <span className="px-4">{productData.quantity}</span>
 
           <Button
             type="button"
@@ -82,7 +106,11 @@ function CartItemCard({ productData }: CartItemCardProps) {
           </Button>
         </div>
 
-        <X size={20} className="mt-2 cursor-pointer text-gray-600" />
+        <X
+          size={20}
+          className="mt-2 cursor-pointer text-gray-600"
+          onClick={handleDelete}
+        />
       </div>
     </div>
   )
