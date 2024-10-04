@@ -2,6 +2,8 @@ import { defaultAvatar } from "@/configs/config"
 
 import { UserType } from "@/schemas/userSchema"
 
+import { useChangeStatusUser } from "@/apis/userApi"
+
 import { formatDateDMY } from "@/lib/utils"
 
 import { Avatar, AvatarImage } from "@/components/global/atoms/avatar"
@@ -21,6 +23,13 @@ interface ViewUserProps {
 }
 
 function ViewUserDialog({ userData, onClose }: ViewUserProps) {
+  const changeStatusMutation = useChangeStatusUser(userData.userId)
+
+  const handleStatusChange = () => {
+    const newStatus = !userData.userId
+    changeStatusMutation.mutate({ status: newStatus })
+  }
+
   return (
     <Dialog onOpenChange={onClose} open>
       <DialogContent className="min-w-[500px]">
@@ -37,18 +46,16 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
               />
             </Avatar>
 
-            <div className="space-y-2">
-              <h3 className="font-semibold text-secondary">
-                {userData.fullName}
-              </h3>
+            <div className="space-y-1">
+              <h3>{userData.fullName}</h3>
               <p className="text-sm font-semibold text-gray-500">
                 {userData.role}
               </p>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label className="font-semibold text-secondary">Email</Label>
+          <div className="space-y-1">
+            <Label>Email</Label>
             <Input
               readOnly
               type="text"
@@ -58,33 +65,31 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
             />
           </div>
 
-          <div className="space-y-2">
-            <Label className="font-semibold text-secondary">
-              Số điện thoại
-            </Label>
+          <div className="space-y-1">
+            <Label>Số điện thoại</Label>
             <Input
               readOnly
               type="string"
               tabIndex={-1}
-              placeholder="Nhập số điện thoại"
+              placeholder="Người dùng chưa cung cấp"
               defaultValue={userData.phoneNumber}
             />
           </div>
 
-          <div className="space-y-2">
-            <Label className="font-semibold text-secondary">Địa chỉ</Label>
+          <div className="space-y-1">
+            <Label>Địa chỉ</Label>
             <Input
               readOnly
               type="text"
               tabIndex={-1}
-              placeholder="Nhập địa chỉ"
+              placeholder="Người dùng chưa cung cấp"
               defaultValue={userData.address}
             />
           </div>
 
           <div className="flex justify-between gap-x-6">
             <div className="w-full">
-              <Label className="font-semibold text-secondary">Ngày tạo</Label>
+              <Label>Ngày tạo</Label>
               <Input
                 readOnly
                 type="text"
@@ -96,9 +101,7 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
             </div>
 
             <div className="w-full">
-              <Label className="font-semibold text-secondary">
-                Ngày cập nhật
-              </Label>
+              <Label>Ngày cập nhật</Label>
               <Input
                 readOnly
                 type="text"
@@ -110,8 +113,8 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label className="font-semibold text-secondary">Trạng thái</Label>
+          <div className="space-y-1">
+            <Label>Trạng thái</Label>
             <Input
               readOnly
               type="text"
@@ -127,7 +130,14 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
             <Button type="button" variant="outline" onClick={onClose}>
               Đóng
             </Button>
-            <Button type="button" variant="default">
+            <Button
+              type="button"
+              variant="default"
+              onClick={() => {
+                handleStatusChange()
+                onClose()
+              }}
+            >
               Cập nhật
             </Button>
           </div>

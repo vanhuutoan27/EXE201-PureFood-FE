@@ -149,9 +149,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
           </DialogHeader>
           <div className="grid grid-cols-3 gap-x-6">
             <div className="col-span-1 space-y-1">
-              <Label className="font-semibold text-secondary">
-                Hình ảnh sản phẩm
-              </Label>
+              <Label>Hình ảnh sản phẩm</Label>
 
               <div className="relative rounded-xl">
                 {productData.images && (
@@ -176,9 +174,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
 
             <div className="col-span-1 space-y-2">
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">
-                  ID sản phẩm
-                </Label>
+                <Label>ID sản phẩm</Label>
                 <Input
                   readOnly
                   type="text"
@@ -188,9 +184,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               </div>
 
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">
-                  Tên sản phẩm
-                </Label>
+                <Label>Tên sản phẩm</Label>
                 <Input
                   readOnly={!isEditing}
                   type="text"
@@ -205,7 +199,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               </div>
 
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">Xuất xứ</Label>
+                <Label>Xuất xứ</Label>
                 <Input
                   readOnly={!isEditing}
                   type="text"
@@ -220,7 +214,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               </div>
 
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">Tồn kho</Label>
+                <Label>Tồn kho</Label>
                 <Input
                   readOnly={!isEditing}
                   type="number"
@@ -237,7 +231,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
 
             <div className="col-span-1 space-y-2">
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">Danh mục</Label>
+                <Label>Danh mục</Label>
                 {isEditing ? (
                   <>
                     <Select
@@ -273,9 +267,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               </div>
 
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">
-                  Loại danh mục
-                </Label>
+                <Label>Loại danh mục</Label>
                 <Input
                   readOnly
                   type="text"
@@ -286,9 +278,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               </div>
 
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">
-                  Nhà cung cấp
-                </Label>
+                <Label>Nhà cung cấp</Label>
                 <Input
                   readOnly={!isEditing}
                   type="text"
@@ -303,7 +293,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               </div>
 
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">Hữu cơ</Label>
+                <Label>Hữu cơ</Label>
 
                 {isEditing ? (
                   <>
@@ -340,9 +330,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
           <div className="grid grid-cols-4 gap-x-6">
             <div className="col-span-1 space-y-2">
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">
-                  Khối lượng
-                </Label>
+                <Label>Khối lượng</Label>
                 <Input
                   readOnly={!isEditing}
                   type="number"
@@ -357,9 +345,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               </div>
 
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">
-                  Ngày nhập
-                </Label>
+                <Label>Ngày nhập</Label>
 
                 {isEditing ? (
                   <>
@@ -402,7 +388,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
 
             <div className="col-span-1 space-y-2">
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">Đơn vị</Label>
+                <Label>Đơn vị</Label>
 
                 {isEditing ? (
                   <>
@@ -435,9 +421,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               </div>
 
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">
-                  Ngày hết hạn
-                </Label>
+                <Label>Ngày hết hạn</Label>
                 {isEditing ? (
                   <>
                     <Popover>
@@ -481,7 +465,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
 
             <div className="col-span-1 space-y-2">
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">Giá</Label>
+                <Label>Giá</Label>
                 <Input
                   readOnly={!isEditing}
                   type="number"
@@ -496,7 +480,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               </div>
 
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">Ngày tạo</Label>
+                <Label>Ngày tạo</Label>
                 <Input
                   readOnly
                   tabIndex={-1}
@@ -507,9 +491,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
 
             <div className="col-span-1 space-y-2">
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">
-                  Trạng thái
-                </Label>
+                <Label>Trạng thái</Label>
 
                 <Input
                   readOnly
@@ -520,9 +502,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
               </div>
 
               <div className="space-y-1">
-                <Label className="font-semibold text-secondary">
-                  Ngày cập nhật
-                </Label>
+                <Label>Ngày cập nhật</Label>
                 <Input
                   readOnly
                   tabIndex={-1}
@@ -533,7 +513,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
           </div>
 
           <div className="space-y-1 pt-3">
-            <Label className="font-semibold text-secondary">Mô tả</Label>
+            <Label>Mô tả</Label>
             <ScrollArea className="h-40">
               <Textarea
                 readOnly={!isEditing}

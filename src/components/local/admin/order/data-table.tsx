@@ -14,7 +14,6 @@ import {
   useReactTable
 } from "@tanstack/react-table"
 
-import { Button } from "@/components/global/atoms/button"
 import { Input } from "@/components/global/atoms/input"
 import {
   Table,
@@ -56,12 +55,12 @@ export function DataTable<TData, TValue>({
     <>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Tìm kiếm theo tên sản phẩm..."
+          placeholder="Tìm kiếm theo tên khách hàng..."
           value={
-            (table.getColumn("orderId")?.getFilterValue() as string) ?? ""
+            (table.getColumn("fullName")?.getFilterValue() as string) ?? ""
           }
           onChange={(event) =>
-            table.getColumn("orderId")?.setFilterValue(event.target.value)
+            table.getColumn("fullName")?.setFilterValue(event.target.value)
           }
           className="border-input bg-white"
         />
@@ -119,27 +118,6 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-      </div>
-
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          disabled={!table.getCanPreviousPage()}
-          type="button"
-          size="sm"
-          variant="outline"
-          onClick={() => table.previousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          disabled={!table.getCanNextPage()}
-          type="button"
-          size="sm"
-          variant="outline"
-          onClick={() => table.nextPage()}
-        >
-          Next
-        </Button>
       </div>
     </>
   )

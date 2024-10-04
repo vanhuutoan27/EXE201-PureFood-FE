@@ -3,7 +3,7 @@ import { z } from "zod"
 export const orderItemSchema = z.object({
   productId: z.string().nonempty({ message: "Mã sản phẩm là bắt buộc" }),
   productName: z.string().nonempty({ message: "Vui lòng nhập tên sản phẩm" }),
-  productImage: z.string().nonempty({ message: "Vui lòng thêm ảnh sản phẩm" }),
+  image: z.string().nonempty({ message: "Vui lòng thêm ảnh sản phẩm" }),
   quantity: z.coerce
     .number()
     .int({ message: "Số lượng phải là số nguyên" })
@@ -15,7 +15,7 @@ export const orderItemSchema = z.object({
 })
 
 export const createOrderItemSchema = orderItemSchema.omit({
-  productImage: true
+  image: true
 })
 
 export const orderSchema = z.object({

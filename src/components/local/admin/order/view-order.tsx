@@ -180,7 +180,7 @@ function ViewOrderDialog({ orderData, onClose }: ViewOrderProps) {
                 <tr key={index} className="border-b text-sm font-normal">
                   <td className="w-1/4 p-2 text-center">
                     <LazyImage
-                      src={item.productImage}
+                      src={item.image}
                       alt={item.productName}
                       className="h-28 w-28 rounded-lg"
                     />

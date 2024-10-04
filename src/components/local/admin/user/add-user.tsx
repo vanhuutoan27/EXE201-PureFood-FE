@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form"
 
 import { CreateUserType, createUserSchema } from "@/schemas/userSchema"
 
+import { useCreateUser } from "@/apis/userApi"
+
 import { Button } from "@/components/global/atoms/button"
 import {
   Dialog,
@@ -40,10 +42,14 @@ function AddUser({ onClose }: AddUserProps) {
     setValue("role", value)
   }
 
+  const addUser = useCreateUser()
+
   const onSubmit = (data: CreateUserType) => {
     console.log("Form data:", data)
-    onClose()
+
+    addUser.mutate(data)
     reset()
+    onClose()
   }
 
   return (
@@ -71,7 +77,7 @@ function AddUser({ onClose }: AddUserProps) {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              
+
               {errors.role && (
                 <p className="error-lens">{errors.role.message}</p>
               )}

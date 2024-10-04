@@ -7,6 +7,8 @@ import { Check, MoreHorizontal, X } from "lucide-react"
 
 import { ProductType } from "@/schemas/productSchema"
 
+import { useChangeStatusProduct } from "@/apis/productApi"
+
 import { capitalize, formatCurrency, formatDateDMY } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
@@ -27,55 +29,47 @@ export const columns: ColumnDef<ProductType>[] = [
   // },
   {
     accessorKey: "productName",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Tên sản phẩm
-        </span>
-      )
-    }
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Tên sản phẩm
+      </span>
+    )
   },
   {
     accessorKey: "supplier",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Nhà cung cấp
-        </span>
-      )
-    }
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Nhà cung cấp
+      </span>
+    )
   },
   {
     accessorKey: "weight",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Khối lượng
-        </span>
-      )
-    }
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Khối lượng
+      </span>
+    )
   },
   {
     accessorKey: "unit",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Đơn vị
-        </span>
-      )
-    },
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Đơn vị
+      </span>
+    ),
     cell: ({ row }) => {
       const unit = row.original.unit
       return <span>{capitalize(unit)}</span>
@@ -83,16 +77,14 @@ export const columns: ColumnDef<ProductType>[] = [
   },
   {
     accessorKey: "price",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Giá
-        </span>
-      )
-    },
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Giá
+      </span>
+    ),
     cell: ({ row }) => {
       const price = row.original.price
       return <span>{formatCurrency(price)}</span>
@@ -100,42 +92,36 @@ export const columns: ColumnDef<ProductType>[] = [
   },
   {
     accessorKey: "stock",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Tồn kho
-        </span>
-      )
-    }
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Tồn kho
+      </span>
+    )
   },
   {
     accessorKey: "origin",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Xuất xứ
-        </span>
-      )
-    }
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Xuất xứ
+      </span>
+    )
   },
   {
     accessorKey: "organic",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Hữu cơ
-        </span>
-      )
-    },
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Hữu cơ
+      </span>
+    ),
     cell: ({ row }) => {
       const organic = row.original.organic ? (
         <Check size={16} />
@@ -147,16 +133,14 @@ export const columns: ColumnDef<ProductType>[] = [
   },
   {
     accessorKey: "entryDate",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Ngày nhập
-        </span>
-      )
-    },
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Ngày nhập
+      </span>
+    ),
     cell: ({ row }) => {
       const entryDate = row.original.entryDate
       return <span>{formatDateDMY(entryDate)}</span>
@@ -164,16 +148,14 @@ export const columns: ColumnDef<ProductType>[] = [
   },
   {
     accessorKey: "expiryDate",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Ngày hết hạn
-        </span>
-      )
-    },
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Ngày hết hạn
+      </span>
+    ),
     cell: ({ row }) => {
       const entryDate = row.original.entryDate
       return <span>{formatDateDMY(entryDate)}</span>
@@ -181,16 +163,14 @@ export const columns: ColumnDef<ProductType>[] = [
   },
   {
     accessorKey: "status",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Trạng thái
-        </span>
-      )
-    },
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Trạng thái
+      </span>
+    ),
     cell: ({ row }) => {
       const status = row.original.status ? "Đang bán" : "Tạm ngưng"
       return <span>{status}</span>
@@ -200,16 +180,17 @@ export const columns: ColumnDef<ProductType>[] = [
     id: "actions",
     cell: ({ row }) => {
       const product = row.original
-
+      const changeStatusMutation = useChangeStatusProduct(product.productId)
       const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
 
       const handleViewDetailsClick = () => {
         setIsViewDialogOpen(true)
       }
 
-      // const handleStatusChange = () => {
-      //   changeProductStatus(product.productId)
-      // }
+      const handleStatusChange = () => {
+        const newStatus = !product.status
+        changeStatusMutation.mutate({ status: newStatus })
+      }
 
       return (
         <>
@@ -230,7 +211,9 @@ export const columns: ColumnDef<ProductType>[] = [
               <DropdownMenuItem onClick={handleViewDetailsClick}>
                 Xem chi tiết
               </DropdownMenuItem>
-              <DropdownMenuItem>Đổi trạng thái</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleStatusChange}>
+                Đổi trạng thái
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 

@@ -84,6 +84,7 @@ export const useCreateUser = () => {
         const { success, message, data } = response.data
 
         if (success) {
+          toast.success(message)
           return data
         } else {
           toast.error(message)
@@ -93,6 +94,35 @@ export const useCreateUser = () => {
         const errorMessage = error.response?.data?.message
         toast.error(errorMessage)
         throw new Error(errorMessage)
+      }
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("users")
+      },
+      onError: (error: Error) => {
+        toast.error(error.message)
+      }
+    }
+  )
+}
+
+export const useChangeStatusUser = (userId: string) => {
+  const queryClient = useQueryClient()
+
+  return useMutation<UserType, Error, { status: boolean }>(
+    async ({ status }) => {
+      const response = await pureAPI.patch(`/users/${userId}/status`, {
+        status
+      })
+      const { success, message, data } = response.data
+
+      if (success) {
+        toast.success(message)
+        return data
+      } else {
+        toast.error(message)
+        throw new Error(message)
       }
     },
     {

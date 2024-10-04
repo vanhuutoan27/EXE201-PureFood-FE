@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "react-query"
 import { toast } from "sonner"
 
-import { ProductType } from "@/schemas/productSchema"
+import { CreateProductType, ProductType } from "@/schemas/productSchema"
 
 import pureAPI from "@/lib/pureAPI"
 
@@ -23,7 +23,7 @@ export const useGetAllProducts = (
     queryFn: async () => {
       try {
         const response = await pureAPI.get("/products", {
-          params: { page, limit, search, status }
+          params: { page, limit, search, category, status }
         })
         const { success, message, data } = response.data
         const { totalPages, totalItems, items: products } = data
@@ -146,12 +146,13 @@ export const useGetProductBySlug = (slug: string | undefined) => {
 export const useCreateProduct = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<ProductType, Error, ProductType>(
+  return useMutation<CreateProductType, Error, CreateProductType>(
     async (product) => {
       const response = await pureAPI.post("/products", product)
       const { success, message, data } = response.data
 
       if (success) {
+        toast.success(message)
         return data
       } else {
         toast.error(message)
@@ -180,6 +181,7 @@ export const useChangeStatusProduct = (productId: string) => {
       const { success, message, data } = response.data
 
       if (success) {
+        toast.success(message)
         return data
       } else {
         toast.error(message)

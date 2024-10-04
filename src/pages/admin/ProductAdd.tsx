@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form"
 
 import { CreateProductType, createProductSchema } from "@/schemas/productSchema"
 
+import { useCreateProduct } from "@/apis/productApi"
+
 import { diamoonDB } from "@/lib/firebase"
 import { convertToLocalISOString } from "@/lib/utils"
 
@@ -37,6 +39,8 @@ function ProductAdd() {
   const [expiryDate, setExpiryDate] = useState<string>("")
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
   const [isDragOver, setIsDragOver] = useState<boolean>(false)
+
+  const createProductMutation = useCreateProduct()
 
   const handleDateSelect = (
     date: Date | undefined,
@@ -95,6 +99,7 @@ function ProductAdd() {
     setValue,
     handleSubmit,
     setError,
+    reset,
     formState: { errors }
   } = useForm<CreateProductType>({
     resolver: zodResolver(createProductSchema),
@@ -132,6 +137,9 @@ function ProductAdd() {
 
       const finalData = { ...data, images: imageUrls }
 
+      createProductMutation.mutate(finalData)
+      setUploadedFiles([])
+      reset()
       console.log(JSON.stringify(finalData, null, 2))
     } catch (error) {
       console.error("Error uploading images:", error)
@@ -190,7 +198,7 @@ function ProductAdd() {
               id="productName"
               placeholder="Nhập tên sản phẩm"
               {...register("productName")}
-              defaultValue={"Rau cải thảo"}
+              // defaultValue={"Rau cải thảo"}
               className="bg-white"
             />
 
@@ -206,7 +214,7 @@ function ProductAdd() {
               id="foodName"
               placeholder="Nhập tên thực phẩm"
               {...register("foodName")}
-              defaultValue={"Cải thảo"}
+              // defaultValue={"Cải thảo"}
               className="bg-white"
             />
 
@@ -222,7 +230,7 @@ function ProductAdd() {
               rows={5}
               placeholder="Nhập mô tả chi tiết"
               {...register("description")}
-              defaultValue={"No description for you"}
+              // defaultValue={"No description for you"}
               className="resize-none bg-white"
             />
 
@@ -238,7 +246,7 @@ function ProductAdd() {
               type="number"
               placeholder="Nhập số lượng tồn kho"
               {...register("stock", { valueAsNumber: true })}
-              defaultValue={100}
+              // defaultValue={100}
               className="bg-white"
             />
 
@@ -254,7 +262,7 @@ function ProductAdd() {
               type="number"
               placeholder="Nhập khối lượng sản phẩm"
               {...register("weight", { valueAsNumber: true })}
-              defaultValue={100}
+              // defaultValue={100}
               className="bg-white"
             />
 
@@ -287,7 +295,7 @@ function ProductAdd() {
               type="number"
               placeholder="Nhập giá sản phẩm"
               {...register("price", { valueAsNumber: true })}
-              defaultValue={10000}
+              // defaultValue={10000}
               className="bg-white"
             />
 
@@ -303,7 +311,7 @@ function ProductAdd() {
               type="text"
               placeholder="Nhập nơi xuất xứ"
               {...register("origin")}
-              defaultValue={"Củ Chi"}
+              // defaultValue={"Củ Chi"}
               className="bg-white"
             />
 
