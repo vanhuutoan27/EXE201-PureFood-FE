@@ -1,19 +1,49 @@
+import { useState } from "react"
+
 import { useLocation } from "react-router-dom"
 
-import { exampleProductsData } from "@/constants/products"
+import { useGetAllProducts } from "@/apis/productApi"
 
+import { Button } from "@/components/global/atoms/button"
 import AdminTitle from "@/components/global/organisms/admin-title"
 import { columns } from "@/components/local/admin/product/columns"
 import { DataTable } from "@/components/local/admin/product/data-table"
 
+import Loading from "../Loading"
+
+const INITIAL_PRODUCT_COUNT = 10
+
 function Products() {
   const categoryUrl = useLocation().pathname.split("/")[3]
+  const [visibleProducts] = useState(INITIAL_PRODUCT_COUNT)
+  const [currentPage, setCurrentPage] = useState(1)
 
-  const productsData = exampleProductsData
-
-  const filteredProductsData = productsData.filter(
-    (product) => product.category === categoryUrl
+  const { data, isLoading } = useGetAllProducts(
+    currentPage,
+    visibleProducts,
+    undefined,
+    categoryUrl,
+    true
   )
+
+  if (isLoading) {
+    return <Loading />
+  }
+
+  const products = data?.products || []
+  const totalPages = data?.totalPages || 1
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1)
+    }
+  }
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1)
+    }
+  }
 
   return (
     <div>
@@ -21,7 +51,28 @@ function Products() {
         title={categoryUrl === "rau-cu" ? "Quản lý Rau củ" : "Quản lý Trái cây"}
       />
 
-      <DataTable columns={columns} data={filteredProductsData} />
+      <DataTable columns={columns} data={products} />
+
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          type="button"
+          size="sm"
+          variant="outline"
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </Button>
+        <Button
+          type="button"
+          size="sm"
+          variant="outline"
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   )
 }
