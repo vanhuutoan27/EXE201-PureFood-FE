@@ -8,6 +8,8 @@ import { MoreHorizontal } from "lucide-react"
 
 import { UserType } from "@/schemas/userSchema"
 
+import { useChangeStatusUser } from "@/apis/userApi"
+
 import { formatDateDMY } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
@@ -23,10 +25,6 @@ import LazyImage from "@/components/global/molecules/lazy-image"
 import ViewUserDialog from "./view-user"
 
 export const columns: ColumnDef<UserType>[] = [
-  // {
-  //   accessorKey: "userId",
-  //   header: "ID"
-  // },
   {
     accessorKey: "fullName",
     header: ({ column }) => {
@@ -96,7 +94,7 @@ export const columns: ColumnDef<UserType>[] = [
     },
     cell: ({ row }) => {
       const address = row.original.address
-      return <span>{address || "Không"}</span>
+      return <span>{address || "Chưa cung cấp"}</span>
     }
   },
   {
@@ -114,24 +112,6 @@ export const columns: ColumnDef<UserType>[] = [
     cell: ({ row }) => {
       const createdAt = row.original.createdAt
       return <span>{formatDateDMY(createdAt)}</span>
-    }
-  },
-
-  {
-    accessorKey: "createdBy",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Người tạo
-        </span>
-      )
-    },
-    cell: ({ row }) => {
-      const createdBy = row.original.createdBy
-      return <span>{createdBy || "Không"}</span>
     }
   },
   {
@@ -189,16 +169,17 @@ export const columns: ColumnDef<UserType>[] = [
     id: "actions",
     cell: ({ row }) => {
       const user = row.original
-
+      const changeStatusMutation = useChangeStatusUser(user.userId)
       const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
 
       const handleViewDetailsClick = () => {
         setIsViewDialogOpen(true)
       }
 
-      // const handleStatusChange = () => {
-      //   changeProductStatus(product.productId)
-      // }
+      const handleStatusChange = () => {
+        const newStatus = !user.userId
+        changeStatusMutation.mutate({ status: newStatus })
+      }
 
       return (
         <>
@@ -219,7 +200,9 @@ export const columns: ColumnDef<UserType>[] = [
               <DropdownMenuItem onClick={handleViewDetailsClick}>
                 Xem chi tiết
               </DropdownMenuItem>
-              <DropdownMenuItem>Đổi trạng thái</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleStatusChange}>
+                Đổi trạng thái
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 

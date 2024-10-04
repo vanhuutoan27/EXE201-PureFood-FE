@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 
 import { ColumnDef } from "@tanstack/react-table"
@@ -23,57 +21,49 @@ import ViewOrderDialog from "./view-order"
 export const columns: ColumnDef<OrderType>[] = [
   {
     accessorKey: "fullName",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Khách hàng
-        </span>
-      )
-    }
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Khách hàng
+      </span>
+    )
   },
   {
     accessorKey: "phoneNumber",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Số điện thoại
-        </span>
-      )
-    }
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Số điện thoại
+      </span>
+    )
   },
   {
     accessorKey: "paymentMethod",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Thanh toán
-        </span>
-      )
-    }
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Thanh toán
+      </span>
+    )
   },
   {
     accessorKey: "totalAmount",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Giá
-        </span>
-      )
-    },
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Giá
+      </span>
+    ),
     cell: ({ row }) => {
-      const totalAmount = row.original.totalAmount
+      const totalAmount = row.original?.totalAmount ?? 0
       return <span>{formatCurrency(totalAmount)}</span>
     }
   },
@@ -81,34 +71,31 @@ export const columns: ColumnDef<OrderType>[] = [
     accessorKey: "createdAt",
     header: "Ngày tạo",
     cell: ({ row }) => {
-      const createdAt = row.original.createdAt
-      return <span>{formatDateDMY(createdAt)}</span>
+      const createdAt = row.original?.createdAt
+      return <span>{createdAt ? formatDateDMY(createdAt) : "N/A"}</span>
     }
   },
   {
     accessorKey: "updatedAt",
     header: "Ngày cập nhật",
     cell: ({ row }) => {
-      const updatedAt = row.original.updatedAt
-      return <span>{formatDateDMY(updatedAt)}</span>
+      const updatedAt = row.original?.updatedAt
+      return <span>{updatedAt ? formatDateDMY(updatedAt) : "N/A"}</span>
     }
   },
   {
     accessorKey: "orderStatus",
-    header: ({ column }) => {
-      return (
-        <span
-          className="cursor-pointer select-none"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Trạng thái
-        </span>
-      )
-    },
+    header: ({ column }) => (
+      <span
+        className="cursor-pointer select-none"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Trạng thái
+      </span>
+    ),
     cell: ({ row }) => {
-      const orderStatus = row.original.orderStatus
-      const { statusColor, statusValue } = getOrderStatus(orderStatus)
-
+      const orderStatus = row.original?.orderStatus
+      const { statusColor, statusValue } = getOrderStatus(orderStatus || "")
       return (
         <span className={`${statusColor} font-semibold`}>{statusValue}</span>
       )
@@ -118,6 +105,10 @@ export const columns: ColumnDef<OrderType>[] = [
     id: "actions",
     cell: ({ row }) => {
       const order = row.original
+
+      if (!order) {
+        return null
+      }
 
       const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
 
@@ -136,7 +127,9 @@ export const columns: ColumnDef<OrderType>[] = [
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="bg-white">
               <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(order.orderId)}
+                onClick={() =>
+                  order?.orderId && navigator.clipboard.writeText(order.orderId)
+                }
               >
                 Sao chép ID
               </DropdownMenuItem>

@@ -2,6 +2,8 @@ import { defaultAvatar } from "@/configs/config"
 
 import { UserType } from "@/schemas/userSchema"
 
+import { useChangeStatusUser } from "@/apis/userApi"
+
 import { formatDateDMY } from "@/lib/utils"
 
 import { Avatar, AvatarImage } from "@/components/global/atoms/avatar"
@@ -21,6 +23,13 @@ interface ViewUserProps {
 }
 
 function ViewUserDialog({ userData, onClose }: ViewUserProps) {
+  const changeStatusMutation = useChangeStatusUser(userData.userId)
+
+  const handleStatusChange = () => {
+    const newStatus = !userData.userId
+    changeStatusMutation.mutate({ status: newStatus })
+  }
+
   return (
     <Dialog onOpenChange={onClose} open>
       <DialogContent className="min-w-[500px]">
@@ -66,7 +75,7 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
               readOnly
               type="string"
               tabIndex={-1}
-              placeholder="Nhập số điện thoại"
+              placeholder="Người dùng chưa cung cấp"
               defaultValue={userData.phoneNumber}
             />
           </div>
@@ -77,7 +86,7 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
               readOnly
               type="text"
               tabIndex={-1}
-              placeholder="Nhập địa chỉ"
+              placeholder="Người dùng chưa cung cấp"
               defaultValue={userData.address}
             />
           </div>
@@ -127,7 +136,14 @@ function ViewUserDialog({ userData, onClose }: ViewUserProps) {
             <Button type="button" variant="outline" onClick={onClose}>
               Đóng
             </Button>
-            <Button type="button" variant="default">
+            <Button
+              type="button"
+              variant="default"
+              onClick={() => {
+                handleStatusChange()
+                onClose()
+              }}
+            >
               Cập nhật
             </Button>
           </div>
