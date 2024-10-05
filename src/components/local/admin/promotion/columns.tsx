@@ -3,13 +3,11 @@
 import { useState } from "react"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { Check, MoreHorizontal, X } from "lucide-react"
+import { MoreHorizontal } from "lucide-react"
 
-import { ProductType } from "@/schemas/productSchema"
+import { PromotionType } from "@/schemas/promotionSchema"
 
-import { useChangeStatusProduct } from "@/apis/productApi"
-
-import { capitalize, formatCurrency, formatDateDMY } from "@/lib/utils"
+import { formatDateDMY } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
 import {
@@ -20,75 +18,52 @@ import {
   DropdownMenuTrigger
 } from "@/components/global/atoms/dropdown-menu"
 
-import ViewProductDialog from "./view-product"
+import ViewPromotionDialog from "./view-promotion"
 
-export const columns: ColumnDef<ProductType>[] = [
-  // {
-  //   accessorKey: "productId",
-  //   header: "ID"
-  // },
+export const columns: ColumnDef<PromotionType>[] = [
   {
-    accessorKey: "productName",
+    accessorKey: "promotionName",
     header: ({ column }) => (
       <span
         className="cursor-pointer select-none"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Tên sản phẩm
+        Tên mã
       </span>
     )
   },
   {
-    accessorKey: "supplier",
+    accessorKey: "discountCode",
     header: ({ column }) => (
       <span
         className="cursor-pointer select-none"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Nhà cung cấp
+        Mã
       </span>
     )
   },
   {
-    accessorKey: "weight",
+    accessorKey: "discountPercentage",
     header: ({ column }) => (
       <span
         className="cursor-pointer select-none"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Khối lượng
+        Giảm giá
       </span>
     )
   },
   {
-    accessorKey: "unit",
+    accessorKey: "quantity",
     header: ({ column }) => (
       <span
         className="cursor-pointer select-none"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Đơn vị
+        Số lượng
       </span>
-    ),
-    cell: ({ row }) => {
-      const unit = row.original.unit
-      return <span>{capitalize(unit)}</span>
-    }
-  },
-  {
-    accessorKey: "price",
-    header: ({ column }) => (
-      <span
-        className="cursor-pointer select-none"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        Giá
-      </span>
-    ),
-    cell: ({ row }) => {
-      const price = row.original.price
-      return <span>{formatCurrency(price)}</span>
-    }
+    )
   },
   {
     accessorKey: "stock",
@@ -97,57 +72,27 @@ export const columns: ColumnDef<ProductType>[] = [
         className="cursor-pointer select-none"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Tồn kho
+        Còn lại
       </span>
     )
   },
   {
-    accessorKey: "origin",
+    accessorKey: "startDate",
     header: ({ column }) => (
       <span
         className="cursor-pointer select-none"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Xuất xứ
-      </span>
-    )
-  },
-  {
-    accessorKey: "organic",
-    header: ({ column }) => (
-      <span
-        className="cursor-pointer select-none"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        Hữu cơ
+        Ngày bắt đầu
       </span>
     ),
     cell: ({ row }) => {
-      const organic = row.original.organic ? (
-        <Check size={16} />
-      ) : (
-        <X size={16} />
-      )
-      return <span className="flex justify-start pl-4">{organic}</span>
+      const startDate = row.original.startDate
+      return <span>{formatDateDMY(startDate)}</span>
     }
   },
   {
-    accessorKey: "entryDate",
-    header: ({ column }) => (
-      <span
-        className="cursor-pointer select-none"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        Ngày nhập
-      </span>
-    ),
-    cell: ({ row }) => {
-      const entryDate = row.original.entryDate
-      return <span>{formatDateDMY(entryDate)}</span>
-    }
-  },
-  {
-    accessorKey: "expiryDate",
+    accessorKey: "endDate",
     header: ({ column }) => (
       <span
         className="cursor-pointer select-none"
@@ -157,8 +102,8 @@ export const columns: ColumnDef<ProductType>[] = [
       </span>
     ),
     cell: ({ row }) => {
-      const expiryDate = row.original.expiryDate
-      return <span>{formatDateDMY(expiryDate)}</span>
+      const endDate = row.original.endDate
+      return <span>{formatDateDMY(endDate)}</span>
     }
   },
   {
@@ -172,25 +117,25 @@ export const columns: ColumnDef<ProductType>[] = [
       </span>
     ),
     cell: ({ row }) => {
-      const status = row.original.status ? "Đang bán" : "Tạm ngưng"
+      const status = row.original.status ? "Áp dụng" : "Tạm ngưng"
       return <span>{status}</span>
     }
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const product = row.original
-      const changeStatusMutation = useChangeStatusProduct(product.productId)
+      const promotion = row.original
+      //   const changeStatusMutation = useChangeStatusProduct(product.productId)
       const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
 
       const handleViewDetailsClick = () => {
         setIsViewDialogOpen(true)
       }
 
-      const handleStatusChange = () => {
-        const newStatus = !product.status
-        changeStatusMutation.mutate({ status: newStatus })
-      }
+      //   const handleStatusChange = () => {
+      //     const newStatus = !product.status
+      //     changeStatusMutation.mutate({ status: newStatus })
+      //   }
 
       return (
         <>
@@ -203,7 +148,9 @@ export const columns: ColumnDef<ProductType>[] = [
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="bg-white">
               <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(product.productId)}
+                onClick={() =>
+                  navigator.clipboard.writeText(promotion.promotionId)
+                }
               >
                 Sao chép ID
               </DropdownMenuItem>
@@ -211,15 +158,14 @@ export const columns: ColumnDef<ProductType>[] = [
               <DropdownMenuItem onClick={handleViewDetailsClick}>
                 Xem chi tiết
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleStatusChange}>
-                Đổi trạng thái
-              </DropdownMenuItem>
+              {/* <DropdownMenuItem onClick={handleStatusChange}> */}
+              <DropdownMenuItem>Đổi trạng thái</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
           {isViewDialogOpen && (
-            <ViewProductDialog
-              productData={product}
+            <ViewPromotionDialog
+              promotionData={promotion}
               onClose={() => setIsViewDialogOpen(false)}
             />
           )}

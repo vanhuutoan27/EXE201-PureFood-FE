@@ -372,7 +372,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                         />
                       </PopoverContent>
                     </Popover>
-                    {errors.expiryDate && (
+                    {errors.entryDate && (
                       <p className="error-lens">Ngày nhập là bắt buộc</p>
                     )}
                   </>

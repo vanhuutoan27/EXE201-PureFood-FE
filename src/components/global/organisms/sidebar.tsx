@@ -11,6 +11,7 @@ import {
   Package,
   Settings,
   ShoppingCart,
+  Ticket,
   Users
 } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
@@ -130,6 +131,12 @@ const sidebarMenu = [
         href: "/admin/don-hang/da-xu-ly"
       }
     ]
+  },
+  {
+    label: "Khuyến mãi",
+    icon: Ticket,
+    href: "/admin/khuyen-mai",
+    items: []
   },
   {
     label: "Khách hàng",

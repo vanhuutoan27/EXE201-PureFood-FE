@@ -29,4 +29,26 @@ export const promotionSchema = z.object({
   updatedBy: z.string().nonempty({ message: "Người cập nhật là bắt buộc" })
 })
 
+export const createPromotionSchema = promotionSchema.omit({
+  promotionId: true,
+  stock: true,
+  status: true,
+  createdAt: true,
+  createdBy: true,
+  updatedAt: true,
+  updatedBy: true
+})
+
+export const updatePromotionSchema = promotionSchema.omit({
+  promotionId: true,
+  stock: true,
+  status: true,
+  createdAt: true,
+  createdBy: true,
+  updatedAt: true,
+  updatedBy: true
+})
+
 export type PromotionType = z.infer<typeof promotionSchema>
+export type CreatePromotionType = z.infer<typeof createPromotionSchema>
+export type UpdatePromotionType = z.infer<typeof updatePromotionSchema>

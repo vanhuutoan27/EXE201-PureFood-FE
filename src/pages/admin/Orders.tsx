@@ -22,10 +22,12 @@ function Orders() {
       orderStatus = null
       break
     case "moi":
-      orderStatus = "new"
+      orderStatus = "Pending"
+      orderStatus = "Processing"
       break
     case "da-xu-ly":
-      orderStatus = "processed"
+      orderStatus = "Shipping"
+      orderStatus = "Completed"
       break
     default:
       orderStatus = null
