@@ -1,7 +1,7 @@
 import { sampleBlogData } from "@/constants/blogs"
 
 import Bread from "@/components/global/molecules/bread"
-import BlogCard from "@/components/local/default/blog/blog-card"
+import BlogList from "@/components/local/default/blog/blog-list"
 
 function Blogs() {
   const blogsData = sampleBlogData
@@ -16,11 +16,7 @@ function Blogs() {
         }}
       />
 
-      <div className="grid grid-cols-3 justify-between gap-x-10 gap-y-12">
-        {blogsData.map((blog) => (
-          <BlogCard key={blog.blogId} blogData={blog} />
-        ))}
-      </div>
+      <BlogList blogsData={blogsData} />
     </div>
   )
 }

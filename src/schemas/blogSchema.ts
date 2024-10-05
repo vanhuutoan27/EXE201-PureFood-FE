@@ -19,7 +19,7 @@ export const blogSchema = z.object({
     .string()
     .nonempty({ message: "Email is required" })
     .email({ message: "Invalid author email format" }),
-  authorImage: z.string().url({ message: "Invalid author image URL format" }),
+  authorAvatar: z.string().url({ message: "Invalid author image URL format" }),
   tags: z.array(z.string()).min(1, "At least one tag is required").optional(),
   image: z.string().optional(),
   status: z.boolean(),
@@ -33,7 +33,7 @@ export const createUpdateBlogSchema = blogSchema.omit({
   blogId: true,
   slug: true,
   authorEmail: true,
-  authorImage: true,
+  authorAvatar: true,
   status: true,
   createdAt: true,
   createdBy: true,

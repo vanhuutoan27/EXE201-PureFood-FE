@@ -1,71 +1,89 @@
+import { Calendar } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { BlogType } from "@/schemas/blogSchema"
 
-import { formatDateDMY } from "@/lib/utils"
+import { capitalize, formatDateDMY } from "@/lib/utils"
 
-import { Button } from "@/components/global/atoms/button"
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage
+} from "@/components/global/atoms/avatar"
+import { Badge } from "@/components/global/atoms/badge"
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader
+} from "@/components/global/atoms/card"
+import LazyImage from "@/components/global/molecules/lazy-image"
 
 interface BlogCardProps {
-  blogsData: BlogType
+  blogData: BlogType
 }
 
-function BlogCard({ blogsData }: BlogCardProps) {
-  const maxTagsToShow = 1
-  const extraTagsCount = blogsData.tags.length - maxTagsToShow
-
+function BlogCard({ blogData }: BlogCardProps) {
   return (
-    <div className="space-y-4 rounded-xl border-2 p-4 shadow-lg">
-      <img
-        src={blogsData.images?.[0]}
-        alt={blogsData.title}
-        className="cursor-pointer select-none rounded-lg object-cover"
-      />
+    <Card key={blogData.blogId} className="flex flex-col p-4">
+      <CardHeader className="p-0">
+        <LazyImage
+          src={blogData.image}
+          alt={blogData.title}
+          className="h-48 w-full select-none rounded-t-lg object-cover"
+        />
+      </CardHeader>
 
-      <div>
-        <div className="flex items-center justify-between">
-          <p className="text-sm font-semibold text-secondary">
-            {formatDateDMY(blogsData.createdAt)}
-          </p>
-          <div className="flex max-w-full flex-wrap gap-2 overflow-hidden">
-            {blogsData.tags.slice(0, maxTagsToShow).map((tag, index) => (
-              <span
-                key={index}
-                className="cursor-pointer rounded-md bg-secondary px-2 py-1 text-xs font-medium text-white"
-              >
-                {tag}
-              </span>
+      <CardContent className="flex-grow space-y-2 p-0">
+        <div className="flex items-center gap-2 pb-4">
+          {blogData.tags &&
+            blogData.tags.slice(0, 2).map((tag, index) => (
+              <Badge key={index} variant="secondary" className="text-white">
+                {capitalize(tag)}
+              </Badge>
             ))}
 
-            {extraTagsCount > 0 && (
-              <span className="cursor-pointer rounded-md bg-secondary px-2 py-1 text-xs font-medium text-white">
-                +{extraTagsCount}
-              </span>
-            )}
-          </div>
+          {blogData.tags && blogData.tags.length > 2 && (
+            <Badge variant="secondary" className="text-white">
+              +{blogData.tags.length - 2} more
+            </Badge>
+          )}
         </div>
 
         <Link
-          to={`/kien-thuc/${blogsData.slug}`}
-          className="title-lens mt-2 w-fit cursor-pointer text-lg font-semibold text-primary"
+          to={`/kien-thuc/${blogData.slug}`}
+          className="text-lg font-semibold"
         >
-          {blogsData.title}
+          {blogData.title}
         </Link>
+        <p className="text-gray-500">{blogData.summary}</p>
+      </CardContent>
 
-        <p className="lens text-sm font-medium text-secondary">
-          {blogsData.summary}
-        </p>
+      <CardFooter className="p-0 pt-4">
+        <div className="flex w-full items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Avatar className="h-8 w-8">
+              <AvatarImage src={blogData.authorAvatar} alt={blogData.author} />
+              <AvatarFallback>
+                {blogData.authorName
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
+              </AvatarFallback>
+            </Avatar>
 
-        <Link
-          to={`/kien-thuc/${blogsData.slug}`}
-          className="mt-4 flex justify-end"
-        >
-          <Button type="button" variant="default">
-            Đọc thêm
-          </Button>
-        </Link>
-      </div>
-    </div>
+            <h4 className="cursor-pointer text-sm font-semibold">
+              {blogData.authorName}
+            </h4>
+          </div>
+
+          <p className="flex items-center text-sm text-gray-500">
+            <Calendar className="mr-2 h-4 w-4" />
+            {formatDateDMY(blogData.createdAt)}
+          </p>
+        </div>
+      </CardFooter>
+    </Card>
   )
 }
 

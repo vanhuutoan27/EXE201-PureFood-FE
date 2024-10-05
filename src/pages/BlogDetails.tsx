@@ -1,7 +1,9 @@
+import { useState } from "react"
+
 import { Bookmark, Heart, MessageCircle, Share } from "lucide-react"
 import { useParams } from "react-router-dom"
 
-import { formatDateDMY } from "@/lib/utils"
+import { formatDateDMY, scrollToTop } from "@/lib/utils"
 
 import { sampleBlogData } from "@/constants/blogs"
 
@@ -25,52 +27,81 @@ function BlogDetails() {
   const { blogSlug } = useParams<{ blogSlug: string }>()
   const blogData = sampleBlogData.find((blog) => blog.slug === blogSlug)
 
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const handleExpand = () => {
+    setIsExpanded(!isExpanded)
+    scrollToTop()
+  }
+
   if (!blogData) return <Loading />
 
   return (
     <Card>
       <CardHeader>
         <div className="flex items-center space-x-4">
-          <Avatar>
+          <Avatar className="h-12 w-12">
             <AvatarImage src="/placeholder-avatar.jpg" alt="John Doe" />
-            <AvatarFallback>JD</AvatarFallback>
+            <AvatarFallback>
+              {blogData.authorName
+                .split(" ")
+                .map((n) => n[0])
+                .join("")}
+            </AvatarFallback>
           </Avatar>
+
           <div>
-            <h2 className="text-xl font-bold">{blogData.title}</h2>
-            <p className="text-sm text-muted-foreground">
-              By {blogData.authorName} • Published on{" "}
+            <h2 className="cursor-pointer text-xl font-bold text-secondary">
+              {blogData.title}
+            </h2>
+            <p className="text-sm text-gray-500">
+              Bởi {blogData.authorName} - Đăng vào ngày{" "}
               {formatDateDMY(blogData.createdAt)}
             </p>
           </div>
         </div>
       </CardHeader>
+
       <CardContent>
-        <p className="mb-4 text-muted-foreground">
-          Artificial Intelligence is revolutionizing the way we approach web
-          development. From automated coding assistants to intelligent design
-          systems, AI is reshaping the landscape of web creation...
-        </p>
-        <Button variant="link" className="px-0">
-          Read more
+        {isExpanded ? (
+          <div className="space-y-8 text-gray-500">
+            <p>{blogData.summary}</p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: blogData.content
+              }}
+            />
+          </div>
+        ) : (
+          <p
+            className="text-gray-500"
+            dangerouslySetInnerHTML={{
+              __html: blogData.summary
+            }}
+          />
+        )}
+
+        <Button variant="link" className="mt-4 px-0" onClick={handleExpand}>
+          {isExpanded ? "Thu gọn" : "Xem thêm"}
         </Button>
       </CardContent>
 
-      <Separator />
+      <Separator className="my-4" />
 
       <CardFooter className="justify-between">
         <div className="flex space-x-4">
           <Button variant="ghost" size="icon">
-            <Heart className="h-5 w-5 text-muted-foreground" />
+            <Heart className="h-5 w-5 text-gray-500" />
           </Button>
           <Button variant="ghost" size="icon">
-            <MessageCircle className="h-5 w-5 text-muted-foreground" />
+            <MessageCircle className="h-5 w-5 text-gray-500" />
           </Button>
           <Button variant="ghost" size="icon">
-            <Share className="h-5 w-5 text-muted-foreground" />
+            <Share className="h-5 w-5 text-gray-500" />
           </Button>
         </div>
         <Button variant="ghost" size="icon">
-          <Bookmark className="h-5 w-5 text-muted-foreground" />
+          <Bookmark className="h-5 w-5 text-gray-500" />
         </Button>
       </CardFooter>
     </Card>
