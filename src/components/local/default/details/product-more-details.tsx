@@ -13,11 +13,11 @@ import ProductDescription from "./product-description"
 import ProductNutrition from "./product-nutrition"
 import ProductReviews from "./product-reviews"
 
-interface ProductDetailsProps {
+interface ProductMoreDetailsProps {
   productData: ProductType
 }
 
-function ProductDetails({ productData }: ProductDetailsProps) {
+function ProductMoreDetails({ productData }: ProductMoreDetailsProps) {
   const reviewsData = sampleReviewData
 
   return (
@@ -43,4 +43,4 @@ function ProductDetails({ productData }: ProductDetailsProps) {
   )
 }
 
-export default ProductDetails
+export default ProductMoreDetails

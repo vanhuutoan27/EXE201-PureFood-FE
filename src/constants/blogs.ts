@@ -3,76 +3,22 @@ import { BlogType } from "@/schemas/blogSchema"
 export const sampleBlogData: BlogType[] = [
   {
     blogId: "b001",
-    title: "Lợi ích của việc ăn rau củ quả sạch",
-    slug: "loi-ich-an-rau-cu-qua-sach",
+    title: "Rau Củ Quả Sạch - Hành Trình Từ Trang Trại Đến Bàn Ăn",
+    slug: "rau-cu-qua-sach-hanh-trinh-tu-trang-trai-den-ban-an",
     summary:
-      "Tìm hiểu về những lợi ích sức khỏe khi ăn rau củ quả sạch và cách chọn lựa thực phẩm an toàn.",
+      "Rau củ quả sạch không chỉ đảm bảo an toàn sức khỏe mà còn mang lại nhiều lợi ích cho cơ thể. Hãy cùng tìm hiểu hành trình của rau củ quả từ trang trại đến bàn ăn và tại sao chúng ta nên lựa chọn rau sạch.",
     content:
-      "Rau củ quả sạch mang lại nhiều lợi ích cho sức khỏe như cung cấp vitamin, khoáng chất và chất xơ, đồng thời giúp ngăn ngừa bệnh tật. Việc chọn thực phẩm không có hóa chất, thuốc trừ sâu sẽ giảm nguy cơ tích tụ chất độc hại trong cơ thể...",
-    author: "Nguyễn Văn A",
-    tags: ["sức khỏe", "rau củ", "thực phẩm sạch"],
-    images: [
-      "https://example.com/blog1-image1.jpg",
-      "https://example.com/blog1-image2.jpg"
-    ],
+      "#### Giới thiệu\nRau củ quả sạch đang dần trở thành sự lựa chọn ưu tiên của nhiều gia đình. Không chỉ đảm bảo an toàn cho sức khỏe, chúng còn giúp tăng cường hệ miễn dịch và cung cấp các chất dinh dưỡng thiết yếu cho cơ thể. Nhưng rau củ quả sạch là gì, tại sao nó lại quan trọng và làm thế nào để chọn được sản phẩm tươi ngon? Hãy cùng tìm hiểu hành trình từ trang trại đến bàn ăn của rau củ quả sạch và lý do vì sao chúng ta nên tích cực lựa chọn chúng trong bữa ăn hàng ngày.\n\n#### Rau củ quả sạch là gì?\nRau củ quả sạch là những sản phẩm được trồng trong môi trường không sử dụng hóa chất độc hại, thuốc trừ sâu, hoặc phân bón hóa học. Thay vào đó, nông dân sử dụng các phương pháp tự nhiên như phân hữu cơ, trồng luân canh, và áp dụng các biện pháp sinh học để bảo vệ mùa màng khỏi sâu bệnh. Điều này giúp giảm thiểu tác động tiêu cực đến môi trường và đảm bảo sức khỏe cho người tiêu dùng.\n\nMột trong những tiêu chí quan trọng để xác định rau củ quả sạch là tiêu chuẩn GlobalGAP, một tiêu chuẩn quốc tế về quy trình sản xuất nông nghiệp tốt. Sản phẩm đạt tiêu chuẩn này phải đảm bảo an toàn thực phẩm, bảo vệ môi trường và phúc lợi xã hội cho người lao động.\n\n#### Lợi ích của việc tiêu thụ rau củ quả sạch\n**1. Bảo vệ sức khỏe:** Rau củ quả sạch không chứa hóa chất độc hại, giúp giảm nguy cơ mắc các bệnh liên quan đến thực phẩm, đặc biệt là các bệnh mãn tính như ung thư, tim mạch, tiểu đường và béo phì.\n\n**2. Cung cấp dinh dưỡng:** Rau củ quả là nguồn cung cấp vitamin, khoáng chất, chất xơ và chất chống oxy hóa dồi dào. Khi tiêu thụ rau củ quả sạch, bạn có thể yên tâm rằng các dưỡng chất này không bị tác động bởi thuốc trừ sâu hay chất bảo quản hóa học.\n\n**3. Tốt cho môi trường:** Sử dụng rau củ quả sạch cũng là cách bạn góp phần bảo vệ môi trường. Việc sản xuất nông sản sạch giúp duy trì độ phì nhiêu của đất, bảo vệ nguồn nước và không làm ô nhiễm môi trường sống của các loài động vật hoang dã.\n\n**4. Phát triển nông nghiệp bền vững:** Khi tiêu dùng sản phẩm rau củ quả sạch, bạn đang ủng hộ và khuyến khích mô hình nông nghiệp bền vững, giúp tăng thu nhập cho nông dân và cải thiện đời sống cho cộng đồng.\n\n#### Làm sao để chọn rau củ quả sạch?\nViệc chọn rau củ quả sạch đòi hỏi sự hiểu biết và cảnh giác. Dưới đây là một số gợi ý giúp bạn lựa chọn sản phẩm tốt nhất:\n\n**1. Chọn sản phẩm có chứng nhận an toàn thực phẩm:** Hãy tìm những sản phẩm có chứng nhận tiêu chuẩn như GlobalGAP, VietGAP, hoặc các chứng nhận hữu cơ. Các chứng nhận này đảm bảo rằng rau củ quả được trồng và chế biến theo quy trình nghiêm ngặt.\n\n**2. Quan sát màu sắc và hình dáng:** Rau củ quả sạch thường có màu sắc tự nhiên, không quá bắt mắt và không có dấu hiệu bất thường như vết thâm, ố vàng hay héo úa. Hình dáng của chúng có thể không đồng đều do không sử dụng chất kích thích tăng trưởng.\n\n**3. Mua từ các cửa hàng uy tín:** Hãy chọn mua rau củ quả tại các cửa hàng hoặc siêu thị uy tín, nơi bạn có thể kiểm tra thông tin về nguồn gốc xuất xứ và quy trình sản xuất của sản phẩm.\n\n#### Rau củ quả sạch trong bữa ăn hàng ngày\nViệc bổ sung rau củ quả sạch vào chế độ ăn uống hàng ngày không chỉ giúp bạn duy trì sức khỏe mà còn là cách để nâng cao chất lượng cuộc sống. Các bữa ăn giàu rau củ quả sạch giúp cân bằng dinh dưỡng và cung cấp các dưỡng chất cần thiết cho cơ thể.\n\nBạn có thể bắt đầu bằng cách thêm các loại rau xanh như cải bó xôi, cải thìa, hoặc rau muống vào bữa ăn chính. Các loại củ như cà rốt, khoai tây, và củ cải cũng là lựa chọn tuyệt vời cho các món hầm, nướng hoặc salad. Đừng quên sử dụng các loại gia vị tự nhiên như hành, tỏi, gừng để tăng hương vị và giá trị dinh dưỡng cho món ăn.\n\n#### Cách bảo quản rau củ quả sạch\nĐể giữ rau củ quả sạch tươi ngon lâu hơn, bạn cần biết cách bảo quản hợp lý:\n\n**1. Bảo quản trong tủ lạnh:** Hầu hết các loại rau củ quả đều nên được bảo quản trong tủ lạnh ở nhiệt độ từ 4°C đến 7°C. Trước khi cho vào tủ, hãy rửa sạch và để ráo nước. Bạn có thể sử dụng túi nilon hoặc túi giấy để bọc rau củ quả trước khi đặt vào tủ lạnh để tránh mất nước.\n\n**2. Bảo quản ngoài tủ lạnh:** Một số loại củ như khoai tây, hành, tỏi, và cà chua không nên để trong tủ lạnh vì chúng sẽ bị mất hương vị và nhanh hỏng hơn. Hãy bảo quản chúng ở nơi khô ráo, thoáng mát.\n\n**3. Sử dụng ngay khi tươi:** Để đảm bảo rau củ quả sạch giữ được giá trị dinh dưỡng tốt nhất, hãy sử dụng chúng trong vòng 2-3 ngày sau khi mua.\n\n#### Kết luận\nRau củ quả sạch không chỉ giúp bảo vệ sức khỏe mà còn là cách chúng ta góp phần bảo vệ môi trường và phát triển nền nông nghiệp bền vững. Việc lựa chọn và sử dụng rau củ quả sạch trong bữa ăn hàng ngày không chỉ mang lại lợi ích cho bản thân mà còn cho cả cộng đồng. Hãy là người tiêu dùng thông thái và bắt đầu hành trình ăn uống lành mạnh với rau củ quả sạch ngay từ hôm nay.",
+    author: "u001",
+    authorName: "Nguyen Quoc Dai",
+    authorEmail: "dainq@example.com",
+    authorImage: "https://example.com/author-a.jpg",
+    tags: ["rau củ quả", "sức khỏe", "môi trường", "nông sản sạch"],
+    image: "https://example.com/rau-cu-qua-sach.jpg",
     status: true,
-    createdAt: "2024-09-26",
+    createdAt: "2024-10-05",
     createdBy: "asd",
-    updatedAt: "2024-09-26",
-    updatedBy: "asd"
-  },
-  {
-    blogId: "b002",
-    title: "Cách chọn rau củ quả an toàn tại chợ",
-    slug: "cach-chon-rau-cu-qua-an-toan",
-    summary:
-      "Bài viết hướng dẫn cách lựa chọn rau củ quả tươi ngon và an toàn tại các khu chợ truyền thống.",
-    content:
-      "Để chọn được rau củ quả tươi ngon tại chợ, bạn nên lưu ý các tiêu chí như màu sắc, độ tươi, và tránh những sản phẩm có dấu hiệu bị hư hỏng. Hãy chú ý lựa chọn thực phẩm từ các nhà cung cấp uy tín hoặc đã được chứng nhận hữu cơ...",
-    author: "Trần Thị B",
-    tags: ["mẹo vặt", "rau củ", "thực phẩm sạch"],
-    images: ["https://example.com/blog2-image1.jpg"],
-    status: true,
-    createdAt: "2024-09-24",
-    createdBy: "asd",
-    updatedAt: "2024-09-24",
-    updatedBy: "asd"
-  },
-  {
-    blogId: "b003",
-    title: "5 loại rau xanh bạn nên ăn hằng ngày",
-    slug: "5-loai-rau-xanh-nen-an-hang-ngay",
-    summary:
-      "Danh sách 5 loại rau xanh giàu dinh dưỡng mà bạn nên bổ sung vào bữa ăn hằng ngày để có sức khỏe tốt hơn.",
-    content:
-      "Rau xanh là nguồn cung cấp dồi dào vitamin và khoáng chất. Những loại rau như cải bó xôi, rau muống, bông cải xanh đều chứa nhiều chất dinh dưỡng cần thiết cho cơ thể, giúp bạn duy trì sức khỏe và phòng ngừa bệnh tật...",
-    author: "Phạm Văn C",
-    tags: ["dinh dưỡng", "rau xanh", "sức khỏe"],
-    images: [
-      "https://example.com/blog3-image1.jpg",
-      "https://example.com/blog3-image2.jpg"
-    ],
-    status: true,
-    createdAt: "2024-09-23",
-    createdBy: "asd",
-    updatedAt: "2024-09-23",
-    updatedBy: "asd"
-  },
-  {
-    blogId: "b004",
-    title: "Tác hại của thuốc trừ sâu trong rau củ quả",
-    slug: "tac-hai-thuoc-tru-sau-trong-rau-cu-qua",
-    summary:
-      "Bài viết cảnh báo về những tác hại của thuốc trừ sâu đối với sức khỏe con người khi sử dụng rau củ quả không sạch.",
-    content:
-      "Việc sử dụng thuốc trừ sâu trong canh tác rau củ quả có thể gây nhiều tác hại cho sức khỏe con người. Khi tiêu thụ thực phẩm chứa dư lượng thuốc trừ sâu, cơ thể có thể tích tụ các hóa chất độc hại, gây ra các bệnh mãn tính và ung thư...",
-    author: "Lê Thị D",
-    tags: ["sức khỏe", "thuốc trừ sâu", "thực phẩm sạch"],
-    images: ["https://example.com/blog4-image1.jpg"],
-    status: true,
-    createdAt: "2024-09-22",
-    createdBy: "asd",
-    updatedAt: "2024-09-22",
+    updatedAt: "2024-10-05",
     updatedBy: "asd"
   }
 ]

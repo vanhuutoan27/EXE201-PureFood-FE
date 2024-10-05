@@ -5,6 +5,7 @@ import { DataTable } from "@/components/local/admin/promotion/data-table"
 
 function AdminPromotion() {
   const promotionData = samplePromotionData
+
   return (
     <div>
       <DataTable columns={columns} data={promotionData} />

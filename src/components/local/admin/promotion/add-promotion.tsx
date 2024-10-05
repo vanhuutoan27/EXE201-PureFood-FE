@@ -18,7 +18,8 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
+  DialogTrigger
 } from "@/components/global/atoms/dialog"
 import { Input } from "@/components/global/atoms/input"
 import { Label } from "@/components/global/atoms/label"
@@ -28,13 +29,14 @@ import {
   PopoverTrigger
 } from "@/components/global/atoms/popover"
 
-interface AddPromotionProps {
-  onClose: () => void
-}
-
-function AddPromotion({ onClose }: AddPromotionProps) {
+function AddPromotion() {
+  const [open, setOpen] = useState(false)
   const [startDate, setStartDate] = useState<string>("")
   const [endDate, setEndDate] = useState<string>("")
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   const handleDateSelect = (
     date: Date | undefined,
@@ -65,14 +67,21 @@ function AddPromotion({ onClose }: AddPromotionProps) {
   }
 
   return (
-    <Dialog onOpenChange={onClose} open>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger>
+        <Button type="button" variant="default">
+          Thêm mã giảm giá
+        </Button>
+      </DialogTrigger>
       <DialogContent className="min-w-[600px]">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <DialogHeader>
-            <DialogTitle className="text-center">Tạo mã giảm giá</DialogTitle>
+            <DialogTitle className="text-center">
+              Thêm mã giảm giá mới
+            </DialogTitle>
           </DialogHeader>
 
-          <div className="flex gap-4">
+          <div className="flex gap-x-6">
             <div className="w-full space-y-1">
               <Label>Tên mã</Label>
               <Input
@@ -101,7 +110,7 @@ function AddPromotion({ onClose }: AddPromotionProps) {
             </div>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex gap-x-6">
             <div className="w-full space-y-1">
               <Label>Giảm giá</Label>
               <Input
@@ -132,14 +141,14 @@ function AddPromotion({ onClose }: AddPromotionProps) {
             </div>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex gap-x-6">
             <div className="w-full space-y-1">
               <Label>Ngày bắt đầu</Label>
 
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
-                    variant={"outline"}
+                    variant="outline"
                     className={`w-full justify-start text-left font-normal ${!startDate && "text-muted-foreground"}`}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -170,7 +179,7 @@ function AddPromotion({ onClose }: AddPromotionProps) {
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
-                    variant={"outline"}
+                    variant="outline"
                     className={`w-full justify-start text-left font-normal ${!endDate && "text-muted-foreground"}`}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -211,12 +220,12 @@ function AddPromotion({ onClose }: AddPromotionProps) {
             )}
           </div>
 
-          <div className="mt-4 flex justify-between">
+          <div className="flex justify-between pt-6">
+            <Button type="button" variant="outline" onClick={handleClose}>
+              Đóng
+            </Button>
             <Button type="submit" variant="default">
               Tạo mới
-            </Button>
-            <Button type="button" variant="outline" onClick={onClose}>
-              Đóng
             </Button>
           </div>
         </form>

@@ -6,6 +6,8 @@ import { defaultAvatar } from "@/configs/config"
 import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 
+import usePointerEvents from "@/hooks/usePointerEvents"
+
 import { UserType } from "@/schemas/userSchema"
 
 import { useChangeStatusUser } from "@/apis/userApi"
@@ -155,6 +157,8 @@ export const columns: ColumnDef<UserType>[] = [
       const user = row.original
       const changeUserStatus = useChangeStatusUser(user.userId)
       const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
+
+      usePointerEvents(isViewDialogOpen)
 
       const handleViewDetailsClick = () => {
         setIsViewDialogOpen(true)

@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
@@ -10,7 +12,8 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
+  DialogTrigger
 } from "@/components/global/atoms/dialog"
 import { Input } from "@/components/global/atoms/input"
 import { Label } from "@/components/global/atoms/label"
@@ -23,11 +26,13 @@ import {
   SelectValue
 } from "@/components/global/atoms/select"
 
-interface AddUserProps {
-  onClose: () => void
-}
+function AddUser() {
+  const [open, setOpen] = useState(false)
 
-function AddUser({ onClose }: AddUserProps) {
+  const handleClose = () => {
+    setOpen(false)
+  }
+
   const {
     register,
     handleSubmit,
@@ -49,11 +54,16 @@ function AddUser({ onClose }: AddUserProps) {
 
     addUser.mutate(data)
     reset()
-    onClose()
+    setOpen(false)
   }
 
   return (
-    <Dialog onOpenChange={onClose} open>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger>
+        <Button type="button" variant="default">
+          Thêm người dùng
+        </Button>
+      </DialogTrigger>
       <DialogContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <DialogHeader>
@@ -122,12 +132,12 @@ function AddUser({ onClose }: AddUserProps) {
               )}
             </div>
 
-            <div className="mt-4 flex justify-between">
+            <div className="flex justify-between pt-6">
+              <Button type="button" variant="outline" onClick={handleClose}>
+                Đóng
+              </Button>
               <Button type="submit" variant="default">
                 Tạo mới
-              </Button>
-              <Button type="button" variant="outline" onClick={onClose}>
-                Đóng
               </Button>
             </div>
           </div>

@@ -3,6 +3,8 @@ import { useState } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 
+import usePointerEvents from "@/hooks/usePointerEvents"
+
 import { OrderType } from "@/schemas/orderSchema"
 
 import { formatCurrency, formatDateDMY, getOrderStatus } from "@/lib/utils"
@@ -107,6 +109,8 @@ export const columns: ColumnDef<OrderType>[] = [
       const order = row.original
 
       const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
+
+      usePointerEvents(isViewDialogOpen)
 
       const handleViewDetailsClick = () => {
         setIsViewDialogOpen(true)

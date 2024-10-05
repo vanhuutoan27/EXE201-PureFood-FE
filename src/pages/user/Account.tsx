@@ -164,7 +164,7 @@ function UserAccount() {
               <Button type="button" variant="ghost" onClick={handleCancel}>
                 Hủy
               </Button>
-              <Button type="submit" variant={"default"}>
+              <Button type="submit" variant="default">
                 Lưu
               </Button>
             </div>

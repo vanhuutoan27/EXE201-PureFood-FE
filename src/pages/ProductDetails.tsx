@@ -6,14 +6,14 @@ import {
 } from "@/apis/productApi"
 
 import Bread from "@/components/global/molecules/bread"
-import ProductDetails from "@/components/local/default/details/product-details"
 import ProductImage from "@/components/local/default/details/product-image"
 import ProductInformation from "@/components/local/default/details/product-information"
+import ProductMoreDetails from "@/components/local/default/details/product-more-details"
 import ProductRelated from "@/components/local/default/details/product-related"
 
 import Loading from "./Loading"
 
-function Details() {
+function ProductDetails() {
   const { productSlug } = useParams()
   const categoryUrl = useLocation().pathname.split("/")[1]
 
@@ -50,11 +50,11 @@ function Details() {
           <ProductInformation productData={productData} />
         </div>
 
-        <ProductDetails productData={productData} />
+        <ProductMoreDetails productData={productData} />
         <ProductRelated productsData={relatedProducts} />
       </div>
     </div>
   )
 }
 
-export default Details
+export default ProductDetails

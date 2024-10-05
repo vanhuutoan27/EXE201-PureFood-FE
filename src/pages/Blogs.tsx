@@ -17,8 +17,8 @@ function Blogs() {
       />
 
       <div className="grid grid-cols-3 justify-between gap-x-10 gap-y-12">
-        {blogsData.map((blog, index) => (
-          <BlogCard key={index} blogsData={blog} />
+        {blogsData.map((blog) => (
+          <BlogCard key={blog.blogId} blogData={blog} />
         ))}
       </div>
     </div>

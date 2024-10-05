@@ -5,6 +5,8 @@ import { useState } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { Check, MoreHorizontal, X } from "lucide-react"
 
+import usePointerEvents from "@/hooks/usePointerEvents"
+
 import { ProductType } from "@/schemas/productSchema"
 
 import { useChangeStatusProduct } from "@/apis/productApi"
@@ -186,6 +188,8 @@ export const columns: ColumnDef<ProductType>[] = [
       const handleViewDetailsClick = () => {
         setIsViewDialogOpen(true)
       }
+
+      usePointerEvents(isViewDialogOpen)
 
       const handleStatusChange = () => {
         const newStatus = !product.status

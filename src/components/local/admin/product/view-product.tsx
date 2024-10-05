@@ -50,6 +50,16 @@ interface ViewProductProps {
 }
 
 function ViewProductDialog({ productData, onClose }: ViewProductProps) {
+  const [isEditing, setIsEditing] = useState(false)
+
+  const handleCancel = () => {
+    setIsEditing(false)
+  }
+
+  const handleUpdate = () => {
+    setIsEditing(true)
+  }
+
   const [entryDate, setEntryDate] = useState<string>(
     productData.entryDate
       ? format(new Date(productData.entryDate), "yyyy-MM-dd")
@@ -93,16 +103,6 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
         : ""
     }
   })
-
-  const [isEditing, setIsEditing] = useState(false)
-
-  const handleCancel = () => {
-    setIsEditing(false)
-  }
-
-  const handleUpdate = () => {
-    setIsEditing(true)
-  }
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
@@ -174,7 +174,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
 
             <div className="col-span-1 space-y-2">
               <div className="space-y-1">
-                <Label>ID sản phẩm</Label>
+                <Label>ID</Label>
                 <Input
                   readOnly
                   type="text"
@@ -352,7 +352,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
-                          variant={"outline"}
+                          variant="outline"
                           className={`w-full justify-start text-left font-normal ${!entryDate && "text-muted-foreground"}`}
                         >
                           <CalendarIcon className="mr-2 h-4 w-4" />
@@ -427,7 +427,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
-                          variant={"outline"}
+                          variant="outline"
                           className={`w-full justify-start text-left font-normal ${!expiryDate && "text-muted-foreground"}`}
                         >
                           <CalendarIcon className="mr-2 h-4 w-4" />

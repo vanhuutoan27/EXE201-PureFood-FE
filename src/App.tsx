@@ -12,8 +12,9 @@ const Login = lazy(() => import("@/pages/Login"))
 const Register = lazy(() => import("@/pages/Register"))
 const Error = lazy(() => import("@/pages/Error"))
 const Product = lazy(() => import("@/pages/Products"))
-const Details = lazy(() => import("@/pages/Details"))
+const ProductDetails = lazy(() => import("@/pages/ProductDetails"))
 const Blog = lazy(() => import("@/pages/Blogs"))
+const BlogDetails = lazy(() => import("@/pages/BlogDetails"))
 const Cart = lazy(() => import("@/pages/Cart"))
 const Order = lazy(() => import("@/pages/Order"))
 
@@ -37,10 +38,11 @@ function App() {
         <Route element={<DefaultLayout />}>
           <Route path="/" element={<Index />} />
           <Route path="/rau-cu" element={<Product />} />
-          <Route path="/rau-cu/:productSlug" element={<Details />} />
+          <Route path="/rau-cu/:productSlug" element={<ProductDetails />} />
           <Route path="/trai-cay" element={<Product />} />
-          <Route path="/trai-cay/:productSlug" element={<Details />} />
+          <Route path="/trai-cay/:productSlug" element={<ProductDetails />} />
           <Route path="/kien-thuc" element={<Blog />} />
+          <Route path="/kien-thuc/:blogSlug" element={<BlogDetails />} />
           <Route path="/gio-hang/:userId" element={<Cart />} />
           <Route path="/dat-hang" element={<Order />} />
 

@@ -14,12 +14,14 @@ export const blogSchema = z.object({
     .min(50, { message: "Content must be at least 50 characters long" })
     .nonempty({ message: "Content is required" }),
   author: z.string().nonempty({ message: "Author is required" }),
-  tags: z
-    .array(z.string())
-    .nonempty({ message: "At least one tag is required" }),
-  images: z
-    .array(z.string().url({ message: "Invalid image URL format" }))
-    .optional(),
+  authorName: z.string().nonempty({ message: "Author name is required" }),
+  authorEmail: z
+    .string()
+    .nonempty({ message: "Email is required" })
+    .email({ message: "Invalid author email format" }),
+  authorImage: z.string().url({ message: "Invalid author image URL format" }),
+  tags: z.array(z.string()).min(1, "At least one tag is required").optional(),
+  image: z.string().optional(),
   status: z.boolean(),
   createdAt: z.string().nonempty({ message: "Created at is required" }),
   createdBy: z.string().nonempty({ message: "Created by is required" }),
@@ -30,6 +32,8 @@ export const blogSchema = z.object({
 export const createUpdateBlogSchema = blogSchema.omit({
   blogId: true,
   slug: true,
+  authorEmail: true,
+  authorImage: true,
   status: true,
   createdAt: true,
   createdBy: true,

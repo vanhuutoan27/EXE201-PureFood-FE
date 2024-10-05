@@ -5,6 +5,8 @@ import { useState } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 
+import usePointerEvents from "@/hooks/usePointerEvents"
+
 import { PromotionType } from "@/schemas/promotionSchema"
 
 import { formatDateDMY } from "@/lib/utils"
@@ -127,6 +129,8 @@ export const columns: ColumnDef<PromotionType>[] = [
       const promotion = row.original
       //   const changeStatusMutation = useChangeStatusProduct(product.productId)
       const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
+
+      usePointerEvents(isViewDialogOpen)
 
       const handleViewDetailsClick = () => {
         setIsViewDialogOpen(true)

@@ -104,227 +104,240 @@ function ViewPromotionDialog({ promotionData, onClose }: ViewPromotionProps) {
             </DialogTitle>
           </DialogHeader>
 
-          <div className="flex gap-4">
-            <div className="w-full space-y-1">
-              <Label>ID sản phẩm</Label>
-              <Input
-                readOnly
-                type="text"
-                tabIndex={-1}
-                defaultValue={promotionData.promotionId}
-              />
-            </div>
-
-            <div className="w-full space-y-1">
-              <Label>Tên mã</Label>
-              <Input
-                readOnly={!isEditing}
-                type="text"
-                tabIndex={-1}
-                {...register("promotionName")}
-                defaultValue={promotionData.promotionName}
-              />
-              {errors.promotionName && (
-                <p className="error-lens">{errors.promotionName.message}</p>
-              )}
-            </div>
-            <div className="w-full space-y-1">
-              <Label>Code</Label>
-              <Input
-                readOnly={!isEditing}
-                type="text"
-                tabIndex={-1}
-                {...register("discountCode")}
-                defaultValue={promotionData.discountCode}
-              />
-              {errors.discountCode && (
-                <p className="error-lens">{errors.discountCode.message}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="flex gap-4">
-            <div className="w-full space-y-1">
-              <Label>Giảm giá</Label>
-              <Input
-                readOnly={!isEditing}
-                type="number"
-                tabIndex={-1}
-                {...register("discountPercentage")}
-                defaultValue={promotionData.discountPercentage}
-              />
-              {errors.discountPercentage && (
-                <p className="error-lens">
-                  {errors.discountPercentage.message}
-                </p>
-              )}
-            </div>
-            <div className="w-full space-y-1">
-              <Label>Số lượng</Label>
-              <Input
-                readOnly={!isEditing}
-                type="number"
-                tabIndex={-1}
-                {...register("quantity")}
-                defaultValue={promotionData.quantity}
-              />
-              {errors.quantity && (
-                <p className="error-lens">{errors.quantity.message}</p>
-              )}
-            </div>
-            <div className="w-full space-y-1">
-              <Label>Đã sử dụng</Label>
-              <Input
-                readOnly
-                type="number"
-                tabIndex={-1}
-                value={usedPromotion}
-              />
-            </div>
-            <div className="w-full space-y-1">
-              <Label>Còn lại</Label>
-              <Input
-                readOnly
-                type="number"
-                tabIndex={-1}
-                defaultValue={promotionData.stock}
-              />
-            </div>
-          </div>
-
-          <div className="flex gap-4">
-            <div className="w-full space-y-1">
-              <Label>Ngày bắt đầu</Label>
-
-              {isEditing ? (
-                <>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant={"outline"}
-                        className={`w-full justify-start text-left font-normal ${!startDate && "text-muted-foreground"}`}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {startDate ? (
-                          format(new Date(startDate), "PPP")
-                        ) : (
-                          <span>Chọn ngày bắt đầu</span>
-                        )}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                      <Calendar
-                        mode="single"
-                        selected={startDate ? new Date(startDate) : undefined}
-                        onSelect={(date) => handleDateSelect(date, "startDate")}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                  {errors.startDate && (
-                    <p className="error-lens">Ngày bắt đầu là bắt buộc</p>
-                  )}
-                </>
-              ) : (
+          <div className="space-y-2">
+            <div className="grid grid-cols-3 gap-x-6">
+              <div className="space-y-1">
+                <Label>ID</Label>
                 <Input
                   readOnly
                   type="text"
                   tabIndex={-1}
-                  defaultValue={formatDateDMY(promotionData.startDate)}
+                  defaultValue={promotionData.promotionId}
                 />
-              )}
-            </div>
-            <div className="w-full space-y-1">
-              <Label>Ngày kết thúc</Label>
+              </div>
 
-              {isEditing ? (
-                <>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant={"outline"}
-                        className={`w-full justify-start text-left font-normal ${!endDate && "text-muted-foreground"}`}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {endDate ? (
-                          format(new Date(endDate), "PPP")
-                        ) : (
-                          <span>Chọn ngày kết thúc</span>
-                        )}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                      <Calendar
-                        mode="single"
-                        selected={endDate ? new Date(endDate) : undefined}
-                        onSelect={(date) => handleDateSelect(date, "endDate")}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                  {errors.endDate && (
-                    <p className="error-lens">Ngày kết thúc là bắt buộc</p>
-                  )}
-                </>
-              ) : (
+              <div className="space-y-1">
+                <Label>Tên mã</Label>
                 <Input
                   readOnly={!isEditing}
                   type="text"
                   tabIndex={-1}
-                  defaultValue={formatDateDMY(promotionData.endDate)}
+                  {...register("promotionName")}
+                  defaultValue={promotionData.promotionName}
                 />
-              )}
+                {errors.promotionName && (
+                  <p className="error-lens">{errors.promotionName.message}</p>
+                )}
+              </div>
+
+              <div className="space-y-1">
+                <Label>Mã</Label>
+                <Input
+                  readOnly={!isEditing}
+                  type="text"
+                  tabIndex={-1}
+                  {...register("discountCode")}
+                  defaultValue={promotionData.discountCode}
+                />
+                {errors.discountCode && (
+                  <p className="error-lens">{errors.discountCode.message}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-4 gap-x-6">
+              <div className="space-y-1">
+                <Label>Giảm giá</Label>
+                <Input
+                  readOnly={!isEditing}
+                  type="number"
+                  tabIndex={-1}
+                  {...register("discountPercentage")}
+                  defaultValue={promotionData.discountPercentage}
+                />
+
+                {errors.discountPercentage && (
+                  <p className="error-lens">
+                    {errors.discountPercentage.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="space-y-1">
+                <Label>Số lượng</Label>
+                <Input
+                  readOnly={!isEditing}
+                  type="number"
+                  tabIndex={-1}
+                  {...register("quantity")}
+                  defaultValue={promotionData.quantity}
+                />
+
+                {errors.quantity && (
+                  <p className="error-lens">{errors.quantity.message}</p>
+                )}
+              </div>
+
+              <div className="space-y-1">
+                <Label>Đã sử dụng</Label>
+                <Input
+                  readOnly
+                  type="number"
+                  tabIndex={-1}
+                  value={usedPromotion}
+                />
+              </div>
+
+              <div className="space-y-1">
+                <Label>Còn lại</Label>
+                <Input
+                  readOnly
+                  type="number"
+                  tabIndex={-1}
+                  defaultValue={promotionData.stock}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-x-6">
+              <div className="space-y-1">
+                <Label>Ngày bắt đầu</Label>
+
+                {isEditing ? (
+                  <div>
+                    <Popover>
+                      <PopoverTrigger asChild className="w-full">
+                        <Button
+                          variant="outline"
+                          className={`justify-start text-left font-normal ${!startDate && "text-muted-foreground"}`}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {startDate ? (
+                            format(new Date(startDate), "PPP")
+                          ) : (
+                            <span>Chọn ngày bắt đầu</span>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          selected={startDate ? new Date(startDate) : undefined}
+                          onSelect={(date) =>
+                            handleDateSelect(date, "startDate")
+                          }
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    {errors.startDate && (
+                      <p className="error-lens">Ngày bắt đầu là bắt buộc</p>
+                    )}
+                  </div>
+                ) : (
+                  <Input
+                    readOnly
+                    type="text"
+                    tabIndex={-1}
+                    defaultValue={formatDateDMY(promotionData.startDate)}
+                  />
+                )}
+              </div>
+              <div className="space-y-1">
+                <Label>Ngày kết thúc</Label>
+
+                {isEditing ? (
+                  <div>
+                    <Popover>
+                      <PopoverTrigger asChild className="w-full">
+                        <Button
+                          variant="outline"
+                          className={`justify-start text-left font-normal ${!endDate && "text-muted-foreground"}`}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {endDate ? (
+                            format(new Date(endDate), "PPP")
+                          ) : (
+                            <span>Chọn ngày kết thúc</span>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          selected={endDate ? new Date(endDate) : undefined}
+                          onSelect={(date) => handleDateSelect(date, "endDate")}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+
+                    {errors.endDate && (
+                      <p className="error-lens">Ngày kết thúc là bắt buộc</p>
+                    )}
+                  </div>
+                ) : (
+                  <Input
+                    readOnly={!isEditing}
+                    type="text"
+                    tabIndex={-1}
+                    defaultValue={formatDateDMY(promotionData.endDate)}
+                  />
+                )}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-x-6">
+              <div className="space-y-1">
+                <Label>Ngày tạo</Label>
+                <Input
+                  readOnly
+                  type="text"
+                  tabIndex={-1}
+                  defaultValue={formatDateDMY(promotionData.createdAt)}
+                />
+              </div>
+
+              <div className="space-y-1">
+                <Label>Ngày cập nhật</Label>
+                <Input
+                  readOnly
+                  type="text"
+                  tabIndex={-1}
+                  defaultValue={formatDateDMY(promotionData.updatedAt)}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-x-6">
+              <div className="col-span-2 space-y-1">
+                <Label>Mô tả</Label>
+                <Input
+                  readOnly={!isEditing}
+                  type="text"
+                  tabIndex={-1}
+                  {...register("description")}
+                  defaultValue={promotionData.description}
+                />
+
+                {errors.description && (
+                  <p className="error-lens">{errors.description.message}</p>
+                )}
+              </div>
+
+              <div className="col-span-1 space-y-1">
+                <Label>Trạng thái</Label>
+                <Input
+                  readOnly
+                  type="text"
+                  tabIndex={-1}
+                  defaultValue={promotionData.status ? "Áp dụng" : "Tạm ngưng"}
+                />
+              </div>
             </div>
           </div>
 
-          <div className="flex gap-4">
-            <div className="w-full space-y-1">
-              <Label>Ngày tạo</Label>
-              <Input
-                readOnly
-                type="text"
-                tabIndex={-1}
-                defaultValue={formatDateDMY(promotionData.createdAt)}
-              />
-            </div>
-
-            <div className="w-full space-y-1">
-              <Label>Ngày cập nhật</Label>
-              <Input
-                readOnly
-                type="text"
-                tabIndex={-1}
-                defaultValue={formatDateDMY(promotionData.updatedAt)}
-              />
-            </div>
-          </div>
-
-          <div className="flex gap-4">
-            <div className="w-2/3 space-y-1">
-              <Label>Mô tả</Label>
-              <Input
-                readOnly={!isEditing}
-                type="text"
-                tabIndex={-1}
-                {...register("description")}
-                defaultValue={promotionData.description}
-              />
-              {errors.description && (
-                <p className="error-lens">{errors.description.message}</p>
-              )}
-            </div>
-            <div className="w-1/3 space-y-1">
-              <Label>Trạng thái</Label>
-              <Input
-                readOnly
-                type="text"
-                tabIndex={-1}
-                defaultValue={promotionData.status ? "Áp dụng" : "Tạm ngưng"}
-              />
-            </div>
-          </div>
-
-          <div className="mt-6 flex justify-between gap-4">
+          <div className="mt-6 flex justify-between gap-x-6">
             <Button type="button" variant="outline" onClick={onClose}>
               Đóng
             </Button>

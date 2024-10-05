@@ -82,12 +82,6 @@ export function DataTable<TData, TValue>({
 
   const maxPage = Math.ceil(totalUsers / visibleOrders)
 
-  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
-
-  const handleAddDetailsClick = () => {
-    setIsAddDialogOpen(true)
-  }
-
   return (
     <>
       <div className="flex items-center justify-between py-4">
@@ -98,9 +92,7 @@ export function DataTable<TData, TValue>({
           className="w-2/3 border-input bg-white"
         />
 
-        <Button type="button" variant="default" onClick={handleAddDetailsClick}>
-          Thêm người dùng
-        </Button>
+        <AddUser />
       </div>
 
       <div className="overflow-hidden rounded-xl border shadow">
@@ -155,10 +147,6 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-
-        {isAddDialogOpen && (
-          <AddUser onClose={() => setIsAddDialogOpen(false)} />
-        )}
       </div>
 
       <div className="flex items-center justify-end space-x-2 py-4">

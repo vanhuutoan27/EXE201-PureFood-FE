@@ -2,7 +2,7 @@ import { PromotionType } from "@/schemas/promotionSchema"
 
 export const samplePromotionData: PromotionType[] = [
   {
-    promotionId: "PROMO001",
+    promotionId: "p001",
     promotionName: "Khuyến Mãi Mùa Hè",
     description: "Giảm giá các mặt hàng thời trang mùa hè",
     discountCode: "SUMMER2024",
@@ -18,7 +18,7 @@ export const samplePromotionData: PromotionType[] = [
     updatedBy: "asd"
   },
   {
-    promotionId: "PROMO002",
+    promotionId: "p002",
     promotionName: "Khuyến Mãi Black Friday",
     description: "Giảm giá lớn cho ngày Black Friday",
     discountCode: "BLACKFRIDAY2024",
@@ -34,7 +34,7 @@ export const samplePromotionData: PromotionType[] = [
     updatedBy: "asd"
   },
   {
-    promotionId: "PROMO003",
+    promotionId: "p003",
     promotionName: "Khuyến Mãi Tết",
     description: "Giảm giá đặc biệt cho mùa Tết",
     discountCode: "TET2024",
@@ -50,7 +50,7 @@ export const samplePromotionData: PromotionType[] = [
     updatedBy: "asd"
   },
   {
-    promotionId: "PROMO004",
+    promotionId: "p004",
     promotionName: "Khuyến Mãi Trung Thu",
     description: "Giảm giá các mặt hàng đồ chơi trẻ em",
     discountCode: "MOONFEST2024",
@@ -66,7 +66,7 @@ export const samplePromotionData: PromotionType[] = [
     updatedBy: "asd"
   },
   {
-    promotionId: "PROMO005",
+    promotionId: "p005",
     promotionName: "Khuyến Mãi Ngày Valentine",
     description: "Ưu đãi dành cho các cặp đôi dịp Valentine",
     discountCode: "LOVE2024",
