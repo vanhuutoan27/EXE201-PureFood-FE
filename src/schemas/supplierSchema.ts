@@ -10,6 +10,10 @@ export const supplierSchema = z.object({
     .string()
     .nonempty({ message: "Vui lòng nhập địa chỉ" })
     .min(20, { message: "Địa chỉ phải chứa ít nhất 20 ký tự" }),
+  phoneNumber: z
+    .string()
+    .nonempty({ message: "Số điện thoại là bắt buộc" })
+    .min(10, { message: "Số điện thoại phải có ít nhất 10 ký tự" }),
   status: z.boolean(),
   createdAt: z.string(),
   createdBy: z.string(),

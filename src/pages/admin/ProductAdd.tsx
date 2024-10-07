@@ -13,6 +13,9 @@ import { useCreateProduct } from "@/apis/productApi"
 import { diamoonDB } from "@/lib/firebase"
 import { convertToLocalISOString } from "@/lib/utils"
 
+import { sampleCategoryData } from "@/constants/category"
+import { sampleSupplierData } from "@/constants/supplier"
+
 import { Button } from "@/components/global/atoms/button"
 import { Calendar } from "@/components/global/atoms/calendar"
 import { Input } from "@/components/global/atoms/input"
@@ -154,14 +157,21 @@ function ProductAdd() {
         <div className="grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2">
           <div className="space-y-1">
             <Label htmlFor="category">Danh mục</Label>
+
             <Select onValueChange={handleCategoryChange}>
-              <SelectTrigger className="h-10 rounded-xl bg-white pl-5">
-                <SelectValue placeholder="Chọn danh mục" />
+              <SelectTrigger className="mb-3 mt-1 h-10 rounded-xl border-[1px] pl-5">
+                <SelectValue placeholder="Chọn danh mục sản phẩm" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="rau-cu">Rau củ</SelectItem>
-                  <SelectItem value="trai-cay">Trái cây</SelectItem>
+                  {sampleCategoryData.map((category) => (
+                    <SelectItem
+                      key={category.categoryId}
+                      value={category.categoryName}
+                    >
+                      {category.categoryName}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -173,15 +183,22 @@ function ProductAdd() {
 
           <div className="space-y-1">
             <Label htmlFor="supplier">Nhà cung cấp</Label>
+
             <Select onValueChange={handleSupplierChange}>
-              <SelectTrigger className="h-10 rounded-xl bg-white pl-5">
+              <SelectTrigger className="mb-3 mt-1 h-10 rounded-xl border-[1px] pl-5">
                 <SelectValue placeholder="Chọn nhà cung cấp" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="PureFood">PureFood</SelectItem>
-                  <SelectItem value="Moncati">Moncati</SelectItem>
-                  <SelectItem value="Other">Khác</SelectItem>
+                  {sampleSupplierData.map((supplier) => (
+                    <SelectItem
+                      key={supplier.supplierId}
+                      value={supplier.supplierName}
+                      disabled={!supplier.status}
+                    >
+                      {supplier.supplierName}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>
