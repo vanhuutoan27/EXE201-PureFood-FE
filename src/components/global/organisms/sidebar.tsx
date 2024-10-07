@@ -5,6 +5,7 @@ import {
   BarChart,
   ChevronDown,
   ChevronUp,
+  CreditCard,
   Dot,
   LayoutDashboard,
   LogOut,
@@ -131,6 +132,12 @@ const sidebarMenu = [
         href: "/admin/don-hang/da-xu-ly"
       }
     ]
+  },
+  {
+    label: "Thanh toán",
+    icon: CreditCard,
+    href: "/admin/thanh-toan",
+    items: []
   },
   {
     label: "Khuyến mãi",

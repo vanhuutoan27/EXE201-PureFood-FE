@@ -28,6 +28,7 @@ const AdminDashboard = lazy(() => import("@/pages/admin/Dashboard"))
 const AdminProducts = lazy(() => import("@/pages/admin/Products"))
 const AdminAddProduct = lazy(() => import("@/pages/admin/ProductAdd"))
 const AdminOrders = lazy(() => import("@/pages/admin/Orders"))
+const AdminPayment = lazy(() => import("@/pages/admin/Payments"))
 const AdminPromotion = lazy(() => import("@/pages/admin/Promotion"))
 const AdminUsers = lazy(() => import("@/pages/admin/Users"))
 
@@ -65,6 +66,7 @@ function App() {
           <Route path="/admin/don-hang/moi" element={<AdminOrders />} />
           <Route path="/admin/don-hang/da-xu-ly" element={<AdminOrders />} />
           <Route path="/admin/khuyen-mai" element={<AdminPromotion />} />
+          <Route path="/admin/thanh-toan" element={<AdminPayment />} />
           <Route path="/admin/khach-hang" element={<AdminUsers />} />
 
           <Route path="/admin/not-found" element={<Error statusCode={404} />} />
