@@ -6,9 +6,12 @@ import {
 } from "@/apis/productApi"
 
 import Bread from "@/components/global/molecules/bread"
+import ProductBuyGuide from "@/components/local/default/details/product-buy-guide"
+import ProductFaqs from "@/components/local/default/details/product-faqs"
 import ProductImage from "@/components/local/default/details/product-image"
 import ProductInformation from "@/components/local/default/details/product-information"
 import ProductMoreDetails from "@/components/local/default/details/product-more-details"
+import ProductQualityCommitment from "@/components/local/default/details/product-quality-commitment"
 import ProductRelated from "@/components/local/default/details/product-related"
 
 import Loading from "./Loading"
@@ -51,6 +54,9 @@ function ProductDetails() {
         </div>
 
         <ProductMoreDetails productData={productData} />
+        <ProductQualityCommitment />
+        <ProductBuyGuide />
+        <ProductFaqs />
         <ProductRelated productsData={relatedProducts} />
       </div>
     </div>

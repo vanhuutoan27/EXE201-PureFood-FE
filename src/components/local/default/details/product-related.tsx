@@ -14,8 +14,8 @@ interface ProductRelatedProps {
 function ProductRelated({ productsData }: ProductRelatedProps) {
   return (
     <div>
-      <h3 className="mb-6 text-2xl font-bold text-secondary">
-        Sản phẩm liên quan
+      <h3 className="mb-6 text-xl font-bold text-secondary">
+        Sản Phẩm Liên Quan
       </h3>
 
       <Carousel

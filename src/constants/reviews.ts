@@ -7,7 +7,7 @@ export const sampleReviewData: ReviewType[] = [
     user: "u001",
     author: "Nguyen Pham Khanh",
     rating: 5,
-    content:
+    comment:
       "Sản phẩm rất tốt, đúng như mô tả. Rau tươi và rất sạch, sẽ tiếp tục ủng hộ!",
     flag: false,
     createdAt: "2024-09-26",
@@ -19,7 +19,7 @@ export const sampleReviewData: ReviewType[] = [
     user: "u002",
     author: "Nguyen Quoc Dai",
     rating: 4,
-    content: "Sản phẩm khá ổn, giao hàng nhanh nhưng bao bì cần cải thiện.",
+    comment: "Sản phẩm khá ổn, giao hàng nhanh nhưng bao bì cần cải thiện.",
     flag: false,
     createdAt: "2024-09-25",
     updatedAt: "2024-09-25"
@@ -30,7 +30,7 @@ export const sampleReviewData: ReviewType[] = [
     user: "u003",
     author: "Do Thu Ha",
     rating: 3,
-    content: "Chất lượng sản phẩm ổn nhưng giá hơi cao so với kỳ vọng.",
+    comment: "Chất lượng sản phẩm ổn nhưng giá hơi cao so với kỳ vọng.",
     flag: true,
     createdAt: "2024-09-24",
     updatedAt: "2024-09-24"
