@@ -31,7 +31,7 @@ function Cart() {
 
       <div className="flex justify-between gap-10">
         {cartItemsData.cartItems.length === 0 ? (
-          <p className="font-medium text-gray-500">
+          <p className="mb-2 mt-6 font-semibold text-primary">
             Không có sản phẩm nào trong giỏ hàng của bạn.
           </p>
         ) : (

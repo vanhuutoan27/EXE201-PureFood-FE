@@ -1,8 +1,14 @@
+import { useState } from "react"
+
 import { appliedFee, shippingFee } from "@/configs/config"
+import { Check, ChevronsUpDown } from "lucide-react"
 
 import { OrderItemType } from "@/schemas/orderSchema"
+import { PromotionType } from "@/schemas/promotionSchema"
 
-import { formatCurrency } from "@/lib/utils"
+import { cn, formatCurrency } from "@/lib/utils"
+
+import { samplePromotionData } from "@/constants/promotions"
 
 import { Button } from "@/components/global/atoms/button"
 import {
@@ -13,53 +19,41 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/global/atoms/card"
-import { Label } from "@/components/global/atoms/label"
 import {
-  RadioGroup,
-  RadioGroupItem
-} from "@/components/global/atoms/radio-group"
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList
+} from "@/components/global/atoms/command"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from "@/components/global/atoms/popover"
 import { Separator } from "@/components/global/atoms/separator"
 
 interface OrderSummaryProps {
-  paymentMethod: string
-  setPaymentMethod: (method: string) => void
   orderSummary: OrderItemType[]
   totalAmount: number
+  handleSubmit: () => void
+  loading: boolean
 }
 
 function OrderSummary({
-  paymentMethod,
-  setPaymentMethod,
   orderSummary,
-  totalAmount
+  totalAmount,
+  handleSubmit,
+  loading
 }: OrderSummaryProps) {
+  const [isPromotionOpen, setIsPromotionOpen] = useState(false)
+  const [selectedPromotion, setSelectedPromotion] =
+    useState<PromotionType | null>(null)
+
   return (
-    <Card className="h-fit px-0 py-6">
-      <CardHeader>
-        <CardTitle className="text-lg">Phương thức thanh toán</CardTitle>
-        <CardDescription>
-          Chọn phương thức thanh toán ưu tiên của bạn
-        </CardDescription>
-      </CardHeader>
-
-      <CardContent>
-        <RadioGroup
-          value={paymentMethod}
-          onValueChange={setPaymentMethod}
-          className="space-y-2"
-        >
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem id="cod" value="COD" />
-            <Label htmlFor="cod">Thanh toán khi nhận hàng (COD)</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem id="vnpay" value="VNPAY" />
-            <Label htmlFor="vnpay">Thanh toán qua VNPay</Label>
-          </div>
-        </RadioGroup>
-      </CardContent>
-
-      <CardHeader>
+    <Card className="h-fit w-2/5 px-0">
+      <CardHeader className="pt-0">
         <CardTitle className="text-lg">Tóm tắt đơn hàng</CardTitle>
         <CardDescription>Xem lại đơn hàng trước khi đặt hàng</CardDescription>
       </CardHeader>
@@ -89,9 +83,71 @@ function OrderSummary({
             <span>{formatCurrency(appliedFee)} VND</span>
           </div>
         </div>
+      </CardContent>
 
-        <Separator className="my-4" />
+      <Separator className="my-4" />
 
+      <CardHeader className="pt-0">
+        <CardTitle className="text-lg">Khuyến mãi</CardTitle>
+        <CardDescription>
+          Chọn khuyến mãi để áp dụng cho đơn hàng của bạn
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent className="justify-between space-y-2">
+        <Popover open={isPromotionOpen} onOpenChange={setIsPromotionOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              aria-expanded={isPromotionOpen}
+              type="button"
+              variant="outline"
+              role="combobox"
+              className="w-full justify-between"
+            >
+              {selectedPromotion
+                ? selectedPromotion.discountCode
+                : "Chọn khuyến mãi..."}
+              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-[400px] p-0">
+            <Command>
+              <CommandInput placeholder="Tìm khuyến mãi..." />
+              <CommandList>
+                <CommandEmpty>Không tìm thấy khuyến mãi.</CommandEmpty>
+                <CommandGroup>
+                  {samplePromotionData.map((promotion) => (
+                    <CommandItem
+                      key={promotion.promotionId}
+                      value={promotion.discountCode}
+                      disabled={!promotion.status}
+                      onSelect={() => {
+                        if (promotion.status) {
+                          setSelectedPromotion(promotion)
+                          setIsPromotionOpen(false)
+                        }
+                      }}
+                    >
+                      <Check
+                        className={cn(
+                          "mr-2 h-4 w-4",
+                          selectedPromotion?.promotionId ===
+                            promotion.promotionId
+                            ? "opacity-100"
+                            : "opacity-0"
+                        )}
+                      />
+                      {promotion.discountCode}
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        </Popover>
+      </CardContent>
+
+      <CardContent>
         <div className="flex justify-between font-bold">
           <span>Tổng cộng</span>
           <span>{formatCurrency(totalAmount)} VND</span>
@@ -99,8 +155,14 @@ function OrderSummary({
       </CardContent>
 
       <CardFooter>
-        <Button type="submit" variant="default" className="h-11 w-full">
-          Đặt hàng
+        <Button
+          type="submit"
+          variant="default"
+          className="h-11 w-full"
+          onClick={handleSubmit}
+          disabled={loading}
+        >
+          {loading ? "Đang xử lý..." : "Đặt hàng"}
         </Button>
       </CardFooter>
     </Card>

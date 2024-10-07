@@ -6,7 +6,13 @@ import { useLocation, useNavigate } from "react-router-dom"
 
 import { useAuthContext } from "@/contexts/auth-context"
 
-import { CreateOrderType, createOrderSchema } from "@/schemas/orderSchema"
+import {
+  CreateOrderItemType,
+  CreateOrderType,
+  createOrderSchema
+} from "@/schemas/orderSchema"
+
+import { useCreateOrder } from "@/apis/orderApi"
 
 import Section from "@/components/global/organisms/section"
 import OrderInformation from "@/components/local/default/order/order-information"
@@ -18,15 +24,9 @@ function Order() {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const {
-    handleSubmit,
-    register,
-    formState: { errors }
-  } = useForm<CreateOrderType>({
-    resolver: zodResolver(createOrderSchema)
-  })
+  const createOrder = useCreateOrder()
 
-  const [paymentMethod, setPaymentMethod] = useState("COD")
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (
@@ -48,11 +48,43 @@ function Order() {
 
   const { productsData, total } = location.state
 
-  const onSubmit = (data: CreateOrderType) => {
-    console.log("Đơn hàng đã được đặt!", JSON.stringify(data, null, 2))
+  const [paymentMethod, setPaymentMethod] = useState("COD")
+
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors }
+  } = useForm<CreateOrderType>({
+    resolver: zodResolver(createOrderSchema),
+    defaultValues: {
+      paymentMethod: "COD",
+      totalAmount: total,
+      orderSummary: productsData.map((product: CreateOrderItemType) => ({
+        product: product.product,
+        quantity: product.quantity
+      }))
+    }
+  })
+
+  const onSubmit = async (data: CreateOrderType) => {
+    setLoading(true)
+
+    const finalData = {
+      user: user?.userId,
+      ...data
+    }
+
+    console.log("Đơn hàng đã được đặt!", JSON.stringify(finalData, null, 2))
+
+    await createOrder.mutate(finalData, {
+      onSuccess: () => {
+        setLoading(false)
+      }
+    })
   }
 
-  console.log("🚀 ~ Order ~ errors:", errors)
+  // console.log("🚀 ~ Order ~ errors:", errors)
 
   return (
     <div className="container mx-auto p-4 md:p-6 lg:p-8">
@@ -63,15 +95,24 @@ function Order() {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid gap-8 md:grid-cols-2"
+        className="flex w-full gap-8"
+        // className="grid gap-8 md:grid-cols-2"
       >
-        <OrderInformation register={register} errors={errors} />
-
-        <OrderSummary
+        <OrderInformation
+          register={register}
+          errors={errors}
           paymentMethod={paymentMethod}
           setPaymentMethod={setPaymentMethod}
+          setProvince={(value) => setValue("province", value)}
+          setDistrict={(value) => setValue("district", value)}
+          setCommune={(value) => setValue("commune", value)}
+        />
+
+        <OrderSummary
           orderSummary={productsData}
           totalAmount={total}
+          handleSubmit={handleSubmit(onSubmit)}
+          loading={loading}
         />
       </form>
     </div>

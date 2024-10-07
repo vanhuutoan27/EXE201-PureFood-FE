@@ -1,7 +1,7 @@
-import { useQuery } from "react-query"
+import { useMutation, useQuery } from "react-query"
 import { toast } from "sonner"
 
-import { OrderType } from "@/schemas/orderSchema"
+import { CreateOrderType, OrderType } from "@/schemas/orderSchema"
 
 import pureAPI from "@/lib/pureAPI"
 
@@ -43,4 +43,29 @@ export const useGetAllOrders = (
       toast.error(error.message)
     }
   })
+}
+
+export const useCreateOrder = () => {
+  return useMutation<CreateOrderType, Error, CreateOrderType>(
+    async (newOrderData) => {
+      const response = await pureAPI.post("/orders", newOrderData)
+      const { success, message, data } = response.data
+
+      if (success) {
+        toast.success(message)
+        return data
+      } else {
+        toast.error(message)
+        throw new Error(message)
+      }
+    },
+    {
+      onSuccess: () => {
+        toast.success("Đặt hàng thành công")
+      },
+      onError: (error: Error) => {
+        toast.error(error.message)
+      }
+    }
+  )
 }

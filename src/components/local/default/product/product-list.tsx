@@ -146,22 +146,29 @@ function ProductList({
       </div>
 
       <p className="mb-2 mt-6 text-center font-semibold text-primary">
-        Hiển thị {Math.min(visibleProducts, filteredProducts.length)} của{" "}
-        {productsData.totalItems} kết quả
+        {filteredProducts.length > 0 ? (
+          <>
+            Hiển thị {Math.min(visibleProducts, filteredProducts.length)} của{" "}
+            {productsData.totalItems} kết quả
+          </>
+        ) : (
+          <>Không tìm thấy sản phẩm nào phù hợp</>
+        )}
       </p>
 
-      {visibleProducts < filteredProducts.length && (
-        <div className="flex justify-center">
-          <Button
-            type="button"
-            variant="default"
-            className="h-11 w-full px-12"
-            onClick={handleShowMore}
-          >
-            Hiển thị thêm
-          </Button>
-        </div>
-      )}
+      {filteredProducts.length > 0 &&
+        visibleProducts < productsData.totalItems && (
+          <div className="flex justify-center">
+            <Button
+              type="button"
+              variant="default"
+              className="h-11 w-full px-12"
+              onClick={handleShowMore}
+            >
+              Hiển thị thêm
+            </Button>
+          </div>
+        )}
     </>
   )
 }
