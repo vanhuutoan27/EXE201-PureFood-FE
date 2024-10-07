@@ -17,6 +17,9 @@ import {
   formatDateDMY
 } from "@/lib/utils"
 
+import { sampleCategoryData } from "@/constants/category"
+import { sampleSupplierData } from "@/constants/supplier"
+
 import { Button } from "@/components/global/atoms/button"
 import { Calendar } from "@/components/global/atoms/calendar"
 import {
@@ -61,14 +64,11 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
   }
 
   const [entryDate, setEntryDate] = useState<string>(
-    productData.entryDate
-      ? format(new Date(productData.entryDate), "yyyy-MM-dd")
-      : ""
+    productData.entryDate ? new Date(productData.entryDate).toISOString() : ""
   )
+
   const [expiryDate, setExpiryDate] = useState<string>(
-    productData.expiryDate
-      ? format(new Date(productData.expiryDate), "yyyy-MM-dd")
-      : ""
+    productData.expiryDate ? new Date(productData.expiryDate).toISOString() : ""
   )
 
   const handleEntryDateSelect = (date: Date | undefined) => {
@@ -115,6 +115,10 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
     setValue("category", value)
   }
 
+  const handleSupplierChange = (value: string) => {
+    setValue("supplier", value)
+  }
+
   const handleUnitChange = (value: string) => {
     setValue("unit", value)
   }
@@ -136,7 +140,7 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
   }
 
   const onSubmit = (data: UpdateProductType) => {
-    console.log("Form data:", data)
+    console.log("Form data:", JSON.stringify(data, null, 2))
     setIsEditing(false)
   }
 
@@ -239,12 +243,18 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
                       defaultValue={productData.category}
                     >
                       <SelectTrigger className="mb-3 mt-1 h-10 rounded-xl border-[1px] pl-5">
-                        <SelectValue placeholder="Chọn nhà cung cấp" />
+                        <SelectValue placeholder="Chọn danh mục sản phẩm" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="trai-cay">Trái cây</SelectItem>
-                          <SelectItem value="rau-cu">Rau củ</SelectItem>
+                          {sampleCategoryData.map((category) => (
+                            <SelectItem
+                              key={category.categoryId}
+                              value={category.categoryName}
+                            >
+                              {category.categoryName}
+                            </SelectItem>
+                          ))}
                         </SelectGroup>
                       </SelectContent>
                     </Select>
@@ -279,16 +289,42 @@ function ViewProductDialog({ productData, onClose }: ViewProductProps) {
 
               <div className="space-y-1">
                 <Label>Nhà cung cấp</Label>
-                <Input
-                  readOnly={!isEditing}
-                  type="text"
-                  tabIndex={-1}
-                  placeholder="Nhập tên nhà cung cấp"
-                  {...register("supplier")}
-                  defaultValue={productData.supplier}
-                />
-                {errors.supplier && (
-                  <p className="error-lens">{errors.supplier.message}</p>
+
+                {isEditing ? (
+                  <>
+                    <Select
+                      onValueChange={handleSupplierChange}
+                      defaultValue={productData.supplier}
+                    >
+                      <SelectTrigger className="mb-3 mt-1 h-10 rounded-xl border-[1px] pl-5">
+                        <SelectValue placeholder="Chọn nhà cung cấp" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {sampleSupplierData.map((supplier) => (
+                            <SelectItem
+                              key={supplier.supplierId}
+                              value={supplier.supplierName}
+                              disabled={!supplier.status}
+                            >
+                              {supplier.supplierName}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    {errors.supplier && (
+                      <p className="error-lens">{errors.supplier.message}</p>
+                    )}
+                  </>
+                ) : (
+                  <Input
+                    readOnly
+                    type="text"
+                    tabIndex={-1}
+                    placeholder="Nhập tên nhà cung cấp"
+                    defaultValue={productData.supplier}
+                  />
                 )}
               </div>
 

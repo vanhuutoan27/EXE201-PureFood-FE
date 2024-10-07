@@ -1,7 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "react-query"
 import { toast } from "sonner"
 
-import { CreateProductType, ProductType } from "@/schemas/productSchema"
+import {
+  CreateProductType,
+  ProductType,
+  UpdateProductType
+} from "@/schemas/productSchema"
 
 import pureAPI from "@/lib/pureAPI"
 
@@ -197,4 +201,36 @@ export const useChangeStatusProduct = (productId: string) => {
       }
     }
   )
+}
+
+export const useUpdateProduct = (productId: string) => {
+  const queryClient = useQueryClient()
+
+  return useMutation<UpdateProductType, Error, UpdateProductType>({
+    mutationFn: async (updatedProduct: UpdateProductType) => {
+      try {
+        const response = await pureAPI.put(
+          `/products/${productId}`,
+          updatedProduct
+        )
+        const { success, message, data } = response.data
+
+        if (success) {
+          toast.success(message)
+          return data
+        } else {
+          toast.error(message)
+          throw new Error(message)
+        }
+      } catch (error: any) {
+        throw new Error(error.response.data.message)
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("products")
+    },
+    onError: (error: Error) => {
+      toast.error(error.message)
+    }
+  })
 }
