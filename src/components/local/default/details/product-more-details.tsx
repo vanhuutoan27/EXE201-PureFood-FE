@@ -1,7 +1,5 @@
 import { ProductType } from "@/schemas/productSchema"
 
-import { sampleReviewData } from "@/constants/reviews"
-
 import {
   Tabs,
   TabsContent,
@@ -18,8 +16,6 @@ interface ProductMoreDetailsProps {
 }
 
 function ProductMoreDetails({ productData }: ProductMoreDetailsProps) {
-  const reviewsData = sampleReviewData
-
   return (
     <Tabs defaultValue="description">
       <TabsList>
@@ -37,7 +33,7 @@ function ProductMoreDetails({ productData }: ProductMoreDetailsProps) {
       </TabsContent>
 
       <TabsContent value="reviews" className="mt-4">
-        <ProductReviews reviews={reviewsData} />
+        <ProductReviews product={productData.productId} />
       </TabsContent>
     </Tabs>
   )

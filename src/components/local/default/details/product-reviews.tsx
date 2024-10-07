@@ -1,10 +1,18 @@
 import { useState } from "react"
 
 import { defaultAvatar } from "@/configs/config"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { ClipLoader } from "react-spinners"
 
 import { useAuthContext } from "@/contexts/auth-context"
 
-import { ReviewType } from "@/schemas/reviewSchema"
+import {
+  CreateUpdateReviewType,
+  createUpdateReviewSchema
+} from "@/schemas/reviewSchema"
+
+import { useCreateReview, useGetReviewsByProductId } from "@/apis/reviewApi"
 
 import { Button } from "@/components/global/atoms/button"
 import { Textarea } from "@/components/global/atoms/textarea"
@@ -12,24 +20,58 @@ import LazyImage from "@/components/global/molecules/lazy-image"
 import ReviewCard from "@/components/global/molecules/review-card"
 
 interface ProductReviewsProps {
-  reviews: ReviewType[]
+  product: string
 }
 
-function ProductReviews({ reviews }: ProductReviewsProps) {
+function ProductReviews({ product }: ProductReviewsProps) {
   const { user } = useAuthContext()
 
-  const [rating, setRating] = useState<number>(0)
-  const [content, setContent] = useState<string>("")
+  const { data: reviewsData, isLoading } = useGetReviewsByProductId(product)
 
-  const handleStarClick = (i: number) => {
-    setRating(i + 1)
+  const createReview = useCreateReview()
+
+  const [loading, setLoading] = useState(false)
+
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    watch,
+    formState: { errors }
+  } = useForm<CreateUpdateReviewType>({
+    resolver: zodResolver(createUpdateReviewSchema),
+    defaultValues: {
+      product: product,
+      user: user?.userId,
+      rating: 0,
+      comment: ""
+    }
+  })
+
+  const onSubmit = async (data: CreateUpdateReviewType) => {
+    setLoading(true)
+
+    console.log(JSON.stringify(data, null, 2))
+
+    createReview.mutate(data, {
+      onSettled: () => {
+        setLoading(false)
+      }
+    })
   }
 
-  const handleReviewSubmit = () => {
-    console.log("Submitted review:", {
-      rating,
-      content
-    })
+  // console.log(errors)
+
+  const handleStarClick = (i: number) => {
+    setValue("rating", i + 1)
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex h-96 items-center justify-center">
+        <ClipLoader color="#00000" size={70} />
+      </div>
+    )
   }
 
   return (
@@ -47,7 +89,7 @@ function ProductReviews({ reviews }: ProductReviewsProps) {
               <svg
                 key={i}
                 className={`h-5 w-5 cursor-pointer ${
-                  i < rating ? "text-yellow-400" : "text-gray-300"
+                  i < watch("rating") ? "text-yellow-400" : "text-gray-300"
                 }`}
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -58,22 +100,30 @@ function ProductReviews({ reviews }: ProductReviewsProps) {
             ))}
           </div>
 
+          {errors.rating && (
+            <p className="error-lens">{errors.rating.message}</p>
+          )}
+
           <Textarea
             rows={4}
             placeholder="Nhập đánh giá của bạn tại đây."
             className="w-full resize-none rounded-xl"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            {...register("comment")}
           />
+
+          {errors.comment && (
+            <p className="error-lens">{errors.comment.message}</p>
+          )}
 
           <div className="flex w-full justify-end">
             <Button
+              disabled={loading}
               type="button"
               variant="default"
               className="mt-4"
-              onClick={handleReviewSubmit}
+              onClick={handleSubmit(onSubmit)}
             >
-              Gửi đánh giá
+              {loading ? "Đang gửi..." : "Gửi đánh giá"}
             </Button>
           </div>
         </div>
@@ -82,9 +132,15 @@ function ProductReviews({ reviews }: ProductReviewsProps) {
       <h3 className="mb-4 text-xl font-semibold">Đánh giá của khách hàng</h3>
 
       <div className="space-y-4">
-        {reviews.map((review) => (
-          <ReviewCard key={review.reviewId} review={review} />
-        ))}
+        {!reviewsData?.length ? (
+          <p className="mb-2 mt-6 font-semibold text-primary">
+            Chưa có đánh giá nào cho sản phẩm này.
+          </p>
+        ) : (
+          reviewsData?.map((review) => (
+            <ReviewCard key={review.reviewId} review={review} />
+          ))
+        )}
       </div>
     </div>
   )

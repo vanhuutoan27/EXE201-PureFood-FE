@@ -11,10 +11,10 @@ export const supplierSchema = z.object({
     .nonempty({ message: "Vui lòng nhập địa chỉ" })
     .min(20, { message: "Địa chỉ phải chứa ít nhất 20 ký tự" }),
   status: z.boolean(),
-  createdAt: z.string().nonempty({ message: "Ngày tạo là bắt buộc" }),
-  createdBy: z.string().nonempty({ message: "Người tạo là bắt buộc" }),
-  updatedAt: z.string().nonempty({ message: "Ngày cập nhật là bắt buộc" }),
-  updatedBy: z.string().nonempty({ message: "Người cập nhật là bắt buộc" })
+  createdAt: z.string(),
+  createdBy: z.string(),
+  updatedAt: z.string(),
+  updatedBy: z.string()
 })
 
 export type SupplierType = z.infer<typeof supplierSchema>

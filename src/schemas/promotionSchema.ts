@@ -23,10 +23,10 @@ export const promotionSchema = z.object({
   startDate: z.string().nonempty({ message: "Ngày bắt đầu là bắt buộc" }),
   endDate: z.string().nonempty({ message: "Ngày kết thúc là bắt buộc" }),
   status: z.boolean(),
-  createdAt: z.string().nonempty({ message: "Ngày tạo là bắt buộc" }),
-  createdBy: z.string().nonempty({ message: "Người tạo là bắt buộc" }),
-  updatedAt: z.string().nonempty({ message: "Ngày cập nhật là bắt buộc" }),
-  updatedBy: z.string().nonempty({ message: "Người cập nhật là bắt buộc" })
+  createdAt: z.string(),
+  createdBy: z.string(),
+  updatedAt: z.string(),
+  updatedBy: z.string()
 })
 
 export const createPromotionSchema = promotionSchema.omit({

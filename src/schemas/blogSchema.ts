@@ -23,10 +23,10 @@ export const blogSchema = z.object({
   tags: z.array(z.string()).min(1, "At least one tag is required").optional(),
   image: z.string().optional(),
   status: z.boolean(),
-  createdAt: z.string().nonempty({ message: "Created at is required" }),
-  createdBy: z.string().nonempty({ message: "Created by is required" }),
-  updatedAt: z.string().nonempty({ message: "Updated at is required" }),
-  updatedBy: z.string().nonempty({ message: "Updated by is required" })
+  createdAt: z.string(),
+  createdBy: z.string(),
+  updatedAt: z.string(),
+  updatedBy: z.string()
 })
 
 export const createUpdateBlogSchema = blogSchema.omit({

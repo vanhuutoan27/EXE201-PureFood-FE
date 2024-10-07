@@ -39,10 +39,10 @@ export const productSchema = z.object({
   status: z.boolean(),
   entryDate: z.string().nonempty({ message: "Vui lòng nhập ngày nhập" }),
   expiryDate: z.string().nonempty({ message: "Vui lòng nhập ngày hết hạn" }),
-  createdAt: z.string().nonempty({ message: "Ngày tạo là bắt buộc" }),
-  createdBy: z.string().nonempty({ message: "Người tạo là bắt buộc" }),
-  updatedAt: z.string().nonempty({ message: "Ngày cập nhật là bắt buộc" }),
-  updatedBy: z.string().nonempty({ message: "Người cập nhật là bắt buộc" })
+  createdAt: z.string(),
+  createdBy: z.string(),
+  updatedAt: z.string(),
+  updatedBy: z.string()
 })
 
 export const createProductSchema = productSchema.omit({

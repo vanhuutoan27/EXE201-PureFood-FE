@@ -156,11 +156,11 @@ function OrderSummary({
 
       <CardFooter>
         <Button
+          disabled={loading}
           type="submit"
           variant="default"
           className="h-11 w-full"
           onClick={handleSubmit}
-          disabled={loading}
         >
           {loading ? "Đang xử lý..." : "Đặt hàng"}
         </Button>

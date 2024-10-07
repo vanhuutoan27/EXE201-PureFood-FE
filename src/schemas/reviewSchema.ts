@@ -9,14 +9,15 @@ export const reviewSchema = z.object({
     .number()
     .min(1, { message: "Xếp hạng phải ít nhất là 1" })
     .max(5, { message: "Xếp hạng không được vượt quá 5" }),
-  content: z.string().nonempty({ message: "Nội dung đánh giá là bắt buộc" }),
+  comment: z.string().nonempty({ message: "Nội dung đánh giá là bắt buộc" }),
   flag: z.boolean().default(false),
-  createdAt: z.string().nonempty({ message: "Ngày tạo là bắt buộc" }),
-  updatedAt: z.string().nonempty({ message: "Ngày cập nhật là bắt buộc" })
+  createdAt: z.string(),
+  updatedAt: z.string()
 })
 
 export const createUpdateReviewSchema = reviewSchema.omit({
   reviewId: true,
+  flag: true,
   createdAt: true,
   updatedAt: true
 })

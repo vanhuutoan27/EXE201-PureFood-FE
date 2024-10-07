@@ -45,8 +45,8 @@ export const orderSchema = z.object({
   orderStatus: z
     .string()
     .nonempty({ message: "Trạng thái đơn hàng là bắt buộc" }),
-  createdAt: z.string().nonempty({ message: "Ngày tạo là bắt buộc" }),
-  updatedAt: z.string().nonempty({ message: "Ngày cập nhật là bắt buộc" })
+  createdAt: z.string(),
+  updatedAt: z.string()
 })
 
 export const createOrderSchema = z.object({
