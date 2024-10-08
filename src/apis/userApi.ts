@@ -68,8 +68,6 @@ export const useGetUserById = (userId: string | undefined) => {
       }
     },
     enabled: !!userId,
-    staleTime: 5 * 60 * 1000,
-    cacheTime: 10 * 60 * 1000,
     retry: 1,
     onError: (error: Error) => {
       toast.error(error.message)
@@ -137,7 +135,7 @@ export const useChangeStatusUser = (userId: string) => {
   )
 }
 
-export const useUpdateUser = (userId: string) => {
+export const useUpdateUser = (userId: string | undefined) => {
   const queryClient = useQueryClient()
 
   return useMutation<UpdateUserType, Error, UpdateUserType>({

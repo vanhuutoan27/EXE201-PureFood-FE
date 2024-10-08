@@ -23,6 +23,7 @@ import { Input } from "@/components/global/atoms/input"
 
 function UserPassword() {
   const { user } = useAuthContext()
+
   const [isCurrentPasswordVisible, setIsCurrentPasswordVisible] =
     useState(false)
   const [isNewPasswordVisible, setIsNewPasswordVisible] = useState(false)

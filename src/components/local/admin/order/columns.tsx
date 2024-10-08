@@ -7,6 +7,8 @@ import usePointerEvents from "@/hooks/usePointerEvents"
 
 import { OrderType } from "@/schemas/orderSchema"
 
+import { useUpdateOrderStatus } from "@/apis/orderApi"
+
 import { formatCurrency, formatDateDMY, getOrderStatus } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
@@ -107,13 +109,18 @@ export const columns: ColumnDef<OrderType>[] = [
     id: "actions",
     cell: ({ row }) => {
       const order = row.original
+      const { mutate: updateOrderStatus } = useUpdateOrderStatus()
 
       const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
 
       usePointerEvents(isViewDialogOpen)
 
-      const handleViewDetailsClick = () => {
+      const handleViewDetails = () => {
         setIsViewDialogOpen(true)
+      }
+
+      const handleUpdateStatus = () => {
+        updateOrderStatus(order.orderId)
       }
 
       return (
@@ -134,10 +141,12 @@ export const columns: ColumnDef<OrderType>[] = [
                 Sao chép ID
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleViewDetailsClick}>
+              <DropdownMenuItem onClick={handleViewDetails}>
                 Xem chi tiết
               </DropdownMenuItem>
-              <DropdownMenuItem>Đổi trạng thái</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleUpdateStatus}>
+                Đổi trạng thái
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 

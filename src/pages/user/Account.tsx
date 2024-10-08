@@ -3,38 +3,37 @@ import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
-import { useOutletContext } from "react-router-dom"
 
-import {
-  UpdateUserType,
-  UserType,
-  updateUserSchema
-} from "@/schemas/userSchema"
+import { useAuthContext } from "@/contexts/auth-context"
+
+import { UpdateUserType, updateUserSchema } from "@/schemas/userSchema"
+
+import { useUpdateUser } from "@/apis/userApi"
 
 import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
 import { Input } from "@/components/global/atoms/input"
 
 import Loading from "../Loading"
-import { useUpdateUser } from "@/apis/userApi"
 
 function UserAccount() {
-  const { userData } = useOutletContext<{ userData: UserType }>()
-  const { mutate: updateUser } = useUpdateUser(userData.userId)
+  const { user } = useAuthContext()
 
-  if (!userData) return <Loading />
+  const { mutate: updateUser } = useUpdateUser(user?.userId)
+
+  if (!user) return <Loading />
 
   const {
     register,
     handleSubmit,
-  formState: { errors }
+    formState: { errors }
   } = useForm<UpdateUserType>({
     resolver: zodResolver(updateUserSchema),
     defaultValues: {
-      fullName: userData.fullName,
-      address: userData.address,
-      phoneNumber: userData.phoneNumber,
-      email: userData.email
+      fullName: user.fullName,
+      address: user.address,
+      phoneNumber: user.phoneNumber,
+      email: user.email
     }
   })
 
@@ -154,7 +153,7 @@ function UserAccount() {
             </div>
 
             {isEditing && (
-              <Link to={`/mat-khau/${userData.userId}`}>
+              <Link to={`/mat-khau/${user.userId}`}>
                 <Button type="button" variant="default">
                   Cập nhật
                 </Button>

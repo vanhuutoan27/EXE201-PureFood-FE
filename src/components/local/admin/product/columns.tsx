@@ -182,7 +182,7 @@ export const columns: ColumnDef<ProductType>[] = [
     id: "actions",
     cell: ({ row }) => {
       const product = row.original
-      const changeStatusMutation = useChangeStatusProduct(product.productId)
+      const updateStatus = useChangeStatusProduct(product.productId)
       const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
 
       const handleViewDetailsClick = () => {
@@ -193,7 +193,7 @@ export const columns: ColumnDef<ProductType>[] = [
 
       const handleStatusChange = () => {
         const newStatus = !product.status
-        changeStatusMutation.mutate({ status: newStatus })
+        updateStatus.mutate({ status: newStatus })
       }
 
       return (

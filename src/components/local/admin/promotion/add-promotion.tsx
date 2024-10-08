@@ -10,6 +10,8 @@ import {
   createPromotionSchema
 } from "@/schemas/promotionSchema"
 
+import { useCreatePromotion } from "@/apis/promotionApi"
+
 import { convertToLocalISOString } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
@@ -30,6 +32,8 @@ import {
 } from "@/components/global/atoms/popover"
 
 function AddPromotion() {
+  const createPromotion = useCreatePromotion()
+
   const [open, setOpen] = useState(false)
   const [startDate, setStartDate] = useState<string>("")
   const [endDate, setEndDate] = useState<string>("")
@@ -62,8 +66,14 @@ function AddPromotion() {
     resolver: zodResolver(createPromotionSchema)
   })
 
-  const onSubmit = (data: CreatePromotionType) => {
-    console.log(JSON.stringify(data, null, 2))
+  const onSubmit = async (data: CreatePromotionType) => {
+    // console.log(JSON.stringify(data, null, 2))
+
+    await createPromotion.mutateAsync(data, {
+      onSuccess: () => {
+        handleClose()
+      }
+    })
   }
 
   return (

@@ -108,7 +108,7 @@ export const columns: ColumnDef<OrderType>[] = [
     id: "actions",
     cell: ({ row }) => {
       const order = row.original
-      const changeStatusMutation = useCancelStatusOrder(order.orderId)
+      const updateStatus = useCancelStatusOrder(order.orderId)
       const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
 
       const handleViewDetailsClick = () => {
@@ -119,7 +119,7 @@ export const columns: ColumnDef<OrderType>[] = [
 
       const handleStatusChange = () => {
         const newStatus = !order.orderStatus
-        changeStatusMutation.mutate({ orderStatus: newStatus })
+        updateStatus.mutate({ orderStatus: newStatus })
       }
 
       return (

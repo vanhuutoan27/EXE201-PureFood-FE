@@ -88,7 +88,7 @@ function Order() {
         setLoading(false)
 
         if (paymentMethod === "COD") {
-          console.log("Ước gì tối nay được đi nhậu")
+          navigate(`/don-hang/${user?.userId}`)
         } else {
           const vnpayRequest = {
             amount: total,

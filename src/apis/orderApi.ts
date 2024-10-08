@@ -56,9 +56,10 @@ export const useGetOrdersByUserId = (
       try {
         const response = await pureAPI.get(`/orders/user/${userId}`)
         const { success, message, data } = response.data
+        const { totalPages, totalItems, items: orders } = data
 
         if (success) {
-          return data
+          return { totalPages, totalItems, orders }
         } else {
           toast.error(message)
           throw new Error(message)
@@ -126,4 +127,33 @@ export const useCancelStatusOrder = (orderId: string) => {
       }
     }
   )
+}
+
+export const useUpdateOrderStatus = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<void, Error, string>({
+    mutationFn: async (orderId: string) => {
+      try {
+        const response = await pureAPI.patch(`/orders/${orderId}/status`)
+        const { success, message, data } = response.data
+
+        if (success) {
+          toast.success(message)
+          return data
+        } else {
+          toast.error(message)
+          throw new Error(message)
+        }
+      } catch (error: any) {
+        throw new Error(error.response.data.message)
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("orders")
+    },
+    onError: (error: Error) => {
+      toast.error(error.message)
+    }
+  })
 }

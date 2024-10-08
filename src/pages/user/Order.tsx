@@ -1,8 +1,6 @@
 import { useState } from "react"
 
-import { useOutletContext } from "react-router-dom"
-
-import { UserType } from "@/schemas/userSchema"
+import { useAuthContext } from "@/contexts/auth-context"
 
 import { useGetOrdersByUserId } from "@/apis/orderApi"
 
@@ -14,16 +12,18 @@ import Loading from "../Loading"
 const INITIAL_ORDER_COUNT = 10
 
 function UserOrder() {
-  const { userData } = useOutletContext<{ userData: UserType }>()
+  const { user } = useAuthContext()
 
   const [currentPage, setCurrentPage] = useState(1)
   const [visibleOrders] = useState(INITIAL_ORDER_COUNT)
 
   const { data: ordersData, isLoading } = useGetOrdersByUserId(
-    userData.userId,
+    user?.userId,
     currentPage,
     visibleOrders
   )
+
+  console.log(ordersData?.orders)
 
   const maxPage = Math.ceil((ordersData?.totalItems || 1) / visibleOrders)
 

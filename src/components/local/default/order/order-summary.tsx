@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 import { appliedFee, shippingFee } from "@/configs/config"
-import { Check, ChevronsUpDown } from "lucide-react"
+import { Check, ChevronsUpDown, X } from "lucide-react"
 import { ClipLoader } from "react-spinners"
 
 import { OrderItemType } from "@/schemas/orderSchema"
@@ -115,11 +115,24 @@ function OrderSummary({
               type="button"
               variant="outline"
               role="combobox"
-              className="w-full justify-between"
+              className="relative w-full justify-between"
             >
-              {selectedPromotion
-                ? selectedPromotion.discountCode
-                : "Chọn khuyến mãi..."}
+              {selectedPromotion ? (
+                <div className="flex w-full items-center justify-between">
+                  <span>{selectedPromotion.discountCode}</span>
+                  <button aria-label="Hủy khuyến mãi">
+                    <X
+                      className="w-4absolute right-2 flex h-4 items-center justify-center text-red-500"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setSelectedPromotion(null)
+                      }}
+                    />
+                  </button>
+                </div>
+              ) : (
+                <span>Chọn khuyến mãi...</span>
+              )}
               <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
