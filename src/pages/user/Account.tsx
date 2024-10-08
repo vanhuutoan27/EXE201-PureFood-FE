@@ -16,9 +16,11 @@ import { Card } from "@/components/global/atoms/card"
 import { Input } from "@/components/global/atoms/input"
 
 import Loading from "../Loading"
+import { useUpdateUser } from "@/apis/userApi"
 
 function UserAccount() {
   const { userData } = useOutletContext<{ userData: UserType }>()
+  const { mutate: updateUser } = useUpdateUser(userData.userId)
 
   if (!userData) return <Loading />
 
@@ -46,7 +48,8 @@ function UserAccount() {
   }
 
   const onSubmit = (data: UpdateUserType) => {
-    console.log("Form data:", data)
+    // console.log("Form data:", data)
+    updateUser(data)
     setIsEditing(false)
   }
 

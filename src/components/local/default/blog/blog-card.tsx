@@ -26,11 +26,11 @@ interface BlogCardProps {
 function BlogCard({ blogData }: BlogCardProps) {
   return (
     <Card key={blogData.blogId} className="flex flex-col p-4">
-      <CardHeader className="p-0">
+      <CardHeader className="p-0 mb-4">
         <LazyImage
           src={blogData.image}
           alt={blogData.title}
-          className="h-48 w-full select-none rounded-t-lg object-cover"
+          className="h-48 w-full select-none rounded-lg object-cover shadow-lg"
         />
       </CardHeader>
 

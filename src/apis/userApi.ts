@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "react-query"
 import { toast } from "sonner"
 
-import { CreateUserType, UserType } from "@/schemas/userSchema"
+import { CreateUserType, UpdateUserType, UserType } from "@/schemas/userSchema"
 
 import pureAPI from "@/lib/pureAPI"
 
@@ -132,4 +132,73 @@ export const useChangeStatusUser = (userId: string) => {
       }
     }
   )
+}
+
+export const useUpdateUser = (userId: string) => {
+  const queryClient = useQueryClient()
+
+  return useMutation<UpdateUserType, Error, UpdateUserType>({
+    mutationFn: async (updatedUser: UpdateUserType) => {
+      try {
+        const response = await pureAPI.put(
+          `/users/customer/${userId}`,
+          updatedUser
+        )
+        const { success, message, data } = response.data
+
+        if (success) {
+          toast.success(message)
+          return data
+        } else {
+          toast.error(message)
+          throw new Error(message)
+        }
+      } catch (error: any) {
+        throw new Error(error.response.data.message)
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("users")
+    },
+    onError: (error: Error) => {
+      toast.error(error.message)
+    }
+  })
+}
+
+
+export const useChangeUserPassword = () => {
+  return useMutation<
+    void,
+    Error,
+    { userId: string; currentPassword: string; newPassword: string }
+  >({
+    mutationFn: async ({ userId, currentPassword, newPassword }) => {
+      try {
+        const response = await pureAPI.put(
+          `/users/${userId}/password`,
+          null,
+          {
+            params: {
+              currentPassword,
+              newPassword
+            }
+          }
+        )
+        const { success, message } = response.data
+
+        if (success) {
+          toast.success(message)
+        } else {
+          toast.error(message)
+          throw new Error(message)
+        }
+      } catch (error: any) {
+        throw new Error(error.response.data.message)
+      }
+    },
+    onError: (error: Error) => {
+      toast.error(error.message)
+    }
+  })
 }

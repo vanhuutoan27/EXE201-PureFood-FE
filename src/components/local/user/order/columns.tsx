@@ -1,9 +1,15 @@
 "use client"
 
+import { useState } from "react"
+
 import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 
+import usePointerEvents from "@/hooks/usePointerEvents"
+
 import { OrderType } from "@/schemas/orderSchema"
+
+import { useCancelStatusOrder } from "@/apis/orderApi"
 
 import {
   capitalize,
@@ -20,6 +26,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/global/atoms/dropdown-menu"
+
+import ViewOrderDialog from "./view-order"
 
 export const columns: ColumnDef<OrderType>[] = [
   {
@@ -99,20 +107,52 @@ export const columns: ColumnDef<OrderType>[] = [
   },
   {
     id: "actions",
-    cell: () => {
+    cell: ({ row }) => {
+      const order = row.original
+      const changeStatusMutation = useCancelStatusOrder(order.orderId)
+      const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
+
+      const handleViewDetailsClick = () => {
+        setIsViewDialogOpen(true)
+      }
+
+      usePointerEvents(isViewDialogOpen)
+
+      const handleStatusChange = () => {
+        const newStatus = !order.orderStatus
+        changeStatusMutation.mutate({ orderStatus: newStatus })
+      }
+
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-white">
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Xem chi tiết</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-white">
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleViewDetailsClick}>
+                Xem chi tiết
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={handleStatusChange}
+                disabled={order.orderStatus === "Cancelled"}
+              >
+                Đổi trạng thái
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {isViewDialogOpen && (
+            <ViewOrderDialog
+              orderData={order}
+              onClose={() => setIsViewDialogOpen(false)}
+            />
+          )}
+        </>
       )
     }
   }

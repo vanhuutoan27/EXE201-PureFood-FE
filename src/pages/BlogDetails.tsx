@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/global/atoms/button"
 import { Card, CardContent, CardHeader } from "@/components/global/atoms/card"
 import { Separator } from "@/components/global/atoms/separator"
+import LazyImage from "@/components/global/molecules/lazy-image"
 
 import Loading from "./Loading"
 
@@ -60,6 +61,11 @@ function BlogDetails() {
         {isExpanded ? (
           <div className="space-y-8 text-gray-500">
             <p>{blogData.summary}</p>
+            <img
+              src={blogData.image}
+              alt={blogData.blogId}
+              className="w-full h-[500px] select-none rounded-xl object-cover shadow-lg"
+            />
             <p
               dangerouslySetInnerHTML={{
                 __html: blogData.content
@@ -67,12 +73,14 @@ function BlogDetails() {
             />
           </div>
         ) : (
-          <p
-            className="text-gray-500"
-            dangerouslySetInnerHTML={{
-              __html: blogData.summary
-            }}
-          />
+          <>
+            <p
+              className="text-gray-500"
+              dangerouslySetInnerHTML={{
+                __html: blogData.summary
+              }}
+            />
+          </>
         )}
 
         <Button variant="link" className="mt-4 px-0" onClick={handleExpand}>

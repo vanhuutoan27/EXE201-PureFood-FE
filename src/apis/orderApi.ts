@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "react-query"
+import { useMutation, useQuery, useQueryClient } from "react-query"
 import { toast } from "sonner"
 
 import { CreateOrderType, OrderType } from "@/schemas/orderSchema"
@@ -60,6 +60,35 @@ export const useCreateOrder = () => {
       }
     },
     {
+      onError: (error: Error) => {
+        toast.error(error.message)
+      }
+    }
+  )
+}
+
+export const useCancelStatusOrder = (orderId: string) => {
+  const queryClient = useQueryClient()
+
+  return useMutation<OrderType, Error, { orderStatus: boolean }>(
+    async ({ orderStatus }) => {
+      const response = await pureAPI.patch(`/orders/${orderId}/cancel`, {
+        orderStatus
+      })
+      const { success, message, data } = response.data
+
+      if (success) {
+        toast.success(message)
+        return data
+      } else {
+        toast.error(message)
+        throw new Error(message)
+      }
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("orders")
+      },
       onError: (error: Error) => {
         toast.error(error.message)
       }

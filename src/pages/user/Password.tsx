@@ -4,7 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Eye, EyeOff } from "lucide-react"
 import { useForm } from "react-hook-form"
 
+import { useAuthContext } from "@/contexts/auth-context"
+
 import { UpdateUserPasswordType, passwordSchema } from "@/schemas/userSchema"
+
+import { useChangeUserPassword } from "@/apis/userApi"
 
 import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
@@ -18,11 +22,13 @@ import {
 import { Input } from "@/components/global/atoms/input"
 
 function UserPassword() {
+  const { user } = useAuthContext()
   const [isCurrentPasswordVisible, setIsCurrentPasswordVisible] =
     useState(false)
   const [isNewPasswordVisible, setIsNewPasswordVisible] = useState(false)
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleToggleVisibility = (field: string) => {
     switch (field) {
@@ -40,12 +46,27 @@ function UserPassword() {
     }
   }
 
+  const changePassword = useChangeUserPassword()
+
   const changePasswordForm = useForm<UpdateUserPasswordType>({
     resolver: zodResolver(passwordSchema)
   })
 
   const onSubmit = async (data: UpdateUserPasswordType) => {
-    console.log(data)
+    const { currentPassword, newPassword } = data
+
+    // console.log({ currentPassword, newPassword })
+
+    setIsLoading(true)
+    try {
+      await changePassword.mutateAsync({
+        userId: user?.userId || "",
+        currentPassword,
+        newPassword
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleReset = () => {
@@ -192,7 +213,7 @@ function UserPassword() {
               <Button type="reset" variant="ghost" onClick={handleReset}>
                 Hủy
               </Button>
-              <Button type="submit" variant="default">
+              <Button type="submit" variant="default" disabled={isLoading}>
                 Lưu
               </Button>
             </div>

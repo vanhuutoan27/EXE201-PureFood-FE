@@ -19,7 +19,7 @@ export const columns: ColumnDef<PaymentType>[] = [
     )
   },
   {
-    accessorKey: "orderId",
+    accessorKey: "order",
     header: ({ column }) => (
       <span
         className="cursor-pointer select-none"
