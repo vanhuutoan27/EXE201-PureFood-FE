@@ -1,6 +1,5 @@
 import { useMemo } from "react"
 
-import { FaShoppingCart } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
 import { ProductType } from "@/schemas/productSchema"
@@ -14,7 +13,6 @@ import {
 
 import { Button } from "@/components/global/atoms/button"
 import { Card } from "@/components/global/atoms/card"
-import { Toggle } from "@/components/global/atoms/toggle"
 import LazyImage from "@/components/global/molecules/lazy-image"
 
 import { Filters } from "./product-filter"
@@ -127,9 +125,9 @@ function ProductList({
               </div>
 
               <div className="mt-4 flex gap-4">
-                <Toggle variant="outline">
+                {/* <Toggle variant="outline">
                   <FaShoppingCart size={16} />
-                </Toggle>
+                </Toggle> */}
 
                 <Link
                   to={`/${product.category}/${product.slug}`}

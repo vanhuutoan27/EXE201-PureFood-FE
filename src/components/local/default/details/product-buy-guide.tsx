@@ -4,7 +4,7 @@ function ProductBuyGuide() {
   return (
     <div>
       <h3 className="mb-6 text-2xl font-bold text-secondary">
-        Hướng dẫn mua hàng
+        Hướng Dẫn Mua Hàng
       </h3>
 
       <ul className="space-y-4">

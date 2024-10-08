@@ -14,7 +14,7 @@ const INITIAL_ORDER_COUNT = 10
 
 function Orders() {
   const orderStatusUrl = useLocation().pathname.split("/")[3]
-  console.log("🚀 ~ Orders ~ orderStatusUrl:", orderStatusUrl)
+  // console.log("🚀 ~ Orders ~ orderStatusUrl:", orderStatusUrl)
 
   let orderStatus: string | null
   switch (orderStatusUrl) {
@@ -22,12 +22,10 @@ function Orders() {
       orderStatus = null
       break
     case "moi":
-      orderStatus = "Pending"
-      orderStatus = "Processing"
+      orderStatus = "new"
       break
     case "da-xu-ly":
-      orderStatus = "Shipping"
-      orderStatus = "Completed"
+      orderStatus = "processed"
       break
     default:
       orderStatus = null

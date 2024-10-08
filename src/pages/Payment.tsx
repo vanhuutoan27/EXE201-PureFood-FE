@@ -41,18 +41,19 @@ function PaymentPage() {
       amount: Number(finalAmount)
     }
 
-    console.log(paymentData)
+    // console.log(JSON.stringify(paymentData, null, 2))
 
-    // if (order && finalAmount) {
-    //   createPayment.mutate(
-    //     { ...paymentData, order: order as string },
-    //     {
-    //       onSuccess: () => {
-    //         navigate(`/don-hang/${user?.userId}`)
-    //       }
-    //     }
-    //   )
-    // }
+    if (order && finalAmount) {
+      createPayment.mutate(
+        // @ts-ignore //Toi qua met moi roi
+        { ...paymentData, order: order as string },
+        {
+          onSuccess: () => {
+            navigate(`/don-hang/${user?.userId}`)
+          }
+        }
+      )
+    }
   }
 
   const { statusCode, title, message } =

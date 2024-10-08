@@ -2,8 +2,8 @@ import { useState } from "react"
 
 import { useGetAllOrders } from "@/apis/orderApi"
 
-import { DataTable } from "@/components/local/admin/order/data-table"
 import { columns } from "@/components/local/user/order/columns"
+import { DataTable } from "@/components/local/user/order/data-table"
 
 import Loading from "../Loading"
 

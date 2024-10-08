@@ -60,14 +60,15 @@ export const createOrderSchema = z.object({
   commune: z.string().nonempty({ message: "Vui lòng chọn phường / xã" }),
   district: z.string().nonempty({ message: "Vui lòng chọn quận / huyện" }),
   province: z.string().nonempty({ message: "Vui lòng chọn tỉnh / thành phố" }),
+  paymentMethod: z
+    .string()
+    .nonempty({ message: "Vui lòng chọn phương thức thanh toán" }),
+  voucher: z.string().optional(),
   totalAmount: z.coerce
     .number()
     .int({ message: "Tổng số tiền phải là số nguyên" })
     .positive({ message: "Tổng số tiền phải lớn hơn 0" }),
-  orderSummary: z.array(createOrderItemSchema),
-  paymentMethod: z
-    .string()
-    .nonempty({ message: "Vui lòng chọn phương thức thanh toán" })
+  orderSummary: z.array(createOrderItemSchema)
 })
 
 export type OrderItemType = z.infer<typeof orderItemSchema>

@@ -31,14 +31,14 @@ import ViewOrderDialog from "./view-order"
 
 export const columns: ColumnDef<OrderType>[] = [
   {
-    accessorKey: "fullName",
+    accessorKey: "orderId",
     header: ({ column }) => {
       return (
         <span
           className="cursor-pointer select-none"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Khách hàng
+          Mã đơn hàng
         </span>
       )
     }
@@ -56,7 +56,7 @@ export const columns: ColumnDef<OrderType>[] = [
     header: "Thanh toán",
     cell: ({ row }) => {
       const paymentMethod = row.original.paymentMethod
-      return <span>{paymentMethod}</span>
+      return <span className="uppercase">{paymentMethod}</span>
     }
   },
   {
@@ -67,7 +67,6 @@ export const columns: ColumnDef<OrderType>[] = [
       return <span>{formatCurrency(totalAmount)}</span>
     }
   },
-
   {
     accessorKey: "createdAt",
     header: "Ngày tạo",

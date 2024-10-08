@@ -9,6 +9,8 @@ import usePointerEvents from "@/hooks/usePointerEvents"
 
 import { PromotionType } from "@/schemas/promotionSchema"
 
+import { useUpdateStatusPromotion } from "@/apis/promotionApi"
+
 import { formatDateDMY } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
@@ -127,7 +129,7 @@ export const columns: ColumnDef<PromotionType>[] = [
     id: "actions",
     cell: ({ row }) => {
       const promotion = row.original
-      //   const changeStatusMutation = useChangeStatusProduct(product.productId)
+      const updateStatus = useUpdateStatusPromotion(promotion.promotionId)
       const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
 
       usePointerEvents(isViewDialogOpen)
@@ -136,10 +138,9 @@ export const columns: ColumnDef<PromotionType>[] = [
         setIsViewDialogOpen(true)
       }
 
-      //   const handleStatusChange = () => {
-      //     const newStatus = !product.status
-      //     changeStatusMutation.mutate({ status: newStatus })
-      //   }
+      const handleStatusChange = () => {
+        updateStatus.mutate()
+      }
 
       return (
         <>
@@ -162,8 +163,9 @@ export const columns: ColumnDef<PromotionType>[] = [
               <DropdownMenuItem onClick={handleViewDetailsClick}>
                 Xem chi tiết
               </DropdownMenuItem>
-              {/* <DropdownMenuItem onClick={handleStatusChange}> */}
-              <DropdownMenuItem>Đổi trạng thái</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleStatusChange}>
+                Đổi trạng thái
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 

@@ -38,7 +38,10 @@ function HomeHero() {
           <Link to="/kien-thuc">Kiến thức</Link>
         </div>
 
-        <Link to="/" className="text-2xl font-bold text-white">
+        <Link
+          to="/"
+          className="absolute left-1/2 -translate-x-1/2 text-2xl font-bold text-white"
+        >
           <span className="text-primary">Pure</span>
           <span>Food</span>
         </Link>

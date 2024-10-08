@@ -174,35 +174,6 @@ export const useCreateProduct = () => {
   )
 }
 
-export const useChangeStatusProduct = (productId: string) => {
-  const queryClient = useQueryClient()
-
-  return useMutation<ProductType, Error, { status: boolean }>(
-    async ({ status }) => {
-      const response = await pureAPI.patch(`/products/${productId}/status`, {
-        status
-      })
-      const { success, message, data } = response.data
-
-      if (success) {
-        toast.success(message)
-        return data
-      } else {
-        toast.error(message)
-        throw new Error(message)
-      }
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("products")
-      },
-      onError: (error: Error) => {
-        toast.error(error.message)
-      }
-    }
-  )
-}
-
 export const useUpdateProduct = (productId: string) => {
   const queryClient = useQueryClient()
 
@@ -233,4 +204,33 @@ export const useUpdateProduct = (productId: string) => {
       toast.error(error.message)
     }
   })
+}
+
+export const useChangeStatusProduct = (productId: string) => {
+  const queryClient = useQueryClient()
+
+  return useMutation<ProductType, Error, { status: boolean }>(
+    async ({ status }) => {
+      const response = await pureAPI.patch(`/products/${productId}/status`, {
+        status
+      })
+      const { success, message, data } = response.data
+
+      if (success) {
+        toast.success(message)
+        return data
+      } else {
+        toast.error(message)
+        throw new Error(message)
+      }
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("products")
+      },
+      onError: (error: Error) => {
+        toast.error(error.message)
+      }
+    }
+  )
 }

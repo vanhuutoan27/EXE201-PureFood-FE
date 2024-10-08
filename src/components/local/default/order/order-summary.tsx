@@ -2,13 +2,14 @@ import { useState } from "react"
 
 import { appliedFee, shippingFee } from "@/configs/config"
 import { Check, ChevronsUpDown } from "lucide-react"
+import { ClipLoader } from "react-spinners"
 
 import { OrderItemType } from "@/schemas/orderSchema"
 import { PromotionType } from "@/schemas/promotionSchema"
 
-import { cn, formatCurrency } from "@/lib/utils"
+import { useGetAllPromotions } from "@/apis/promotionApi"
 
-import { samplePromotionData } from "@/constants/promotions"
+import { cn, formatCurrency } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
 import {
@@ -35,21 +36,33 @@ import {
 import { Separator } from "@/components/global/atoms/separator"
 
 interface OrderSummaryProps {
+  loading: boolean
+  handleSubmit: () => void
   orderSummary: OrderItemType[]
   totalAmount: number
-  handleSubmit: () => void
-  loading: boolean
+  selectedPromotion: PromotionType | null
+  setSelectedPromotion: (promotion: PromotionType | null) => void
 }
 
 function OrderSummary({
+  loading,
+  handleSubmit,
   orderSummary,
   totalAmount,
-  handleSubmit,
-  loading
+  selectedPromotion,
+  setSelectedPromotion
 }: OrderSummaryProps) {
+  const { data: promotionsData, isLoading } = useGetAllPromotions(1, undefined)
+
   const [isPromotionOpen, setIsPromotionOpen] = useState(false)
-  const [selectedPromotion, setSelectedPromotion] =
-    useState<PromotionType | null>(null)
+
+  if (!promotionsData || isLoading) {
+    return (
+      <div className="flex h-96 items-center justify-center">
+        <ClipLoader color="#00000" size={70} />
+      </div>
+    )
+  }
 
   return (
     <Card className="h-fit w-2/5 px-0">
@@ -110,13 +123,13 @@ function OrderSummary({
               <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-[400px] p-0">
+          <PopoverContent className="p-0">
             <Command>
               <CommandInput placeholder="Tìm khuyến mãi..." />
               <CommandList>
                 <CommandEmpty>Không tìm thấy khuyến mãi.</CommandEmpty>
                 <CommandGroup>
-                  {samplePromotionData.map((promotion) => (
+                  {promotionsData.promotions.map((promotion) => (
                     <CommandItem
                       key={promotion.promotionId}
                       value={promotion.discountCode}

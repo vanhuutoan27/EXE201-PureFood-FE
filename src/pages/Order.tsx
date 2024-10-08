@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useLocation, useNavigate } from "react-router-dom"
+import { toast } from "sonner"
 
 import { useAuthContext } from "@/contexts/auth-context"
 
@@ -11,8 +12,10 @@ import {
   CreateOrderType,
   createOrderSchema
 } from "@/schemas/orderSchema"
+import { PromotionType } from "@/schemas/promotionSchema"
 
 import { useCreateOrder } from "@/apis/orderApi"
+import { useVNPay } from "@/apis/vnpayApi"
 
 import Section from "@/components/global/organisms/section"
 import OrderInformation from "@/components/local/default/order/order-information"
@@ -25,6 +28,7 @@ function Order() {
   const navigate = useNavigate()
 
   const createOrder = useCreateOrder()
+  const vnpayPayment = useVNPay()
 
   const [loading, setLoading] = useState(false)
 
@@ -48,7 +52,9 @@ function Order() {
 
   const { productsData, total } = location.state
 
-  const [paymentMethod, setPaymentMethod] = useState("COD")
+  const [paymentMethod, setPaymentMethod] = useState<string>("COD")
+  const [selectedPromotion, setSelectedPromotion] =
+    useState<PromotionType | null>(null)
 
   const {
     handleSubmit,
@@ -72,14 +78,32 @@ function Order() {
 
     const finalData = {
       user: user?.userId,
-      ...data
+      ...data,
+      paymentMethod,
+      voucher: selectedPromotion?.discountCode
     }
 
-    console.log("Đơn hàng đã được đặt!", JSON.stringify(finalData, null, 2))
-
     await createOrder.mutate(finalData, {
-      onSuccess: () => {
+      onSuccess: async (orderId) => {
         setLoading(false)
+
+        if (paymentMethod === "COD") {
+          console.log("Ước gì tối nay được đi nhậu")
+        } else {
+          const vnpayRequest = {
+            amount: total,
+            orderDescription: `Thanh toán đơn hàng ${orderId}`,
+            orderType: "Thanh toán đơn hàng",
+            name: user?.fullName
+          }
+
+          await vnpayPayment.mutate(vnpayRequest)
+        }
+      },
+      onError: (error) => {
+        setLoading(false)
+        toast.error("Failed to create order!")
+        console.error("Create order error:", error)
       }
     })
   }
@@ -109,10 +133,12 @@ function Order() {
         />
 
         <OrderSummary
+          loading={loading}
+          handleSubmit={handleSubmit(onSubmit)}
           orderSummary={productsData}
           totalAmount={total}
-          handleSubmit={handleSubmit(onSubmit)}
-          loading={loading}
+          selectedPromotion={selectedPromotion}
+          setSelectedPromotion={setSelectedPromotion}
         />
       </form>
     </div>

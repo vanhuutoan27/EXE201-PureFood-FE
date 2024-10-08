@@ -32,7 +32,10 @@ function Header() {
         </div>
 
         {/* Center - Logo */}
-        <Link to="/" className="text-2xl font-bold text-black">
+        <Link
+          to="/"
+          className="absolute left-1/2 -translate-x-1/2 text-2xl font-bold text-black"
+        >
           <span className="text-primary">Pure</span>
           <span>Food</span>
         </Link>

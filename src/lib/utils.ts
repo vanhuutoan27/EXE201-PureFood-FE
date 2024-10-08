@@ -42,8 +42,8 @@ export const formatDateDMY = (dateString: string): string => {
 export const extractParagraphs = (htmlString: string) => {
   const parser = new DOMParser()
   const doc = parser.parseFromString(htmlString, "text/html")
-  const paragraphs = doc.querySelectorAll("p")
-  return Array.from(paragraphs).map((p) => p.textContent)
+  const paragraphs = doc.querySelectorAll("h4")
+  return Array.from(paragraphs).map((h) => h.textContent)
 }
 
 // Remove Vietnamese tones from a string

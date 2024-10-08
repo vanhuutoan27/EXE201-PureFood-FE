@@ -15,7 +15,6 @@ import {
 } from "@tanstack/react-table"
 
 import { Button } from "@/components/global/atoms/button"
-import { Input } from "@/components/global/atoms/input"
 import {
   Table,
   TableBody,
@@ -25,27 +24,26 @@ import {
   TableRow
 } from "@/components/global/atoms/table"
 
-import AddPromotion from "./add-promotion"
-
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  currentPage: number
-  totalPromotions: number
-  visiblePromotions: number
-  onNextPage: () => void
-  onPreviousPage: () => void
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   currentPage,
-  totalPromotions,
-  visiblePromotions,
+  totalOrders,
+  visibleOrders,
   onNextPage,
   onPreviousPage
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData, TValue> & {
+  currentPage: number
+  totalOrders: number
+  visibleOrders: number
+  onNextPage: () => void
+  onPreviousPage: () => void
+}) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
@@ -64,43 +62,30 @@ export function DataTable<TData, TValue>({
     }
   })
 
-  const maxPage = Math.ceil(totalPromotions / visiblePromotions)
+  const maxPage = Math.ceil(totalOrders / visibleOrders)
 
   return (
-    <>
-      <div className="flex items-center justify-between py-4">
-        <Input
-          placeholder="Tìm kiếm theo tên mã giảm giá..."
-          value={
-            (table.getColumn("promotionName")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("promotionName")?.setFilterValue(event.target.value)
-          }
-          className="w-2/3 border-input bg-white"
-        />
-
-        <AddPromotion />
-      </div>
-
+    <div className="mt-8">
       <div className="overflow-hidden rounded-xl border shadow">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead
-                    key={header.id}
-                    className="font-semibold text-secondary"
-                  >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </TableHead>
-                ))}
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead
+                      key={header.id}
+                      className="font-semibold text-secondary"
+                    >
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  )
+                })}
               </TableRow>
             ))}
           </TableHeader>
@@ -146,7 +131,7 @@ export function DataTable<TData, TValue>({
           Previous
         </Button>
         <Button
-          disabled={currentPage === maxPage || totalPromotions === 0}
+          disabled={currentPage === maxPage || totalOrders === 0}
           type="button"
           size="sm"
           variant="outline"
@@ -155,6 +140,6 @@ export function DataTable<TData, TValue>({
           Next
         </Button>
       </div>
-    </>
+    </div>
   )
 }
