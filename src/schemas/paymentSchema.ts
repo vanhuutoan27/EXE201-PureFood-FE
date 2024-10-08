@@ -1,16 +1,23 @@
 import { z } from "zod"
 
 export const paymentSchema = z.object({
-  paymentId: z.string().nonempty({ message: "Mã thanh toán là bắt buộc" }),
-  orderId: z.string().nonempty({ message: "Mã đơn hàng là bắt buộc" }),
-  customerId: z.string().nonempty({ message: "Mã khách hàng là bắt buộc" }),
-  customerName: z.string().nonempty({ message: "Tên khách hàng là bắt buộc" }),
-  amount: z.coerce
+  paymentId: z.string(),
+  order: z.string().nonempty({ message: "Mã đơn hàng là bắt buộc" }),
+  customer: z.string().nonempty({ message: "Mã người dùng là bắt buộc" }),
+  customerName: z.string().nonempty({ message: "Tên người dùng là bắt buộc" }),
+  amount: z
     .number()
-    .int({ message: "Giá phải là số nguyên" })
-    .positive({ message: "Giá phải lớn hơn 0" }),
+    .int()
+    .positive({ message: "Số tiền phải là số nguyên dương" }),
   createdAt: z.string(),
   updatedAt: z.string()
 })
 
+export const createPaymentSchema = paymentSchema.omit({
+  paymentId: true,
+  createdAt: true,
+  updatedAt: true
+})
+
 export type PaymentType = z.infer<typeof paymentSchema>
+export type CreatePaymentType = z.infer<typeof createPaymentSchema>

@@ -1,6 +1,5 @@
 import { useState } from "react"
 
-import { Bookmark, Heart, MessageCircle, Share } from "lucide-react"
 import { useParams } from "react-router-dom"
 
 import { formatDateDMY, scrollToTop } from "@/lib/utils"
@@ -13,12 +12,7 @@ import {
   AvatarImage
 } from "@/components/global/atoms/avatar"
 import { Button } from "@/components/global/atoms/button"
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader
-} from "@/components/global/atoms/card"
+import { Card, CardContent, CardHeader } from "@/components/global/atoms/card"
 import { Separator } from "@/components/global/atoms/separator"
 
 import Loading from "./Loading"
@@ -87,23 +81,6 @@ function BlogDetails() {
       </CardContent>
 
       <Separator className="my-4" />
-
-      <CardFooter className="justify-between">
-        <div className="flex space-x-4">
-          <Button variant="ghost" size="icon">
-            <Heart className="h-5 w-5 text-gray-500" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <MessageCircle className="h-5 w-5 text-gray-500" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <Share className="h-5 w-5 text-gray-500" />
-          </Button>
-        </div>
-        <Button variant="ghost" size="icon">
-          <Bookmark className="h-5 w-5 text-gray-500" />
-        </Button>
-      </CardFooter>
     </Card>
   )
 }

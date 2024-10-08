@@ -17,6 +17,7 @@ const Blog = lazy(() => import("@/pages/Blogs"))
 const BlogDetails = lazy(() => import("@/pages/BlogDetails"))
 const Cart = lazy(() => import("@/pages/Cart"))
 const Order = lazy(() => import("@/pages/Order"))
+const Payment = lazy(() => import("@/pages/Payment"))
 
 // User pages
 const UserAccount = lazy(() => import("@/pages/user/Account"))
@@ -46,6 +47,7 @@ function App() {
           <Route path="/kien-thuc/:blogSlug" element={<BlogDetails />} />
           <Route path="/gio-hang/:userId" element={<Cart />} />
           <Route path="/dat-hang" element={<Order />} />
+          <Route path="/thanh-toan" element={<Payment />} />
 
           <Route element={<UserLayout />}>
             <Route

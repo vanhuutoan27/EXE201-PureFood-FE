@@ -54,7 +54,7 @@ function ErrorPage({ statusCode }: ErrorPageProps) {
   return (
     <div className="flex h-screen w-full select-none items-center justify-center bg-white">
       <div className="flex w-[700px] flex-col px-4 text-center font-medium">
-        <h1 className="mb-2 text-9xl font-bold text-slate-200">{statusCode}</h1>
+        <h2 className="mb-2 text-9xl font-bold text-slate-200">{statusCode}</h2>
         <p className="text-2xl font-bold tracking-tight text-primary sm:text-4xl">
           {title}
         </p>

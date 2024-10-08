@@ -134,15 +134,15 @@ const sidebarMenu = [
     ]
   },
   {
-    label: "Thanh toán",
-    icon: CreditCard,
-    href: "/admin/thanh-toan",
-    items: []
-  },
-  {
     label: "Khuyến mãi",
     icon: Ticket,
     href: "/admin/khuyen-mai",
+    items: []
+  },
+  {
+    label: "Thanh toán",
+    icon: CreditCard,
+    href: "/admin/thanh-toan",
     items: []
   },
   {
