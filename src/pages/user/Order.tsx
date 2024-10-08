@@ -1,6 +1,10 @@
 import { useState } from "react"
 
-import { useGetAllOrders } from "@/apis/orderApi"
+import { useOutletContext } from "react-router-dom"
+
+import { UserType } from "@/schemas/userSchema"
+
+import { useGetOrdersByUserId } from "@/apis/orderApi"
 
 import { columns } from "@/components/local/user/order/columns"
 import { DataTable } from "@/components/local/user/order/data-table"
@@ -10,13 +14,15 @@ import Loading from "../Loading"
 const INITIAL_ORDER_COUNT = 10
 
 function UserOrder() {
+  const { userData } = useOutletContext<{ userData: UserType }>()
+
   const [currentPage, setCurrentPage] = useState(1)
   const [visibleOrders] = useState(INITIAL_ORDER_COUNT)
 
-  const { data: ordersData, isLoading } = useGetAllOrders(
+  const { data: ordersData, isLoading } = useGetOrdersByUserId(
+    userData.userId,
     currentPage,
-    visibleOrders,
-    null
+    visibleOrders
   )
 
   const maxPage = Math.ceil((ordersData?.totalItems || 1) / visibleOrders)

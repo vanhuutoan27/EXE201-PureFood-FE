@@ -43,6 +43,7 @@ function ProductReviews({ product }: ProductReviewsProps) {
     defaultValues: {
       product: product,
       user: user?.userId,
+      author: user?.fullName,
       rating: 0,
       comment: ""
     }
@@ -51,7 +52,7 @@ function ProductReviews({ product }: ProductReviewsProps) {
   const onSubmit = async (data: CreateUpdateReviewType) => {
     setLoading(true)
 
-    console.log(JSON.stringify(data, null, 2))
+    // console.log(JSON.stringify(data, null, 2))
 
     createReview.mutate(data, {
       onSettled: () => {

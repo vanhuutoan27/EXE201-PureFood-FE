@@ -6,6 +6,7 @@ import AdminLayout from "./layouts/admin"
 import DefaultLayout from "./layouts/default"
 import UserLayout from "./layouts/user"
 import Loading from "./pages/Loading"
+import Redirect from "./pages/Redirect"
 
 const Index = lazy(() => import("@/pages/Index"))
 const Login = lazy(() => import("@/pages/Login"))
@@ -78,7 +79,7 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         <Route path="/*" element={<Error statusCode={404} />} />
-        {/* <Route path="/redirect" element={<Redirect />} /> */}
+        <Route path="/redirect" element={<Redirect />} />
         <Route path="/not-found" element={<Error statusCode={404} />} />
         <Route path="/unauthorized" element={<Error statusCode={401} />} />
         <Route path="/forbidden" element={<Error statusCode={403} />} />

@@ -48,14 +48,7 @@ function Register() {
   }
 
   const methods = useForm<UserRegisterType>({
-    resolver: zodResolver(userRegisterSchema),
-    defaultValues: {
-      fullName: "Van Huu Toan",
-      phoneNumber: "0792766979",
-      email: "vanhuutoan27@gmail.com",
-      password: "123As@",
-      confirmPassword: "123As@"
-    }
+    resolver: zodResolver(userRegisterSchema)
   })
 
   const {
@@ -137,7 +130,7 @@ function Register() {
                         <FormControl>
                           <Input
                             type="text"
-                            placeholder="Enter your full name"
+                            placeholder="Nhập họ và tên"
                             {...field}
                           />
                         </FormControl>
@@ -154,7 +147,7 @@ function Register() {
                         <FormControl>
                           <Input
                             type="text"
-                            placeholder="Enter your phone number"
+                            placeholder="Nhập số điện thoại"
                             {...field}
                           />
                         </FormControl>
@@ -172,7 +165,7 @@ function Register() {
                       <FormControl>
                         <Input
                           type="email"
-                          placeholder="Enter your email"
+                          placeholder="Nhập địa chỉ email"
                           {...field}
                         />
                       </FormControl>
@@ -190,7 +183,7 @@ function Register() {
                         <FormControl>
                           <Input
                             type={isPasswordVisible ? "text" : "password"}
-                            placeholder="Enter your password"
+                            placeholder="Nhập mật khẩu"
                             {...field}
                           />
                         </FormControl>
@@ -225,7 +218,7 @@ function Register() {
                             type={
                               isConfirmPasswordVisible ? "text" : "password"
                             }
-                            placeholder="Confirm your password"
+                            placeholder="Nhập lại mật khẩu"
                             {...field}
                           />
                         </FormControl>

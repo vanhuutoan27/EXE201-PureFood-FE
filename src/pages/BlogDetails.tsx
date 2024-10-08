@@ -14,7 +14,6 @@ import {
 import { Button } from "@/components/global/atoms/button"
 import { Card, CardContent, CardHeader } from "@/components/global/atoms/card"
 import { Separator } from "@/components/global/atoms/separator"
-import LazyImage from "@/components/global/molecules/lazy-image"
 
 import Loading from "./Loading"
 
@@ -64,7 +63,7 @@ function BlogDetails() {
             <img
               src={blogData.image}
               alt={blogData.blogId}
-              className="w-full h-[500px] select-none rounded-xl object-cover shadow-lg"
+              className="h-[500px] w-full select-none rounded-xl object-cover shadow-lg"
             />
             <p
               dangerouslySetInnerHTML={{

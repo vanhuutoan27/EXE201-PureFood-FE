@@ -48,11 +48,7 @@ function Login() {
   }
 
   const formMethods = useForm<UserLoginType>({
-    resolver: zodResolver(userLoginSchema),
-    defaultValues: {
-      identifier: "vanhuutoan27@gmail.com",
-      password: "123As@"
-    }
+    resolver: zodResolver(userLoginSchema)
   })
 
   const {
@@ -112,7 +108,7 @@ function Login() {
                       <FormControl>
                         <Input
                           type="email"
-                          placeholder="Enter your email"
+                          placeholder="Nhập địa chỉ email"
                           {...field}
                         />
                       </FormControl>
@@ -130,7 +126,7 @@ function Login() {
                         <FormControl>
                           <Input
                             type={isPasswordVisible ? "text" : "password"}
-                            placeholder="Enter your password"
+                            placeholder="Nhập mật khẩu"
                             {...field}
                           />
                         </FormControl>

@@ -120,7 +120,7 @@ function OrderInformation({
               type="text"
               placeholder="Nhập họ và tên"
               {...register("fullName")}
-              defaultValue={"Van Huu Toan"}
+              // defaultValue={"Van Huu Toan"}
             />
 
             {errors?.fullName && (
@@ -135,7 +135,7 @@ function OrderInformation({
               type="text"
               placeholder="Nhập số điện thoại"
               {...register("phoneNumber")}
-              defaultValue={"0792766979"}
+              // defaultValue={"0792766979"}
             />
 
             {errors?.phoneNumber && (
@@ -151,7 +151,7 @@ function OrderInformation({
             type="email"
             placeholder="Nhập địa chỉ email"
             {...register("email")}
-            defaultValue={"vanhuutoan27@gmail.com"}
+            // defaultValue={"vanhuutoan27@gmail.com"}
           />
 
           {errors?.email && (
@@ -166,7 +166,7 @@ function OrderInformation({
             type="text"
             placeholder="Nhập địa chỉ giao hàng"
             {...register("address")}
-            defaultValue={"dia chi gi do 20 ki tu"}
+            // defaultValue={"dia chi gi do 20 ki tu"}
           />
 
           {errors?.address && (

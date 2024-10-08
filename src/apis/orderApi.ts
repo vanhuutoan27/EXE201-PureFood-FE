@@ -45,6 +45,38 @@ export const useGetAllOrders = (
   })
 }
 
+export const useGetOrdersByUserId = (
+  userId: string | undefined,
+  page: number,
+  limit: number
+) => {
+  return useQuery<OrderResponse, Error>({
+    queryKey: ["orders", userId, page, limit],
+    queryFn: async () => {
+      try {
+        const response = await pureAPI.get(`/orders/user/${userId}`)
+        const { success, message, data } = response.data
+
+        if (success) {
+          return data
+        } else {
+          toast.error(message)
+          throw new Error(message)
+        }
+      } catch (error: any) {
+        const errorMessage = error.response?.data?.message
+        toast.error(errorMessage)
+        throw new Error(errorMessage)
+      }
+    },
+    enabled: !!userId,
+    keepPreviousData: true,
+    onError: (error: Error) => {
+      toast.error(error.message)
+    }
+  })
+}
+
 export const useCreateOrder = () => {
   return useMutation<CreateOrderType, Error, CreateOrderType>(
     async (newOrderData) => {

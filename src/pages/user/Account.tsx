@@ -27,7 +27,7 @@ function UserAccount() {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+  formState: { errors }
   } = useForm<UpdateUserType>({
     resolver: zodResolver(updateUserSchema),
     defaultValues: {

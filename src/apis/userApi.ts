@@ -68,6 +68,9 @@ export const useGetUserById = (userId: string | undefined) => {
       }
     },
     enabled: !!userId,
+    staleTime: 5 * 60 * 1000,
+    cacheTime: 10 * 60 * 1000,
+    retry: 1,
     onError: (error: Error) => {
       toast.error(error.message)
     }
@@ -166,7 +169,6 @@ export const useUpdateUser = (userId: string) => {
   })
 }
 
-
 export const useChangeUserPassword = () => {
   return useMutation<
     void,
@@ -175,16 +177,12 @@ export const useChangeUserPassword = () => {
   >({
     mutationFn: async ({ userId, currentPassword, newPassword }) => {
       try {
-        const response = await pureAPI.put(
-          `/users/${userId}/password`,
-          null,
-          {
-            params: {
-              currentPassword,
-              newPassword
-            }
+        const response = await pureAPI.put(`/users/${userId}/password`, null, {
+          params: {
+            currentPassword,
+            newPassword
           }
-        )
+        })
         const { success, message } = response.data
 
         if (success) {

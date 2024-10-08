@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 import { defaultAvatar } from "@/configs/config"
 import ErrorPage from "@/pages/Error"
@@ -28,11 +28,14 @@ function UserLayout() {
 
   const { data: userData, isLoading } = useGetUserById(userId)
 
-  const activeTab = location.pathname.includes("thong-tin-ca-nhan")
-    ? "account"
-    : location.pathname.includes("mat-khau")
-      ? "password"
-      : "order"
+  const [activeTab, setActiveTab] = useState("account")
+
+  useEffect(() => {
+    scrollToTop()
+    if (location.pathname.includes("thong-tin-ca-nhan")) setActiveTab("account")
+    else if (location.pathname.includes("mat-khau")) setActiveTab("password")
+    else setActiveTab("order")
+  }, [location])
 
   useEffect(() => {
     scrollToTop()
