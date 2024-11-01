@@ -23,7 +23,7 @@ function UserOrder() {
     visibleOrders
   )
 
-  console.log(ordersData?.orders)
+  // console.log(ordersData?.orders)
 
   const maxPage = Math.ceil((ordersData?.totalItems || 1) / visibleOrders)
 

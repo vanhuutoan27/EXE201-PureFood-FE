@@ -96,6 +96,7 @@ function UserAccount() {
                   ? "text-secondary"
                   : "border-white text-muted-foreground shadow-none"
               }`}
+              placeholder="Nhập số điện thoại của bạn"
             />
             {errors.phoneNumber && (
               <p className="error-lens">{errors.phoneNumber.message}</p>

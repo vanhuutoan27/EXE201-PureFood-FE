@@ -94,6 +94,9 @@ function ProductList({
                   {product.productName} ({product.weight} {product.unit})
                 </Link>
                 <p className="text-lg font-bold text-secondary">
+                  <span className="font-medium text-gray-500 line-through">
+                    {formatCurrency(product.price + product.price * 0.1)}
+                  </span>{" "}
                   {formatCurrency(product.price)}
                 </p>
               </div>

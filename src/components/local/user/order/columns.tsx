@@ -76,14 +76,6 @@ export const columns: ColumnDef<OrderType>[] = [
     }
   },
   {
-    accessorKey: "updatedAt",
-    header: "Ngày cập nhật",
-    cell: ({ row }) => {
-      const updatedAt = row.original.updatedAt
-      return <span>{formatDateDMY(updatedAt)}</span>
-    }
-  },
-  {
     accessorKey: "orderStatus",
     header: ({ column }) => {
       return (

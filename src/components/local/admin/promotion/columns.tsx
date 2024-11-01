@@ -43,7 +43,7 @@ export const columns: ColumnDef<PromotionType>[] = [
         className="cursor-pointer select-none"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Mã
+        Mã khuyến mã
       </span>
     )
   },
@@ -56,7 +56,11 @@ export const columns: ColumnDef<PromotionType>[] = [
       >
         Giảm giá
       </span>
-    )
+    ),
+    cell: ({ row }) => {
+      const discountPercentage = row.original.discountPercentage
+      return <span>{discountPercentage}%</span>
+    }
   },
   {
     accessorKey: "quantity",
@@ -121,7 +125,7 @@ export const columns: ColumnDef<PromotionType>[] = [
       </span>
     ),
     cell: ({ row }) => {
-      const status = row.original.status ? "Áp dụng" : "Tạm ngưng"
+      const status = row.original.status ? "Đang áp dụng" : "Tạm ngưng"
       return <span>{status}</span>
     }
   },

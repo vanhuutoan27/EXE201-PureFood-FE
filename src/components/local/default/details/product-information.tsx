@@ -11,6 +11,7 @@ import { useCreateCart } from "@/apis/cartApi"
 import { formatCurrency } from "@/lib/utils"
 
 import { Button } from "@/components/global/atoms/button"
+import DiscountChip from "@/components/global/molecules/discount-chip"
 
 interface ProductInformationProps {
   productData: ProductType
@@ -51,20 +52,18 @@ function ProductInformation({ productData }: ProductInformationProps) {
       </h2>
 
       <div className="flex items-center space-x-4">
-        {/* if discount */}
-        {/* <span className="text-2xl font-bold text-primary">
-          {formatCurrency(25000)}
-        </span>
-        <span className="font-medium text-gray-500 line-through">
-          {formatCurrency(25000000)}
-        </span> */}
-
         <span className="text-2xl font-bold text-primary">
           {formatCurrency(productData.price)}
         </span>
+        <span className="font-medium text-gray-500 line-through">
+          {formatCurrency(productData.price + productData.price * 0.1)}
+        </span>
 
-        {/* if discount */}
-        {/* <DiscountChip rate={1000} /> */}
+        {/* <span className="text-2xl font-bold text-primary">
+          {formatCurrency(productData.price)}
+        </span> */}
+
+        <DiscountChip rate={10} />
       </div>
 
       <div

@@ -158,7 +158,7 @@ export const useUpdateStatusPromotion = (promotionId: string) => {
 
   return useMutation<PromotionType, Error>(
     async () => {
-      const response = await pureAPI.patch(`/promotions/${promotionId}`)
+      const response = await pureAPI.patch(`/promotions/${promotionId}/status`)
       const { success, message, data } = response.data
 
       if (success) {

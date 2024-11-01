@@ -25,7 +25,7 @@ function CustomerReviews({
       <CardContent className="pl-2">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <p className="text-sm font-medium leading-none">Average Rating</p>
+            <p className="text-sm font-medium leading-none">Đánh giá trung bình</p>
             <p className="text-sm font-medium leading-none">
               {averageRating.toFixed(1)} / 5.0
             </p>
@@ -33,7 +33,7 @@ function CustomerReviews({
           {[5, 4, 3, 2, 1].map((star) => (
             <div key={star} className="flex items-center justify-between">
               <div className="space-y-1">
-                <p className="text-sm font-medium leading-none">{star} Stars</p>
+                <p className="text-sm font-medium leading-none">{star} Sao</p>
               </div>
               <Progress
                 value={

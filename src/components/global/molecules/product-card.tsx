@@ -37,7 +37,13 @@ function ProductCard({ productData }: ProductCardProps) {
         </p>
 
         <div className="mt-4 flex items-center justify-between">
-          <p className="font-medium">{formatCurrency(productData.price)}</p>
+          <p className="font-medium">
+            <p className="text-gray-500 line-through">
+              {formatCurrency(productData.price + productData.price * 0.1)}
+            </p>
+
+            {formatCurrency(productData.price)}
+          </p>
 
           <Link
             to={`/${productData.category}/${productData.slug}`}
