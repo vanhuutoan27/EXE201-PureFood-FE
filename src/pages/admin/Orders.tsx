@@ -1,6 +1,8 @@
 import { useState } from "react"
 
 import { useLocation } from "react-router-dom"
+import { toast } from "sonner"
+import * as XLSX from "xlsx"
 
 import { useGetAllOrders } from "@/apis/orderApi"
 
@@ -54,6 +56,33 @@ function Orders() {
     }
   }
 
+  const exportToExcel = () => {
+    if (!ordersData || ordersData.orders.length === 0) {
+      toast.error("Không có dữ liệu để xuất Excel")
+      return
+    }
+
+    const dataForExport = ordersData.orders.map((order) => ({
+      "Mã đơn hàng": order.orderId,
+      "Mã khách hàng": order.user,
+      "Tên Khách hàng": order.fullName,
+      "Số điện thoại": order.phoneNumber,
+      "Email": order.email,
+      "Địa chỉ": `${order.address || ""} ${order.commune || ""} ${order.district || ""} ${order.province || ""}`,
+      "Phương thức thanh toán": order.paymentMethod,
+      "Mã giảm giá": order.voucher,
+      "Tổng số tiền": order.totalAmount,
+      "Trạng thái": order.orderStatus,
+      "Ngày đặt hàng": order.createdAt
+    }))
+
+    const worksheet = XLSX.utils.json_to_sheet(dataForExport)
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Đơn Hàng")
+
+    XLSX.writeFile(workbook, "DanhSachDonHangPureFoods.xlsx")
+  }
+
   if (!ordersData || isLoading) return <Loading />
 
   return (
@@ -68,6 +97,7 @@ function Orders() {
         visibleOrders={visibleOrders}
         onNextPage={handleNextPage}
         onPreviousPage={handlePreviousPage}
+        onExport={exportToExcel}
       />
     </>
   )

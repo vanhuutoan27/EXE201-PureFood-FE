@@ -23,6 +23,18 @@ export const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat("vi-VN").format(amount) + " VND"
 }
 
+export const formatShortCurrency = (amount: number): string => {
+  if (amount >= 1_000_000_000) {
+    return (amount / 1_000_000_000).toFixed(1).replace(/\.0$/, "") + "B"
+  } else if (amount >= 1_000_000) {
+    return (amount / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M"
+  } else if (amount >= 1_000) {
+    return (amount / 1_000).toFixed(1).replace(/\.0$/, "") + "K"
+  } else {
+    return amount.toString()
+  }
+}
+
 // Format a date string to DD/MM/YYYY
 export const formatDateDMY = (dateString: string): string => {
   const date = new Date(dateString)

@@ -122,21 +122,6 @@ export const columns: ColumnDef<UserType>[] = [
     }
   },
   {
-    accessorKey: "updatedBy",
-    header: ({ column }) => (
-      <span
-        className="cursor-pointer select-none"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        Người cập nhật
-      </span>
-    ),
-    cell: ({ row }) => {
-      const updatedBy = row.original.updatedBy
-      return <span>{updatedBy || "Không"}</span>
-    }
-  },
-  {
     accessorKey: "status",
     header: ({ column }) => (
       <span

@@ -72,7 +72,7 @@ function Login() {
         login(accessToken, refreshToken, expiredAt)
         toast.success(message)
         navigate("/")
-        // navigate("/redirect")
+        navigate("/redirect")
       } else {
         toast.error(message)
       }

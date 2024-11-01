@@ -28,6 +28,7 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  onExport: () => void
 }
 
 export function DataTable<TData, TValue>({
@@ -37,7 +38,8 @@ export function DataTable<TData, TValue>({
   totalOrders,
   visibleOrders,
   onNextPage,
-  onPreviousPage
+  onPreviousPage,
+  onExport
 }: DataTableProps<TData, TValue> & {
   currentPage: number
   totalOrders: number
@@ -67,7 +69,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Tìm kiếm theo tên khách hàng..."
           value={
@@ -76,8 +78,12 @@ export function DataTable<TData, TValue>({
           onChange={(event) =>
             table.getColumn("fullName")?.setFilterValue(event.target.value)
           }
-          className="border-input bg-white"
+          className="w-2/3 border-input bg-white"
         />
+
+        <Button type="button" variant="default" onClick={onExport}>
+          Xuất đơn hàng
+        </Button>
       </div>
 
       <div className="overflow-hidden rounded-xl border shadow">

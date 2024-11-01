@@ -113,6 +113,7 @@ function UserAccount() {
                   ? "text-secondary"
                   : "border-white text-muted-foreground shadow-none"
               }`}
+              placeholder="Nhập địa chỉ của bạn"
             />
             {errors.address && (
               <p className="error-lens">{errors.address.message}</p>

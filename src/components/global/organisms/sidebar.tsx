@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 
 import { motion } from "framer-motion"
 import {
-  BarChart,
   ChevronDown,
   ChevronUp,
   CreditCard,
@@ -10,7 +9,6 @@ import {
   LayoutDashboard,
   LogOut,
   Package,
-  Settings,
   ShoppingCart,
   Ticket,
   Users
@@ -95,20 +93,20 @@ const sidebarMenu = [
     href: "/admin/dashboard",
     items: []
   },
-  {
-    label: "Báo cáo",
-    icon: BarChart,
-    href: "#",
-    items: [
-      { label: "Doanh thu", icon: Dot, href: "/admin/bao-cao/doanh-thu" },
-      { label: "Lợi nhuận", icon: Dot, href: "/admin/bao-cao/loi-nhuan" },
-      {
-        label: "Sản phẩm bán chạy",
-        icon: Dot,
-        href: "/admin/bao-cao/san-pham-ban-chay"
-      }
-    ]
-  },
+  // {
+  //   label: "Báo cáo",
+  //   icon: BarChart,
+  //   href: "#",
+  //   items: [
+  //     { label: "Doanh thu", icon: Dot, href: "/admin/bao-cao/doanh-thu" },
+  //     { label: "Lợi nhuận", icon: Dot, href: "/admin/bao-cao/loi-nhuan" },
+  //     {
+  //       label: "Sản phẩm bán chạy",
+  //       icon: Dot,
+  //       href: "/admin/bao-cao/san-pham-ban-chay"
+  //     }
+  //   ]
+  // },
   {
     label: "Sản phẩm",
     icon: Package,
@@ -149,12 +147,6 @@ const sidebarMenu = [
     label: "Khách hàng",
     icon: Users,
     href: "/admin/khach-hang",
-    items: []
-  },
-  {
-    label: "Cài đặt",
-    icon: Settings,
-    href: "/admin/cai-dat",
     items: []
   }
 ]
