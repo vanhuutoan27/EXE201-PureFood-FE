@@ -25,7 +25,9 @@ function CustomerReviews({
       <CardContent className="pl-2">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <p className="text-sm font-medium leading-none">Đánh giá trung bình</p>
+            <p className="text-sm font-medium leading-none">
+              Đánh giá trung bình
+            </p>
             <p className="text-sm font-medium leading-none">
               {averageRating.toFixed(1)} / 5.0
             </p>
@@ -38,14 +40,14 @@ function CustomerReviews({
               <Progress
                 value={
                   totalReviews > 0
-                    ? (ratingCounts[star - 1] / totalReviews) * 100
+                    ? (ratingCounts[5 - star] / totalReviews) * 100
                     : 0
                 }
                 className="w-[60%]"
               />
               <p className="ml-2 text-sm text-muted-foreground">
                 {totalReviews > 0
-                  ? ((ratingCounts[star - 1] / totalReviews) * 100).toFixed(1)
+                  ? ((ratingCounts[5 - star] / totalReviews) * 100).toFixed(1)
                   : "0.0"}
                 %
               </p>
