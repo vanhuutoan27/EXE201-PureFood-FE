@@ -4,7 +4,7 @@ import { baseUrl } from "@/configs/config"
 
 const pureAPI = axios.create({
   baseURL: baseUrl,
-  timeout: 5000,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json"
   }
